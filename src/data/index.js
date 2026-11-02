@@ -1,5 +1,16 @@
 import { cvpTopic } from './accounting/cost-volume-profit.js';
+import { accountingBasicsTopic } from './accounting/accounting-basics.js';
+import { accountingProcessTopic } from './accounting/accounting-process.js';
+import { statementsAndNotesTopic } from './accounting/statements-and-notes.js';
+import { balanceSheetAssetsTopic } from './accounting/balance-sheet-assets.js';
+import { balanceSheetLiabilitiesEquityTopic } from './accounting/balance-sheet-liabilities-equity.js';
+import { whatIsStrategyTopic } from './strategy/what-is-strategy.js';
+import { strategicLeadershipTopic } from './strategy/strategic-leadership.js';
+import { pestelTopic } from './strategy/pestel.js';
 import { fiveForcesTopic } from './strategy/five-forces.js';
+import { internalAnalysisTopic } from './strategy/internal-analysis.js';
+import { swotTopic } from './strategy/swot.js';
+import { performanceBusinessModelsTopic } from './strategy/performance-business-models.js';
 
 // ---------------------------------------------------------------------------
 // To add a topic: write a content file like the two samples, import it here,
@@ -7,7 +18,21 @@ import { fiveForcesTopic } from './strategy/five-forces.js';
 // Units without a matching topic show up as "coming soon".
 // ---------------------------------------------------------------------------
 
-export const topics = [cvpTopic, fiveForcesTopic];
+export const topics = [
+  accountingBasicsTopic,
+  accountingProcessTopic,
+  statementsAndNotesTopic,
+  balanceSheetAssetsTopic,
+  balanceSheetLiabilitiesEquityTopic,
+  cvpTopic,
+  whatIsStrategyTopic,
+  strategicLeadershipTopic,
+  pestelTopic,
+  fiveForcesTopic,
+  internalAnalysisTopic,
+  swotTopic,
+  performanceBusinessModelsTopic,
+];
 
 export const universes = {
   ironhawks: {

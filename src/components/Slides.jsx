@@ -101,20 +101,33 @@ export default function Slides({ slides, start = 0, label, onFinish, finishLabel
         </button>
 
         <div className="stack-sm" style={{ textAlign: 'center' }}>
-          <div className="dots">
-            {slides.map((s, n) => (
-              <button
-                key={n}
-                type="button"
-                className="dot"
-                onClick={() => go(n)}
-                aria-label={`Slide ${n + 1}: ${s.title}`}
-                aria-current={n === i}
-              >
-                <span />
-              </button>
-            ))}
-          </div>
+          {slides.length <= 8 ? (
+            <div className="dots">
+              {slides.map((s, n) => (
+                <button
+                  key={n}
+                  type="button"
+                  className="dot"
+                  onClick={() => go(n)}
+                  aria-label={`Slide ${n + 1}: ${s.title}`}
+                  aria-current={n === i}
+                >
+                  <span />
+                </button>
+              ))}
+            </div>
+          ) : (
+            <div
+              className="slide-progress"
+              role="progressbar"
+              aria-valuemin={1}
+              aria-valuemax={slides.length}
+              aria-valuenow={i + 1}
+              aria-label="Slide progress"
+            >
+              <span style={{ width: `${((i + 1) / slides.length) * 100}%` }} />
+            </div>
+          )}
           <p className="slide-count">{i + 1} of {slides.length}</p>
         </div>
 

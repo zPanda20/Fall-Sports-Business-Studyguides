@@ -1167,6 +1167,22 @@ a.tile:hover {
   background: linear-gradient(90deg, var(--accent), var(--accent-b));
   box-shadow: 0 0 12px var(--glow);
 }
+.slide-progress {
+  width: min(220px, 100%);
+  height: 8px;
+  margin: 10px auto 6px;
+  border-radius: 999px;
+  background: var(--nm-dark);
+  overflow: hidden;
+}
+.slide-progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent), var(--accent-b));
+  box-shadow: 0 0 12px var(--glow);
+  transition: width 0.3s ease;
+}
 .slide-count {
   font-size: 0.82rem;
   color: var(--muted);

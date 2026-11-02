@@ -134,6 +134,13 @@ export default function TopicPage() {
             <p className="meta">{head.note}</p>
           </div>
 
+          {topic.partial && section === 'plain' && (
+            <aside className="callout warn" style={{ marginBottom: '1rem' }}>
+              <strong>Partly covered</strong>
+              <p>{topic.partial}</p>
+            </aside>
+          )}
+
           {section === 'plain' && (
             <Slides key={slideKey} slides={topic.plain} start={startSlide} label="In plain words" onFinish={finish} finishLabel={finishLabel} />
           )}
@@ -147,6 +154,9 @@ export default function TopicPage() {
           {section === 'practice' && <Quiz topic={topic} courseTitle={course.title} onReview={review} />}
           {section === 'watch' && (
             <div className="stack">
+              {topic.videos.length === 0 && (
+                <p className="meta">No videos have been added for this topic yet. This guide is built from your course slides and notes, so everything you need is in the other sections.</p>
+              )}
               <ul className="videos" role="list">
                 {topic.videos.map((v) => (
                   <li key={v.url}>
@@ -161,14 +171,16 @@ export default function TopicPage() {
                   </li>
                 ))}
               </ul>
-              <a
-                className="text-link"
-                href={`https://www.youtube.com/results?search_query=${encodeURIComponent(topic.videoSearch)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Search YouTube for more on this topic ↗
-              </a>
+              {topic.videoSearch && (
+                <a
+                  className="text-link"
+                  href={`https://www.youtube.com/results?search_query=${encodeURIComponent(topic.videoSearch)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Search YouTube for more on this topic ↗
+                </a>
+              )}
               <div className="complete">
                 <button
                   type="button"

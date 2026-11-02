@@ -45,7 +45,9 @@ Content lives in `src/data/`, one file per topic, separate from the code.
 
 **Numbers in the Accounting topics are computed in code** (`src/lib/cvp.js`), not typed by hand, so the written steps, tables, chart and quiz answers always agree. `npm run verify` checks them against hand-calculated values.
 
-**Videos:** only add a link after opening it and confirming the title and channel. Dead or wrong links are worse than none.
+**What is filled in:** topics are written only from the course slides and guides. Accounting & Forecasting covers accounting basics, the accounting process, statements and notes, assets, liabilities and equity, and cost-volume-profit. Business Strategy covers what strategy is, strategic leadership, PESTEL, Five Forces, internal analysis, SWOT, and performance and business models. Units with no source material stay "Coming soon". Two topics carry a "Partly covered" note because a chapter was missing from the materials (Chapter 6 and Chapter 11). Items marked not-for-exam in the slides are left out.
+
+**Videos:** most topics have none yet and the Watch section says so. Only add a link after opening it and confirming the title and channel. Dead or wrong links are worse than none.
 
 ## Project layout
 

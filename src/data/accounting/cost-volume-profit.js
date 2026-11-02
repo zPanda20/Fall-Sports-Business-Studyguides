@@ -278,7 +278,7 @@ export const cvpTopic = {
         blocks: [
           {
             type: 'p',
-            text: `A fictional pro basketball team. The arena seats ${num(base.capacity)} and there are ${base.homeGames} home games, so the season has room for ${num(capacity)} tickets. We only look at tickets, to keep it clean.`,
+            text: `A fictional pro basketball team. The arena seats ${num(base.capacity)} and there are ${base.homeGames} home games, so the season has room for ${num(capacity)} tickets. We only look at tickets, to keep it clean. This is the ticket-only slice of a club with roughly $420M of total revenue, so these figures are far smaller than the full income statement in other topics.`,
           },
           {
             type: 'table',
