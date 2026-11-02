@@ -22,46 +22,50 @@
 :root,
 :root[data-theme='light'] {
   color-scheme: light;
-  --bg: #e3e9f2;
-  --bg-2: #f4f7fc;
-  --nm-bg: #e8edf5;
+  --bg: #e5e6f2;
+  --bg-2: #f2edf6;
+  --bg-grad: linear-gradient(135deg, #f1e4ef 0%, #e6e5f3 42%, #dae5f3 100%);
+  --nm-bg: #eaecf5;
   --nm-light: rgba(255, 255, 255, 0.95);
-  --nm-dark: rgba(140, 160, 195, 0.5);
-  --ink: #172036;
-  --muted: #4a5775;
-  --line: rgba(23, 32, 54, 0.1);
+  --nm-dark: rgba(148, 150, 192, 0.46);
+  --ink: #1b2034;
+  --muted: #53586e;
+  --line: rgba(27, 32, 52, 0.1);
 
   --glass-a: rgba(255, 255, 255, 0.62);
   --glass-b: rgba(255, 255, 255, 0.22);
   --glass-c: rgba(255, 255, 255, 0.4);
   --glass-border: rgba(255, 255, 255, 0.8);
   --glass-edge: rgba(255, 255, 255, 0.9);
-  --glass-shadow: 0 12px 40px rgba(60, 85, 140, 0.16);
-  --glass-solid: rgba(246, 249, 253, 0.94);
+  --glass-shadow: 0 14px 44px rgba(88, 90, 150, 0.17);
+  --glass-solid: rgba(246, 246, 252, 0.94);
 
-  --accent: #137a72;
-  --accent-b: #2563a8;
-  --accent-ink: #0d6a63;
-  --accent-soft: rgba(19, 122, 114, 0.13);
-  --glow: rgba(38, 150, 165, 0.38);
+  --accent: #0f7a5e;
+  --accent-b: #0a6a62;
+  --accent-ink: #0b6a50;
+  --accent-soft: rgba(15, 122, 94, 0.12);
+  --glow: rgba(30, 165, 125, 0.34);
   --on-accent: #ffffff;
+  --copper: #b3622b;
+  --copper-ink: #944f1f;
 
   --good: #17724a;
   --good-soft: rgba(23, 114, 74, 0.13);
   --bad: #b0372d;
   --bad-soft: rgba(176, 55, 45, 0.12);
-  --warm: #9a5a17;
-  --warm-soft: rgba(226, 164, 70, 0.2);
+  --warm: #8f4f1f;
+  --warm-soft: rgba(214, 140, 80, 0.18);
 
-  --i1: #5fe0cd;
-  --i2: #7aa8ff;
-  --i3: #b98cff;
-  --i4: #ff8fc7;
-  --i5: #ffc384;
+  /* iridescence: emerald and copper */
+  --i1: #2fd29a;
+  --i2: #a9f2d4;
+  --i3: #e2955c;
+  --i4: #f4cda3;
+  --i5: #17a97c;
 
-  --orb1: rgba(95, 224, 205, 0.55);
-  --orb2: rgba(185, 140, 255, 0.42);
-  --orb3: rgba(255, 195, 132, 0.5);
+  --orb1: rgba(100, 205, 172, 0.42);
+  --orb2: rgba(236, 156, 196, 0.36);
+  --orb3: rgba(230, 168, 120, 0.34);
 
   --r: 22px;
   --r-sm: 14px;
@@ -69,13 +73,14 @@
 
 :root[data-theme='dark'] {
   color-scheme: dark;
-  --bg: #070c19;
-  --bg-2: #0f1733;
-  --nm-bg: #111a31;
+  --bg: #0b0d1d;
+  --bg-2: #1a1631;
+  --bg-grad: linear-gradient(135deg, #1b1330 0%, #11142b 45%, #0b1630 100%);
+  --nm-bg: #141729;
   --nm-light: rgba(130, 160, 255, 0.075);
   --nm-dark: rgba(0, 0, 0, 0.62);
-  --ink: #eaf0ff;
-  --muted: #aab7d8;
+  --ink: #eceef8;
+  --muted: #b1b5cd;
   --line: rgba(190, 205, 255, 0.12);
 
   --glass-a: rgba(255, 255, 255, 0.1);
@@ -86,39 +91,41 @@
   --glass-shadow: 0 14px 44px rgba(0, 0, 0, 0.5);
   --glass-solid: rgba(20, 28, 52, 0.96);
 
-  --accent: #55d8c8;
-  --accent-b: #7ea6ff;
-  --accent-ink: #7be6d8;
-  --accent-soft: rgba(85, 216, 200, 0.14);
-  --glow: rgba(85, 216, 200, 0.4);
-  --on-accent: #04211e;
+  --accent: #4fd6a5;
+  --accent-b: #2db58c;
+  --accent-ink: #84e9c6;
+  --accent-soft: rgba(79, 214, 165, 0.14);
+  --glow: rgba(60, 210, 160, 0.38);
+  --on-accent: #03221a;
+  --copper: #eda26c;
+  --copper-ink: #f5bc92;
 
   --good: #7fe0a8;
   --good-soft: rgba(127, 224, 168, 0.14);
   --bad: #ff9a8f;
   --bad-soft: rgba(255, 154, 143, 0.14);
-  --warm: #ffc680;
-  --warm-soft: rgba(255, 198, 128, 0.14);
+  --warm: #f2b585;
+  --warm-soft: rgba(237, 162, 108, 0.14);
 
-  --orb1: rgba(30, 165, 170, 0.38);
-  --orb2: rgba(105, 85, 255, 0.4);
-  --orb3: rgba(205, 80, 170, 0.24);
+  --orb1: rgba(40, 170, 130, 0.26);
+  --orb2: rgba(80, 100, 210, 0.34);
+  --orb3: rgba(190, 105, 150, 0.22);
 }
 
 [data-course='strategy'] {
-  --accent: #3f56c8;
-  --accent-b: #7a4fd0;
-  --accent-ink: #3144ad;
-  --accent-soft: rgba(63, 86, 200, 0.13);
-  --glow: rgba(100, 112, 235, 0.38);
+  --accent: #9a5222;
+  --accent-b: #7e4118;
+  --accent-ink: #8a4719;
+  --accent-soft: rgba(154, 82, 34, 0.12);
+  --glow: rgba(214, 130, 70, 0.34);
 }
 :root[data-theme='dark'] [data-course='strategy'] {
-  --accent: #9bb0ff;
-  --accent-b: #c4a2ff;
-  --accent-ink: #b3c3ff;
-  --accent-soft: rgba(155, 176, 255, 0.15);
-  --glow: rgba(150, 165, 255, 0.4);
-  --on-accent: #0b1030;
+  --accent: #f0a572;
+  --accent-b: #d9814a;
+  --accent-ink: #f7be94;
+  --accent-soft: rgba(240, 165, 114, 0.15);
+  --glow: rgba(240, 160, 100, 0.4);
+  --on-accent: #2b1405;
 }
 
 /* ---------- base ---------- */
@@ -138,10 +145,7 @@ body {
   font-size: 1.0625rem;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
-  background:
-    radial-gradient(1100px 700px at 12% -8%, var(--bg-2), transparent 70%),
-    radial-gradient(900px 600px at 100% 100%, var(--bg-2), transparent 70%),
-    var(--bg);
+  background: var(--bg-grad), var(--bg);
   background-attachment: fixed;
 }
 h1,
@@ -337,12 +341,12 @@ input {
   padding: 1.5px;
   background: conic-gradient(
     from var(--angle),
-    var(--i1),
-    var(--i2),
-    var(--i3),
-    var(--i4),
-    var(--i5),
-    var(--i1)
+    var(--i1) 0%,
+    var(--i2) 18%,
+    var(--i3) 42%,
+    var(--i4) 58%,
+    var(--i5) 80%,
+    var(--i1) 100%
   );
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
@@ -354,7 +358,7 @@ input {
   opacity: 0;
   transition: opacity 0.35s ease;
   pointer-events: none;
-  animation: spin 7s linear infinite;
+  animation: spin 16s linear infinite;
 }
 .irid:hover::before,
 .irid:focus-visible::before,
@@ -367,7 +371,7 @@ input {
   }
 }
 .irid-text {
-  background: linear-gradient(100deg, var(--accent), var(--accent-b) 45%, #b06be0);
+  background: linear-gradient(100deg, var(--accent), var(--accent-b) 50%, var(--copper));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -432,8 +436,7 @@ input {
 
 /* ---------- header / footer ---------- */
 .site-header {
-  position: sticky;
-  top: 12px;
+  position: relative;
   z-index: 30;
   margin: 12px auto 0;
   width: calc(100% - 24px);
@@ -464,6 +467,7 @@ input {
   border-radius: 50%;
   background: conic-gradient(from 200deg, var(--i1), var(--i2), var(--i3), var(--i4), var(--i5), var(--i1));
   box-shadow: 0 0 18px var(--glow), inset 0 0 0 4px rgba(255, 255, 255, 0.45);
+  animation: slow-turn 24s linear infinite;
 }
 .header-nav {
   display: flex;
@@ -757,6 +761,19 @@ a.tile:hover {
 }
 
 /* ---------- topic app shell ---------- */
+@keyframes slow-turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes sheen {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
 .topic-wrap {
   display: grid;
   gap: 18px;
@@ -770,7 +787,7 @@ a.tile:hover {
   display: none;
   padding: 18px 14px;
   position: sticky;
-  top: 92px;
+  top: 24px;
 }
 .side-title {
   padding: 4px 12px 14px;
@@ -842,7 +859,7 @@ a.tile:hover {
   min-width: 0;
 }
 .panel {
-  scroll-margin-top: 84px;
+  scroll-margin-top: 24px;
 }
 .panel-head {
   display: grid;
@@ -1755,5 +1772,113 @@ td {
     animation: none !important;
     transition: none !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- the sidebar: a beveled window of liquid glass ---------- */
+.side.glass {
+  border-radius: 28px;
+  border: 0;
+  background-image:
+    radial-gradient(260px circle at var(--mx, 50%) var(--my, -30%), rgba(255, 255, 255, calc(var(--spot) * 0.6)), transparent 70%),
+    linear-gradient(155deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.08) 40%, rgba(255, 255, 255, 0.02) 62%, rgba(255, 255, 255, 0.28));
+  -webkit-backdrop-filter: blur(30px) saturate(190%) brightness(1.05);
+  backdrop-filter: blur(30px) saturate(190%) brightness(1.05);
+  box-shadow:
+    0 22px 50px rgba(88, 90, 150, 0.22),
+    0 2px 6px rgba(88, 90, 150, 0.12),
+    inset 2px 2px 2px rgba(255, 255, 255, 0.95),
+    inset -2px -2px 3px rgba(120, 125, 175, 0.2),
+    inset 0 0 34px rgba(255, 255, 255, 0.28);
+}
+:root[data-theme='dark'] .side.glass {
+  background-image:
+    radial-gradient(260px circle at var(--mx, 50%) var(--my, -30%), rgba(255, 255, 255, calc(var(--spot) * 0.22)), transparent 70%),
+    linear-gradient(155deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.03) 42%, rgba(255, 255, 255, 0.02) 60%, rgba(255, 255, 255, 0.09));
+  box-shadow:
+    0 24px 56px rgba(0, 0, 0, 0.5),
+    inset 2px 2px 2px rgba(255, 255, 255, 0.28),
+    inset -2px -2px 3px rgba(0, 0, 0, 0.45),
+    inset 0 0 34px rgba(255, 255, 255, 0.05);
+}
+/* slow emerald and copper light running round the bevel */
+.side.glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(
+    from var(--angle),
+    var(--i1) 0%,
+    rgba(255, 255, 255, 0.85) 16%,
+    var(--i3) 40%,
+    rgba(255, 255, 255, 0.2) 55%,
+    var(--i5) 78%,
+    var(--i1) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  opacity: 0.6;
+  pointer-events: none;
+  animation: spin 22s linear infinite;
+}
+/* specular sheen, drifting very slowly across the pane */
+.side.glass::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(118deg, transparent 16%, rgba(255, 255, 255, 0.42) 28%, transparent 40%, transparent 68%, rgba(226, 149, 92, 0.16) 80%, transparent 92%);
+  background-size: 260% 260%;
+  opacity: 1;
+  pointer-events: none;
+  animation: sheen 18s ease-in-out infinite alternate;
+}
+.side.glass > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* soft coloured light behind the sidebar, so the glass has something to refract */
+@media (min-width: 920px) {
+  .shell {
+    position: relative;
+  }
+  .shell::before {
+    content: '';
+    position: absolute;
+    left: -34px;
+    top: 10px;
+    width: 340px;
+    height: 520px;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(150px 150px at 30% 18%, rgba(47, 210, 154, 0.55), transparent 70%),
+      radial-gradient(170px 170px at 78% 52%, rgba(226, 149, 92, 0.5), transparent 70%),
+      radial-gradient(160px 160px at 28% 88%, rgba(236, 156, 196, 0.5), transparent 70%);
+    filter: blur(22px);
+    animation: light-drift 20s ease-in-out infinite alternate;
+  }
+  :root[data-theme='dark'] .shell::before {
+    opacity: 0.6;
+  }
+  .side,
+  .panel {
+    z-index: 1;
+  }
+  .panel {
+    position: relative;
+  }
+}
+@keyframes light-drift {
+  to {
+    transform: translate(10px, 40px) scale(1.06);
   }
 }
