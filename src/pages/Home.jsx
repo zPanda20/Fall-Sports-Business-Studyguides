@@ -7,6 +7,7 @@ const HOW = [
   { icon: 'plain', title: 'In plain words', text: 'Short, clickable slides that explain each idea simply.' },
   { icon: 'real', title: 'Real and sports examples', text: 'A real case, then a fictional team that carries through the course.' },
   { icon: 'practice', title: 'Practice', text: 'Exam-style questions, with help the moment you get one wrong.' },
+  { icon: 'ai', title: 'Extra help from AI', text: 'Missed a question? Send it to the AI you like, with a ready-made message asking for a simpler explanation.' },
   { icon: 'watch', title: 'Watch', text: 'Hand-picked videos when you want a second explanation.' },
 ];
 

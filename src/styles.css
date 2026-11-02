@@ -39,6 +39,19 @@
   --glass-edge: rgba(255, 255, 255, 0.9);
   --glass-shadow: 0 14px 44px rgba(88, 90, 150, 0.17);
   --glass-solid: rgba(246, 246, 252, 0.94);
+  /* thick liquid-glass rim: light from the top-left, emerald and copper dispersion */
+  --g-tint-a: rgba(176, 236, 218, 0.34);
+  --g-tint-b: rgba(246, 205, 180, 0.3);
+  --g-hi: rgba(255, 255, 255, 0.95);
+  --g-hi2: rgba(255, 255, 255, 0.75);
+  --g-disp-a: rgba(47, 210, 154, 0.3);
+  --g-disp-b: rgba(226, 149, 92, 0.3);
+  --g-drop: rgba(88, 96, 170, 0.22);
+  --g-drop2: rgba(226, 149, 92, 0.16);
+  --metal: linear-gradient(180deg, #c9f7e3 0%, #5fe0b0 22%, #25b886 48%, #1c9f76 52%, #3cc99b 78%, #a6efd0 100%);
+  --metal-edge: rgba(8, 80, 58, 0.45);
+  --metal-glow: rgba(30, 165, 125, 0.4);
+  --on-metal: #03241b;
 
   --accent: #0f7a5e;
   --accent-b: #0a6a62;
@@ -90,6 +103,14 @@
   --glass-edge: rgba(255, 255, 255, 0.3);
   --glass-shadow: 0 14px 44px rgba(0, 0, 0, 0.5);
   --glass-solid: rgba(20, 28, 52, 0.96);
+  --g-tint-a: rgba(80, 200, 165, 0.14);
+  --g-tint-b: rgba(230, 150, 100, 0.12);
+  --g-hi: rgba(255, 255, 255, 0.42);
+  --g-hi2: rgba(255, 255, 255, 0.2);
+  --g-disp-a: rgba(60, 210, 160, 0.3);
+  --g-disp-b: rgba(237, 162, 108, 0.28);
+  --g-drop: rgba(0, 0, 0, 0.5);
+  --g-drop2: rgba(60, 210, 160, 0.1);
 
   --accent: #4fd6a5;
   --accent-b: #2db58c;
@@ -118,6 +139,10 @@
   --accent-ink: #8a4719;
   --accent-soft: rgba(154, 82, 34, 0.12);
   --glow: rgba(214, 130, 70, 0.34);
+  --metal: linear-gradient(180deg, #fbdcbc 0%, #eba877 20%, #d08046 47%, #bb6c34 52%, #d68f58 80%, #f3c79d 100%);
+  --metal-edge: rgba(100, 46, 12, 0.5);
+  --metal-glow: rgba(214, 130, 70, 0.42);
+  --on-metal: #2a1204;
 }
 :root[data-theme='dark'] [data-course='strategy'] {
   --accent: #f0a572;
@@ -281,19 +306,25 @@ input {
 /* ---------- surfaces ---------- */
 .glass {
   background-image:
+    radial-gradient(34px 18px at calc(100% - 30px) 9px, rgba(255, 255, 255, 0.8), transparent 72%),
     radial-gradient(
       280px circle at var(--mx, 50%) var(--my, -30%),
       rgba(255, 255, 255, calc(var(--spot) * 0.55)),
       transparent 70%
     ),
-    linear-gradient(155deg, var(--glass-a), var(--glass-b) 48%, var(--glass-c));
-  -webkit-backdrop-filter: blur(22px) saturate(175%);
-  backdrop-filter: blur(22px) saturate(175%);
-  border: 1px solid var(--glass-border);
+    linear-gradient(150deg, var(--g-tint-a) 0%, rgba(255, 255, 255, 0.1) 38%, rgba(255, 255, 255, 0.06) 62%, var(--g-tint-b) 100%);
+  -webkit-backdrop-filter: blur(24px) saturate(185%);
+  backdrop-filter: blur(24px) saturate(185%);
+  border: 0;
   box-shadow:
-    var(--glass-shadow),
-    inset 0 1px 0 var(--glass-edge),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.08);
+    0 22px 34px -14px var(--g-drop),
+    0 8px 16px -8px var(--g-drop2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5),
+    inset 3px 4px 6px -2px var(--g-hi),
+    inset -3px -4px 6px -2px var(--g-hi2),
+    inset 9px 11px 22px -10px var(--g-disp-a),
+    inset -9px -11px 22px -10px var(--g-disp-b),
+    inset 0 0 20px rgba(255, 255, 255, 0.18);
   border-radius: var(--r);
   transition: --spot 0.35s ease;
 }
@@ -339,15 +370,21 @@ input {
   inset: 0;
   border-radius: inherit;
   padding: 1.5px;
-  background: conic-gradient(
-    from var(--angle),
-    var(--i1) 0%,
-    var(--i2) 18%,
-    var(--i3) 42%,
-    var(--i4) 58%,
-    var(--i5) 80%,
-    var(--i1) 100%
-  );
+  background:
+    linear-gradient(110deg, transparent 38%, rgba(255, 255, 255, 0.85) 50%, transparent 62%),
+    linear-gradient(
+      110deg,
+      var(--i1) 0%,
+      var(--i2) 14%,
+      var(--i3) 30%,
+      var(--i4) 42%,
+      var(--i5) 56%,
+      var(--i2) 70%,
+      var(--i3) 84%,
+      var(--i1) 100%
+    );
+  background-size: 260% 100%, 320% 100%;
+  background-position: 120% 0, 0% 0;
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
@@ -358,20 +395,34 @@ input {
   opacity: 0;
   transition: opacity 0.35s ease;
   pointer-events: none;
-  animation: spin 16s linear infinite;
+  animation: wave 9s ease-in-out infinite alternate;
 }
 .irid:hover::before,
 .irid:focus-visible::before,
 .irid.is-on::before {
   opacity: 1;
 }
-@keyframes spin {
+/* iridescence travels across the edge in slow waves: a highlight sweeps one way while the colours drift the other */
+@keyframes wave {
+  from {
+    background-position: 120% 0, 0% 0;
+  }
   to {
-    --angle: 360deg;
+    background-position: -20% 0, 100% 0;
+  }
+}
+@keyframes wave-text {
+  from {
+    background-position: 0% 0;
+  }
+  to {
+    background-position: 100% 0;
   }
 }
 .irid-text {
-  background: linear-gradient(100deg, var(--accent), var(--accent-b) 50%, var(--copper));
+  background: linear-gradient(100deg, var(--accent), var(--accent-b) 25%, var(--copper) 50%, var(--accent-b) 75%, var(--accent));
+  background-size: 220% 100%;
+  animation: wave-text 10s ease-in-out infinite alternate;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -385,7 +436,7 @@ input {
 }
 .wrap {
   width: 100%;
-  max-width: 68rem;
+  max-width: 82rem;
   margin: 0 auto;
   padding-left: 16px;
   padding-right: 16px;
@@ -440,7 +491,7 @@ input {
   z-index: 30;
   margin: 12px auto 0;
   width: calc(100% - 24px);
-  max-width: 68rem;
+  max-width: 82rem;
   border-radius: 999px;
 }
 .header-inner {
@@ -465,9 +516,10 @@ input {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: conic-gradient(from 200deg, var(--i1), var(--i2), var(--i3), var(--i4), var(--i5), var(--i1));
+  background: linear-gradient(120deg, var(--i1), var(--i2) 24%, var(--i3) 50%, var(--i4) 66%, var(--i5) 84%, var(--i1));
+  background-size: 300% 100%;
   box-shadow: 0 0 18px var(--glow), inset 0 0 0 4px rgba(255, 255, 255, 0.45);
-  animation: slow-turn 24s linear infinite;
+  animation: wave-text 7s ease-in-out infinite alternate;
 }
 .header-nav {
   display: flex;
@@ -526,20 +578,43 @@ input {
   text-decoration: none;
   text-align: center;
   cursor: pointer;
-  color: var(--on-accent);
-  background: linear-gradient(135deg, var(--accent), var(--accent-b));
+  overflow: hidden;
+  color: var(--on-metal);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 4px),
+    var(--metal);
   box-shadow:
-    0 10px 26px var(--glow),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4),
-    inset 0 -2px 6px rgba(0, 0, 0, 0.12);
+    0 10px 24px var(--metal-glow),
+    0 0 0 1px var(--metal-edge),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.22);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+/* a pale band of light slides across the metal */
+.button:not(.secondary)::after,
+.arrow-btn.primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(105deg, transparent 36%, rgba(255, 255, 255, 0.65) 50%, transparent 64%);
+  background-size: 260% 100%;
+  background-position: 160% 0;
+  transition: background-position 0.9s ease;
+  pointer-events: none;
+}
+.button:not(.secondary):hover::after,
+.arrow-btn.primary:hover::after {
+  background-position: -60% 0;
 }
 .button:hover {
   transform: translateY(-1px);
   box-shadow:
-    0 14px 32px var(--glow),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
-    inset 0 -2px 6px rgba(0, 0, 0, 0.12);
+    0 14px 30px var(--metal-glow),
+    0 0 0 1px var(--metal-edge),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.22);
 }
 .button:active {
   transform: translateY(1px);
@@ -660,9 +735,11 @@ input {
 .how-grid {
   display: grid;
   gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
 }
 .how-item {
   display: grid;
+  align-content: start;
   gap: 8px;
   padding: 20px;
 }
@@ -920,9 +997,6 @@ a.tile:hover {
   .course-grid {
     grid-template-columns: 1fr 1fr;
   }
-  .how-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
   .tiles {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -966,14 +1040,33 @@ a.tile:hover {
   touch-action: pan-y;
   overflow: hidden;
 }
+.slides {
+  overflow-anchor: none;
+}
+.slides-track {
+  display: grid;
+}
 .slide {
+  grid-area: 1 / 1;
   display: grid;
   gap: 16px;
   align-content: start;
+}
+.slide.is-on {
   animation: slide-in 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.slide.back {
+.slide.is-on.back {
   animation-name: slide-in-back;
+}
+/* every slide takes the same space, so nothing jumps when you press Next */
+.slide.is-off {
+  visibility: hidden;
+  pointer-events: none;
+}
+@media (max-width: 919px) {
+  .slide.is-off {
+    display: none;
+  }
 }
 @keyframes slide-in {
   from {
@@ -1026,9 +1119,23 @@ a.tile:hover {
   cursor: default;
 }
 .arrow-btn.primary {
-  color: var(--on-accent);
-  background: linear-gradient(135deg, var(--accent), var(--accent-b));
-  box-shadow: 0 8px 22px var(--glow), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  position: relative;
+  overflow: hidden;
+  color: var(--on-metal);
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 4px),
+    var(--metal);
+  box-shadow:
+    0 8px 20px var(--metal-glow),
+    0 0 0 1px var(--metal-edge),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.22);
+}
+.arrow-btn.primary:active:not(:disabled) {
+  box-shadow:
+    0 3px 8px var(--metal-glow),
+    0 0 0 1px var(--metal-edge),
+    inset 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 .dots {
   display: flex;
@@ -1775,48 +1882,33 @@ td {
   }
 }
 
-/* ---------- the sidebar: a beveled window of liquid glass ---------- */
+/* ---------- the sidebar: a thick-rimmed window of liquid glass ---------- */
 .side.glass {
-  border-radius: 28px;
-  border: 0;
-  background-image:
-    radial-gradient(260px circle at var(--mx, 50%) var(--my, -30%), rgba(255, 255, 255, calc(var(--spot) * 0.6)), transparent 70%),
-    linear-gradient(155deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.08) 40%, rgba(255, 255, 255, 0.02) 62%, rgba(255, 255, 255, 0.28));
+  border-radius: 38px 46px 40px 48px / 42px 38px 48px 40px;
   -webkit-backdrop-filter: blur(30px) saturate(190%) brightness(1.05);
   backdrop-filter: blur(30px) saturate(190%) brightness(1.05);
   box-shadow:
-    0 22px 50px rgba(88, 90, 150, 0.22),
-    0 2px 6px rgba(88, 90, 150, 0.12),
-    inset 2px 2px 2px rgba(255, 255, 255, 0.95),
-    inset -2px -2px 3px rgba(120, 125, 175, 0.2),
-    inset 0 0 34px rgba(255, 255, 255, 0.28);
+    0 30px 44px -16px var(--g-drop),
+    0 10px 18px -8px var(--g-drop2),
+    inset 0 0 0 1.5px rgba(255, 255, 255, 0.55),
+    inset 5px 6px 8px -2px var(--g-hi),
+    inset -5px -6px 8px -2px var(--g-hi2),
+    inset 14px 16px 30px -12px var(--g-disp-a),
+    inset -14px -16px 30px -12px var(--g-disp-b),
+    inset 0 0 36px rgba(255, 255, 255, 0.22);
 }
-:root[data-theme='dark'] .side.glass {
-  background-image:
-    radial-gradient(260px circle at var(--mx, 50%) var(--my, -30%), rgba(255, 255, 255, calc(var(--spot) * 0.22)), transparent 70%),
-    linear-gradient(155deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.03) 42%, rgba(255, 255, 255, 0.02) 60%, rgba(255, 255, 255, 0.09));
-  box-shadow:
-    0 24px 56px rgba(0, 0, 0, 0.5),
-    inset 2px 2px 2px rgba(255, 255, 255, 0.28),
-    inset -2px -2px 3px rgba(0, 0, 0, 0.45),
-    inset 0 0 34px rgba(255, 255, 255, 0.05);
-}
-/* slow emerald and copper light running round the bevel */
+/* emerald and copper light travelling around the rim in waves */
 .side.glass::before {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  padding: 2px;
-  background: conic-gradient(
-    from var(--angle),
-    var(--i1) 0%,
-    rgba(255, 255, 255, 0.85) 16%,
-    var(--i3) 40%,
-    rgba(255, 255, 255, 0.2) 55%,
-    var(--i5) 78%,
-    var(--i1) 100%
-  );
+  padding: 2.5px;
+  background:
+    linear-gradient(115deg, transparent 38%, rgba(255, 255, 255, 0.9) 50%, transparent 62%),
+    linear-gradient(115deg, var(--i1) 0%, var(--i2) 16%, var(--i3) 34%, var(--i4) 46%, var(--i5) 62%, var(--i3) 80%, var(--i1) 100%);
+  background-size: 240% 240%, 300% 300%;
+  background-position: 120% 0%, 0% 0%;
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
@@ -1824,21 +1916,28 @@ td {
   mask:
     linear-gradient(#000 0 0) content-box exclude,
     linear-gradient(#000 0 0);
-  opacity: 0.6;
+  opacity: 0.7;
   pointer-events: none;
-  animation: spin 22s linear infinite;
+  animation: wave-rim 14s ease-in-out infinite alternate;
 }
-/* specular sheen, drifting very slowly across the pane */
+@keyframes wave-rim {
+  from {
+    background-position: 120% 0%, 0% 0%;
+  }
+  to {
+    background-position: -20% 100%, 100% 100%;
+  }
+}
+/* a soft curved highlight across the upper pane, like light on a thick lens */
 .side.glass::after {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: linear-gradient(118deg, transparent 16%, rgba(255, 255, 255, 0.42) 28%, transparent 40%, transparent 68%, rgba(226, 149, 92, 0.16) 80%, transparent 92%);
-  background-size: 260% 260%;
-  opacity: 1;
+  background:
+    radial-gradient(70px 30px at calc(100% - 44px) 12px, rgba(255, 255, 255, 0.85), transparent 70%),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.3) 0%, transparent 34%);
   pointer-events: none;
-  animation: sheen 18s ease-in-out infinite alternate;
 }
 .side.glass > * {
   position: relative;
@@ -1880,5 +1979,65 @@ td {
 @keyframes light-drift {
   to {
     transform: translate(10px, 40px) scale(1.06);
+  }
+}
+
+/* wide screens: let the slide breathe */
+@media (min-width: 1100px) {
+  .shell {
+    grid-template-columns: 290px minmax(0, 1fr);
+  }
+  .panel {
+    padding: 24px 44px 26px;
+  }
+  .stage {
+    min-height: 380px;
+    padding: 26px 40px;
+  }
+  .slide {
+    gap: 16px;
+  }
+  .slide p,
+  .slide .bullets li,
+  .slide .steps li {
+    font-size: 1.12rem;
+  }
+}
+.slide > p {
+  max-width: 58rem;
+}
+
+/* keep the chart compact so the deck stays inside one screen */
+@media (min-width: 920px) {
+  .chart {
+    max-width: 430px;
+    margin-inline: auto;
+  }
+}
+/* phones: the slide controls float above the tab bar, so Next is always in the same place */
+@media (max-width: 919px) {
+  .slide-controls.glass {
+    position: sticky;
+    bottom: calc(88px + env(safe-area-inset-bottom));
+    z-index: 5;
+    padding: 8px 12px;
+    border-radius: 28px;
+  }
+}
+@media (min-width: 920px) {
+  .slide-controls.glass {
+    background: none;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@media (min-width: 920px) {
+  .main {
+    padding-top: 22px;
+  }
+  .panel-head {
+    margin-bottom: 14px;
   }
 }

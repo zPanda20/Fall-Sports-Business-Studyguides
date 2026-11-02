@@ -32,7 +32,34 @@ export default function Slides({ slides, start = 0, label, onFinish, finishLabel
     return () => el.removeEventListener('keydown', onKey);
   });
 
-  const slide = slides[i];
+  // After pressing Next/Back, keep the slide in view. Every slide takes the same space on
+  // desktop, so nothing moves; this only steps in when the deck has drifted out of sight.
+  // On phones the controls float above the tab bar, so we just make sure the top of the
+  // new slide is visible.
+  const first = useRef(true);
+  useEffect(() => {
+    if (first.current) {
+      first.current = false;
+      return;
+    }
+    const el = wrapRef.current;
+    const stage = el && el.querySelector('.stage');
+    if (!stage) return;
+    const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    const tabbar = document.querySelector('.tabbar');
+    const phone = tabbar && getComputedStyle(tabbar).display !== 'none';
+    const vh = window.innerHeight;
+    if (phone) {
+      const top = stage.getBoundingClientRect().top;
+      if (top < 8 || top > vh * 0.5) window.scrollTo({ top: window.scrollY + top - 16, behavior: calm });
+    } else {
+      const rect = el.getBoundingClientRect();
+      const controls = el.querySelector('.slide-controls').getBoundingClientRect();
+      if (stage.getBoundingClientRect().top < 12 || controls.bottom > vh - 4) {
+        el.scrollIntoView({ behavior: calm, block: rect.height < vh - 40 ? 'center' : 'start' });
+      }
+    }
+  }, [i]);
 
   return (
     <div className="slides" ref={wrapRef} role="group" aria-roledescription="carousel" aria-label={label}>
@@ -49,14 +76,26 @@ export default function Slides({ slides, start = 0, label, onFinish, finishLabel
           if (Math.abs(dx) > 55) go(i + (dx < 0 ? 1 : -1));
         }}
       >
-        <div key={i} className={`slide ${dir === 'back' ? 'back' : ''}`} aria-live="polite">
-          {slide.kicker && <span className="slide-kicker">{slide.kicker}</span>}
-          <h3 className="slide-title">{slide.title}</h3>
-          <Blocks blocks={slide.blocks} />
+        <div className="slides-track" aria-live="polite">
+          {slides.map((slide, n) => {
+            const on = n === i;
+            return (
+              <div
+                key={n}
+                className={`slide ${on ? 'is-on' : 'is-off'} ${on && dir === 'back' ? 'back' : ''}`}
+                aria-hidden={on ? undefined : 'true'}
+                inert={on ? undefined : ''}
+              >
+                {slide.kicker && <span className="slide-kicker">{slide.kicker}</span>}
+                <h3 className="slide-title">{slide.title}</h3>
+                <Blocks blocks={slide.blocks} />
+              </div>
+            );
+          })}
         </div>
       </div>
 
-      <div className="slide-controls">
+      <div className="slide-controls glass">
         <button type="button" className="arrow-btn irid" onClick={() => go(i - 1)} disabled={i === 0} aria-label="Previous slide">
           <Icon name="left" />
         </button>
