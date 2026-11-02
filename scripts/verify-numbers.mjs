@@ -49,6 +49,36 @@ eq(unitsForProfit({ ...m, variable: 35 }), 436_364, 'variable +5'); // 24,000,00
 // profit is exactly zero at break-even
 eq(profitAt(m, unitsForProfit(m)), 0, 'profit at break-even');
 
+// ---- Real example: Green Bay Packers FY ended 31 March 2025 ----
+// As reported by the team (packers.com, 23 July 2025). Figures in $ millions.
+const pk = { rev: 64.9, exp: 41.3, profitChange: 23.6, profit: 83.7, prev: 60.1, local: 34.6, national: 30.3 };
+near(pk.rev - pk.exp, pk.profitChange, 'Packers: revenue change - expense change = profit change', 1e-9);
+near(pk.profit - pk.prev, pk.profitChange, 'Packers: operating profit change', 1e-9);
+near(pk.profitChange / pk.prev, 0.393, 'Packers: profit growth %', 0.001);
+near(pk.local + pk.national, pk.rev, 'Packers: local + national = revenue change', 1e-9);
+near(pk.profitChange / pk.rev, 0.364, 'Packers: incremental margin', 0.001);
+
+// ---- Slide structure ----
+const BLOCKS = new Set(['p', 'big', 'bullets', 'formulas', 'columns', 'kpis', 'table', 'steps', 'chart', 'callout', 'forces', 'sources']);
+const SECTION_SLIDES = (t) => ({ plain: t.plain, real: t.real.slides, sports: t.sports.slides });
+for (const t of topics) {
+  for (const [name, slides] of Object.entries(SECTION_SLIDES(t))) {
+    assert.ok(Array.isArray(slides) && slides.length > 0, `${t.id}/${name}: needs slides`);
+    for (const [i, s] of slides.entries()) {
+      assert.ok(s.title && Array.isArray(s.blocks) && s.blocks.length > 0, `${t.id}/${name}[${i}]: slide needs title and blocks`);
+      for (const b of s.blocks) assert.ok(BLOCKS.has(b.type), `${t.id}/${name}[${i}]: unknown block ${b.type}`);
+      checks++;
+    }
+  }
+  // the real example must show where its facts come from
+  const hasSources = t.real.slides.some((s) => s.blocks.some((b) => b.type === 'sources' && b.items.every((x) => /^https:\/\//.test(x.url) && x.note)));
+  assert.ok(hasSources, `${t.id}: real example needs a sources slide with https links`);
+  assert.ok(t.real.title && t.real.note, `${t.id}: real example needs title and note`);
+  assert.ok(t.sports.title && t.sports.universe, `${t.id}: sports example needs title and universe`);
+  assert.ok(t.terms.length > 0, `${t.id}: needs terms`);
+  checks++;
+}
+
 // ---- Quiz structure ----
 for (const t of topics) {
   const ids = new Set();
@@ -64,6 +94,8 @@ for (const t of topics) {
       assert.equal(q.type, 'open', `${t.id}/${q.id}: unknown type`);
       assert.ok(Array.isArray(q.answer) && q.answer.length > 0, `${t.id}/${q.id}: open question needs answer lines`);
     }
+    const sec = SECTION_SLIDES(t)[q.review?.section];
+    assert.ok(sec && Number.isInteger(q.review.slide) && q.review.slide >= 0 && q.review.slide < sec.length, `${t.id}/${q.id}: review must point at a real slide`);
     assert.ok(!/NaN|undefined|\[object/.test(JSON.stringify(q)), `${t.id}/${q.id}: bad value in text`);
     checks++;
   }

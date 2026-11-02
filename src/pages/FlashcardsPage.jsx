@@ -44,27 +44,23 @@ export default function FlashcardsPage() {
   function mark(isKnown) {
     setKnown(card.id, isKnown);
     if (hideKnown && isKnown) {
-      // the card leaves the deck; stay at the same position
-      setFlipped(false);
+      setFlipped(false); // the card leaves the deck; stay at the same position
     } else {
       go(1);
     }
   }
 
   return (
-    <div className="stack-lg" data-course={course.id}>
-      <nav className="crumbs" aria-label="Breadcrumb">
-        <Link to="/">Courses</Link> <span aria-hidden="true">/</span>{' '}
-        <Link to={`/course/${course.id}`}>{course.short}</Link> <span aria-hidden="true">/</span>{' '}
-        <span>Flashcards</span>
-      </nav>
-
+    <div className="stack-lg narrow" data-course={course.id}>
       <header className="stack">
+        <nav className="crumbs" aria-label="Breadcrumb">
+          <Link to="/">Courses</Link> <span aria-hidden="true">/</span>{' '}
+          <Link to={`/course/${course.id}`}>{course.short}</Link> <span aria-hidden="true">/</span>{' '}
+          <span>Flashcards</span>
+        </nav>
         <h1>Flashcards</h1>
         <p className="lead">{topic ? topic.title : `All ${course.short} terms so far`}</p>
-        <p className="meta">
-          {knownCount} of {all.length} marked as known
-        </p>
+        <p className="meta">{knownCount} of {all.length} marked as known</p>
         {topic && (
           <Link to={`/course/${course.id}/flashcards`} className="text-link">
             Show cards from every topic
@@ -73,10 +69,10 @@ export default function FlashcardsPage() {
       </header>
 
       {!card ? (
-        <div className="card">
+        <div className="glass" style={{ padding: 24 }}>
           <p>{all.length ? 'You have marked every card as known. Nice work.' : 'No cards yet.'}</p>
           {all.length > 0 && (
-            <button type="button" className="button secondary" onClick={() => setHideKnown(false)}>
+            <button type="button" className="button secondary" style={{ marginTop: 14 }} onClick={() => setHideKnown(false)}>
               Show all cards again
             </button>
           )}
@@ -88,7 +84,8 @@ export default function FlashcardsPage() {
           </p>
           <button
             type="button"
-            className={`flashcard ${flipped ? 'flipped' : ''}`}
+            className={`flashcard glass irid ${flipped ? 'flipped is-on' : ''}`}
+            data-glow
             onClick={() => setFlipped((f) => !f)}
             aria-label={flipped ? 'Answer shown. Tap to show the question again.' : 'Tap to reveal the answer.'}
           >
@@ -98,18 +95,14 @@ export default function FlashcardsPage() {
           </button>
           <p className="meta center">From: {card.topicTitle}</p>
 
-          <div className="row">
+          <div className="row-2">
             <button type="button" className="button secondary" onClick={() => go(-1)}>← Previous</button>
             <button type="button" className="button secondary" onClick={() => go(1)}>Next →</button>
           </div>
           {flipped && (
-            <div className="row">
-              <button type="button" className="button secondary" onClick={() => mark(false)}>
-                Still learning
-              </button>
-              <button type="button" className="button" onClick={() => mark(true)}>
-                Got it
-              </button>
+            <div className="row-2">
+              <button type="button" className="button secondary" onClick={() => mark(false)}>Still learning</button>
+              <button type="button" className="button" onClick={() => mark(true)}>Got it</button>
             </div>
           )}
 

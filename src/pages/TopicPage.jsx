@@ -1,22 +1,44 @@
-import { Link, useParams } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { getTopic, getCourse, universes } from '../data/index.js';
 import { useProgress, toggleDone } from '../lib/progress.js';
-import Rich from '../lib/Rich.jsx';
+import Icon from '../components/Icon.jsx';
+import Slides from '../components/Slides.jsx';
+import Terms from '../components/Terms.jsx';
 import Quiz from '../components/Quiz.jsx';
-import ExampleBlocks from '../components/ExampleBlocks.jsx';
 
-function jump(id) {
-  const el = document.getElementById(id);
-  if (el) {
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    el.focus({ preventScroll: true });
-  }
-}
+const SECTIONS = [
+  { id: 'plain', label: 'In plain words', short: 'Basics', icon: 'plain' },
+  { id: 'terms', label: 'Key terms', short: 'Terms', icon: 'terms' },
+  { id: 'real', label: 'Real example', short: 'Real', icon: 'real' },
+  { id: 'sports', label: 'Sports example', short: 'Sports', icon: 'sports' },
+  { id: 'practice', label: 'Practice', short: 'Practice', icon: 'practice' },
+  { id: 'watch', label: 'Watch', short: 'Watch', icon: 'watch' },
+];
 
 export default function TopicPage() {
   const { topicId } = useParams();
-  const topic = getTopic(topicId);
+  const [params, setParams] = useSearchParams();
   const progress = useProgress();
+  const panelRef = useRef(null);
+  const [visited, setVisited] = useState(() => new Set(['plain']));
+
+  const topic = getTopic(topicId);
+  const section = SECTIONS.some((s) => s.id === params.get('s')) ? params.get('s') : 'plain';
+  const slideParam = params.get('slide');
+
+  // Remember which sections have been opened (for the little check marks).
+  useEffect(() => {
+    setVisited((v) => (v.has(section) ? v : new Set(v).add(section)));
+  }, [section]);
+
+  // When the section changes, bring the panel back into view if it has scrolled away.
+  useEffect(() => {
+    const el = panelRef.current;
+    if (el && el.getBoundingClientRect().top < 60) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [section, slideParam]);
 
   if (!topic) {
     return (
@@ -28,139 +50,157 @@ export default function TopicPage() {
   }
 
   const course = getCourse(topic.course);
-  const universe = universes[topic.example.universe];
+  const universe = universes[topic.sports.universe];
   const isDone = Boolean(progress.done[topic.id]);
+  const idx = SECTIONS.findIndex((s) => s.id === section);
+  const nextSection = SECTIONS[idx + 1];
 
-  const sections = [
-    ['plain', 'In plain words'],
-    ['terms', 'Key terms'],
-    ['example', 'Sports example'],
-    ['practice', 'Practice'],
-    ['watch', 'Watch'],
-  ];
+  const open = (id, slide) => {
+    const next = { s: id };
+    if (slide !== undefined && slide !== null) next.slide = String(slide);
+    setParams(next);
+  };
+  const review = (r) => open(r?.section || 'plain', r?.slide ?? 0);
+  const startSlide = Number(slideParam) || 0;
+  const slideKey = `${section}-${slideParam ?? 0}`;
+  const finish = nextSection ? () => open(nextSection.id) : undefined;
+  const finishLabel = nextSection ? `Next: ${nextSection.label}` : undefined;
+
+  const head = {
+    plain: { title: 'In plain words', note: 'The idea, one step at a time. Tap the arrows, swipe, or use your arrow keys.' },
+    terms: { title: 'Key terms', note: 'Tap a term to see what it means.' },
+    real: { title: topic.real.title, note: topic.real.note },
+    sports: { title: topic.sports.title, note: universe.blurb },
+    practice: { title: 'Practice', note: 'Pick an answer. If you miss one, you can jump back to the explanation or ask an AI.' },
+    watch: { title: 'Watch', note: 'Optional. Videos open on YouTube in a new tab and are not part of this guide, so explanations may differ slightly from your course.' },
+  }[section];
 
   return (
-    <article className="stack-lg topic" data-course={topic.course}>
+    <div className="topic-wrap has-tabbar" data-course={topic.course}>
       <nav className="crumbs" aria-label="Breadcrumb">
         <Link to="/">Courses</Link> <span aria-hidden="true">/</span>{' '}
         <Link to={`/course/${course.id}`}>{course.short}</Link> <span aria-hidden="true">/</span>{' '}
         <span>{topic.sessions}</span>
       </nav>
 
-      <header className="stack">
-        <h1>{topic.title}</h1>
-        <p className="lead">{topic.summary}</p>
-        <p className="meta">
-          {topic.sessions} · about {topic.minutes} min · {topic.reading}
-        </p>
-        <div className="chips" role="navigation" aria-label="On this page">
-          {sections.map(([id, label]) => (
-            <button key={id} type="button" className="chip" onClick={() => jump(id)}>
-              {label}
+      <div className="mobile-title">
+        <h1 style={{ fontSize: '1.7rem' }}>{topic.title}</h1>
+        <p className="meta">{topic.sessions} · about {topic.minutes} min</p>
+      </div>
+
+      <div className="shell">
+        {/* Glass sidebar (desktop) */}
+        <aside className="side glass" data-glow aria-label="Topic sections">
+          <div className="side-title">
+            <h1 className="serif">{topic.title}</h1>
+            <p className="meta">{topic.sessions} · about {topic.minutes} min</p>
+          </div>
+          <ul className="side-nav">
+            {SECTIONS.map((s) => (
+              <li key={s.id}>
+                <button
+                  type="button"
+                  className={`side-item irid ${s.id === section ? 'is-on' : ''}`}
+                  aria-current={s.id === section}
+                  onClick={() => open(s.id)}
+                >
+                  <span className="ico"><Icon name={s.icon} /></span>
+                  <span>{s.label}</span>
+                  {visited.has(s.id) && s.id !== section && (
+                    <span className="side-check" aria-label="opened"><Icon name="check" size={16} /></span>
+                  )}
+                </button>
+              </li>
+            ))}
+          </ul>
+          <div className="side-foot">
+            <button
+              type="button"
+              className={`button small ${isDone ? 'secondary' : ''}`}
+              onClick={() => toggleDone(topic.id)}
+              aria-pressed={isDone}
+            >
+              {isDone ? '✓ Done (tap to undo)' : 'Mark topic as done'}
             </button>
-          ))}
-        </div>
-      </header>
-
-      <section id="plain" tabIndex={-1} className="stack">
-        <h2>In plain words</h2>
-        {topic.simple.map((p, i) => (
-          <p key={i}><Rich text={p} /></p>
-        ))}
-
-        {topic.formulas && (
-          <div className="card">
-            <h3 className="h3">Formulas to know</h3>
-            <dl className="formulas">
-              {topic.formulas.map((f) => (
-                <div key={f.name} className="formula">
-                  <dt>{f.name}</dt>
-                  <dd>{f.formula}</dd>
-                </div>
-              ))}
-            </dl>
+            <Link to={`/course/${course.id}`} className="text-link">← All {course.short} topics</Link>
           </div>
-        )}
+        </aside>
 
-        {topic.pitfalls && (
-          <div className="callout warn">
-            <strong>Common traps</strong>
-            <ul>
-              {topic.pitfalls.map((p, i) => (
-                <li key={i}><Rich text={p} /></li>
-              ))}
-            </ul>
+        {/* Neumorphic content panel */}
+        <section className="panel nm" ref={panelRef} aria-labelledby="panel-title">
+          <div className="panel-head">
+            {SECTIONS[idx].label !== head.title && <span className="eyebrow">{SECTIONS[idx].label}</span>}
+            <h2 id="panel-title">{head.title}</h2>
+            <p className="meta">{head.note}</p>
           </div>
-        )}
-      </section>
 
-      <section id="terms" tabIndex={-1} className="stack">
-        <h2>Key terms</h2>
-        <dl className="terms">
-          {topic.terms.map((t) => (
-            <div key={t.term} className="term">
-              <dt>{t.term}</dt>
-              <dd>{t.def}</dd>
-            </div>
-          ))}
-        </dl>
-        <Link to={`/course/${topic.course}/flashcards?topic=${topic.id}`} className="button secondary fit">
-          Flashcards for this topic
-        </Link>
-      </section>
-
-      <section id="example" tabIndex={-1} className="stack">
-        <h2>Sports example</h2>
-        <p className="meta">{topic.example.title}. {universe.blurb}</p>
-        <ExampleBlocks blocks={topic.example.blocks} />
-      </section>
-
-      <section id="practice" tabIndex={-1} className="stack">
-        <h2>Practice</h2>
-        <Quiz topicId={topic.id} questions={topic.questions} />
-      </section>
-
-      <section id="watch" tabIndex={-1} className="stack">
-        <h2>Watch</h2>
-        <p className="meta">
-          Optional. These open on YouTube in a new tab. The videos are not part of this guide, so
-          the explanations may differ slightly from your course.
-        </p>
-        <ul className="videos" role="list">
-          {topic.videos.map((v) => (
-            <li key={v.url}>
-              <a className="video" href={v.url} target="_blank" rel="noopener noreferrer">
-                <span className="video-title">{v.title}</span>
-                <span className="video-meta">
-                  {v.channel}
-                  {v.length ? ` · ${v.length}` : ''}
-                </span>
-                {v.note && <span className="video-note">{v.note}</span>}
+          {section === 'plain' && (
+            <Slides key={slideKey} slides={topic.plain} start={startSlide} label="In plain words" onFinish={finish} finishLabel={finishLabel} />
+          )}
+          {section === 'terms' && <Terms terms={topic.terms} courseId={course.id} topicId={topic.id} />}
+          {section === 'real' && (
+            <Slides key={slideKey} slides={topic.real.slides} start={startSlide} label="Real example" onFinish={finish} finishLabel={finishLabel} />
+          )}
+          {section === 'sports' && (
+            <Slides key={slideKey} slides={topic.sports.slides} start={startSlide} label="Sports example" onFinish={finish} finishLabel={finishLabel} />
+          )}
+          {section === 'practice' && <Quiz topic={topic} courseTitle={course.title} onReview={review} />}
+          {section === 'watch' && (
+            <div className="stack">
+              <ul className="videos" role="list">
+                {topic.videos.map((v) => (
+                  <li key={v.url}>
+                    <a className="video glass irid" data-glow href={v.url} target="_blank" rel="noopener noreferrer">
+                      <span className="video-title">{v.title} ↗</span>
+                      <span className="video-meta">
+                        {v.channel}
+                        {v.length ? ` · ${v.length}` : ''}
+                      </span>
+                      {v.note && <span className="video-note">{v.note}</span>}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <a
+                className="text-link"
+                href={`https://www.youtube.com/results?search_query=${encodeURIComponent(topic.videoSearch)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Search YouTube for more on this topic ↗
               </a>
-            </li>
-          ))}
-        </ul>
-        <a
-          className="text-link"
-          href={`https://www.youtube.com/results?search_query=${encodeURIComponent(topic.videoSearch)}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Search YouTube for more on this topic ↗
-        </a>
-      </section>
+              <div className="complete">
+                <button
+                  type="button"
+                  className={`button ${isDone ? 'secondary' : ''}`}
+                  onClick={() => toggleDone(topic.id)}
+                  aria-pressed={isDone}
+                >
+                  {isDone ? '✓ Marked as done (tap to undo)' : 'Mark this topic as done'}
+                </button>
+                <Link to={`/course/${course.id}`} className="text-link">Back to {course.short} topics</Link>
+              </div>
+            </div>
+          )}
+        </section>
+      </div>
 
-      <footer className="complete stack-sm">
-        <button
-          type="button"
-          className={`button ${isDone ? 'secondary' : ''}`}
-          onClick={() => toggleDone(topic.id)}
-          aria-pressed={isDone}
-        >
-          {isDone ? '✓ Marked as done (tap to undo)' : 'Mark this topic as done'}
-        </button>
-        <Link to={`/course/${course.id}`} className="text-link">Back to {course.short} topics</Link>
-      </footer>
-    </article>
+      {/* Glass tab bar (phones) */}
+      <nav className="tabbar glass" aria-label="Topic sections">
+        {SECTIONS.map((s) => (
+          <button
+            key={s.id}
+            type="button"
+            className="tab"
+            aria-current={s.id === section}
+            aria-label={s.label}
+            onClick={() => open(s.id)}
+          >
+            <Icon name={s.icon} size={20} />
+            <span>{s.short}</span>
+          </button>
+        ))}
+      </nav>
+    </div>
   );
 }

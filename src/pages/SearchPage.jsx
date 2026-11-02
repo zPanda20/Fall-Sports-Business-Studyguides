@@ -28,7 +28,7 @@ export default function SearchPage() {
   }, [q, index]);
 
   return (
-    <div className="stack-lg">
+    <div className="stack-lg narrow">
       <header className="stack">
         <h1>Search</h1>
         <label className="search" htmlFor="q">
@@ -53,7 +53,7 @@ export default function SearchPage() {
         {results.map((r) => (
           <li key={r.id}>
             {r.available ? (
-              <Link to={`/topic/${r.id}`} className="result">
+              <Link to={`/topic/${r.id}`} className="result nm irid" data-course={r.course}>
                 <span className="result-top">
                   <span className="unit-title">{r.title}</span>
                   <span className="pill ready">{r.courseShort}</span>
@@ -69,9 +69,7 @@ export default function SearchPage() {
                   <span className="unit-title">{r.title}</span>
                   <span className="pill">Coming soon</span>
                 </span>
-                <span className="unit-meta">
-                  {r.courseShort} · {r.sessions}
-                </span>
+                <span className="unit-meta">{r.courseShort} · {r.sessions}</span>
               </div>
             )}
           </li>

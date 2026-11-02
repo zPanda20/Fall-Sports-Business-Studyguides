@@ -6,8 +6,8 @@ This is an unofficial, student-made study aid. It supplements lectures and cours
 
 ## Features
 
-- Topic pages: plain words, key terms, sports example, practice quiz, videos
-- Quiz mode (multiple choice with explanations, plus self-checked exercises)
+- Topic pages with a sidebar and one section at a time: plain words (interactive slides), key terms, a real example (with sources and dates), a sports example (fictional team), practice quiz, videos
+- Quiz mode (multiple choice with explanations, plus self-checked exercises). A wrong answer offers "Review this section" and a ready-made message for the student's preferred AI (ChatGPT and Perplexity open prefilled; Claude, Gemini, Mistral and DeepSeek copy the message and open the site)
 - Flashcards for each topic or a whole course
 - Search across topics, terms and formulas
 - Dark mode, mobile-friendly layout
@@ -39,7 +39,7 @@ The app uses hash-based routing (`/#/topic/...`), so links work on any static ho
 Content lives in `src/data/`, one file per topic, separate from the code.
 
 1. Copy one of the sample topics (`src/data/accounting/cost-volume-profit.js` or `src/data/strategy/five-forces.js`).
-2. Fill in the fields: `simple`, `terms`, `example`, `questions`, `videos`.
+2. Fill in the fields: `plain` (slides), `terms`, `real` (`{title, note, slides}`, must end with a sources slide), `sports` (`{title, universe, slides}`), `questions` (each with `review: {section, slide}` pointing at the slide that explains it), `videos`. Slides are `{kicker?, title, blocks}`; block types are listed at the top of `src/components/Blocks.jsx`.
 3. Import it in `src/data/index.js` and add it to the `topics` array. Its `id` must match a unit id in the course outline in that same file. Units without a topic show as "Coming soon".
 4. Run `npm run verify`.
 
@@ -53,7 +53,7 @@ Content lives in `src/data/`, one file per topic, separate from the code.
 src/
   data/          course outlines and topic content
   lib/           progress, theme, formatting, CVP maths
-  components/    quiz, example blocks, break-even chart
+  components/    slides, content blocks, quiz, AI hand-off, break-even chart
   pages/         home, course, topic, flashcards, search
 scripts/
   verify-numbers.mjs

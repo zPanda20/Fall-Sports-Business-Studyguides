@@ -1,6 +1,14 @@
 import { Link } from 'react-router-dom';
 import { courses, allUnits, topicsForCourse } from '../data/index.js';
 import { useProgress } from '../lib/progress.js';
+import Icon from '../components/Icon.jsx';
+
+const HOW = [
+  { icon: 'plain', title: 'In plain words', text: 'Short, clickable slides that explain each idea simply.' },
+  { icon: 'real', title: 'Real and sports examples', text: 'A real case, then a fictional team that carries through the course.' },
+  { icon: 'practice', title: 'Practice', text: 'Exam-style questions, with help the moment you get one wrong.' },
+  { icon: 'watch', title: 'Watch', text: 'Hand-picked videos when you want a second explanation.' },
+];
 
 export default function Home() {
   const progress = useProgress();
@@ -8,10 +16,13 @@ export default function Home() {
   return (
     <div className="stack-lg">
       <section className="hero">
-        <h1>Study sports business, one clear step at a time.</h1>
+        <span className="eyebrow">Sports business study guides</span>
+        <h1>
+          Study one clear step <span className="irid-text">at a time.</span>
+        </h1>
         <p className="lead">
-          Plain-language explanations, examples built around fictional teams, practice
-          questions and flashcards. Pick a course to begin.
+          Plain-language slides, real and fictional sports examples, practice questions and
+          flashcards. Pick a course to begin.
         </p>
       </section>
 
@@ -22,7 +33,15 @@ export default function Home() {
           const done = ready.filter((t) => progress.done[t.id]).length;
           const pctDone = ready.length ? (done / ready.length) * 100 : 0;
           return (
-            <Link key={course.id} to={`/course/${course.id}`} className="course-card" data-course={course.id}>
+            <Link
+              key={course.id}
+              to={`/course/${course.id}`}
+              className="course-card glass irid"
+              data-glow
+              data-course={course.id}
+            >
+              <span className="glowline" aria-hidden="true" />
+              <span className="eyebrow">{course.short}</span>
               <h2>{course.title}</h2>
               <p>{course.blurb}</p>
               <div className="progress" role="img" aria-label={`${done} of ${ready.length} available topics complete`}>
@@ -37,14 +56,17 @@ export default function Home() {
         })}
       </section>
 
-      <section className="how">
+      <section className="stack">
         <h2>How each topic works</h2>
-        <ol className="how-list">
-          <li><strong>In plain words.</strong> The idea explained simply, with the key terms defined.</li>
-          <li><strong>A sports example.</strong> The same idea applied to one consistent fictional team.</li>
-          <li><strong>Practice.</strong> Exam-style questions with explanations.</li>
-          <li><strong>Watch.</strong> Hand-picked videos if you want another explanation.</li>
-        </ol>
+        <div className="how-grid">
+          {HOW.map((h) => (
+            <div key={h.title} className="how-item nm">
+              <span className="ico"><Icon name={h.icon} size={22} /></span>
+              <h3>{h.title}</h3>
+              <p>{h.text}</p>
+            </div>
+          ))}
+        </div>
         <p className="meta">Your progress is saved on this device only. No account needed.</p>
       </section>
     </div>

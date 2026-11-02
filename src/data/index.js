@@ -135,6 +135,18 @@ export function cardsForCourse(courseId, topicId) {
   return list;
 }
 
+// Pull plain text out of slides so search can find words used in the explanations.
+function slideText(slides = []) {
+  const out = [];
+  const walk = (v) => {
+    if (typeof v === 'string') out.push(v);
+    else if (Array.isArray(v)) v.forEach(walk);
+    else if (v && typeof v === 'object') Object.entries(v).forEach(([k, x]) => k !== 'model' && k !== 'url' && walk(x));
+  };
+  walk(slides);
+  return out.join(' ').replace(/\*\*/g, '');
+}
+
 // Flat list used by search. Includes planned units so students can see what is on the way.
 export function searchIndex() {
   const items = [];
@@ -153,6 +165,9 @@ export function searchIndex() {
           topic?.summary ?? '',
           ...(topic?.terms ?? []).flatMap((t) => [t.term, t.def]),
           ...(topic?.formulas ?? []).flatMap((f) => [f.name, f.formula]),
+          slideText(topic?.plain),
+          topic?.real ? `${topic.real.title} ${slideText(topic.real.slides)}` : '',
+          topic?.sports ? `${topic.sports.title} ${slideText(topic.sports.slides)}` : '',
         ]
           .join(' ')
           .toLowerCase(),

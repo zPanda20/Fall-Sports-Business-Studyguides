@@ -34,16 +34,36 @@ function ThemeToggle() {
 
 function Layout() {
   const { pathname } = useLocation();
+
   // Start each page at the top, like a normal website.
+  // (Topic sections handle their own scrolling, so only react to path changes.)
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
+  // Soft light that follows the pointer over any element marked data-glow.
+  useEffect(() => {
+    function onMove(e) {
+      const el = e.target.closest?.('[data-glow]');
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+      el.style.setProperty('--my', `${e.clientY - r.top}px`);
+    }
+    document.addEventListener('pointermove', onMove, { passive: true });
+    return () => document.removeEventListener('pointermove', onMove);
+  }, []);
+
   return (
     <div className="app">
+      <div className="aurora" aria-hidden="true">
+        <span className="orb a" />
+        <span className="orb b" />
+        <span className="orb c" />
+      </div>
       <a className="skip" href="#main">Skip to content</a>
-      <header className="site-header">
-        <div className="wrap header-row">
+      <header className="site-header glass">
+        <div className="header-inner">
           <Link to="/" className="brand">
             <span className="brand-mark" aria-hidden="true" />
             <span>Study Guides</span>
@@ -65,11 +85,11 @@ function Layout() {
       </main>
       <footer className="site-footer">
         <div className="wrap">
-          <p>
+          <p className="footer-note glass">
             An unofficial, student-made study aid. It supplements your lectures and course
             materials and does not replace them. If something here differs from what your
-            instructor taught, go with your instructor. Examples use fictional teams and
-            made-up numbers.
+            instructor taught, go with your instructor. Sports examples use fictional teams and
+            made-up numbers. Real examples link to their sources.
           </p>
         </div>
       </footer>
