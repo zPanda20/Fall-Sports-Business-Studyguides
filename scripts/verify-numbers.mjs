@@ -13,6 +13,7 @@ import {
   marginOfSafety,
 } from '../src/lib/cvp.js';
 import { topics, courses, allUnits } from '../src/data/index.js';
+import { bookmarkPrompt } from '../src/lib/ai.js';
 
 let checks = 0;
 const eq = (actual, expected, label) => {
@@ -252,6 +253,45 @@ for (const t of topics) {
   assert.ok(course, `${t.id}: unknown course ${t.course}`);
   assert.ok(allUnits(course).some((u) => u.id === t.id), `${t.id}: not in the ${t.course} outline`);
   checks++;
+}
+
+// ---- Course outlines ----
+for (const course of courses) {
+  const units = allUnits(course);
+  const ids = units.map((u) => u.id);
+  assert.equal(new Set(ids).size, ids.length, `${course.id}: duplicate unit ids`);
+  checks++;
+  for (const u of units) {
+    assert.ok(u.title && u.sessions, `${course.id}/${u.id}: unit needs a title and sessions`);
+    if (u.covers) assert.ok(Array.isArray(u.covers) && u.covers.length > 0 && u.covers.every((c) => typeof c === 'string' && c.trim()), `${u.id}: covers must be a list of text`);
+    checks++;
+  }
+  if (course.universe) assert.ok(typeof course.universe === 'string', `${course.id}: universe`);
+}
+// Market Research follows the syllabus: 12 sessions plus 2 asynchronous activities, no topic left uncovered
+{
+  const mr = courses.find((c) => c.id === 'market-research');
+  ok_(mr, 'Market Research course exists');
+  const units = allUnits(mr);
+  eq(units.length, 14, 'Market Research units (12 sessions + 2 async)');
+  for (let n = 1; n <= 12; n++) ok_(units.some((u) => u.sessions === `Session ${n}`), `Market Research has Session ${n}`);
+  ok_(units.some((u) => u.sessions.startsWith('Async A')), 'Market Research has Async A');
+  ok_(units.some((u) => u.sessions.startsWith('Async B')), 'Market Research has Async B');
+  ok_(units.every((u) => Array.isArray(u.covers)), 'Every Market Research unit lists the topics it covers');
+  const all = units.flatMap((u) => u.covers).join(' | ').toLowerCase();
+  for (const word of ['representativeness', 'causality', 'mixed methods', 'zotero', 'validity', 'competitor analysis', 'sampling', 'qualtrics', 'jamovi', 'anova', 'regression', 'focus groups', 'projective', 'netnography', 'taguette', 'semi-structured']) {
+    ok_(all.includes(word), `Market Research covers "${word}"`);
+  }
+}
+
+// ---- Bookmark message ----
+{
+  const one = bookmarkPrompt({ items: [{ course: 'Market Research', topic: 'Sampling', where: 'Slide 2', excerpt: 'A sample is a part of a population.', note: 'Why not ask everyone?' }] });
+  ok_(one.includes('Why not ask everyone?') && one.includes('Sampling') && one.includes('A sample is a part of a population.'), 'bookmark message carries topic, slide text and note');
+  const none = bookmarkPrompt({ items: [{ course: 'Accounting', topic: 'Basics', note: '' }] });
+  ok_(none.includes('explain the idea from the start'), 'bookmark message handles an empty note');
+  const two = bookmarkPrompt({ items: [{ course: 'A', topic: 'B', note: 'x' }, { course: 'C', topic: 'D', note: 'y' }] });
+  ok_(two.includes('1. Course: A') && two.includes('2. Course: C'), 'bookmark message numbers several items');
 }
 
 console.log(`All ${checks} checks passed.`);

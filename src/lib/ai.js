@@ -78,3 +78,24 @@ export function bundlePrompt({ course, topic, items }) {
   lines.push('', 'For each one, explain why my choice was wrong and why the correct answer is right, using simple language and one everyday example.');
   return lines.join('\n');
 }
+
+// Bookmarks. Each item: { course, topic, where?, excerpt?, note? }
+export function bookmarkPrompt({ items }) {
+  const many = items.length > 1;
+  const lines = [
+    many ? 'Please help me understand these things I am confused about.' : 'Please help me understand something I am confused about.',
+    '',
+    `I am a student using a study guide. I bookmarked ${many ? 'the parts below' : 'the part below'} because ${many ? 'they' : 'it'} did not make sense to me.`,
+  ];
+  items.forEach((it, i) => {
+    lines.push('', `${i + 1}. Course: ${it.course}. Topic: ${it.topic}.`);
+    if (it.where) lines.push(`   Where: ${it.where}`);
+    if (it.excerpt) lines.push(`   What the guide says: ${it.excerpt}`);
+    lines.push(`   What confuses me: ${it.note || 'I am not sure. Please explain the idea from the start.'}`);
+  });
+  lines.push(
+    '',
+    `${many ? 'For each one, explain' : 'Please explain'} it in simple language, give one everyday example, and finish with one quick question to check that I understood. Stick to what a university course would teach, and tell me if something may differ from how my instructor teaches it.`,
+  );
+  return lines.join('\n');
+}

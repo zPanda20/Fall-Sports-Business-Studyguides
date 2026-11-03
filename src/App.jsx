@@ -1,11 +1,26 @@
-import { Routes, Route, Link, NavLink, Outlet, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { Routes, Route, Link, NavLink, Outlet, useLocation, matchPath } from 'react-router-dom';
+import { useEffect, useLayoutEffect } from 'react';
+import { getTopic } from './data/index.js';
+import { useBookmarks } from './lib/bookmarks.js';
+import Icon from './components/Icon.jsx';
 import { useTheme } from './lib/theme.js';
 import Home from './pages/Home.jsx';
 import CoursePage from './pages/CoursePage.jsx';
 import TopicPage from './pages/TopicPage.jsx';
 import FlashcardsPage from './pages/FlashcardsPage.jsx';
 import SearchPage from './pages/SearchPage.jsx';
+import BookmarksPage from './pages/BookmarksPage.jsx';
+
+// Courses with their own look (see styles.css, "skins"). The page background and glow follow
+// the course you are reading, so the whole screen changes, not just the accent.
+const SKINNED = new Set(['market-research']);
+
+function courseForPath(pathname) {
+  const c = matchPath('/course/:courseId/*', pathname)?.params.courseId;
+  if (c) return c;
+  const t = matchPath('/topic/:topicId', pathname)?.params.topicId;
+  return t ? getTopic(t)?.course : undefined;
+}
 
 function ThemeToggle() {
   const { theme, toggle } = useTheme();
@@ -34,6 +49,14 @@ function ThemeToggle() {
 
 function Layout() {
   const { pathname } = useLocation();
+  const marks = useBookmarks();
+
+  useLayoutEffect(() => {
+    const course = courseForPath(pathname);
+    const root = document.documentElement;
+    if (SKINNED.has(course)) root.setAttribute('data-skin', course);
+    else root.removeAttribute('data-skin');
+  }, [pathname]);
 
   // Start each page at the top, like a normal website.
   // (Topic sections handle their own scrolling, so only react to path changes.)
@@ -74,7 +97,12 @@ function Layout() {
                 <circle cx="11" cy="11" r="6.5" />
                 <path d="M16 16l4.5 4.5" />
               </svg>
-              <span>Search</span>
+              <span className="nav-label-wide">Search</span>
+            </NavLink>
+            <NavLink to="/bookmarks" className="nav-link" aria-label={`Bookmarks, ${marks.length} saved`}>
+              <Icon name="bookmark" size={18} />
+              <span className="nav-label-wide">Bookmarks</span>
+              {marks.length > 0 && <span className="nav-count" aria-hidden="true">{marks.length}</span>}
             </NavLink>
             <ThemeToggle />
           </nav>
@@ -112,6 +140,7 @@ export default function App() {
       <Route element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="search" element={<SearchPage />} />
+        <Route path="bookmarks" element={<BookmarksPage />} />
         <Route path="course/:courseId" element={<CoursePage />} />
         <Route path="course/:courseId/flashcards" element={<FlashcardsPage />} />
         <Route path="topic/:topicId" element={<TopicPage />} />

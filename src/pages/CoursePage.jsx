@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import { getCourse, getTopic, topicsForCourse, universes, cardsForCourse } from '../data/index.js';
+import { getCourse, getTopic, topicsForCourse, universes, cardsForCourse, allUnits } from '../data/index.js';
 import { useProgress } from '../lib/progress.js';
 import Icon from '../components/Icon.jsx';
 
@@ -17,7 +17,7 @@ export default function CoursePage() {
     );
   }
 
-  const universe = universes[course.universe];
+  const universe = course.universe ? universes[course.universe] : null;
   const ready = topicsForCourse(course.id);
   const done = ready.filter((t) => progress.done[t.id]).length;
   const cardCount = cardsForCourse(course.id).length;
@@ -30,7 +30,11 @@ export default function CoursePage() {
         </nav>
         <h1>{course.title}</h1>
         <p className="lead">{course.blurb}</p>
-        <p className="meta">{done} of {ready.length} available topics done</p>
+        <p className="meta">
+          {ready.length === 0
+            ? `${allUnits(course).length} topics planned. Study guides are added as the course materials arrive.`
+            : `${done} of ${ready.length} available topics done`}
+        </p>
         {cardCount > 0 && (
           <Link to={`/course/${course.id}/flashcards`} className="button fit">
             <Icon name="cards" size={20} />
@@ -38,6 +42,21 @@ export default function CoursePage() {
           </Link>
         )}
       </header>
+
+      {course.overview && (
+        <section className="glance glass" aria-label="Course at a glance">
+          <h2 className="serif" style={{ fontSize: '1.3rem' }}>At a glance</h2>
+          <dl>
+            {course.overview.map((o) => (
+              <div key={o.label}>
+                <dt>{o.label}</dt>
+                <dd>{o.text}</dd>
+              </div>
+            ))}
+          </dl>
+          <p className="meta">From the course syllabus (version dated 15 September 2026). Your instructor&rsquo;s latest word always wins.</p>
+        </section>
+      )}
 
       {course.blocks.map((block) => (
         <section key={block.title} className="stack">
@@ -56,6 +75,13 @@ export default function CoursePage() {
                       <span className="pill">Coming soon</span>
                     </div>
                     <span className="tile-title">{unit.title}</span>
+                    {unit.covers && (
+                      <ul className="tile-covers" aria-label="Topics covered">
+                        {unit.covers.map((c) => (
+                          <li key={c}>{c}</li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 );
               }
@@ -81,11 +107,13 @@ export default function CoursePage() {
         </section>
       ))}
 
-      <section className="running glass">
-        <span className="eyebrow">Running example</span>
-        <h2 className="serif" style={{ fontSize: '1.4rem' }}>{universe.name}</h2>
-        <p>{universe.blurb}</p>
-      </section>
+      {universe && (
+        <section className="running glass">
+          <span className="eyebrow">Running example</span>
+          <h2 className="serif" style={{ fontSize: '1.4rem' }}>{universe.name}</h2>
+          <p>{universe.blurb}</p>
+        </section>
+      )}
     </div>
   );
 }

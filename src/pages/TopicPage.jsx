@@ -6,6 +6,8 @@ import Icon from '../components/Icon.jsx';
 import Slides from '../components/Slides.jsx';
 import Terms from '../components/Terms.jsx';
 import Quiz from '../components/Quiz.jsx';
+import BookmarkButton from '../components/BookmarkButton.jsx';
+import { topicBookmarkId } from '../lib/bookmarks.js';
 
 const SECTIONS = [
   { id: 'plain', label: 'In plain words', short: 'Basics', icon: 'plain' },
@@ -66,6 +68,15 @@ export default function TopicPage() {
   const finish = nextSection ? () => open(nextSection.id) : undefined;
   const finishLabel = nextSection ? `Next: ${nextSection.label}` : undefined;
 
+  const topicMark = {
+    id: topicBookmarkId(topic.id),
+    topicId: topic.id,
+    courseId: topic.course,
+    topicTitle: topic.title,
+    scope: 'topic',
+  };
+  const slideMark = (sec) => ({ topicId: topic.id, courseId: topic.course, topicTitle: topic.title, section: sec });
+
   const head = {
     plain: { title: 'In plain words', note: 'The idea, one step at a time. Tap the arrows, swipe, or use your arrow keys.' },
     terms: { title: 'Key terms', note: 'Tap a term to see what it means.' },
@@ -86,6 +97,7 @@ export default function TopicPage() {
       <div className="mobile-title">
         <h1 style={{ fontSize: '1.7rem' }}>{topic.title}</h1>
         <p className="meta">{topic.sessions} · about {topic.minutes} min</p>
+        <BookmarkButton item={topicMark} variant="topic" />
       </div>
 
       <div className="shell">
@@ -94,6 +106,7 @@ export default function TopicPage() {
           <div className="side-title">
             <h1 className="serif">{topic.title}</h1>
             <p className="meta">{topic.sessions} · about {topic.minutes} min</p>
+            <BookmarkButton item={topicMark} variant="topic" />
           </div>
           <ul className="side-nav">
             {SECTIONS.map((s) => (
@@ -142,14 +155,14 @@ export default function TopicPage() {
           )}
 
           {section === 'plain' && (
-            <Slides key={slideKey} slides={topic.plain} start={startSlide} label="In plain words" onFinish={finish} finishLabel={finishLabel} />
+            <Slides key={slideKey} slides={topic.plain} start={startSlide} label="In plain words" bookmark={slideMark('plain')} onFinish={finish} finishLabel={finishLabel} />
           )}
           {section === 'terms' && <Terms terms={topic.terms} courseId={course.id} topicId={topic.id} />}
           {section === 'real' && (
-            <Slides key={slideKey} slides={topic.real.slides} start={startSlide} label="Real example" onFinish={finish} finishLabel={finishLabel} />
+            <Slides key={slideKey} slides={topic.real.slides} start={startSlide} label="Real example" bookmark={slideMark('real')} onFinish={finish} finishLabel={finishLabel} />
           )}
           {section === 'sports' && (
-            <Slides key={slideKey} slides={topic.sports.slides} start={startSlide} label="Sports example" onFinish={finish} finishLabel={finishLabel} />
+            <Slides key={slideKey} slides={topic.sports.slides} start={startSlide} label="Sports example" bookmark={slideMark('sports')} onFinish={finish} finishLabel={finishLabel} />
           )}
           {section === 'practice' && <Quiz topic={topic} courseTitle={course.title} onReview={review} />}
           {section === 'watch' && (

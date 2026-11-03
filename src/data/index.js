@@ -94,7 +94,7 @@ export const courses = [
     title: 'Business Strategy',
     short: 'Strategy',
     blurb:
-      'Understand how firms win and keep an advantage: analyse the environment, choose a strategy, and put it into action.',
+      'Understand how firms win and keep an advantage: analyze the environment, choose a strategy, and put it into action.',
     universe: 'kestrel',
     blocks: [
       {
@@ -135,6 +135,167 @@ export const courses = [
       },
     ],
   },
+  {
+    id: 'market-research',
+    title: 'Market Research',
+    short: 'Market Research',
+    blurb:
+      'Turn a business question into evidence: choose between qualitative and quantitative methods, collect and analyze data, and explain what it means for decisions.',
+    overview: [
+      { label: 'Format', text: '12 in-class sessions (24 hours) plus 2 asynchronous activities (6 hours).' },
+      { label: 'Continuous assessment (60%)', text: 'Class participation and engagement (40%) and a group project (60%). The group picks one option: a quantitative project built in Qualtrics and analyzed statistically, or a qualitative project using interviews, AI-generated data and coding in Taguette.' },
+      { label: 'Final exam (40%)', text: 'Individual, in the official exam week. Closed book, no AI. Multiple-choice and open-ended questions.' },
+      { label: 'Tools you will meet', text: 'Zotero, Qualtrics, Jamovi and Taguette.' },
+    ],
+    blocks: [
+      {
+        title: 'Foundations of research',
+        units: [
+          {
+            id: 'why-market-research',
+            title: 'Why market research matters and the research process',
+            sessions: 'Session 1',
+            covers: [
+              'General introduction and why market research matters',
+              'Fundamental concepts: representativeness, significance, correlation and causality',
+              'The research process',
+            ],
+          },
+          {
+            id: 'methodology-paradigms',
+            title: 'Methodology, methods and research paradigms',
+            sessions: 'Session 2',
+            covers: [
+              'Methodology, method and research paradigm',
+              'Qualitative vs quantitative research',
+              'Mixed methods',
+            ],
+          },
+          {
+            id: 'research-question-proposal',
+            title: 'The research objective, question and proposal',
+            sessions: 'Session 3',
+            covers: ['The research objective', 'The research question', 'The research proposal'],
+          },
+          {
+            id: 'literature-review',
+            title: 'Finding literature and writing a literature review',
+            sessions: 'Session 4',
+            covers: [
+              'Finding literature and conducting a literature review',
+              'Using Zotero',
+              'Reviewing literature with the help of AI',
+            ],
+          },
+          {
+            id: 'measurement-validity',
+            title: 'Measuring and collecting data: objectivity, validity and reliability',
+            sessions: 'Session 5',
+            covers: ['Measuring and collecting data', 'Objectivity, validity and reliability'],
+          },
+        ],
+      },
+      {
+        title: 'Quantitative research',
+        units: [
+          {
+            id: 'quantitative-overview',
+            title: 'Quantitative research, ethics, secondary data and competitor analysis',
+            sessions: 'Session 6',
+            covers: [
+              'Quantitative research: an overview',
+              'Ethical considerations',
+              'Secondary quantitative data',
+              'Competitor analysis',
+            ],
+          },
+          {
+            id: 'sampling',
+            title: 'Sampling: techniques, criteria, size and recruitment',
+            sessions: 'Session 7',
+            covers: [
+              'Sampling fundamentals',
+              'Sampling techniques, criteria and size considerations',
+              'Recruitment channels',
+            ],
+          },
+          {
+            id: 'applied-quantitative',
+            title: 'Applied quantitative market research',
+            sessions: 'Async A (before Session 8 starts)',
+            covers: [
+              'Turning a business question into measurable variables and survey items',
+              'Synthetic data and basic descriptive evidence',
+              'Using quantitative findings for managerial decisions',
+              'Judging whether the quantitative project path suits you',
+            ],
+          },
+          {
+            id: 'questionnaire-design',
+            title: 'Questionnaire design and online surveys',
+            sessions: 'Session 8',
+            covers: [
+              'Principles of questionnaire design',
+              'Unbiased question formulation',
+              'Types of questions and measurement scales',
+              'Online survey tools, with an introduction to Qualtrics',
+            ],
+          },
+          {
+            id: 'data-cleaning-descriptives',
+            title: 'Data cleaning and descriptive statistics',
+            sessions: 'Session 9',
+            covers: [
+              'Data export and cleaning procedures',
+              'Descriptive statistics',
+              'Jamovi for quantitative data analysis',
+            ],
+          },
+          {
+            id: 'significance-anova-regression',
+            title: 'Tests of significance, ANOVA and regression',
+            sessions: 'Session 10',
+            covers: ['Tests of significance', 'Analysis of variance (ANOVA)', 'Regression', 'Practice in Jamovi'],
+          },
+        ],
+      },
+      {
+        title: 'Qualitative research',
+        units: [
+          {
+            id: 'qualitative-overview',
+            title: 'Qualitative research: focus groups, projective techniques, ethnography and netnography',
+            sessions: 'Session 11',
+            covers: [
+              'Qualitative research: an overview',
+              'Focus groups',
+              'Projective techniques',
+              'Ethnography and netnography',
+              'Introduction to Taguette',
+            ],
+          },
+          {
+            id: 'interviews-coding',
+            title: 'Semi-structured interviews and coding with AI support',
+            sessions: 'Session 12',
+            covers: ['Semi-structured interviews', 'Coding with the support of AI', 'Practice in Taguette'],
+          },
+          {
+            id: 'applied-qualitative',
+            title: 'Applied qualitative market research',
+            sessions: 'Async B (10 days after Session 12)',
+            covers: [
+              'Investigating meanings, experiences, perceptions and stakeholder views',
+              'Qualitative instruments and synthetic data',
+              'Basic coding and theme identification',
+              'Turning qualitative evidence into managerial insights',
+              'Judging whether the qualitative project path suits you',
+            ],
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 // ---- helpers ----
@@ -161,12 +322,12 @@ export function cardsForCourse(courseId, topicId) {
 }
 
 // Pull plain text out of slides so search can find words used in the explanations.
-function slideText(slides = []) {
+export function slideText(slides = []) {
   const out = [];
   const walk = (v) => {
     if (typeof v === 'string') out.push(v);
     else if (Array.isArray(v)) v.forEach(walk);
-    else if (v && typeof v === 'object') Object.entries(v).forEach(([k, x]) => k !== 'model' && k !== 'url' && walk(x));
+    else if (v && typeof v === 'object') Object.entries(v).forEach(([k, x]) => !['model', 'url', 'type', 'tone'].includes(k) && walk(x));
   };
   walk(slides);
   return out.join(' ').replace(/\*\*/g, '');
@@ -187,6 +348,7 @@ export function searchIndex() {
         available: Boolean(topic),
         text: [
           topic?.title ?? unit.title,
+          ...(unit.covers ?? []),
           topic?.summary ?? '',
           ...(topic?.terms ?? []).flatMap((t) => [t.term, t.def]),
           ...(topic?.formulas ?? []).flatMap((f) => [f.name, f.formula]),

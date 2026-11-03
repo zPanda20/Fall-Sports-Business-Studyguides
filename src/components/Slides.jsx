@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import Blocks from './Blocks.jsx';
 import Icon from './Icon.jsx';
+import BookmarkButton from './BookmarkButton.jsx';
+import { slideBookmarkId } from '../lib/bookmarks.js';
 
 // An interactive slide deck: arrows, dots, swipe and keyboard arrows.
+// With a `bookmark` prop, each slide gets a "bookmark to ask later" button.
 // Each slide is { kicker?, title, blocks: [...] } and is written to fit
 // on one screen without scrolling.
-export default function Slides({ slides, start = 0, label, onFinish, finishLabel }) {
+export default function Slides({ slides, start = 0, label, onFinish, finishLabel, bookmark }) {
   const [i, setI] = useState(Math.min(Math.max(start, 0), slides.length - 1));
   const [dir, setDir] = useState('fwd');
   const touch = useRef(null);
@@ -76,6 +79,20 @@ export default function Slides({ slides, start = 0, label, onFinish, finishLabel
           if (Math.abs(dx) > 55) go(i + (dx < 0 ? 1 : -1));
         }}
       >
+        {bookmark && (
+          <BookmarkButton
+            item={{
+              id: slideBookmarkId(bookmark.topicId, bookmark.section, i),
+              topicId: bookmark.topicId,
+              courseId: bookmark.courseId,
+              topicTitle: bookmark.topicTitle,
+              scope: 'slide',
+              section: bookmark.section,
+              slide: i,
+              slideTitle: slides[i].title,
+            }}
+          />
+        )}
         <div className="slides-track" aria-live="polite">
           {slides.map((slide, n) => {
             const on = n === i;

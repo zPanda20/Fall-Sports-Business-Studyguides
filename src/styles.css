@@ -153,6 +153,78 @@
   --on-accent: #2b1405;
 }
 
+/* ---------- skins: Market Research, dark sapphire ----------
+   Accent colors apply anywhere inside a [data-course] area. The page background, glow and
+   header follow the course too, through data-skin on <html> (set in App.jsx). */
+[data-course='market-research'],
+:root[data-skin='market-research'] {
+  --accent: #1b3f9e;
+  --accent-b: #12307f;
+  --accent-ink: #17368f;
+  --accent-soft: rgba(27, 63, 158, 0.12);
+  --glow: rgba(52, 96, 214, 0.38);
+  --metal: linear-gradient(180deg, #a9c0ff 0%, #5a82e6 20%, #2a50b8 47%, #183791 52%, #3459c8 80%, #97b2f7 100%);
+  --metal-edge: rgba(6, 18, 70, 0.6);
+  --metal-glow: rgba(40, 80, 200, 0.45);
+  --on-metal: #ffffff;
+  --copper: #4a5fc4;
+  --copper-ink: #3a4cab;
+  --i1: #4d7bff;
+  --i2: #b6caff;
+  --i3: #8f7bff;
+  --i4: #d6dcff;
+  --i5: #2b56d6;
+  --g-tint-a: rgba(160, 190, 255, 0.32);
+  --g-tint-b: rgba(190, 175, 255, 0.26);
+  --g-disp-a: rgba(70, 120, 240, 0.3);
+  --g-disp-b: rgba(140, 120, 255, 0.28);
+  --g-drop: rgba(40, 60, 160, 0.24);
+  --g-drop2: rgba(70, 120, 240, 0.16);
+  --side-l1: rgba(80, 130, 255, 0.5);
+  --side-l2: rgba(140, 120, 255, 0.42);
+  --side-l3: rgba(90, 170, 255, 0.42);
+}
+:root[data-skin='market-research'] {
+  --bg: #dfe5f6;
+  --bg-2: #e9ebf8;
+  --bg-grad: linear-gradient(135deg, #e8e6f7 0%, #dce4f7 42%, #cddbf5 100%);
+  --nm-bg: #e4e9f7;
+  --orb1: rgba(80, 125, 240, 0.4);
+  --orb2: rgba(150, 140, 250, 0.34);
+  --orb3: rgba(110, 160, 235, 0.32);
+}
+:root[data-theme='dark'] [data-course='market-research'],
+:root[data-theme='dark'][data-skin='market-research'] {
+  --accent: #86a8ff;
+  --accent-b: #5b84f0;
+  --accent-ink: #a9c2ff;
+  --accent-soft: rgba(134, 168, 255, 0.16);
+  --glow: rgba(90, 130, 255, 0.42);
+  --on-accent: #06113a;
+  --copper: #a9b8ff;
+  --copper-ink: #c4cfff;
+  --g-tint-a: rgba(90, 130, 255, 0.16);
+  --g-tint-b: rgba(130, 110, 255, 0.12);
+  --g-disp-a: rgba(80, 130, 255, 0.32);
+  --g-disp-b: rgba(150, 120, 255, 0.26);
+  --g-drop: rgba(0, 0, 0, 0.55);
+  --g-drop2: rgba(80, 130, 255, 0.12);
+}
+:root[data-theme='dark'][data-skin='market-research'] {
+  --bg: #050a22;
+  --bg-2: #0a1342;
+  --bg-grad: linear-gradient(135deg, #0a1448 0%, #07103a 46%, #040a26 100%);
+  --nm-bg: #0b1336;
+  --nm-light: rgba(120, 160, 255, 0.08);
+  --glass-solid: rgba(10, 20, 60, 0.96);
+  --orb1: rgba(30, 80, 220, 0.4);
+  --orb2: rgba(60, 120, 255, 0.28);
+  --orb3: rgba(110, 90, 230, 0.24);
+}
+:is([data-course='market-research'], :root[data-skin='market-research']) :is(.button:not(.secondary), .arrow-btn.primary) {
+  text-shadow: 0 1px 1px rgba(5, 15, 60, 0.6);
+}
+
 /* ---------- base ---------- */
 *,
 *::before,
@@ -813,6 +885,9 @@ a.tile:hover {
 }
 .tile.soon .tile-title {
   color: var(--muted);
+}
+.tile.soon {
+  justify-content: flex-start;
 }
 .tile.is-done {
   box-shadow: 9px 9px 22px var(--nm-dark), -9px -9px 22px var(--nm-light), 0 0 0 1.5px var(--good);
@@ -1975,9 +2050,9 @@ td {
     z-index: 0;
     pointer-events: none;
     background:
-      radial-gradient(150px 150px at 30% 18%, rgba(47, 210, 154, 0.55), transparent 70%),
-      radial-gradient(170px 170px at 78% 52%, rgba(226, 149, 92, 0.5), transparent 70%),
-      radial-gradient(160px 160px at 28% 88%, rgba(236, 156, 196, 0.5), transparent 70%);
+      radial-gradient(150px 150px at 30% 18%, var(--side-l1, rgba(47, 210, 154, 0.55)), transparent 70%),
+      radial-gradient(170px 170px at 78% 52%, var(--side-l2, rgba(226, 149, 92, 0.5)), transparent 70%),
+      radial-gradient(160px 160px at 28% 88%, var(--side-l3, rgba(236, 156, 196, 0.5)), transparent 70%);
     filter: blur(22px);
     animation: light-drift 20s ease-in-out infinite alternate;
   }
@@ -2056,4 +2131,257 @@ td {
   .panel-head {
     margin-bottom: 14px;
   }
+}
+
+/* ---------- course overview, planned-topic lists ---------- */
+.glance {
+  display: grid;
+  gap: 14px;
+  padding: 22px 24px;
+}
+.glance dl {
+  display: grid;
+  gap: 14px 28px;
+  margin: 0;
+}
+.glance dt {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+.glance dd {
+  margin: 2px 0 0;
+  color: var(--ink);
+}
+.tile-covers {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.86rem;
+  line-height: 1.4;
+  color: var(--muted);
+}
+.tile-covers li {
+  position: relative;
+  padding-left: 14px;
+}
+.tile-covers li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.55;
+}
+@media (min-width: 760px) {
+  .glance dl {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 640px) {
+  .course-grid {
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  }
+}
+
+/* ---------- clarification bookmarks ---------- */
+.bm {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 14px 0 11px;
+  border: 0;
+  border-radius: 999px;
+  color: var(--accent-ink);
+  font: inherit;
+  font-size: 0.84rem;
+  font-weight: 650;
+  background: var(--nm-bg);
+  box-shadow: 3px 3px 8px var(--nm-dark), -3px -3px 8px var(--nm-light);
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+.bm:hover {
+  color: var(--ink);
+}
+.bm[aria-pressed='true'] {
+  color: var(--accent-ink);
+  background: var(--accent-soft);
+  box-shadow: inset 2px 2px 6px var(--nm-dark), inset -2px -2px 6px var(--nm-light), 0 0 0 1.5px var(--accent);
+}
+.bm[aria-pressed='true'] svg {
+  fill: currentColor;
+}
+.bm-slide {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+}
+.bm-topic {
+  justify-self: start;
+  margin-top: 10px;
+}
+.stage .slide-kicker,
+.stage .slide-title {
+  padding-right: 44px;
+}
+@media (min-width: 640px) {
+  .stage .slide-kicker,
+  .stage .slide-title {
+    padding-right: 120px;
+  }
+}
+@media (max-width: 639px) {
+  .bm-slide {
+    width: 40px;
+    padding: 0;
+    justify-content: center;
+  }
+  .bm-slide .bm-label {
+    display: none;
+  }
+}
+.nav-count {
+  min-width: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: center;
+  color: var(--on-accent);
+  background: var(--accent);
+}
+@media (max-width: 479px) {
+  .nav-label-wide {
+    display: none;
+  }
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.chip {
+  min-height: 40px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 999px;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--nm-bg);
+  box-shadow: 3px 3px 8px var(--nm-dark), -3px -3px 8px var(--nm-light);
+  cursor: pointer;
+}
+.chip[aria-pressed='true'] {
+  color: var(--accent-ink);
+  background: var(--accent-soft);
+  box-shadow: inset 2px 2px 6px var(--nm-dark), inset -2px -2px 6px var(--nm-light);
+}
+.send-bm,
+.empty-bm {
+  padding: 22px 24px;
+}
+.empty-bm {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+}
+.empty-bm .ico {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  color: var(--accent-ink);
+  background: var(--accent-soft);
+}
+.bm-list {
+  display: grid;
+  gap: 16px;
+  padding: 0;
+  list-style: none;
+}
+.bm-item {
+  display: grid;
+  gap: 14px;
+  padding: 18px 20px;
+}
+.bm-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.bm-pick {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex: none;
+}
+.bm-pick input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+.bm-what {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  gap: 2px;
+}
+.bm-what .bm-topic {
+  margin: 0;
+  font-weight: 650;
+  line-height: 1.35;
+}
+.bm-note {
+  display: grid;
+  gap: 6px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+.bm-note textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 0;
+  border-radius: var(--r-sm);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.5;
+  resize: vertical;
+  background: var(--nm-bg);
+  box-shadow: inset 3px 3px 8px var(--nm-dark), inset -3px -3px 8px var(--nm-light);
+}
+.bm-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.bm-ask summary {
+  cursor: pointer;
+  min-height: 36px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent-ink);
+}
+.bm-ask .ask {
+  margin-top: 10px;
 }
