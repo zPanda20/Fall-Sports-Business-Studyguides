@@ -1,0 +1,307 @@
+/* =====================================================================
+   Colour-shifting skins (generated from a palette table; edit with care)
+   - Alexandrite (International Sports Governance): teal-green by day,
+     moving through blue-violet to raspberry, then back, like the gem.
+   - Opalescent (Foundations of Sport Management): a pearly pastel base with
+     a play of colour drifting through violet, cyan, rose and jade.
+   Each palette is a set of registered colour variables (--sa-*, --so-*) that
+   can be animated. They only animate while <html data-shift> is set (the
+   home page and these courses' pages), and never with reduced motion.
+   ===================================================================== */
+
+@property --sa-acc { syntax: '<color>'; inherits: true; initial-value: #0b7a6e; }
+@property --sa-accb { syntax: '<color>'; inherits: true; initial-value: #09645a; }
+@property --sa-ink { syntax: '<color>'; inherits: true; initial-value: #0a6a60; }
+@property --sa-soft { syntax: '<color>'; inherits: true; initial-value: rgba(11, 122, 110, 0.13); }
+@property --sa-glow { syntax: '<color>'; inherits: true; initial-value: rgba(30, 200, 174, 0.38); }
+@property --sa-m1 { syntax: '<color>'; inherits: true; initial-value: #bff5ea; }
+@property --sa-m2 { syntax: '<color>'; inherits: true; initial-value: #3cc9b2; }
+@property --sa-m3 { syntax: '<color>'; inherits: true; initial-value: #0f8576; }
+@property --sa-m4 { syntax: '<color>'; inherits: true; initial-value: #0a6a5f; }
+@property --sa-orb1 { syntax: '<color>'; inherits: true; initial-value: rgba(30, 200, 174, 0.4); }
+@property --sa-orb2 { syntax: '<color>'; inherits: true; initial-value: rgba(60, 143, 224, 0.32); }
+@property --sa-orb3 { syntax: '<color>'; inherits: true; initial-value: rgba(79, 210, 154, 0.3); }
+@property --sa-i1 { syntax: '<color>'; inherits: true; initial-value: #2fd9b8; }
+@property --sa-i2 { syntax: '<color>'; inherits: true; initial-value: #aaf5e6; }
+@property --sa-i3 { syntax: '<color>'; inherits: true; initial-value: #4aa8f0; }
+@property --sa-i4 { syntax: '<color>'; inherits: true; initial-value: #c8e6ff; }
+@property --sa-i5 { syntax: '<color>'; inherits: true; initial-value: #12a58f; }
+@property --sa-bg1 { syntax: '<color>'; inherits: true; initial-value: #e1f2ef; }
+@property --sa-bg2 { syntax: '<color>'; inherits: true; initial-value: #dae9f4; }
+@property --sa-bg3 { syntax: '<color>'; inherits: true; initial-value: #e7e6f5; }
+@property --sa-nm { syntax: '<color>'; inherits: true; initial-value: #e3eef3; }
+@property --sa-side1 { syntax: '<color>'; inherits: true; initial-value: rgba(30, 200, 174, 0.5); }
+@property --sa-side2 { syntax: '<color>'; inherits: true; initial-value: rgba(60, 143, 224, 0.42); }
+@property --sa-side3 { syntax: '<color>'; inherits: true; initial-value: rgba(79, 210, 154, 0.42); }
+@property --sa-dispa { syntax: '<color>'; inherits: true; initial-value: rgba(30, 200, 174, 0.3); }
+@property --sa-dispb { syntax: '<color>'; inherits: true; initial-value: rgba(60, 143, 224, 0.28); }
+@property --so-acc { syntax: '<color>'; inherits: true; initial-value: #6a4cc9; }
+@property --so-accb { syntax: '<color>'; inherits: true; initial-value: #573ea5; }
+@property --so-ink { syntax: '<color>'; inherits: true; initial-value: #5a3dbb; }
+@property --so-soft { syntax: '<color>'; inherits: true; initial-value: rgba(106, 76, 201, 0.13); }
+@property --so-glow { syntax: '<color>'; inherits: true; initial-value: rgba(154, 124, 245, 0.38); }
+@property --so-m1 { syntax: '<color>'; inherits: true; initial-value: #ffffff; }
+@property --so-m2 { syntax: '<color>'; inherits: true; initial-value: #e6dcff; }
+@property --so-m3 { syntax: '<color>'; inherits: true; initial-value: #c2b0f6; }
+@property --so-m4 { syntax: '<color>'; inherits: true; initial-value: #a590e6; }
+@property --so-orb1 { syntax: '<color>'; inherits: true; initial-value: rgba(154, 124, 245, 0.4); }
+@property --so-orb2 { syntax: '<color>'; inherits: true; initial-value: rgba(240, 138, 208, 0.32); }
+@property --so-orb3 { syntax: '<color>'; inherits: true; initial-value: rgba(124, 205, 245, 0.3); }
+@property --so-i1 { syntax: '<color>'; inherits: true; initial-value: #a98bff; }
+@property --so-i2 { syntax: '<color>'; inherits: true; initial-value: #e6dcff; }
+@property --so-i3 { syntax: '<color>'; inherits: true; initial-value: #7fd6f5; }
+@property --so-i4 { syntax: '<color>'; inherits: true; initial-value: #fbd3ee; }
+@property --so-i5 { syntax: '<color>'; inherits: true; initial-value: #7a5fe0; }
+@property --so-bg1 { syntax: '<color>'; inherits: true; initial-value: #f1edfb; }
+@property --so-bg2 { syntax: '<color>'; inherits: true; initial-value: #ebe8f8; }
+@property --so-bg3 { syntax: '<color>'; inherits: true; initial-value: #f6ebf7; }
+@property --so-nm { syntax: '<color>'; inherits: true; initial-value: #efecf8; }
+@property --so-side1 { syntax: '<color>'; inherits: true; initial-value: rgba(154, 124, 245, 0.5); }
+@property --so-side2 { syntax: '<color>'; inherits: true; initial-value: rgba(240, 138, 208, 0.42); }
+@property --so-side3 { syntax: '<color>'; inherits: true; initial-value: rgba(124, 205, 245, 0.42); }
+@property --so-dispa { syntax: '<color>'; inherits: true; initial-value: rgba(154, 124, 245, 0.3); }
+@property --so-dispb { syntax: '<color>'; inherits: true; initial-value: rgba(240, 138, 208, 0.28); }
+
+:root {
+  --sa-acc: #0b7a6e;
+  --sa-accb: #09645a;
+  --sa-ink: #0a6a60;
+  --sa-soft: rgba(11, 122, 110, 0.13);
+  --sa-glow: rgba(30, 200, 174, 0.38);
+  --sa-m1: #bff5ea;
+  --sa-m2: #3cc9b2;
+  --sa-m3: #0f8576;
+  --sa-m4: #0a6a5f;
+  --sa-orb1: rgba(30, 200, 174, 0.4);
+  --sa-orb2: rgba(60, 143, 224, 0.32);
+  --sa-orb3: rgba(79, 210, 154, 0.3);
+  --sa-i1: #2fd9b8;
+  --sa-i2: #aaf5e6;
+  --sa-i3: #4aa8f0;
+  --sa-i4: #c8e6ff;
+  --sa-i5: #12a58f;
+  --sa-bg1: #e1f2ef;
+  --sa-bg2: #dae9f4;
+  --sa-bg3: #e7e6f5;
+  --sa-nm: #e3eef3;
+  --sa-side1: rgba(30, 200, 174, 0.5);
+  --sa-side2: rgba(60, 143, 224, 0.42);
+  --sa-side3: rgba(79, 210, 154, 0.42);
+  --sa-dispa: rgba(30, 200, 174, 0.3);
+  --sa-dispb: rgba(60, 143, 224, 0.28);
+}
+:root[data-theme='dark'] {
+  --sa-acc: #4fe0c8;
+  --sa-accb: #3fb3a0;
+  --sa-ink: #8af2e0;
+  --sa-soft: rgba(79, 224, 200, 0.16);
+  --sa-glow: rgba(30, 200, 174, 0.42);
+  --sa-m1: #bff5ea;
+  --sa-m2: #3cc9b2;
+  --sa-m3: #0f8576;
+  --sa-m4: #0a6a5f;
+  --sa-orb1: rgba(30, 200, 174, 0.34);
+  --sa-orb2: rgba(60, 143, 224, 0.28);
+  --sa-orb3: rgba(79, 210, 154, 0.24);
+  --sa-i1: #2fd9b8;
+  --sa-i2: #aaf5e6;
+  --sa-i3: #4aa8f0;
+  --sa-i4: #c8e6ff;
+  --sa-i5: #12a58f;
+  --sa-bg1: #03161a;
+  --sa-bg2: #041a26;
+  --sa-bg3: #07112a;
+  --sa-nm: #08171e;
+  --sa-side1: rgba(30, 200, 174, 0.5);
+  --sa-side2: rgba(60, 143, 224, 0.42);
+  --sa-side3: rgba(79, 210, 154, 0.42);
+  --sa-dispa: rgba(30, 200, 174, 0.3);
+  --sa-dispb: rgba(60, 143, 224, 0.28);
+}
+@keyframes sa-light {
+  0% { --sa-acc: #0b7a6e; --sa-accb: #09645a; --sa-ink: #0a6a60; --sa-soft: rgba(11, 122, 110, 0.13); --sa-glow: rgba(30, 200, 174, 0.38); --sa-m1: #bff5ea; --sa-m2: #3cc9b2; --sa-m3: #0f8576; --sa-m4: #0a6a5f; --sa-orb1: rgba(30, 200, 174, 0.4); --sa-orb2: rgba(60, 143, 224, 0.32); --sa-orb3: rgba(79, 210, 154, 0.3); --sa-i1: #2fd9b8; --sa-i2: #aaf5e6; --sa-i3: #4aa8f0; --sa-i4: #c8e6ff; --sa-i5: #12a58f; --sa-bg1: #e1f2ef; --sa-bg2: #dae9f4; --sa-bg3: #e7e6f5; --sa-nm: #e3eef3; --sa-side1: rgba(30, 200, 174, 0.5); --sa-side2: rgba(60, 143, 224, 0.42); --sa-side3: rgba(79, 210, 154, 0.42); --sa-dispa: rgba(30, 200, 174, 0.3); --sa-dispb: rgba(60, 143, 224, 0.28); }
+  14% { --sa-acc: #0b7a6e; --sa-accb: #09645a; --sa-ink: #0a6a60; --sa-soft: rgba(11, 122, 110, 0.13); --sa-glow: rgba(30, 200, 174, 0.38); --sa-m1: #bff5ea; --sa-m2: #3cc9b2; --sa-m3: #0f8576; --sa-m4: #0a6a5f; --sa-orb1: rgba(30, 200, 174, 0.4); --sa-orb2: rgba(60, 143, 224, 0.32); --sa-orb3: rgba(79, 210, 154, 0.3); --sa-i1: #2fd9b8; --sa-i2: #aaf5e6; --sa-i3: #4aa8f0; --sa-i4: #c8e6ff; --sa-i5: #12a58f; --sa-bg1: #e1f2ef; --sa-bg2: #dae9f4; --sa-bg3: #e7e6f5; --sa-nm: #e3eef3; --sa-side1: rgba(30, 200, 174, 0.5); --sa-side2: rgba(60, 143, 224, 0.42); --sa-side3: rgba(79, 210, 154, 0.42); --sa-dispa: rgba(30, 200, 174, 0.3); --sa-dispb: rgba(60, 143, 224, 0.28); }
+  46% { --sa-acc: #4a4fb8; --sa-accb: #3d4197; --sa-ink: #3f43a6; --sa-soft: rgba(74, 79, 184, 0.13); --sa-glow: rgba(110, 110, 240, 0.38); --sa-m1: #d0d2ff; --sa-m2: #7c80ee; --sa-m3: #4348bf; --sa-m4: #33379c; --sa-orb1: rgba(110, 110, 240, 0.4); --sa-orb2: rgba(164, 110, 230, 0.32); --sa-orb3: rgba(90, 160, 238, 0.3); --sa-i1: #7a7cff; --sa-i2: #cfd0ff; --sa-i3: #c27cf0; --sa-i4: #ead6ff; --sa-i5: #5558cf; --sa-bg1: #e5e6f7; --sa-bg2: #e4dff5; --sa-bg3: #dce4f6; --sa-nm: #e6e7f6; --sa-side1: rgba(110, 110, 240, 0.5); --sa-side2: rgba(164, 110, 230, 0.42); --sa-side3: rgba(90, 160, 238, 0.42); --sa-dispa: rgba(110, 110, 240, 0.3); --sa-dispb: rgba(164, 110, 230, 0.28); }
+  86% { --sa-acc: #a3205f; --sa-accb: #861a4e; --sa-ink: #94195a; --sa-soft: rgba(163, 32, 95, 0.13); --sa-glow: rgba(236, 74, 140, 0.38); --sa-m1: #ffcde2; --sa-m2: #ee5f98; --sa-m3: #b81c62; --sa-m4: #951450; --sa-orb1: rgba(236, 74, 140, 0.4); --sa-orb2: rgba(180, 90, 230, 0.32); --sa-orb3: rgba(242, 112, 110, 0.3); --sa-i1: #f0508f; --sa-i2: #ffc4dd; --sa-i3: #b45df0; --sa-i4: #f0d4ff; --sa-i5: #cc2f72; --sa-bg1: #f6e3ed; --sa-bg2: #f0e0f2; --sa-bg3: #ece0f4; --sa-nm: #f3e6ef; --sa-side1: rgba(236, 74, 140, 0.5); --sa-side2: rgba(180, 90, 230, 0.42); --sa-side3: rgba(242, 112, 110, 0.42); --sa-dispa: rgba(236, 74, 140, 0.3); --sa-dispb: rgba(180, 90, 230, 0.28); }
+  100% { --sa-acc: #a3205f; --sa-accb: #861a4e; --sa-ink: #94195a; --sa-soft: rgba(163, 32, 95, 0.13); --sa-glow: rgba(236, 74, 140, 0.38); --sa-m1: #ffcde2; --sa-m2: #ee5f98; --sa-m3: #b81c62; --sa-m4: #951450; --sa-orb1: rgba(236, 74, 140, 0.4); --sa-orb2: rgba(180, 90, 230, 0.32); --sa-orb3: rgba(242, 112, 110, 0.3); --sa-i1: #f0508f; --sa-i2: #ffc4dd; --sa-i3: #b45df0; --sa-i4: #f0d4ff; --sa-i5: #cc2f72; --sa-bg1: #f6e3ed; --sa-bg2: #f0e0f2; --sa-bg3: #ece0f4; --sa-nm: #f3e6ef; --sa-side1: rgba(236, 74, 140, 0.5); --sa-side2: rgba(180, 90, 230, 0.42); --sa-side3: rgba(242, 112, 110, 0.42); --sa-dispa: rgba(236, 74, 140, 0.3); --sa-dispb: rgba(180, 90, 230, 0.28); }
+}
+@keyframes sa-dark {
+  0% { --sa-acc: #4fe0c8; --sa-accb: #3fb3a0; --sa-ink: #8af2e0; --sa-soft: rgba(79, 224, 200, 0.16); --sa-glow: rgba(30, 200, 174, 0.42); --sa-m1: #bff5ea; --sa-m2: #3cc9b2; --sa-m3: #0f8576; --sa-m4: #0a6a5f; --sa-orb1: rgba(30, 200, 174, 0.34); --sa-orb2: rgba(60, 143, 224, 0.28); --sa-orb3: rgba(79, 210, 154, 0.24); --sa-i1: #2fd9b8; --sa-i2: #aaf5e6; --sa-i3: #4aa8f0; --sa-i4: #c8e6ff; --sa-i5: #12a58f; --sa-bg1: #03161a; --sa-bg2: #041a26; --sa-bg3: #07112a; --sa-nm: #08171e; --sa-side1: rgba(30, 200, 174, 0.5); --sa-side2: rgba(60, 143, 224, 0.42); --sa-side3: rgba(79, 210, 154, 0.42); --sa-dispa: rgba(30, 200, 174, 0.3); --sa-dispb: rgba(60, 143, 224, 0.28); }
+  14% { --sa-acc: #4fe0c8; --sa-accb: #3fb3a0; --sa-ink: #8af2e0; --sa-soft: rgba(79, 224, 200, 0.16); --sa-glow: rgba(30, 200, 174, 0.42); --sa-m1: #bff5ea; --sa-m2: #3cc9b2; --sa-m3: #0f8576; --sa-m4: #0a6a5f; --sa-orb1: rgba(30, 200, 174, 0.34); --sa-orb2: rgba(60, 143, 224, 0.28); --sa-orb3: rgba(79, 210, 154, 0.24); --sa-i1: #2fd9b8; --sa-i2: #aaf5e6; --sa-i3: #4aa8f0; --sa-i4: #c8e6ff; --sa-i5: #12a58f; --sa-bg1: #03161a; --sa-bg2: #041a26; --sa-bg3: #07112a; --sa-nm: #08171e; --sa-side1: rgba(30, 200, 174, 0.5); --sa-side2: rgba(60, 143, 224, 0.42); --sa-side3: rgba(79, 210, 154, 0.42); --sa-dispa: rgba(30, 200, 174, 0.3); --sa-dispb: rgba(60, 143, 224, 0.28); }
+  46% { --sa-acc: #a0a6ff; --sa-accb: #8085cc; --sa-ink: #c0c4ff; --sa-soft: rgba(160, 166, 255, 0.16); --sa-glow: rgba(110, 110, 240, 0.42); --sa-m1: #d0d2ff; --sa-m2: #7c80ee; --sa-m3: #4348bf; --sa-m4: #33379c; --sa-orb1: rgba(110, 110, 240, 0.34); --sa-orb2: rgba(164, 110, 230, 0.28); --sa-orb3: rgba(90, 160, 238, 0.24); --sa-i1: #7a7cff; --sa-i2: #cfd0ff; --sa-i3: #c27cf0; --sa-i4: #ead6ff; --sa-i5: #5558cf; --sa-bg1: #080b2e; --sa-bg2: #0d0a32; --sa-bg3: #060b2a; --sa-nm: #0b0e30; --sa-side1: rgba(110, 110, 240, 0.5); --sa-side2: rgba(164, 110, 230, 0.42); --sa-side3: rgba(90, 160, 238, 0.42); --sa-dispa: rgba(110, 110, 240, 0.3); --sa-dispb: rgba(164, 110, 230, 0.28); }
+  86% { --sa-acc: #ff82b6; --sa-accb: #cc6892; --sa-ink: #ffa9cc; --sa-soft: rgba(255, 130, 182, 0.16); --sa-glow: rgba(236, 74, 140, 0.42); --sa-m1: #ffcde2; --sa-m2: #ee5f98; --sa-m3: #b81c62; --sa-m4: #951450; --sa-orb1: rgba(236, 74, 140, 0.34); --sa-orb2: rgba(180, 90, 230, 0.28); --sa-orb3: rgba(242, 112, 110, 0.24); --sa-i1: #f0508f; --sa-i2: #ffc4dd; --sa-i3: #b45df0; --sa-i4: #f0d4ff; --sa-i5: #cc2f72; --sa-bg1: #1d0518; --sa-bg2: #190623; --sa-bg3: #0e0620; --sa-nm: #1b0a1e; --sa-side1: rgba(236, 74, 140, 0.5); --sa-side2: rgba(180, 90, 230, 0.42); --sa-side3: rgba(242, 112, 110, 0.42); --sa-dispa: rgba(236, 74, 140, 0.3); --sa-dispb: rgba(180, 90, 230, 0.28); }
+  100% { --sa-acc: #ff82b6; --sa-accb: #cc6892; --sa-ink: #ffa9cc; --sa-soft: rgba(255, 130, 182, 0.16); --sa-glow: rgba(236, 74, 140, 0.42); --sa-m1: #ffcde2; --sa-m2: #ee5f98; --sa-m3: #b81c62; --sa-m4: #951450; --sa-orb1: rgba(236, 74, 140, 0.34); --sa-orb2: rgba(180, 90, 230, 0.28); --sa-orb3: rgba(242, 112, 110, 0.24); --sa-i1: #f0508f; --sa-i2: #ffc4dd; --sa-i3: #b45df0; --sa-i4: #f0d4ff; --sa-i5: #cc2f72; --sa-bg1: #1d0518; --sa-bg2: #190623; --sa-bg3: #0e0620; --sa-nm: #1b0a1e; --sa-side1: rgba(236, 74, 140, 0.5); --sa-side2: rgba(180, 90, 230, 0.42); --sa-side3: rgba(242, 112, 110, 0.42); --sa-dispa: rgba(236, 74, 140, 0.3); --sa-dispb: rgba(180, 90, 230, 0.28); }
+}
+:root {
+  --so-acc: #6a4cc9;
+  --so-accb: #573ea5;
+  --so-ink: #5a3dbb;
+  --so-soft: rgba(106, 76, 201, 0.13);
+  --so-glow: rgba(154, 124, 245, 0.38);
+  --so-m1: #ffffff;
+  --so-m2: #e6dcff;
+  --so-m3: #c2b0f6;
+  --so-m4: #a590e6;
+  --so-orb1: rgba(154, 124, 245, 0.4);
+  --so-orb2: rgba(240, 138, 208, 0.32);
+  --so-orb3: rgba(124, 205, 245, 0.3);
+  --so-i1: #a98bff;
+  --so-i2: #e6dcff;
+  --so-i3: #7fd6f5;
+  --so-i4: #fbd3ee;
+  --so-i5: #7a5fe0;
+  --so-bg1: #f1edfb;
+  --so-bg2: #ebe8f8;
+  --so-bg3: #f6ebf7;
+  --so-nm: #efecf8;
+  --so-side1: rgba(154, 124, 245, 0.5);
+  --so-side2: rgba(240, 138, 208, 0.42);
+  --so-side3: rgba(124, 205, 245, 0.42);
+  --so-dispa: rgba(154, 124, 245, 0.3);
+  --so-dispb: rgba(240, 138, 208, 0.28);
+}
+:root[data-theme='dark'] {
+  --so-acc: #bba9ff;
+  --so-accb: #9687cc;
+  --so-ink: #d2c6ff;
+  --so-soft: rgba(187, 169, 255, 0.16);
+  --so-glow: rgba(154, 124, 245, 0.42);
+  --so-m1: #ffffff;
+  --so-m2: #e6dcff;
+  --so-m3: #c2b0f6;
+  --so-m4: #a590e6;
+  --so-orb1: rgba(154, 124, 245, 0.34);
+  --so-orb2: rgba(240, 138, 208, 0.28);
+  --so-orb3: rgba(124, 205, 245, 0.24);
+  --so-i1: #a98bff;
+  --so-i2: #e6dcff;
+  --so-i3: #7fd6f5;
+  --so-i4: #fbd3ee;
+  --so-i5: #7a5fe0;
+  --so-bg1: #120e2c;
+  --so-bg2: #0f0d28;
+  --so-bg3: #190f2e;
+  --so-nm: #15112f;
+  --so-side1: rgba(154, 124, 245, 0.5);
+  --so-side2: rgba(240, 138, 208, 0.42);
+  --so-side3: rgba(124, 205, 245, 0.42);
+  --so-dispa: rgba(154, 124, 245, 0.3);
+  --so-dispb: rgba(240, 138, 208, 0.28);
+}
+@keyframes so-light {
+  0% { --so-acc: #6a4cc9; --so-accb: #573ea5; --so-ink: #5a3dbb; --so-soft: rgba(106, 76, 201, 0.13); --so-glow: rgba(154, 124, 245, 0.38); --so-m1: #ffffff; --so-m2: #e6dcff; --so-m3: #c2b0f6; --so-m4: #a590e6; --so-orb1: rgba(154, 124, 245, 0.4); --so-orb2: rgba(240, 138, 208, 0.32); --so-orb3: rgba(124, 205, 245, 0.3); --so-i1: #a98bff; --so-i2: #e6dcff; --so-i3: #7fd6f5; --so-i4: #fbd3ee; --so-i5: #7a5fe0; --so-bg1: #f1edfb; --so-bg2: #ebe8f8; --so-bg3: #f6ebf7; --so-nm: #efecf8; --so-side1: rgba(154, 124, 245, 0.5); --so-side2: rgba(240, 138, 208, 0.42); --so-side3: rgba(124, 205, 245, 0.42); --so-dispa: rgba(154, 124, 245, 0.3); --so-dispb: rgba(240, 138, 208, 0.28); }
+  25% { --so-acc: #0b7f94; --so-accb: #096879; --so-ink: #0a6f83; --so-soft: rgba(11, 127, 148, 0.13); --so-glow: rgba(60, 198, 224, 0.38); --so-m1: #ffffff; --so-m2: #d6f5fc; --so-m3: #98dcec; --so-m4: #6cc2d6; --so-orb1: rgba(60, 198, 224, 0.4); --so-orb2: rgba(138, 156, 245, 0.32); --so-orb3: rgba(126, 232, 192, 0.3); --so-i1: #4ed0ea; --so-i2: #d6f5fc; --so-i3: #9aa8f8; --so-i4: #e1e6ff; --so-i5: #12a2bb; --so-bg1: #e9f5f8; --so-bg2: #e5f0f7; --so-bg3: #edeffa; --so-nm: #e8f2f6; --so-side1: rgba(60, 198, 224, 0.5); --so-side2: rgba(138, 156, 245, 0.42); --so-side3: rgba(126, 232, 192, 0.42); --so-dispa: rgba(60, 198, 224, 0.3); --so-dispb: rgba(138, 156, 245, 0.28); }
+  50% { --so-acc: #b0357f; --so-accb: #902b68; --so-ink: #9d2b6f; --so-soft: rgba(176, 53, 127, 0.13); --so-glow: rgba(240, 112, 184, 0.38); --so-m1: #ffffff; --so-m2: #ffdcee; --so-m3: #f4a6cc; --so-m4: #e083b5; --so-orb1: rgba(240, 112, 184, 0.4); --so-orb2: rgba(245, 169, 124, 0.32); --so-orb3: rgba(182, 144, 245, 0.3); --so-i1: #f27cbf; --so-i2: #ffdcee; --so-i3: #f7b089; --so-i4: #fff0dc; --so-i5: #c43f8f; --so-bg1: #f8ecf3; --so-bg2: #f4eaf5; --so-bg3: #fbeee9; --so-nm: #f6ebf1; --so-side1: rgba(240, 112, 184, 0.5); --so-side2: rgba(245, 169, 124, 0.42); --so-side3: rgba(182, 144, 245, 0.42); --so-dispa: rgba(240, 112, 184, 0.3); --so-dispb: rgba(245, 169, 124, 0.28); }
+  75% { --so-acc: #12805f; --so-accb: #0f694e; --so-ink: #0f6e52; --so-soft: rgba(18, 128, 95, 0.13); --so-glow: rgba(60, 214, 160, 0.38); --so-m1: #ffffff; --so-m2: #d9f7e8; --so-m3: #98dfbc; --so-m4: #6cc89a; --so-orb1: rgba(60, 214, 160, 0.4); --so-orb2: rgba(110, 198, 240, 0.32); --so-orb3: rgba(232, 217, 122, 0.3); --so-i1: #4fdcab; --so-i2: #d9f7e8; --so-i3: #7ccdf2; --so-i4: #e0f4ff; --so-i5: #12a074; --so-bg1: #ebf6f0; --so-bg2: #e8f3f4; --so-bg3: #f1f4ea; --so-nm: #e9f4ee; --so-side1: rgba(60, 214, 160, 0.5); --so-side2: rgba(110, 198, 240, 0.42); --so-side3: rgba(232, 217, 122, 0.42); --so-dispa: rgba(60, 214, 160, 0.3); --so-dispb: rgba(110, 198, 240, 0.28); }
+  100% { --so-acc: #6a4cc9; --so-accb: #573ea5; --so-ink: #5a3dbb; --so-soft: rgba(106, 76, 201, 0.13); --so-glow: rgba(154, 124, 245, 0.38); --so-m1: #ffffff; --so-m2: #e6dcff; --so-m3: #c2b0f6; --so-m4: #a590e6; --so-orb1: rgba(154, 124, 245, 0.4); --so-orb2: rgba(240, 138, 208, 0.32); --so-orb3: rgba(124, 205, 245, 0.3); --so-i1: #a98bff; --so-i2: #e6dcff; --so-i3: #7fd6f5; --so-i4: #fbd3ee; --so-i5: #7a5fe0; --so-bg1: #f1edfb; --so-bg2: #ebe8f8; --so-bg3: #f6ebf7; --so-nm: #efecf8; --so-side1: rgba(154, 124, 245, 0.5); --so-side2: rgba(240, 138, 208, 0.42); --so-side3: rgba(124, 205, 245, 0.42); --so-dispa: rgba(154, 124, 245, 0.3); --so-dispb: rgba(240, 138, 208, 0.28); }
+}
+@keyframes so-dark {
+  0% { --so-acc: #bba9ff; --so-accb: #9687cc; --so-ink: #d2c6ff; --so-soft: rgba(187, 169, 255, 0.16); --so-glow: rgba(154, 124, 245, 0.42); --so-m1: #ffffff; --so-m2: #e6dcff; --so-m3: #c2b0f6; --so-m4: #a590e6; --so-orb1: rgba(154, 124, 245, 0.34); --so-orb2: rgba(240, 138, 208, 0.28); --so-orb3: rgba(124, 205, 245, 0.24); --so-i1: #a98bff; --so-i2: #e6dcff; --so-i3: #7fd6f5; --so-i4: #fbd3ee; --so-i5: #7a5fe0; --so-bg1: #120e2c; --so-bg2: #0f0d28; --so-bg3: #190f2e; --so-nm: #15112f; --so-side1: rgba(154, 124, 245, 0.5); --so-side2: rgba(240, 138, 208, 0.42); --so-side3: rgba(124, 205, 245, 0.42); --so-dispa: rgba(154, 124, 245, 0.3); --so-dispb: rgba(240, 138, 208, 0.28); }
+  25% { --so-acc: #84e6f7; --so-accb: #6ab8c6; --so-ink: #a8f0fb; --so-soft: rgba(132, 230, 247, 0.16); --so-glow: rgba(60, 198, 224, 0.42); --so-m1: #ffffff; --so-m2: #d6f5fc; --so-m3: #98dcec; --so-m4: #6cc2d6; --so-orb1: rgba(60, 198, 224, 0.34); --so-orb2: rgba(138, 156, 245, 0.28); --so-orb3: rgba(126, 232, 192, 0.24); --so-i1: #4ed0ea; --so-i2: #d6f5fc; --so-i3: #9aa8f8; --so-i4: #e1e6ff; --so-i5: #12a2bb; --so-bg1: #08181f; --so-bg2: #0a1523; --so-bg3: #0e1330; --so-nm: #0c1a24; --so-side1: rgba(60, 198, 224, 0.5); --so-side2: rgba(138, 156, 245, 0.42); --so-side3: rgba(126, 232, 192, 0.42); --so-dispa: rgba(60, 198, 224, 0.3); --so-dispb: rgba(138, 156, 245, 0.28); }
+  50% { --so-acc: #ffaadb; --so-accb: #cc88af; --so-ink: #ffc3e6; --so-soft: rgba(255, 170, 219, 0.16); --so-glow: rgba(240, 112, 184, 0.42); --so-m1: #ffffff; --so-m2: #ffdcee; --so-m3: #f4a6cc; --so-m4: #e083b5; --so-orb1: rgba(240, 112, 184, 0.34); --so-orb2: rgba(245, 169, 124, 0.28); --so-orb3: rgba(182, 144, 245, 0.24); --so-i1: #f27cbf; --so-i2: #ffdcee; --so-i3: #f7b089; --so-i4: #fff0dc; --so-i5: #c43f8f; --so-bg1: #220f22; --so-bg2: #1b0f2e; --so-bg3: #20111e; --so-nm: #241324; --so-side1: rgba(240, 112, 184, 0.5); --so-side2: rgba(245, 169, 124, 0.42); --so-side3: rgba(182, 144, 245, 0.42); --so-dispa: rgba(240, 112, 184, 0.3); --so-dispb: rgba(245, 169, 124, 0.28); }
+  75% { --so-acc: #94f0c4; --so-accb: #76c09d; --so-ink: #b4f5d6; --so-soft: rgba(148, 240, 196, 0.16); --so-glow: rgba(60, 214, 160, 0.42); --so-m1: #ffffff; --so-m2: #d9f7e8; --so-m3: #98dfbc; --so-m4: #6cc89a; --so-orb1: rgba(60, 214, 160, 0.34); --so-orb2: rgba(110, 198, 240, 0.28); --so-orb3: rgba(232, 217, 122, 0.24); --so-i1: #4fdcab; --so-i2: #d9f7e8; --so-i3: #7ccdf2; --so-i4: #e0f4ff; --so-i5: #12a074; --so-bg1: #08201a; --so-bg2: #08191f; --so-bg3: #0d1626; --so-nm: #0c211c; --so-side1: rgba(60, 214, 160, 0.5); --so-side2: rgba(110, 198, 240, 0.42); --so-side3: rgba(232, 217, 122, 0.42); --so-dispa: rgba(60, 214, 160, 0.3); --so-dispb: rgba(110, 198, 240, 0.28); }
+  100% { --so-acc: #bba9ff; --so-accb: #9687cc; --so-ink: #d2c6ff; --so-soft: rgba(187, 169, 255, 0.16); --so-glow: rgba(154, 124, 245, 0.42); --so-m1: #ffffff; --so-m2: #e6dcff; --so-m3: #c2b0f6; --so-m4: #a590e6; --so-orb1: rgba(154, 124, 245, 0.34); --so-orb2: rgba(240, 138, 208, 0.28); --so-orb3: rgba(124, 205, 245, 0.24); --so-i1: #a98bff; --so-i2: #e6dcff; --so-i3: #7fd6f5; --so-i4: #fbd3ee; --so-i5: #7a5fe0; --so-bg1: #120e2c; --so-bg2: #0f0d28; --so-bg3: #190f2e; --so-nm: #15112f; --so-side1: rgba(154, 124, 245, 0.5); --so-side2: rgba(240, 138, 208, 0.42); --so-side3: rgba(124, 205, 245, 0.42); --so-dispa: rgba(154, 124, 245, 0.3); --so-dispb: rgba(240, 138, 208, 0.28); }
+}
+
+:root[data-shift] {
+  animation: sa-light 34s ease-in-out infinite alternate, so-light 44s linear infinite;
+}
+:root[data-theme='dark'][data-shift] {
+  animation: sa-dark 34s ease-in-out infinite alternate, so-dark 44s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  :root[data-shift],
+  :root[data-theme='dark'][data-shift] {
+    animation: none;
+  }
+}
+
+[data-course='sport-governance'],
+:root[data-skin='sport-governance'] {
+  --accent: var(--sa-acc);
+  --accent-b: var(--sa-accb);
+  --accent-ink: var(--sa-ink);
+  --accent-soft: var(--sa-soft);
+  --glow: var(--sa-glow);
+  --metal: linear-gradient(180deg, var(--sa-m1) 0%, var(--sa-m2) 20%, var(--sa-m3) 47%, var(--sa-m4) 52%, var(--sa-m3) 80%, var(--sa-m2) 100%);
+  --metal-edge: rgba(10, 20, 50, 0.55);
+  --metal-glow: var(--sa-glow);
+  --on-metal: #ffffff;
+  --copper: var(--sa-accb);
+  --copper-ink: var(--sa-ink);
+  --i1: var(--sa-i1);
+  --i2: var(--sa-i2);
+  --i3: var(--sa-i3);
+  --i4: var(--sa-i4);
+  --i5: var(--sa-i5);
+  --g-tint-a: var(--sa-dispa);
+  --g-tint-b: var(--sa-dispb);
+  --g-disp-a: var(--sa-dispa);
+  --g-disp-b: var(--sa-dispb);
+  --side-l1: var(--sa-side1);
+  --side-l2: var(--sa-side2);
+  --side-l3: var(--sa-side3);
+}
+:root[data-skin='sport-governance'] {
+  --bg: var(--sa-bg1);
+  --bg-2: var(--sa-bg2);
+  --bg-grad: linear-gradient(135deg, var(--sa-bg1) 0%, var(--sa-bg2) 46%, var(--sa-bg3) 100%);
+  --nm-bg: var(--sa-nm);
+  --orb1: var(--sa-orb1);
+  --orb2: var(--sa-orb2);
+  --orb3: var(--sa-orb3);
+}
+
+[data-course='sport-management'],
+:root[data-skin='sport-management'] {
+  --accent: var(--so-acc);
+  --accent-b: var(--so-accb);
+  --accent-ink: var(--so-ink);
+  --accent-soft: var(--so-soft);
+  --glow: var(--so-glow);
+  --metal: linear-gradient(180deg, var(--so-m1) 0%, var(--so-m2) 20%, var(--so-m3) 47%, var(--so-m4) 52%, var(--so-m3) 80%, var(--so-m2) 100%);
+  --metal-edge: rgba(70, 50, 120, 0.34);
+  --metal-glow: var(--so-glow);
+  --on-metal: #201a48;
+  --copper: var(--so-accb);
+  --copper-ink: var(--so-ink);
+  --i1: var(--so-i1);
+  --i2: var(--so-i2);
+  --i3: var(--so-i3);
+  --i4: var(--so-i4);
+  --i5: var(--so-i5);
+  --g-tint-a: var(--so-dispa);
+  --g-tint-b: var(--so-dispb);
+  --g-disp-a: var(--so-dispa);
+  --g-disp-b: var(--so-dispb);
+  --side-l1: var(--so-side1);
+  --side-l2: var(--so-side2);
+  --side-l3: var(--so-side3);
+}
+:root[data-skin='sport-management'] {
+  --bg: var(--so-bg1);
+  --bg-2: var(--so-bg2);
+  --bg-grad: linear-gradient(135deg, var(--so-bg1) 0%, var(--so-bg2) 46%, var(--so-bg3) 100%);
+  --nm-bg: var(--so-nm);
+  --orb1: var(--so-orb1);
+  --orb2: var(--so-orb2);
+  --orb3: var(--so-orb3);
+}
+
+/* text on an accent-coloured chip: white on the deeper light-mode accents, dark on the brighter dark-mode ones */
+[data-course='sport-governance'],
+:root[data-skin='sport-governance'],
+[data-course='sport-management'],
+:root[data-skin='sport-management'] {
+  --on-accent: #ffffff;
+}
+:root[data-theme='dark'] [data-course='sport-governance'],
+:root[data-theme='dark'][data-skin='sport-governance'],
+:root[data-theme='dark'] [data-course='sport-management'],
+:root[data-theme='dark'][data-skin='sport-management'] {
+  --on-accent: #0b1020;
+}
+/* alexandrite buttons carry white text, so give it a soft dark edge */
+:is([data-course='sport-governance'], :root[data-skin='sport-governance']) :is(.button:not(.secondary), .arrow-btn.primary) {
+  text-shadow: 0 1px 1px rgba(10, 20, 50, 0.6);
+}

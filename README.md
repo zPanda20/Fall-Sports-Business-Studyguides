@@ -1,6 +1,6 @@
 # Fall Sports Business Study Guides
 
-A calm, minimalist study app for three MSc Sports Business Management courses: **Accounting & Forecasting**, **Business Strategy** and **Market Research**. Each topic has a plain-language explanation, key terms, a sports example built around a consistent fictional team, exam-style practice questions, and curated videos. There are also flashcards, search, dark mode, and progress tracking.
+A calm, minimalist study app for five MSc Sports Business Management courses: **Accounting & Forecasting**, **Business Strategy**, **Market Research**, **International Sports Governance** and **Foundations of Sport Management**. Each topic has a plain-language explanation, key terms, a sports example built around a consistent fictional team, exam-style practice questions, and curated videos. There are also flashcards, search, dark mode, and progress tracking.
 
 This is an unofficial, student-made study aid. It supplements lectures and course materials and does not replace them. All explanations are written from scratch, and all teams and numbers are fictional.
 
@@ -48,6 +48,8 @@ Content lives in `src/data/`, one file per topic, separate from the code.
 **What is filled in:** topics are written only from the course slides and guides. Accounting & Forecasting covers accounting basics, the accounting process, statements and notes, assets, liabilities and equity, and cost-volume-profit. Business Strategy covers what strategy is, strategic leadership, PESTEL, Five Forces, internal analysis, SWOT, and performance and business models. Units with no source material stay "Coming soon". Two topics carry a "Partly covered" note because a chapter was missing from the materials (Chapter 6 and Chapter 11). Items marked not-for-exam in the slides are left out.
 
 **Market Research** has its full outline from the syllabus (12 sessions plus 2 asynchronous activities, each listing the topics it covers) and its own dark sapphire look. Its units show "Coming soon" until course slides are added. When you add a topic, give it `course: 'market-research'` and an `id` from the outline. Courses with their own look are listed in `SKINNED` in `src/App.jsx` and styled under "skins" in `src/styles.css`.
+
+**International Sports Governance** and **Foundations of Sport Management** also have their full syllabus outlines, with a "Coming soon" tag until slides are added. Each has its own colour-shifting look: alexandrite (teal-green moving through blue-violet to raspberry) and opalescent (a pearly base with a play of colour through violet, cyan, rose and jade). The palettes live in `src/skins.css` and move only on the home page and those courses' pages, and not at all with reduced motion.
 
 **Clarification bookmarks:** every topic and every slide has a bookmark button. Bookmarks are saved in the browser (`sbsg:bookmarks:v1`), listed on the Bookmarks page with an optional note, and can be sent to an AI with a ready-made message that includes the slide's text and the note.
 

@@ -57,7 +57,7 @@ export default function CoursePage() {
               </div>
             ))}
           </dl>
-          <p className="meta">From the course syllabus (version dated 15 September 2026). Your instructor&rsquo;s latest word always wins.</p>
+          <p className="meta">From the course syllabus{course.syllabusDate ? ` (version dated ${course.syllabusDate})` : ''}. Your instructor&rsquo;s latest word always wins.</p>
         </section>
       )}
 

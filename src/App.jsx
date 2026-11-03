@@ -14,7 +14,9 @@ import BookmarksPage from './pages/BookmarksPage.jsx';
 
 // Courses with their own look (see styles.css, "skins"). The page background and glow follow
 // the course you are reading, so the whole screen changes, not just the accent.
-const SKINNED = new Set(['market-research']);
+const SKINNED = new Set(['market-research', 'sport-governance', 'sport-management']);
+// Skins whose colours drift over time. The animation only runs where one of them is on screen.
+const SHIFTING = new Set(['sport-governance', 'sport-management']);
 
 function courseForPath(pathname) {
   const c = matchPath('/course/:courseId/*', pathname)?.params.courseId;
@@ -57,6 +59,8 @@ function Layout() {
     const root = document.documentElement;
     if (SKINNED.has(course)) root.setAttribute('data-skin', course);
     else root.removeAttribute('data-skin');
+    if (pathname === '/' || SHIFTING.has(course)) root.setAttribute('data-shift', pathname === '/' ? 'home' : course);
+    else root.removeAttribute('data-shift');
   }, [pathname]);
 
   // Start each page at the top, like a normal website.

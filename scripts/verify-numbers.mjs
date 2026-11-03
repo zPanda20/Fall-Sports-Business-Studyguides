@@ -284,6 +284,40 @@ for (const course of courses) {
   }
 }
 
+// International Sports Governance follows its syllabus: sessions 1-12, two asynchronous activities, a final assessment
+{
+  const g = courses.find((c) => c.id === 'sport-governance');
+  ok_(g, 'Sport Governance course exists');
+  const units = allUnits(g);
+  eq(units.length, 15, 'Sport Governance units (12 sessions + 2 async + final assessment)');
+  for (let n = 1; n <= 12; n++) ok_(units.some((u) => u.sessions === `Session ${n}`), `Sport Governance has Session ${n}`);
+  ok_(units.some((u) => u.sessions.startsWith('Async 1')) && units.some((u) => u.sessions.startsWith('Async 2')), 'Sport Governance has both asynchronous activities');
+  ok_(units.some((u) => u.sessions.startsWith('Final assessment')), 'Sport Governance has the final assessment');
+  ok_(units.every((u) => Array.isArray(u.covers)), 'Every Sport Governance unit lists what it covers');
+  ok_(g.tag === 'Coming soon', 'Sport Governance is tagged Coming soon');
+  const all = units.flatMap((u) => u.covers).join(' | ').toLowerCase();
+  for (const word of ['three levels of governance', 'stakeholders', 'non-olympic', 'regulatory standards', 'fifagate', 'autonomy', 'competitive balance', 'integrity', 'safeguarding', 'ethical decision making', 'sustainability', 'race and socioeconomic']) {
+    ok_(all.includes(word), `Sport Governance covers "${word}"`);
+  }
+}
+// Foundations of Sport Management follows its syllabus: 12 sessions, six asynchronous activities listed inside them
+{
+  const f = courses.find((c) => c.id === 'sport-management');
+  ok_(f, 'Sport Management course exists');
+  const units = allUnits(f);
+  eq(units.length, 12, 'Sport Management units (12 sessions)');
+  for (let n = 1; n <= 12; n++) ok_(units.some((u) => u.sessions === `Session ${n}`), `Sport Management has Session ${n}`);
+  ok_(units.every((u) => Array.isArray(u.covers)), 'Every Sport Management unit lists what it covers');
+  ok_(f.tag === 'Coming soon', 'Sport Management is tagged Coming soon');
+  const all = units.flatMap((u) => u.covers).join(' | ').toLowerCase();
+  for (const word of ['ecosystem', 'fandom', 'fan engagement', 'sports marketing', 'media rights', 'sponsorship', 'endorsements', 'cryptocurrency', 'luxury', 'gender pay gap', 'analytics']) {
+    ok_(all.includes(word), `Sport Management covers "${word}"`);
+  }
+  for (let n = 1; n <= 6; n++) ok_(all.includes(`async activity ${n}`), `Sport Management lists async activity ${n}`);
+}
+// every course names the date of its syllabus
+for (const c of courses.filter((c) => c.overview)) ok_(typeof c.syllabusDate === 'string' && c.syllabusDate.length > 0, `${c.id}: syllabus date`);
+
 // ---- Bookmark message ----
 {
   const one = bookmarkPrompt({ items: [{ course: 'Market Research', topic: 'Sampling', where: 'Slide 2', excerpt: 'A sample is a part of a population.', note: 'Why not ask everyone?' }] });
