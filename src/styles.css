@@ -2385,3 +2385,39 @@ td {
 .bm-ask .ask {
   margin-top: 10px;
 }
+
+/* ---------- course tag, maker credit ---------- */
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 28px;
+}
+.course-head h1 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+}
+.title-tag {
+  font-family: 'Inter Variable', system-ui, sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+}
+.maker {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 7px;
+  margin: 10px 4px 0;
+  font-size: 0.72rem;
+  line-height: 1;
+  color: var(--muted);
+  opacity: 0.8;
+}
+.maker img {
+  display: block;
+  width: 27px;
+  height: auto;
+}

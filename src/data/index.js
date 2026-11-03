@@ -137,6 +137,7 @@ export const courses = [
   },
   {
     id: 'market-research',
+    tag: 'Coming soon',
     title: 'Market Research',
     short: 'Market Research',
     blurb:

@@ -3,6 +3,7 @@ import { useEffect, useLayoutEffect } from 'react';
 import { getTopic } from './data/index.js';
 import { useBookmarks } from './lib/bookmarks.js';
 import Icon from './components/Icon.jsx';
+import makerMark from './assets/panda-mark.png';
 import { useTheme } from './lib/theme.js';
 import Home from './pages/Home.jsx';
 import CoursePage from './pages/CoursePage.jsx';
@@ -118,6 +119,10 @@ function Layout() {
             materials and does not replace them. If something here differs from what your
             instructor taught, go with your instructor. Sports examples use fictional teams and
             made-up numbers. Real examples link to their sources.
+          </p>
+          <p className="maker">
+            <img src={makerMark} alt="" width="27" height="18" />
+            <span>private build. Program by Panda</span>
           </p>
         </div>
       </footer>

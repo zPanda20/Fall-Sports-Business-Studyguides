@@ -43,7 +43,10 @@ export default function Home() {
               data-course={course.id}
             >
               <span className="glowline" aria-hidden="true" />
-              <span className="eyebrow">{course.short}</span>
+              <span className="card-top">
+                <span className="eyebrow">{course.short}</span>
+                {course.tag && <span className="pill ready">{course.tag}</span>}
+              </span>
               <h2>{course.title}</h2>
               <p>{course.blurb}</p>
               <div className="progress" role="img" aria-label={`${done} of ${ready.length} available topics complete`}>

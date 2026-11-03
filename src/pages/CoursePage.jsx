@@ -28,7 +28,10 @@ export default function CoursePage() {
         <nav className="crumbs" aria-label="Breadcrumb">
           <Link to="/">Courses</Link> <span aria-hidden="true">/</span> <span>{course.short}</span>
         </nav>
-        <h1>{course.title}</h1>
+        <h1>
+          {course.title}{' '}
+          {course.tag && <span className="pill ready title-tag">{course.tag}</span>}
+        </h1>
         <p className="lead">{course.blurb}</p>
         <p className="meta">
           {ready.length === 0
