@@ -1,5 +1,5 @@
 import { getPrefs, setPref } from './prefs.js';
-import { say } from './manager.js';
+import { say, getCompanionState } from './manager.js';
 import { line } from './dialogue.js';
 import { snapshotDeadlines } from '../lib/deadlines.js';
 
@@ -40,6 +40,8 @@ export function checkDeadlines() {
   if ((!demon && !seraph) || p.quiet) return false;
   const hour = new Date().getHours();
   if (hour < 8 || hour >= 22) return false; // no late-night nagging
+  if (getCompanionState().panel) return false; // never replace something already on screen
+  if (!p.introSeen) return false; // a first visit gets the welcome only
   const now = Date.now();
   const { active } = snapshotDeadlines();
 

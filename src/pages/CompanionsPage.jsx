@@ -3,7 +3,7 @@ import { usePrefs, setPref, resetPrefs, isPreview } from '../companions/prefs.js
 import { tourReset, tourStart } from '../companions/tour.js';
 import { say, closePanel } from '../companions/manager.js';
 import { line } from '../companions/dialogue.js';
-import { CHARACTERS, faceUrl } from '../companions/assets.js';
+import { CHARACTERS, REWARD_ART_READY, faceUrl } from '../companions/assets.js';
 
 function Switch({ checked, onChange, label, hint, id }) {
   return (
@@ -150,8 +150,8 @@ export default function CompanionsPage() {
 
       {isPreview() && (
         <section className="glass cmp-card" aria-labelledby="cmp-early">
-          <h2 id="cmp-early" className="serif">Early access settings</h2>
-          <p className="meta">You can see these because preview mode is on in this browser. The tour, quiz reactions and reminders are not visible to anyone else yet.</p>
+          <h2 id="cmp-early" className="serif">Tour, reactions and reminders</h2>
+          <p className="meta">Choose what the helpers do on their own. Quiet Study Mode above silences all of it.</p>
           <Switch id="cmp-tour" label="Tour guidance" hint="Seraph offers the tour once and explains pages." checked={p.tutorial} onChange={(v) => setPref('tutorial', v)} />
           <div className="cmp-ask-actions">
             <button type="button" className="button small" onClick={() => { tourReset(); tourStart(); }}>Restart the tour</button>
@@ -171,9 +171,11 @@ export default function CompanionsPage() {
               <Choice name="popups" value="lively" current={p.popups} onPick={(v) => setPref('popups', v)} title="Lively" text="More reactions, still never twice at once." />
             </div>
           </fieldset>
-          <p className="meta">
-            Rewards earned so far (art for these is still to come): {p.rewards.snacks} snacks for Seraph, {p.rewards.hammers} hammers for Demon, {p.rewards.pats} head pats.
-          </p>
+          {REWARD_ART_READY && (
+            <p className="meta">
+              Rewards earned so far: {p.rewards.snacks} snacks for Seraph, {p.rewards.hammers} hammers for Demon, {p.rewards.pats} head pats.
+            </p>
+          )}
         </section>
       )}
 

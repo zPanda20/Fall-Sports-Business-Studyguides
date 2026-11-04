@@ -3,6 +3,7 @@ import { getPrefs, setPref } from './prefs.js';
 import { say, amend } from './manager.js';
 import { line } from './dialogue.js';
 import { getTopic } from '../data/index.js';
+import { REWARD_ART_READY } from './assets.js';
 
 // Turns what the student does into what the companions say. This file decides; it never draws anything
 // and never grades anything. Right and wrong come from the quiz pages themselves.
@@ -158,7 +159,7 @@ function onComplete(p) {
   const improved = Boolean(p.prev) && p.correct > p.prev.last && p.total === p.prev.total;
   earnFor(perfect ? 2 : 1);
 
-  const note = prefs.seraph || prefs.demon ? 'Reward earned.' : undefined;
+  const note = REWARD_ART_READY && (prefs.seraph || prefs.demon) ? 'Reward earned.' : undefined;
   const seraph = wants.seraph();
   const demon = wants.demon();
   const topicLink = p.topicId && getTopic(p.topicId) ? { label: 'Open the study guide', to: `/topic/${p.topicId}` } : null;

@@ -47,6 +47,9 @@ export const FACES = {
 };
 export const NEUTRAL_FACE = { seraph: 'friendly', demon: 'deadpan' };
 
+// Flip to true once snack / hammer / head-pat art exists, so the app can show earned rewards.
+export const REWARD_ART_READY = false;
+
 export const POSE_SIZE = { seraph: [487, 640], demon: [480, 640] };
 
 export const poseUrl = (who, pose) => `${base()}companions/${who}/poses/${pose}.webp`;

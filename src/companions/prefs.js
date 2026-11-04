@@ -3,7 +3,6 @@ import { useSyncExternalStore } from 'react';
 // Companion settings live only in this browser, in one versioned localStorage entry.
 // Updating the app never resets them: saved values are merged over the defaults.
 const KEY = 'sbsg:companions:v1';
-const PREVIEW_KEY = 'sbsg:companions:preview';
 
 export const DEFAULTS = {
   seraph: true, // on by default, can be switched off
@@ -97,17 +96,6 @@ export function resetPrefs() {
   commit({ ...DEFAULTS });
 }
 
-// ---- unreleased parts ----
-// The tour, quiz reactions, deadline nagging and context help are built but hidden from everyone
-// until they are approved. To try them on your own device, open the site once with ?companions=preview
-// (and ?companions=off to hide them again). It is remembered in this browser only.
-let preview = false;
-try {
-  const q = new URLSearchParams(window.location.search).get('companions');
-  if (q === 'preview') localStorage.setItem(PREVIEW_KEY, '1');
-  if (q === 'off') localStorage.removeItem(PREVIEW_KEY);
-  preview = localStorage.getItem(PREVIEW_KEY) === '1';
-} catch {
-  preview = false;
-}
-export const isPreview = () => preview;
+// The tour, quiz reactions, reminders and help are all live. This stays as one switch in case a part ever
+// needs to be held back again.
+export const isPreview = () => true;
