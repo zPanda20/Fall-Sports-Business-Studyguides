@@ -68,13 +68,13 @@ export const DEADLINES = [
   },
   {
     id: 'governance-super-league',
-    title: 'Super League: analysis of the event and its failure',
+    title: 'Group assignment: governance case analysis',
     course: 'International Sports Governance',
     courseId: 'sport-governance',
     dueAt: null,
     approx: 'Early December',
     group: true,
-    note: 'Focus on: 1) how the Super League planned not to reinvest in local leagues, 2) the court of justice, 3) the financial aspects. Observation (what we know), integration (connect to theory) and critique.',
+    note: 'Observation (what we know about the event), integration (connect it to the theory and ideas from the course) and critique (analyze and criticize the situation).',
   },
   {
     id: 'accounting-company-analysis',
