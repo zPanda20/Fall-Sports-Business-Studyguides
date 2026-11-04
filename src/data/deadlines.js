@@ -35,7 +35,7 @@ export const DEADLINES = [
   },
   {
     id: 'strategy-final-group-assignment',
-    title: 'Final Group Assignment: Manchester United business analysis',
+    title: 'Final Group Assignment: business analysis',
     course: 'Business Strategy',
     courseId: 'strategy',
     dueAt: '2026-11-27T23:59:00+01:00',
@@ -44,7 +44,7 @@ export const DEADLINES = [
   },
   {
     id: 'strategy-final-presentation',
-    title: 'Final presentation: Manchester United',
+    title: 'Final presentation',
     course: 'Business Strategy',
     courseId: 'strategy',
     dueAt: '2026-11-30T23:59:00+01:00',
