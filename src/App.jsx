@@ -2,6 +2,7 @@ import { Routes, Route, Link, NavLink, Outlet, useLocation, matchPath } from 're
 import { useEffect, useLayoutEffect } from 'react';
 import { getTopic } from './data/index.js';
 import { useBookmarks } from './lib/bookmarks.js';
+import { useDeadlines, useLastArchived, restore } from './lib/deadlines.js';
 import Icon from './components/Icon.jsx';
 import makerMark from './assets/panda-mark.png';
 import { useTheme } from './lib/theme.js';
@@ -11,6 +12,7 @@ import TopicPage from './pages/TopicPage.jsx';
 import FlashcardsPage from './pages/FlashcardsPage.jsx';
 import SearchPage from './pages/SearchPage.jsx';
 import BookmarksPage from './pages/BookmarksPage.jsx';
+import DeadlinesPage from './pages/DeadlinesPage.jsx';
 
 // Courses with their own look (see styles.css, "skins"). The page background and glow follow
 // the course you are reading, so the whole screen changes, not just the accent.
@@ -53,6 +55,8 @@ function ThemeToggle() {
 function Layout() {
   const { pathname } = useLocation();
   const marks = useBookmarks();
+  const { active: dueActive } = useDeadlines();
+  const archivedNow = useLastArchived();
 
   useLayoutEffect(() => {
     const course = courseForPath(pathname);
@@ -104,6 +108,11 @@ function Layout() {
               </svg>
               <span className="nav-label-wide">Search</span>
             </NavLink>
+            <NavLink to="/deadlines" className="nav-link" aria-label={`Due dates, ${dueActive.length} to do`}>
+              <Icon name="calendar" size={18} />
+              <span className="nav-label-wide">Due dates</span>
+              {dueActive.length > 0 && <span className="nav-count" aria-hidden="true">{dueActive.length}</span>}
+            </NavLink>
             <NavLink to="/bookmarks" className="nav-link" aria-label={`Bookmarks, ${marks.length} saved`}>
               <Icon name="bookmark" size={18} />
               <span className="nav-label-wide">Bookmarks</span>
@@ -113,6 +122,12 @@ function Layout() {
           </nav>
         </div>
       </header>
+      {archivedNow && (
+        <div className="toast glass" role="status">
+          <span>Archived &ldquo;{archivedNow.title}&rdquo;.</span>
+          <button type="button" className="toast-undo" onClick={() => restore(archivedNow.id)}>Undo</button>
+        </div>
+      )}
       <main id="main" className="wrap main">
         <Outlet />
       </main>
@@ -150,6 +165,7 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="search" element={<SearchPage />} />
         <Route path="bookmarks" element={<BookmarksPage />} />
+        <Route path="deadlines" element={<DeadlinesPage />} />
         <Route path="course/:courseId" element={<CoursePage />} />
         <Route path="course/:courseId/flashcards" element={<FlashcardsPage />} />
         <Route path="topic/:topicId" element={<TopicPage />} />

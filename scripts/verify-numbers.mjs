@@ -14,6 +14,8 @@ import {
 } from '../src/lib/cvp.js';
 import { topics, courses, allUnits } from '../src/data/index.js';
 import { bookmarkPrompt } from '../src/lib/ai.js';
+import { DEADLINES } from '../src/data/deadlines.js';
+import { resolve, split, splitDuration, urgency, spoken, toLocalInput } from '../src/lib/deadlines.js';
 
 let checks = 0;
 const eq = (actual, expected, label) => {
@@ -326,6 +328,56 @@ for (const c of courses.filter((c) => c.overview)) ok_(typeof c.syllabusDate ===
   ok_(none.includes('explain the idea from the start'), 'bookmark message handles an empty note');
   const two = bookmarkPrompt({ items: [{ course: 'A', topic: 'B', note: 'x' }, { course: 'C', topic: 'D', note: 'y' }] });
   ok_(two.includes('1. Course: A') && two.includes('2. Course: C'), 'bookmark message numbers several items');
+}
+
+// ---- Due dates ----
+{
+  eq(DEADLINES.length, 7, 'seven due dates');
+  eq(new Set(DEADLINES.map((d) => d.id)).size, DEADLINES.length, 'due date ids are unique');
+  for (const d of DEADLINES) {
+    ok_(d.title && d.course, `${d.id}: has a title and a course`);
+    ok_(d.dueAt === null || Number.isFinite(Date.parse(d.dueAt)), `${d.id}: dueAt is a valid date or null`);
+    ok_(d.dueAt === null || /[+-]\d\d:\d\d$/.test(d.dueAt), `${d.id}: dueAt names its UTC offset`);
+    ok_(!d.courseId || courses.some((c) => c.id === d.courseId), `${d.id}: course link points at a real course`);
+  }
+  const at = (id) => Date.parse(DEADLINES.find((d) => d.id === id).dueAt);
+  eq(at('leadership-workshop-reflection'), Date.UTC(2026, 10, 6, 22, 59), 'Workshop reflection: 6 Nov 23:59 (UTC+1)');
+  eq(at('strategy-async-assignment-1'), Date.UTC(2026, 10, 8, 22, 59), 'Strategy assignment 1: 8 Nov 23:59 (UTC+1)');
+  eq(at('sport-management-async-group-assignment'), Date.UTC(2026, 10, 13, 16, 0), 'Group assignment: 13 Nov 17:00 (UTC+1)');
+  eq(at('careers-submit-cv'), Date.UTC(2026, 10, 14, 23, 0), 'CV: 15 Nov 00:00 (UTC+1)');
+  eq(at('strategy-final-group-assignment'), Date.UTC(2026, 10, 27, 22, 59), 'Final group assignment: 27 Nov 23:59 (UTC+1)');
+  eq(DEADLINES.filter((d) => d.dueAt === null).length, 2, 'two items have no date yet');
+
+  // countdown arithmetic: 2 days 4 hours 12 minutes 9 seconds
+  const ms = ((2 * 24 + 4) * 3600 + 12 * 60 + 9) * 1000;
+  const sd = splitDuration(ms);
+  ok_(sd.days === 2 && sd.hours === 4 && sd.minutes === 12 && sd.seconds === 9 && !sd.late, 'splitDuration breaks time into d/h/m/s');
+  const late = splitDuration(-90 * 1000);
+  ok_(late.late && late.minutes === 1 && late.seconds === 30, 'splitDuration handles overdue time');
+  eq(urgency(-1), 'late', 'urgency: overdue');
+  eq(urgency(2 * 3600 * 1000), 'urgent', 'urgency: under 3 hours');
+  eq(urgency(10 * 3600 * 1000), 'soon', 'urgency: under a day');
+  eq(urgency(3 * 24 * 3600 * 1000), 'calm', 'urgency: days away');
+  eq(spoken(ms), 'Due in 2 days 4 hours', 'spoken phrase');
+  eq(spoken(-3600 * 1000), 'Overdue by 1 hour', 'spoken phrase when overdue');
+  eq(spoken(20 * 1000), 'Due in less than a minute', 'spoken phrase under a minute');
+  ok_(/^\d{4}-\d\d-\d\dT\d\d:\d\d$/.test(toLocalInput(Date.now())), 'datetime-local value has the right shape');
+
+  // active / archive split
+  const empty = { done: {}, dates: {} };
+  const all = split(resolve(empty));
+  eq(all.active.length, 7, 'all seven start in the list');
+  eq(all.archived.length, 0, 'nothing is archived at the start');
+  const dated = all.active.filter((d) => d.dueMs !== null).map((d) => d.dueMs);
+  ok_(dated.every((v, i) => i === 0 || dated[i - 1] <= v), 'list is soonest first');
+  ok_(all.active.slice(-2).every((d) => d.dueMs === null), 'undated items come last');
+  const done = split(resolve({ done: { 'careers-submit-cv': 5, 'strategy-async-assignment-1': 9 }, dates: {} }));
+  eq(done.active.length, 5, 'ticked items leave the list');
+  eq(done.archived.map((d) => d.id).join(), 'strategy-async-assignment-1,careers-submit-cv', 'archive shows the newest first');
+  const dateAdded = split(resolve({ done: {}, dates: { 'presentation-skills-speaker-analysis': '2026-11-10T12:00:00+01:00' } }));
+  eq(dateAdded.active.filter((d) => d.dueMs === null).length, 1, 'adding a date gives an undated item a clock');
+  const changed = resolve({ done: {}, dates: { 'careers-submit-cv': '2026-11-20T12:00:00+01:00' } }).find((d) => d.id === 'careers-submit-cv');
+  ok_(changed.changed && changed.dueMs === Date.parse('2026-11-20T12:00:00+01:00'), 'a changed date overrides the original');
 }
 
 console.log(`All ${checks} checks passed.`);

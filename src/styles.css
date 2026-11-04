@@ -2265,6 +2265,25 @@ td {
   .nav-label-wide {
     display: none;
   }
+  .brand > span:last-child {
+    white-space: nowrap;
+  }
+  .header-inner {
+    padding-left: 14px;
+    padding-right: 6px;
+  }
+  .brand {
+    gap: 8px;
+    font-size: 1rem;
+  }
+  .header-nav {
+    gap: 0;
+  }
+  .nav-link,
+  .icon-btn {
+    padding: 0 9px;
+    gap: 5px;
+  }
 }
 
 .chips {
@@ -2420,4 +2439,339 @@ td {
   display: block;
   width: 27px;
   height: auto;
+}
+
+/* ---------- due dates ---------- */
+.due-list,
+.up-list,
+.arch-list {
+  display: grid;
+  gap: 16px;
+  padding: 0;
+  list-style: none;
+}
+.due-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px 16px;
+  align-items: start;
+  padding: 18px 20px;
+}
+.due-check {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  color: transparent;
+  background: var(--nm-bg);
+  box-shadow: inset 3px 3px 7px var(--nm-dark), inset -3px -3px 7px var(--nm-light), 0 0 0 1.5px var(--accent);
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+}
+.due-check:hover,
+.due-check:focus-visible {
+  color: var(--accent-ink);
+  background: var(--accent-soft);
+}
+.due-check:active {
+  transform: scale(0.92);
+}
+.due-main {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+.due-title {
+  font-size: 1.08rem;
+  line-height: 1.35;
+}
+.due-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.due-course {
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent-ink);
+  background: var(--accent-soft);
+  text-decoration: none;
+}
+.due-course.plain {
+  color: var(--muted);
+  background: var(--nm-bg);
+  box-shadow: inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light);
+}
+.due-note {
+  font-size: 0.88rem;
+  color: var(--muted);
+  max-width: 44rem;
+}
+.due-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}
+.due-link {
+  min-height: 32px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--accent-ink);
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.due-edit {
+  display: grid;
+  gap: 10px;
+  margin-top: 4px;
+}
+.due-edit label {
+  display: grid;
+  gap: 6px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+.due-edit input {
+  width: min(100%, 20rem);
+  min-height: 44px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: var(--r-sm);
+  color: var(--ink);
+  font: inherit;
+  background: var(--nm-bg);
+  box-shadow: inset 3px 3px 8px var(--nm-dark), inset -3px -3px 8px var(--nm-light);
+}
+.due-edit-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.due-clock {
+  grid-column: 1 / -1;
+}
+.due-nodate {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* the live clock */
+.cd {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+.cd-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.cd-tiles {
+  display: flex;
+  gap: 8px;
+}
+.cd-tile {
+  display: grid;
+  justify-items: center;
+  min-width: 54px;
+  padding: 6px 8px 5px;
+  border-radius: 14px;
+  background: var(--nm-bg);
+  box-shadow: inset 2px 2px 6px var(--nm-dark), inset -2px -2px 6px var(--nm-light);
+}
+.cd-tile b {
+  font-family: 'Fraunces Variable', Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent-ink);
+}
+.cd-tile small {
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.cd.soon .cd-tile b {
+  color: var(--warm);
+}
+.cd.urgent .cd-tile b,
+.cd.late .cd-tile b {
+  color: var(--bad);
+}
+.cd.urgent .cd-tile,
+.cd.late .cd-tile {
+  box-shadow: inset 2px 2px 6px var(--nm-dark), inset -2px -2px 6px var(--nm-light), 0 0 0 1.5px var(--bad);
+}
+.cd.late .cd-label {
+  color: var(--bad);
+}
+.cd-line {
+  font-size: 0.9rem;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--accent-ink);
+}
+.cd-line.soon {
+  color: var(--warm);
+}
+.cd-line.urgent,
+.cd-line.late {
+  color: var(--bad);
+}
+@media (min-width: 720px) {
+  .due-item {
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+  }
+  .due-clock {
+    grid-column: auto;
+  }
+}
+
+/* archive */
+.due-archive summary {
+  cursor: pointer;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  font-family: 'Fraunces Variable', Georgia, serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+.arch-list {
+  margin-top: 8px;
+  gap: 10px;
+}
+.arch-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  padding: 14px 18px;
+  border-radius: var(--r-sm);
+  background: var(--nm-bg);
+  box-shadow: inset 3px 3px 8px var(--nm-dark), inset -3px -3px 8px var(--nm-light);
+}
+.arch-item > div {
+  display: grid;
+  gap: 2px;
+}
+.arch-title {
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--line);
+}
+.due-empty {
+  display: grid;
+  gap: 6px;
+  padding: 22px 24px;
+}
+
+/* home: coming up */
+.upnext {
+  display: grid;
+  gap: 12px;
+  padding: 20px 22px;
+}
+.upnext-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 16px;
+}
+.upnext-head .text-link {
+  min-height: 0;
+  padding-top: 0;
+  font-weight: 650;
+}
+.up-list {
+  gap: 10px;
+}
+.up-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 12px;
+  align-items: center;
+}
+.up-item .cd-line {
+  grid-column: 2;
+}
+.up-main {
+  display: grid;
+  min-width: 0;
+}
+.up-title {
+  font-weight: 650;
+  line-height: 1.35;
+}
+.up-item .due-check {
+  width: 34px;
+  height: 34px;
+}
+@media (min-width: 720px) {
+  .up-item {
+    grid-template-columns: auto 1fr auto;
+  }
+  .up-item .cd-line {
+    grid-column: auto;
+  }
+}
+
+/* "archived" undo message */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(92px + env(safe-area-inset-bottom));
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: calc(100vw - 24px);
+  padding: 10px 12px 10px 18px;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  transform: translateX(-50%);
+  animation: slide-in 0.3s ease;
+}
+.toast-undo {
+  min-height: 40px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 999px;
+  color: var(--on-metal);
+  font: inherit;
+  font-weight: 700;
+  background: var(--metal);
+  box-shadow: 0 0 0 1px var(--metal-edge);
+  cursor: pointer;
+}
+@media (min-width: 920px) {
+  .toast {
+    bottom: 28px;
+  }
 }

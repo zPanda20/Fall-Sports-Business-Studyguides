@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { courses, allUnits, topicsForCourse } from '../data/index.js';
 import { useProgress } from '../lib/progress.js';
 import Icon from '../components/Icon.jsx';
+import UpNext from '../components/UpNext.jsx';
 
 const HOW = [
   { icon: 'plain', title: 'In plain words', text: 'Short, clickable slides that explain each idea simply.' },
@@ -27,6 +28,8 @@ export default function Home() {
           flashcards. Pick a course to begin.
         </p>
       </section>
+
+      <UpNext />
 
       <section className="course-grid" aria-label="Courses">
         {courses.map((course) => {
