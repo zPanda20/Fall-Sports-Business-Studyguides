@@ -37,6 +37,7 @@ export default function DueRow({ item }) {
           ) : (
             <span className="due-course plain">{item.course}</span>
           )}
+          {item.group && <span className="due-course group">Group project</span>}
           {hasDate && <span className="due-when">{formatDue(item.dueMs)}</span>}
         </p>
         {item.note && <p className="due-note">{item.note}</p>}
@@ -50,7 +51,7 @@ export default function DueRow({ item }) {
             }}
           >
             <label>
-              <span>{hasDate ? 'New due date and time' : 'Add the due date and time'}</span>
+              <span>{hasDate ? 'New due date and time' : item.approx ? 'Add the exact date and time when it is announced' : 'Add the due date and time'}</span>
               <input type="datetime-local" value={value} onChange={(e) => setValue(e.target.value)} required />
             </label>
             <div className="due-edit-actions">
@@ -77,7 +78,7 @@ export default function DueRow({ item }) {
       </div>
 
       <div className="due-clock">
-        {hasDate ? <Countdown dueMs={item.dueMs} /> : <span className="due-nodate">No due date yet</span>}
+        {hasDate ? <Countdown dueMs={item.dueMs} /> : <span className="due-nodate">{item.approx ? `Expected: ${item.approx.toLowerCase()}` : 'No due date yet'}</span>}
       </div>
     </li>
   );

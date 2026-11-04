@@ -2,6 +2,7 @@
 // dueAt is an exact moment with its offset, so the countdown is right in any time zone.
 // dueAt: null means no date has been added yet. Each student can add or change a date on their own device.
 // courseId links to a course in this app when there is one.
+// group: true marks a group project. approx is shown when only a rough time is known (no exact date yet).
 export const DEADLINES = [
   {
     id: 'leadership-workshop-reflection',
@@ -22,6 +23,7 @@ export const DEADLINES = [
     course: 'Foundations of Sport Management',
     courseId: 'sport-management',
     dueAt: '2026-11-13T17:00:00+01:00',
+    group: true,
     note: '4,000 to 5,000 word report: an evidence-based forecast of the global sports industry in 2035.',
   },
   {
@@ -33,10 +35,21 @@ export const DEADLINES = [
   },
   {
     id: 'strategy-final-group-assignment',
-    title: 'Final Group Assignment',
+    title: 'Final Group Assignment: Manchester United business analysis',
     course: 'Business Strategy',
     courseId: 'strategy',
     dueAt: '2026-11-27T23:59:00+01:00',
+    group: true,
+    note: 'PESTEL, Five Forces, SWOT, VRIO and a strategic proposal.',
+  },
+  {
+    id: 'strategy-final-presentation',
+    title: 'Final presentation: Manchester United',
+    course: 'Business Strategy',
+    courseId: 'strategy',
+    dueAt: '2026-11-30T23:59:00+01:00',
+    group: true,
+    note: 'Only the day (30 November) was given, so this is set to the end of that day. Use "Change date" if you know the time.',
   },
   {
     id: 'governance-fifa-reforms',
@@ -52,5 +65,34 @@ export const DEADLINES = [
     course: 'Presentation Skills',
     dueAt: null,
     note: 'No due date was shown yet.',
+  },
+  {
+    id: 'governance-super-league',
+    title: 'Super League: analysis of the event and its failure',
+    course: 'International Sports Governance',
+    courseId: 'sport-governance',
+    dueAt: null,
+    approx: 'Early December',
+    group: true,
+    note: 'Focus on: 1) how the Super League planned not to reinvest in local leagues, 2) the court of justice, 3) the financial aspects. Observation (what we know), integration (connect to theory) and critique.',
+  },
+  {
+    id: 'accounting-company-analysis',
+    title: 'Financial analysis of a company',
+    course: 'Accounting and Forecasting',
+    courseId: 'accounting',
+    dueAt: null,
+    approx: 'Later December',
+    group: true,
+    note: 'Carry out a financial analysis of a company and present it.',
+  },
+  {
+    id: 'market-research-project',
+    title: 'Quantitative or qualitative research project',
+    course: 'Market Research',
+    courseId: 'market-research',
+    dueAt: null,
+    approx: 'Mid-December',
+    group: true,
   },
 ];

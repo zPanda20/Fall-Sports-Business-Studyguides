@@ -27,7 +27,7 @@ export default function UpNext() {
               </button>
               <div className="up-main">
                 <span className="up-title">{d.title}</span>
-                <span className="meta">{d.course} · {formatDue(d.dueMs)}</span>
+                <span className="meta">{d.course}{d.group ? ' · Group' : ''} · {formatDue(d.dueMs)}</span>
               </div>
               <Countdown dueMs={d.dueMs} compact />
             </li>

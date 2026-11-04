@@ -53,7 +53,7 @@ Content lives in `src/data/`, one file per topic, separate from the code.
 
 **Clarification bookmarks:** every topic and every slide has a bookmark button. Bookmarks are saved in the browser (`sbsg:bookmarks:v1`), listed on the Bookmarks page with an optional note, and can be sent to an AI with a ready-made message that includes the slide's text and the note.
 
-**Due dates:** the Due dates page and the home page's "Coming up" panel list assignments with a live countdown. Ticking one archives it (with an undo, and "Put back" in the archive). Done items and any changed dates are saved in the browser (`sbsg:deadlines:v1`), so each person keeps their own list. Edit `src/data/deadlines.js` to add or change items; times are written with a UTC offset (the platform's Monaco time, UTC+1 in November) and shown in the viewer's own time zone. Items with `dueAt: null` get a date picker.
+**Due dates:** the Due dates page and the home page's "Coming up" panel list assignments with a live countdown. Ticking one archives it (with an undo, and "Put back" in the archive). Done items and any changed dates are saved in the browser (`sbsg:deadlines:v1`), so each person keeps their own list. Edit `src/data/deadlines.js` to add or change items; times are written with a UTC offset (the platform's Monaco time, UTC+1 in November) and shown in the viewer's own time zone. Items with `dueAt: null` get a date picker (and an optional `approx` such as "Early December"); `group: true` adds a Group project tag.
 
 **Videos:** most topics have none yet and the Watch section says so. Only add a link after opening it and confirming the title and channel. Dead or wrong links are worse than none.
 
