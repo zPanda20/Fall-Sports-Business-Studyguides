@@ -42,6 +42,8 @@ const SERAPH = {
   deadline: ['Heads up: {title} is due {when}. Want to revise first?', '{title} is coming up {when}. A short study session now will help.'],
   resume: ['You were reading {title}. Want to pick up where you left off?'],
   oops: ['Oops! My wing got tangled for a second. Where were we?', 'Whoops, I dropped my notes. Ahem. Nice work!'],
+  reviseBack: ['Good idea to read it again before another try. You can do this.'],
+  zero: ['That was a really tough round, and that is okay. Read the topic through, then try again when you are ready.'],
   quietOnShort: ['Okay, quiet it is.'],
 };
 
@@ -49,12 +51,12 @@ const DEMON = {
   help: {
     mild: ['Oh, you need something? Fine. What is it?', 'Hello. Let me guess: you need help.'],
     playful: ["Oh good, you're back. What do you need this time?", 'Yes? I was busy being brilliant.'],
-    spicy: ["Well, damn. You actually opened me. What now?", 'Speak. I have exactly zero patience today.'],
+    spicy: ["Oh, you poked the panda. Bold. What do you want?", "Speak. I have exactly zero patience today."],
   },
   welcome: {
     mild: ["Hello. I'm Demon. I'll be mildly unimpressed from the corner."],
     playful: ["Oh, you turned me on. Brave. I'm Demon, and I have opinions about your study habits."],
-    spicy: ["You turned me on? Bold. I'm Demon. Expect sarcasm, and the occasional swear."],
+    spicy: ["You called? Brave of you. I'm Demon Panda. Don't expect me to pat your back and give you a cookie. I'm just here as a casual menace. All you're getting from me is sarcasm and swearing."],
   },
   quietOn: {
     mild: ['Quiet mode. Fine. I will be silent and disappointed.'],
@@ -79,37 +81,37 @@ const DEMON = {
   tourOffer: {
     mild: ["Hello. Want a tour? I will point at things and sigh."],
     playful: ["A tour? Fine. I'll point at things and judge. Ready?"],
-    spicy: ["Want a tour? I'll show you around, and you can try not to get lost, damn it."],
+    spicy: ["Want a tour? I'll point at things, you pretend to be impressed. Try not to get lost. It's embarrassing for both of us."],
   },
   correct: {
     mild: ['Well done. That was correct.', 'Correct. I am not surprised, much.'],
     playful: ['Well, look at that. You actually knew the answer.', 'Correct. Do not let it go to your head.', 'Huh. Right. Lucky or learned?'],
-    spicy: ['Well, hell. You got it right.', 'Correct. I almost had a joke ready, too.', 'Right answer. My expectations just got a bruise.'],
+    spicy: ["I had a joke ready. Damn.", "Correct. Better than I expected.", "Right. Don't get cocky, it's one question."],
   },
   wrong1: {
     mild: ['An interesting answer. Not the right one.', 'Close, but no.'],
     playful: ['An interesting answer. Unfortunately, reality disagrees.', 'Bold choice. Unfortunately, no.', 'Confident. Wrong, but confident.'],
-    spicy: ['Wow. Confident. Wrong, but confident.', 'That answer was a choice. A bad one.', 'Nope. Not even in the neighborhood.'],
+    spicy: ["Wow. Confident. Wrong, but confident.", "That answer was a choice. A bad one.", "Nope. Not even in the neighborhood.", "That was dogshit. Bold of you to commit to it."],
   },
   wrong2: {
     mild: ['Two in a row. Take a breath.'],
     playful: ['Two in a row. The streak is not the good kind.', 'Again? Fascinating. Painful, but fascinating.'],
-    spicy: ['Two in a row. Impressive, in the worst way.', 'Wrong again. The textbook is crying.'],
+    spicy: ["Two in a row. Impressive, in the worst way.", "Two in a row. Did you pick those with a dartboard?"],
   },
   wrong3: {
     mild: ['Three in a row. Maybe read the topic once more?'],
     playful: ["THREE IN A ROW? At this point I'm considering filing a complaint with the syllabus.", 'Three wrong. I need to lie down in a glitch.'],
-    spicy: ["THREE IN A ROW? What the actual hell? Go read the topic. Please.", "Three in a row. I'm legally obligated to scream."],
+    spicy: ["THREE IN A ROW? What the actual hell? Go read the topic. Please.", "Three in a row. I'm legally obligated to scream.", "THREE IN A ROW? Holy fuck. Go read the topic. I'll wait."],
   },
   perfect: {
     mild: ['A perfect score. Well done.'],
     playful: ["Fine. I'll admit it. That was impressive.", 'Perfect. I have nothing sarcastic to say. Give me a minute.'],
-    spicy: ['My expectations were low but HOLY SHIT!', 'Perfect? Damn. Okay. Respect.'],
+    spicy: ["Perfect? Damn. Okay. Respect.", "Perfect score. I have nothing mean to say and it's physically painful.", "Every single one right. Who are you and what did you do with the wrong-answer machine?"],
   },
   improved: {
     mild: ['Better than last time. Good.'],
     playful: ['Apparently the studying worked. Shocking development.', 'Improvement. Who authorized this?'],
-    spicy: ['You improved? Well, damn. Look at you.', 'Better than last time. Annoyingly.'],
+    spicy: ["Better than last time. I hate that I'm impressed.", "You improved? Damn, look at you go."],
   },
   steady: {
     mild: ['An average round. Review what you missed.'],
@@ -124,7 +126,7 @@ const DEMON = {
   flashcards: {
     mild: ['Flashcards. Good idea.'],
     playful: ['Flashcards. Revolutionary idea: remembering things.', 'Reviewing cards. Proud of you. A little.'],
-    spicy: ['Flashcards. Remember things. Revolutionary, I know.', 'Cards, huh? About damn time.'],
+    spicy: ["Flashcards. Remember things. Revolutionary, I know.", "Cards, huh? Not poker this time? Shocking."],
   },
   bookmark: {
     mild: ['Saved. Do come back to it.'],
@@ -144,7 +146,7 @@ const DEMON = {
   moduleDone: {
     mild: ['Topic done. Good.'],
     playful: ['A topic finished. I am almost proud.', 'Done. Next one is waiting.'],
-    spicy: ["Topic done. Damn, who's the overachiever?", 'Finished. Do another. Go on.'],
+    spicy: ["Topic done. Who are you, and where's the procrastinator?", "Finished. Do another. Go on."],
   },
   deadline7: {
     mild: ['{title} is due {when}. Plenty of time, if you start soon.'],
@@ -176,10 +178,20 @@ const DEMON = {
     playful: ['Let me find something sarcastic to say about that...'],
     spicy: ['Hold on, I had a roast ready for this...'],
   },
+  zero: {
+    mild: ['Zero correct. Take a breath, read the topic, and try again.'],
+    playful: ["Zero. Not one. That takes a special kind of commitment."],
+    spicy: ["My expectations were low but HOLY SHIT!", "Zero. Not a single one. That's almost impressive."],
+  },
+  reviseBack: {
+    mild: ['Back to the guide. Good. Read it properly this time.'],
+    playful: ["Back to the guide? Look at you, doing the thing. Don't fumble it this time."],
+    spicy: ["Back to the guide? Damn, you're actually revising. Try not to fuck it up this time."],
+  },
   previewRespect: {
     mild: ['Well done. Do not let it go to your head. (Preview only.)'],
     playful: ["Fine. I'll admit it. That was impressive. (Preview only.)"],
-    spicy: ['My expectations were low but HOLY SHIT! (Preview only.)'],
+    spicy: ["Perfect? Damn. Okay. Respect. (Preview only.)"],
   },
 };
 

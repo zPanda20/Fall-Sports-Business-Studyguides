@@ -19,6 +19,7 @@ const S = {
   lastAt: 0, // last automatic reaction
   flash: { n: 0, at: 0 }, // flashcards marked recently
   lastQuizAt: 0,
+  revise: null, // { topicId, at } after a middling or low result
 };
 export const session = S;
 
@@ -173,7 +174,10 @@ function onComplete(p) {
     if (seraph) return say('seraph', { text: line('seraph', 'improved'), note, actions: [{ label: 'Close', run: 'close' }] }, { priority: 3, auto: true, reaction: 'proud', ttl: 10000 });
     if (demon) return say('demon', { text: line('demon', 'improved', level()), note, actions: [{ label: 'Close', run: 'close' }] }, { priority: 3, auto: true, reaction: 'respect', ttl: 10000 });
   }
-  const key = ratio >= 0.6 ? 'steady' : 'tough';
+  const zero = p.correct === 0 && p.total >= 3;
+  const key = zero ? 'zero' : ratio >= 0.6 ? 'steady' : 'tough';
+  // Remember the topic so a trip back to the study guide gets a follow-up.
+  if (p.topicId && ratio < 0.9) S.revise = { topicId: p.topicId, at: Date.now() };
   const acts = [...(topicLink ? [{ ...topicLink, primary: ratio < 0.6 }] : []), { label: 'Close', run: 'close' }];
   if (seraph) return say('seraph', { text: line('seraph', key), note, actions: acts }, { priority: 3, auto: true, reaction: ratio >= 0.6 ? 'greet' : 'reassure', ttl: 12000 });
   if (demon) return say('demon', { text: line('demon', key, level()), note, actions: acts }, { priority: 3, auto: true, reaction: ratio >= 0.6 ? 'quiz' : 'facepalm', ttl: 12000 });
@@ -189,6 +193,12 @@ function once(id, who, key, reaction, o = {}) {
 }
 
 function onPage({ pathname }) {
+  const topic = pathname.match(/^\/topic\/([^/]+)/);
+  if (topic && S.revise && S.revise.topicId === decodeURIComponent(topic[1]) && Date.now() - S.revise.at < 2 * 3_600_000) {
+    S.revise = null;
+    const who = wants.demon() && (!wants.seraph() || Math.random() < 0.6) ? 'demon' : wants.seraph() ? 'seraph' : null;
+    if (who) once(`revise:${topic[1]}:${Date.now()}`, who, 'reviseBack', who === 'demon' ? 'scholar' : 'think', { ttl: 6000 });
+  }
   const m = pathname.match(/^\/course\/([^/]+)\/flashcards/);
   if (m) {
     if (wants.seraph()) once(`cards:${m[1]}`, 'seraph', 'flashcards', 'flashcards', { ttl: 7000 });

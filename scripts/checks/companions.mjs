@@ -50,14 +50,14 @@ export default function ({ eq, ok_ }) {
 
   // dialogue exists at all three sarcasm levels and never swears below 'spicy'
   for (const level of ['mild', 'playful', 'spicy']) {
-    for (const key of ['help', 'welcome', 'quietOn', 'previewFacepalm', 'previewLaugh', 'previewMeltdown', 'previewRespect']) {
+    for (const key of ['help', 'welcome', 'quietOn', 'previewFacepalm', 'previewLaugh', 'previewMeltdown', 'previewRespect', 'zero', 'reviseBack', 'correct', 'wrong1', 'wrong2', 'wrong3', 'perfect', 'improved', 'steady', 'tough', 'flashcards', 'bookmark', 'ai', 'moduleDone']) {
       ok_(line('demon', key, level).length > 5, `demon.${key}.${level} missing`);
     }
   }
   const swear = /\b(shit|damn|hell|fuck|ass)\b/i;
   for (const level of ['mild', 'playful']) {
     for (let i = 0; i < 20; i++) {
-      for (const key of ['help', 'welcome', 'quietOn', 'previewFacepalm', 'previewLaugh', 'previewMeltdown', 'previewRespect']) {
+      for (const key of ['help', 'welcome', 'quietOn', 'previewFacepalm', 'previewLaugh', 'previewMeltdown', 'previewRespect', 'zero', 'reviseBack', 'correct', 'wrong1', 'wrong2', 'wrong3', 'perfect', 'improved', 'steady', 'tough', 'flashcards', 'bookmark', 'ai', 'moduleDone']) {
         ok_(!swear.test(line('demon', key, level)), `swearing at level ${level}: ${key}`);
       }
     }
