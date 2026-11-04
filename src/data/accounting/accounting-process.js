@@ -266,6 +266,49 @@ export const accountingProcessTopic = {
         },
       ],
     },
+    {
+      kicker: 'Picture it',
+      title: 'The cycle as a loop',
+      blocks: [
+        { type: 'p', text: 'The eight steps repeat every period, so they form a loop. Here they are grouped into six stages.' },
+        {
+          type: 'cycle',
+          center: 'One accounting period',
+          items: [
+            { title: 'Record', text: 'Journalize each transaction' },
+            { title: 'Post', text: 'Copy entries to the ledger' },
+            { title: 'Check', text: 'Trial balance: debits equal credits' },
+            { title: 'Adjust', text: 'Adjusting entries, then the adjusted trial balance' },
+            { title: 'Report', text: 'Prepare the financial statements' },
+            { title: 'Close', text: 'Closing entries, then the after-closing trial balance' },
+          ],
+        },
+        {
+          type: 'figure',
+          src: 'acc-process-t-account.png',
+          alt: 'A T account with debits on the left and credits on the right and a running balance',
+          caption: 'A T account: left side debit, right side credit.',
+          need: 'A clean T-account diagram for Cash with a few debit entries on the left, credit entries on the right and the balance underneath.',
+        },
+      ],
+    },
+    {
+      kicker: 'Picture it',
+      title: 'A liability that turns into revenue',
+      blocks: [
+        { type: 'p', text: 'The Ironhawks sold $82M of season tickets before game one. Each home game moves $2M from the liability to revenue.' },
+        {
+          type: 'bars',
+          title: 'Unearned Ticket Revenue still owed ($M)',
+          items: [
+            { label: 'Before game 1', value: 82 },
+            { label: 'After 10 games', value: 62 },
+            { label: 'After 25 games', value: 32 },
+            { label: 'After 41 games', value: 0 },
+          ],
+        },
+      ],
+    },
   ],
 
   // ------------------------------------------------------------------ terms
@@ -546,6 +589,63 @@ export const accountingProcessTopic = {
         '**(c)** Debit Unearned Ticket Revenue $50M, credit Ticket Revenue $50M (the total to date, assuming nothing was recognized earlier).',
       ],
       review: { section: 'sports', slide: 2 },
+    },
+  ],
+
+  // ------------------------------------------------------------------ exam-level questions
+  exam: [
+    {
+      id: 'e1',
+      marks: 12,
+      q: 'At year end the Ironhawks make these adjusting entries. (a) Depreciate the arena ($560M, 40-year life) and the practice facility ($70M, 25-year life), straight line, no residual value, and give the entry. (b) Season tickets of $82M were sold in advance for 41 home games and 10 have been played: how much revenue is earned, how much liability remains, and what is the entry? (c) Wages of $6M were earned in the last days of the year and will be paid next month: give the entry. (d) A concert promoter used the arena and owes $1.2M, not yet billed: give the entry. (e) By how much do the four adjustments change net income?',
+      answer: [
+        '**(a)** Arena: $560M ÷ 40 = **$14M**. Practice facility: $70M ÷ 25 = **$2.8M**. Entry: debit Depreciation Expense $16.8M, credit Accumulated Depreciation $16.8M.',
+        '**(b)** $82M ÷ 41 = $2M per game, so 10 games earn **$20M** and **$62M** remains as Unearned Ticket Revenue. Entry: debit Unearned Ticket Revenue $20M, credit Ticket Revenue $20M.',
+        '**(c)** Debit Wages Expense $6M, credit Wages Payable $6M.',
+        '**(d)** Debit Accounts Receivable $1.2M, credit Rental Revenue $1.2M.',
+        '**(e)** Revenue rises $20M + $1.2M = $21.2M. Expenses rise $16.8M + $6M = $22.8M. Net income changes by $21.2M − $22.8M = **−$1.6M** (it falls).',
+      ],
+      marking: [
+        'Arena $14M and practice facility $2.8M (2)',
+        'Depreciation entry, $16.8M, debit and credit correct (2)',
+        'Revenue per game $2M, earned $20M, remaining liability $62M (2)',
+        'Ticket-revenue entry correct (2)',
+        'Wages entry correct (1)',
+        'Rental entry correct (1)',
+        'Net effect on net income of −$1.6M (2)',
+      ],
+    },
+    {
+      id: 'e2',
+      marks: 8,
+      q: 'On 1 July the Ironhawks receive $8M in cash for a two-year sponsorship that starts that day. (a) Give the entry on 1 July. (b) How much sponsorship revenue is earned by 31 December of the same year, and what is the adjusting entry? (c) What balance remains in Unearned Sponsorship Revenue after that entry?',
+      answer: [
+        '**(a)** Debit Cash $8M, credit Unearned Sponsorship Revenue $8M. The club owes the sponsor two years of benefits, so it is a liability.',
+        '**(b)** $8M ÷ 2 years = $4M a year. Six months is **$2M**. Debit Unearned Sponsorship Revenue $2M, credit Sponsorship Revenue $2M.',
+        '**(c)** $8M − $2M = **$6M**.',
+      ],
+      marking: [
+        'Debit Cash and credit a liability, $8M (2)',
+        'Revenue of $2M calculated (2)',
+        'Adjusting entry with the correct accounts (2)',
+        'Remaining balance of $6M (2)',
+      ],
+    },
+    {
+      id: 'e3',
+      marks: 6,
+      q: 'A trial balance has equal debits and credits. (a) What does that show? (b) Give two kinds of error it would not reveal. (c) Give one Ironhawks example each of an accrued expense and a deferred expense.',
+      answer: [
+        '**(a)** The ledger is internally consistent: total debits equal total credits.',
+        '**(b)** Any two of: a transaction left out entirely; an amount posted to the wrong account; the same wrong amount posted on both sides.',
+        '**(c)** Accrued expense: $6M of wages earned but unpaid at year end. Deferred expense: the arena, paid for long ago and charged to expense through depreciation over its life.',
+      ],
+      marking: [
+        'Debits equal credits, nothing more (2)',
+        'Two valid undetected errors, one mark each (2)',
+        'A valid accrued expense example (1)',
+        'A valid deferred expense example (1)',
+      ],
     },
   ],
 

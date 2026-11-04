@@ -57,6 +57,18 @@ export const pestelTopic = {
             { title: 'Legal', text: 'Laws, mandates, regulations and court decisions.' },
           ],
         },
+        {
+          type: 'cycle',
+          center: 'The firm',
+          items: [
+            { title: 'Political', text: 'Governments, NGOs, movements' },
+            { title: 'Economic', text: 'Growth, jobs, rates, prices' },
+            { title: 'Sociocultural', text: 'Norms, values, demographics' },
+            { title: 'Technological', text: 'Innovation' },
+            { title: 'Ecological', text: 'Climate, nature' },
+            { title: 'Legal', text: 'Laws and rulings' },
+          ],
+        },
       ],
     },
     {
@@ -156,6 +168,65 @@ export const pestelTopic = {
         },
       ],
     },
+    {
+      kicker: 'Class case: Shein',
+      title: 'Three trends that opened the door',
+      blocks: [
+        {
+          type: 'p',
+          text: 'In class, PESTEL was used to ask how a young online fashion retailer, **Shein**, took on giants such as Zara and H&M. The reasoning below follows the class case discussion.',
+        },
+        {
+          type: 'table',
+          head: ['Segment', 'What Shein used'],
+          rows: [
+            ['Sociocultural', 'Young shoppers found styles on social media, wanted constant novelty and low prices, and were happy to buy through an app.'],
+            ['Technological', 'Data and AI spotted rising trends. The app showed demand within days, so factories made only what was proven to sell.'],
+            ['Economic', 'Price-sensitive buyers, flexible contract factories able to make small batches, and a light cost base with no store network.'],
+          ],
+        },
+        {
+          type: 'callout',
+          title: 'The pattern',
+          text: 'Shein did not beat the incumbents at their own game. It **changed the game**, so that their strengths (store networks, brand heritage, two-week design cycles) became weaknesses.',
+        },
+      ],
+    },
+    {
+      kicker: 'Class case: Shein',
+      title: 'Conditions that helped, then hurt',
+      blocks: [
+        {
+          type: 'p',
+          text: 'The **political, legal and ecological** segments worked in Shein’s favor for years because rules lagged behind its model. The same conditions later turned into threats.',
+        },
+        {
+          type: 'table',
+          head: ['Segment', 'Helped Shein', 'Became a threat'],
+          rows: [
+            ['Legal', 'US rules let small parcels under $800 enter duty-free, so Shein shipped single parcels and avoided the duties bulk importers paid.', 'The US ended that exemption in 2025 (see source).'],
+            ['Political', 'Little oversight of supplier working conditions.', 'Forced-labor investigations.'],
+            ['Ecological', 'Little regulation of fast fashion.', 'Possible tariffs or rules on unsustainable fashion.'],
+          ],
+        },
+        {
+          type: 'callout',
+          tone: 'warn',
+          title: 'Dated fact',
+          text: 'The White House announced in July 2025 that the US duty-free exemption for low-value parcels would end on August 29, 2025. It had already been removed for China and Hong Kong in May 2025. Check a current source before relying on this.',
+        },
+        {
+          type: 'sources',
+          items: [
+            {
+              title: 'White House says de minimis exemption will end on Aug. 29 (Supply Chain Dive)',
+              url: 'https://www.supplychaindive.com/news/de-minimis-exemption-end-date-postal-exception/756358/',
+              note: 'July 30, 2025. The $800 exemption, the August 29 end date, and the earlier removal for China and Hong Kong in May 2025. The Shein reading comes from the class case discussion.',
+            },
+          ],
+        },
+      ],
+    },
   ],
 
   // ------------------------------------------------------------------ terms
@@ -177,6 +248,7 @@ export const pestelTopic = {
     { front: 'General vs task environment', back: 'General: little control (interest rates). Task: some influence (industry structure, strategic groups).' },
     { front: 'Political vs legal', back: 'Political is the pressure from governments, NGOs and movements. Legal is the resulting laws, regulations and court decisions.' },
     { front: 'How do firms respond to political pressure?', back: 'Lobbying, public relations, contributions and litigation.' },
+    { front: 'Which segments enabled Shein for years, then turned into threats?', back: 'Political, legal and ecological: weak oversight and the duty-free parcel rule helped it, then investigations and rule changes hurt.' },
   ],
 
   // ------------------------------------------------------------------ real example
@@ -410,6 +482,61 @@ export const pestelTopic = {
         '**Priority.** Any is defensible if you explain it. A strong answer picks the one with the biggest effect on Kestrel and says why, such as (c) if fan spending on tickets and merchandise drives its revenue.',
       ],
       review: { section: 'plain', slide: 1 },
+    },
+  ],
+
+  // ------------------------------------------------------------------ exam-level written questions
+  exam: [
+    {
+      id: 'e1',
+      marks: 10,
+      q: 'Use PESTEL to explain how external factors helped a young online fashion retailer such as Shein disrupt established chains such as Zara and H&M. Then say which of those factors later became a threat.',
+      answer: [
+        '**Sociocultural:** young shoppers discover styles on social media, expect constant novelty and cheap prices, and are comfortable buying through an app.',
+        '**Technological:** data and AI detect rising trends and the app shows demand within days, so production follows proven demand.',
+        '**Economic:** price-sensitive buyers, flexible contract factories able to make small batches, and a light cost base with no store network.',
+        '**Political and legal:** weak oversight of suppliers and the duty-free rule for small parcels lowered costs for years.',
+        '**Later threats:** the duty-free rule was ended, forced-labor investigations followed, and rules on unsustainable fashion are possible. The enabling conditions became risks.',
+      ],
+      marking: [
+        'Sociocultural trends identified and linked to the firm (2)',
+        'Technological trends identified and linked to the firm (2)',
+        'Economic factors identified and linked to the firm (2)',
+        'Political or legal factors that lowered costs (2)',
+        'Explains that some conditions later became threats (2)',
+      ],
+    },
+    {
+      id: 'e2',
+      marks: 6,
+      q: 'Distinguish the general environment from the task environment. Give two examples of each, and name two ways a firm can respond to political pressure.',
+      answer: [
+        'The **general environment** is made up of factors strategic leaders have little control over, such as interest rates and exchange rates.',
+        'The **task environment** is where leaders have some influence, such as the structure of the industry and the composition of strategic groups.',
+        'A firm can respond to political pressure by **lobbying**, **public relations**, **contributions** or **litigation**. Political pressure often ends in changes to legislation.',
+      ],
+      marking: [
+        'General environment defined with two examples (2)',
+        'Task environment defined with two examples (2)',
+        'Two ways of responding to political pressure (2)',
+      ],
+    },
+    {
+      id: 'e3',
+      marks: 6,
+      q: 'A PESTEL list on its own is not enough. Describe the three steps that turn it into a judgment, and say where its results go next in the strategy process.',
+      answer: [
+        '**List** the important trends in each of the six segments.',
+        '**Judge** whether each is an opportunity or a threat for this firm, and how big.',
+        '**Pick** the few that matter most and decide what to do about them.',
+        'The results feed the **opportunities and threats** boxes of a **SWOT** analysis, alongside Five Forces.',
+      ],
+      marking: [
+        'List the trends (1)',
+        'Judge opportunity or threat and size (2)',
+        'Pick and prioritize and decide what to do (1)',
+        'Links to the O and T of a SWOT (2)',
+      ],
     },
   ],
 

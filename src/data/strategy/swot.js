@@ -48,6 +48,15 @@ export const swotTopic = {
           ],
         },
         {
+          type: 'flow',
+          items: [
+            { title: 'Look outside', text: 'PESTEL and Five Forces' },
+            { title: 'Look inside', text: 'VRIO' },
+            { title: 'Sort', text: 'S, W, O and T' },
+            { title: 'Pair and act', text: 'Turn the picture into moves' },
+          ],
+        },
+        {
           type: 'p',
           text: 'SWOT is a summary, not a separate piece of research. A weak SWOT usually comes from skipping the analysis behind it.',
         },
@@ -118,6 +127,7 @@ export const swotTopic = {
     { front: 'Which tool feeds S and W?', back: 'Internal analysis, especially VRIO.' },
     { front: 'Which tools feed O and T?', back: 'External analysis: PESTEL and Five Forces.' },
     { front: 'Inside or outside?', back: 'Strengths and weaknesses are internal. Opportunities and threats are external.' },
+    { front: 'SWOT in four steps', back: 'Look outside, look inside, sort into the four boxes, then pair the boxes and act.' },
   ],
 
   // ------------------------------------------------------------------ real example
@@ -337,6 +347,61 @@ export const swotTopic = {
         '**(d)** **Weakness.** Internal analysis comparing Kestrel’s resources with those of rivals.',
       ],
       review: { section: 'plain', slide: 1 },
+    },
+  ],
+
+  // ------------------------------------------------------------------ exam-level written questions
+  exam: [
+    {
+      id: 'e1',
+      marks: 10,
+      q: 'Kestrel Racing has a mid-sized budget, gets 60% of its income from one title sponsor and has a data and analyst culture rivals cannot copy. A streaming service has just offered to broadcast every race, and a rich new team is about to join the Series. (a) Sort these four facts into a SWOT and name the tool that would produce each. (b) Write one strength plus opportunity move.',
+      answer: [
+        '**Mid-sized budget:** **weakness** (inside, harmful). Found by internal analysis against rivals’ resources.',
+        '**60% of income from one sponsor:** **weakness** (inside, harmful). Found by internal analysis.',
+        '**Data and analyst culture:** **strength** (inside, helpful). Found with **VRIO**: valuable, rare, costly to imitate and organized.',
+        '**Streaming offer:** **opportunity** (outside, helpful), from the external analysis (technological and industry trends).',
+        '**Rich new team joining:** **threat** (outside, harmful). **Five Forces** calls it the threat of new entrants.',
+        '**Strength + opportunity move:** use the data culture to produce live race stats and content for the streaming partner, which sponsors and fans value.',
+      ],
+      marking: [
+        'Weaknesses correctly placed (2)',
+        'Strength correctly placed and linked to VRIO (2)',
+        'Opportunity correctly placed (1)',
+        'Threat correctly placed and linked to Five Forces (2)',
+        'A sensible strength and opportunity move (3)',
+      ],
+    },
+    {
+      id: 'e2',
+      marks: 8,
+      q: 'Why is a SWOT described as a summary rather than separate research? Describe four common mistakes that produce a weak SWOT.',
+      answer: [
+        'A SWOT **pulls together** work done elsewhere: **VRIO** feeds strengths and weaknesses, and **PESTEL and Five Forces** feed opportunities and threats. A weak SWOT usually comes from skipping that analysis.',
+        'Common mistakes: mixing **inside** and **outside** factors; writing long **vague** lists with no evidence; listing items without saying **what to do**; calling something a strength without comparing it with **competitors**; and never reviewing it as the environment changes.',
+      ],
+      marking: [
+        'Explains the SWOT as a summary of earlier analysis (2)',
+        'Names which tool feeds which boxes (2)',
+        'Four distinct mistakes explained (4)',
+      ],
+    },
+    {
+      id: 'e3',
+      marks: 6,
+      q: 'Explain how pairing the four SWOT boxes turns a picture into strategy. Give the question each pair asks.',
+      answer: [
+        '**Strength + opportunity:** how can we use our strengths to seize this opportunity?',
+        '**Strength + threat:** how can our strengths blunt this threat?',
+        '**Weakness + opportunity:** how can this opportunity help us fix a weakness?',
+        '**Weakness + threat:** where are we most exposed, and how do we avoid or reduce it?',
+        'Pairing forces a **specific action** for each combination, instead of leaving four lists.',
+      ],
+      marking: [
+        'Four pairs named (2)',
+        'The question each pair asks (3)',
+        'Explains that it moves from description to action (1)',
+      ],
     },
   ],
 

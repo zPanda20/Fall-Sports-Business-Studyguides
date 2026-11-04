@@ -2,6 +2,8 @@
 // Checks the Ironhawks numbers against values worked out by hand, and checks
 // that every quiz question is well formed. Fails loudly if anything is off.
 import assert from 'node:assert/strict';
+import { readdirSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
 import {
   ironhawks as m,
   contributionMargin,
@@ -204,14 +206,21 @@ eq(8 * 18_000 * 12, 1_728_000, 'Kestrel Pass after churn');
 eq(1_920_000 - 1_728_000, 192_000, 'Kestrel Pass revenue lost');
 
 // ---- Slide structure ----
-const BLOCKS = new Set(['p', 'big', 'bullets', 'formulas', 'columns', 'kpis', 'table', 'steps', 'chart', 'callout', 'forces', 'sources']);
+const BLOCKS = new Set(['p', 'big', 'bullets', 'formulas', 'columns', 'kpis', 'table', 'steps', 'chart', 'callout', 'forces', 'sources', 'flow', 'cycle', 'bars', 'figure', 'balance', 'sheet']);
 const SECTION_SLIDES = (t) => ({ plain: t.plain, real: t.real.slides, sports: t.sports.slides });
 for (const t of topics) {
   for (const [name, slides] of Object.entries(SECTION_SLIDES(t))) {
     assert.ok(Array.isArray(slides) && slides.length > 0, `${t.id}/${name}: needs slides`);
     for (const [i, s] of slides.entries()) {
       assert.ok(s.title && Array.isArray(s.blocks) && s.blocks.length > 0, `${t.id}/${name}[${i}]: slide needs title and blocks`);
-      for (const b of s.blocks) assert.ok(BLOCKS.has(b.type), `${t.id}/${name}[${i}]: unknown block ${b.type}`);
+      for (const b of s.blocks) {
+        const where = `${t.id}/${name}[${i}]`;
+        assert.ok(BLOCKS.has(b.type), `${where}: unknown block ${b.type}`);
+        if (b.type === 'flow') assert.ok(b.items?.length >= 2 && b.items.every((x) => x.title), `${where}: flow needs 2+ titled items`);
+        if (b.type === 'cycle') assert.ok(b.items?.length >= 3 && b.items.length <= 6 && b.items.every((x) => x.title), `${where}: cycle needs 3-6 titled items`);
+        if (b.type === 'bars') assert.ok(b.items?.length >= 2 && b.items.every((x) => x.label && Number.isFinite(x.value) && x.value >= 0), `${where}: bars need labeled, non-negative values`);
+        if (b.type === 'figure') assert.ok(b.alt && b.need && (!b.src || /^[\w.-]+\.(png|jpe?g|webp|svg|gif)$/i.test(b.src)), `${where}: figure needs alt, need and a plain file name`);
+      }
       checks++;
     }
   }
@@ -221,6 +230,12 @@ for (const t of topics) {
   assert.ok(t.real.title && t.real.note, `${t.id}: real example needs title and note`);
   assert.ok(t.sports.title && t.sports.universe, `${t.id}: sports example needs title and universe`);
   assert.ok(t.terms.length > 0, `${t.id}: needs terms`);
+  for (const e of t.exam || []) {
+    assert.ok(e.id && Number.isFinite(e.marks) && e.marks > 0 && e.q && Array.isArray(e.answer) && e.answer.length > 0, `${t.id}/exam ${e.id}: needs id, marks, q, answer[]`);
+    assert.ok(Array.isArray(e.marking) && e.marking.length >= 2, `${t.id}/exam ${e.id}: needs 2+ marking points`);
+    checks++;
+  }
+  assert.equal(new Set((t.exam || []).map((e) => e.id)).size, (t.exam || []).length, `${t.id}: exam ids are unique`);
   checks++;
 }
 
@@ -241,11 +256,11 @@ for (const t of topics) {
     }
     const sec = SECTION_SLIDES(t)[q.review?.section];
     assert.ok(sec && Number.isInteger(q.review.slide) && q.review.slide >= 0 && q.review.slide < sec.length, `${t.id}/${q.id}: review must point at a real slide`);
-    assert.ok(!/NaN|undefined|\[object/.test(JSON.stringify(q)), `${t.id}/${q.id}: bad value in text`);
+    assert.ok(!/\[object|\bNaN\b|\$\{/.test(JSON.stringify(q)), `${t.id}/${q.id}: bad value in text`);
     checks++;
   }
   assert.ok(Array.isArray(t.videos), `${t.id}: videos must be an array (may be empty)`);
-  assert.ok(!/NaN|undefined|\[object/.test(JSON.stringify(t)), `${t.id}: bad value in content`);
+  assert.ok(!/\[object|\bNaN\b|\$\{/.test(JSON.stringify(t)), `${t.id}: bad value in content`);
   checks++;
 }
 
@@ -381,6 +396,15 @@ for (const c of courses.filter((c) => c.overview)) ok_(typeof c.syllabusDate ===
   eq(dateAdded.active.filter((d) => d.dueMs === null).length, 4, 'adding a date gives an undated item a clock');
   const changed = resolve({ done: {}, dates: { 'careers-submit-cv': '2026-11-20T12:00:00+01:00' } }).find((d) => d.id === 'careers-submit-cv');
   ok_(changed.changed && changed.dueMs === Date.parse('2026-11-20T12:00:00+01:00'), 'a changed date overrides the original');
+}
+
+// ---- Extra check files: every scripts/checks/*.mjs default-exports (helpers) => void ----
+{
+  const dir = new URL('./checks/', import.meta.url);
+  for (const f of readdirSync(dir).filter((n) => n.endsWith('.mjs')).sort()) {
+    const mod = await import(pathToFileURL(new URL(f, dir).pathname).href);
+    mod.default({ eq, ok_, near });
+  }
 }
 
 console.log(`All ${checks} checks passed.`);

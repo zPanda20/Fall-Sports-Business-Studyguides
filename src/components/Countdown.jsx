@@ -1,8 +1,13 @@
-import { useNow, splitDuration, urgency, spoken } from '../lib/deadlines.js';
+import { useNow, splitDuration, urgency, spoken, useTimersOn } from '../lib/deadlines.js';
 
 // A live clock to a due moment: days, hours, minutes, seconds, ticking every second.
 // Past the deadline it counts up, so you can see how late it is.
-export default function Countdown({ dueMs, compact = false }) {
+export default function Countdown(props) {
+  const on = useTimersOn();
+  return on ? <Clock {...props} /> : null;
+}
+
+function Clock({ dueMs, compact = false }) {
   const now = useNow();
   const ms = dueMs - now;
   const { days, hours, minutes, seconds, late } = splitDuration(ms);

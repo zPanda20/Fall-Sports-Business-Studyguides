@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useDeadlines, markDone, formatDue } from '../lib/deadlines.js';
 import Countdown from './Countdown.jsx';
 import Icon from './Icon.jsx';
+import TimerToggle from './TimerToggle.jsx';
 
 // The next few things due, on the home page, with the same live clock.
 export default function UpNext() {
@@ -34,6 +35,7 @@ export default function UpNext() {
           ))}
         </ul>
       )}
+      <TimerToggle />
     </section>
   );
 }

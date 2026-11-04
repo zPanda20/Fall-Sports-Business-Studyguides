@@ -55,6 +55,16 @@ Content lives in `src/data/`, one file per topic, separate from the code.
 
 **Due dates:** the Due dates page and the home page's "Coming up" panel list assignments with a live countdown. Ticking one archives it (with an undo, and "Put back" in the archive). Done items and any changed dates are saved in the browser (`sbsg:deadlines:v1`), so each person keeps their own list. Edit `src/data/deadlines.js` to add or change items; times are written with a UTC offset (the platform's Monaco time, UTC+1 in November) and shown in the viewer's own time zone. Items with `dueAt: null` get a date picker (and an optional `approx` such as "Early December"); `group: true` adds a Group project tag.
 
+**Quick test and exam practice:** each course page has a Quick test (a random 5, 10 or 15 multiple-choice questions drawn from every topic, with the topics optionally narrowed) and Exam practice (written exam-level questions with model answers and a self-marking checklist). Each topic's Practice section also has an Exam-style tab. Questions live in the topic files as `questions` (multiple choice and exercises) and `exam` (`{ id, marks, q, answer[], marking[] }`).
+
+**Visuals:** slide blocks `flow`, `cycle`, `bars`, `figure` (an image slot that shows a labeled placeholder until the file is added to `public/assets/`), `balance` (an animated balance sheet that you step through) and `sheet` (a working mini spreadsheet with checkable tasks, powered by `src/lib/sheet.js`). `npm run assets` writes ASSETS-TO-FIND.md, the list of images and videos still to supply.
+
+**Read aloud:** the Course basics panel and every slide have a Read aloud button that uses the browser's own voices (nothing is sent anywhere).
+
+**Progress rings:** circular rings show topics done per course, sections opened, quiz scores, quick-test scores, self-marked exam points and handed-in assignments.
+
+**Extra check files:** every `scripts/checks/*.mjs` runs as part of `npm run verify` (it default-exports `({ eq, ok_, near }) => {}`).
+
 **Videos:** most topics have none yet and the Watch section says so. Only add a link after opening it and confirming the title and channel. Dead or wrong links are worse than none.
 
 ## Project layout

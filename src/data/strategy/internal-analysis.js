@@ -49,6 +49,14 @@ export const internalAnalysisTopic = {
             },
           ],
         },
+        {
+          type: 'flow',
+          items: [
+            { title: 'Resources and capabilities', text: 'What we have and how well we use it' },
+            { title: 'Core competencies', text: 'Unique strengths from recombining them' },
+            { title: 'Competitive advantage', text: 'Higher value or lower cost than rivals' },
+          ],
+        },
       ],
     },
     {
@@ -175,6 +183,13 @@ export const internalAnalysisTopic = {
           ],
         },
         {
+          type: 'figure',
+          src: 'bs-internal-analysis-bathtub.png',
+          alt: 'A bathtub: the tap is investment flowing in, the water level is the resource stock, the drain is what leaks away',
+          caption: 'The tap is the flow, the water level is the stock.',
+          need: 'A simple bathtub picture: a tap labeled “resource flow (investment)”, the water level labeled “resource stock”, and a drain labeled “leakage if you stop investing”. Redraw the one from the Session 4 slides.',
+        },
+        {
           type: 'p',
           text: 'The bathtub picture: the water level is the stock, the tap pouring in is the flow of investment, and the drain is what leaks away if you stop investing.',
         },
@@ -193,6 +208,74 @@ export const internalAnalysisTopic = {
             'Assuming an advantage lasts forever. Competencies can become **rigidities**.',
             'Judging a resource in isolation instead of against **rivals’** resources.',
           ],
+        },
+      ],
+    },
+    {
+      kicker: 'Class case: Ferrari and Porsche',
+      title: 'Why Porsche could not simply copy Ferrari',
+      blocks: [
+        {
+          type: 'p',
+          text: 'Porsche stressed comparisons with Ferrari when it listed on the stock market in 2022. Investors later decided it was a premium carmaker, not a true luxury company. The class case explains why.',
+        },
+        {
+          type: 'bars',
+          title: 'Cars sold in a year (approximate)',
+          unit: 'cars',
+          items: [
+            { label: 'Ferrari (under 15,000)', value: 15000 },
+            { label: 'Porsche (2025 deliveries)', value: 279449 },
+          ],
+        },
+        {
+          type: 'p',
+          text: 'Ferrari’s bar is the ceiling given in the course case (“fewer than 15,000”). Porsche delivered 279,449 cars in 2025, **at least eighteen times** as many. Volume is the first difference: scarcity cannot be built from mass-market volume.',
+        },
+        {
+          type: 'sources',
+          items: [
+            {
+              title: 'Porsche delivers 279,449 cars to customers in 2025 (Porsche Newsroom)',
+              url: 'https://newsroom.porsche.com/it_CH/2026/company/porsche-deliveries-2025-41520.html',
+              note: 'January 16, 2026. The 2025 delivery total, down 10% from 310,718 in 2024. Ferrari’s “fewer than 15,000” is from the course case.',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      kicker: 'Class case: Ferrari and Porsche',
+      title: 'A VRIO view of the difference',
+      blocks: [
+        {
+          type: 'table',
+          head: ['', 'Ferrari', 'Porsche'],
+          rows: [
+            ['Scarcity', 'Keeps supply below demand', 'Large volumes, with SUVs seen on ordinary streets'],
+            ['Price and margin', 'Sets prices, rarely discounts, margins near 30%', 'Compares with rivals, lower margins that have fallen'],
+            ['Who can buy', 'Selects who may buy the most exclusive models and makes them wait', 'Almost anyone with the money can buy almost any model'],
+            ['Heritage', 'Tied to Formula 1 since it began and to its founder’s legend', 'Strong racing record, but an image of German engineering and reliability'],
+            ['Resale value', 'Most hold value, limited models rise', 'Most lose value over time, like other premium cars'],
+            ['Ownership', 'Independent since its 2015 listing', 'Majority-controlled by Volkswagen'],
+          ],
+        },
+        {
+          type: 'p',
+          text: 'In VRIO terms, Ferrari’s exclusivity is valuable, rare, **costly to imitate** (it rests on decades of history and customer data) and **organized** into the whole business model. A competitor without excess demand cannot afford to turn customers away.',
+        },
+        {
+          type: 'cycle',
+          center: 'Ferrari’s virtuous circle',
+          items: [
+            { title: 'Racing', text: 'Builds technology and prestige' },
+            { title: 'Road cars', text: 'Demand and prices rise' },
+            { title: 'Profits', text: 'Fund the racing team' },
+          ],
+        },
+        {
+          type: 'p',
+          text: 'The comparison comes from the course case discussion. Treat the market-value numbers as of 2025.',
         },
       ],
     },
@@ -222,6 +305,8 @@ export const internalAnalysisTopic = {
     { front: 'Four isolating mechanisms', back: 'Better expectations of future value, path dependence, causal ambiguity, IP protection.' },
     { front: 'What is core rigidity?', back: 'A former core competency that turns into a liability when the environment changes.' },
     { front: 'Bathtub metaphor', back: 'Stock is the water level. Flow is the tap (investment) that keeps it filled.' },
+    { front: 'Why could Porsche not copy Ferrari?', back: 'Ferrari is scarce, selects its buyers, has F1 heritage and keeps pricing power. Porsche sells high volumes to a wider market. Exclusivity must be built into the whole business model.' },
+    { front: 'Core competency chain', back: 'Resources and capabilities, recombined, give core competencies, which give competitive advantage.' },
   ],
 
   // ------------------------------------------------------------------ real example
@@ -441,6 +526,64 @@ export const internalAnalysisTopic = {
         '**(c)** Use isolating mechanisms. For example, protect the brand with trademarks, make switching hard with membership benefits, or build something that rivals cannot easily see or copy, such as unique fan data and routines. Keep investing, as with a resource flow, so the stock keeps growing.',
       ],
       review: { section: 'sports', slide: 1 },
+    },
+  ],
+
+  // ------------------------------------------------------------------ exam-level written questions
+  exam: [
+    {
+      id: 'e1',
+      marks: 12,
+      q: 'Ferrari sells fewer than 15,000 cars a year yet was valued at about twice Porsche, which sells close to 300,000. Using the VRIO framework and the idea of core competencies, explain why Ferrari’s position is hard to copy.',
+      answer: [
+        'Ferrari’s **core competency** is exclusive luxury, built from resources and capabilities: the brand, racing heritage, Formula 1 know-how, craftsmanship, and data on its customers.',
+        '**Valuable:** it supports premium prices, high margins (close to 30%) and demand above supply.',
+        '**Rare:** few makers sell so little yet are valued so highly.',
+        '**Costly to imitate:** the advantage is built over decades (path dependence) and rests on intangible resources and tacit knowledge. A competitor cannot buy history.',
+        '**Organized:** the firm is set up to capture the value: it controls scarcity, selects its buyers and moves racing knowledge into road cars.',
+        'Porsche, with high volumes and a broader price range, behaves more like a premium carmaker, so it cannot copy the scarcity and selection that sustain Ferrari’s advantage.',
+      ],
+      marking: [
+        'Identifies the core competency as exclusive luxury, from resources and capabilities (2)',
+        'Valuable, with evidence (2)',
+        'Rare, with evidence (2)',
+        'Costly to imitate, mentioning intangibles, history or path dependence (2)',
+        'Organized to capture the value (2)',
+        'Contrasts with Porsche’s volume and pricing (2)',
+      ],
+    },
+    {
+      id: 'e2',
+      marks: 8,
+      q: 'Define resources, capabilities and activities, with one example of each from a sports organization. Then explain the difference between tangible and intangible resources.',
+      answer: [
+        '**Resources** are assets a firm can draw on, such as cash, buildings and intellectual property. Example: a stadium.',
+        '**Capabilities** are the organizational and managerial skills needed to use resources: structure, routines and culture. Example: a youth academy’s way of developing players.',
+        '**Activities** are distinct, fine-grained processes. Example: ticket sales and invoicing.',
+        '**Tangible** resources have physical attributes and are visible, such as a stadium. **Intangible** resources have no physical form and are invisible, such as brand, reputation and know-how. Intangible resources are often harder to imitate.',
+      ],
+      marking: [
+        'Resources defined with a relevant example (2)',
+        'Capabilities defined with a relevant example (2)',
+        'Activities defined with a relevant example (2)',
+        'Tangible versus intangible explained (2)',
+      ],
+    },
+    {
+      id: 'e3',
+      marks: 8,
+      q: 'What is a core rigidity? Explain how dynamic capabilities, and the idea of resource stocks and flows, help a firm avoid one. Name two isolating mechanisms that help sustain an advantage.',
+      answer: [
+        'A **core rigidity** is a former core competency that has become a liability because the environment changed. It can cost the firm its advantage, or its existence.',
+        '**Dynamic capabilities** are the firm’s ability to adapt its resources over time to keep a fit with a changing environment. The **resource stock** is the current level of a resource and the **resource flow** is the investment that maintains or builds it, like the tap filling a bathtub. Keeping the flow going stops the stock draining away.',
+        'Isolating mechanisms include **path dependence**, **causal ambiguity**, **intellectual property protection** and better expectations of the resource’s future value.',
+      ],
+      marking: [
+        'Defines core rigidity (2)',
+        'Explains dynamic capabilities (2)',
+        'Stock and flow explained (2)',
+        'Two isolating mechanisms (2)',
+      ],
     },
   ],
 

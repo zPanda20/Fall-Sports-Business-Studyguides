@@ -45,6 +45,14 @@ export const whatIsStrategyTopic = {
           ],
         },
         {
+          type: 'flow',
+          items: [
+            { title: 'Analysis', text: 'What is the challenge?' },
+            { title: 'Formulation', text: 'What is our answer?' },
+            { title: 'Implementation', text: 'Carry it out, coherently.' },
+          ],
+        },
+        {
           type: 'p',
           text: 'The framework helps explain why some firms perform better than others, and helps managers design a strategy that can deliver superior performance.',
         },
@@ -122,6 +130,19 @@ export const whatIsStrategyTopic = {
             'You can get there by raising WTP (a WTP advantage) or lowering cost (a WTS advantage).',
           ],
         },
+        {
+          type: 'bars',
+          title: 'Value created = WTP − WTS (made-up numbers)',
+          unit: '$',
+          items: [
+            { label: 'Firm A (WTP 100, WTS 60)', value: 40 },
+            { label: 'Firm B (WTP 90, WTS 65)', value: 25 },
+          ],
+        },
+        {
+          type: 'p',
+          text: 'Firm A creates more value than Firm B, so Firm A has the advantage. Its customers value it more (100 against 90) **and** its cost is lower (60 against 65).',
+        },
       ],
     },
     {
@@ -161,6 +182,13 @@ export const whatIsStrategyTopic = {
             { title: 'Internal', text: 'Stockholders, employees and board members.' },
             { title: 'External', text: 'Customers, suppliers, alliance partners, creditors, unions, communities, media and governments.' },
           ],
+        },
+        {
+          type: 'figure',
+          src: 'bs-what-is-strategy-stakeholders.png',
+          alt: 'A firm in the center with internal stakeholders (stockholders, employees, board) and external stakeholders around it',
+          caption: 'Who can affect the firm, and who is affected by it.',
+          need: 'A simple diagram with the firm in the middle, internal stakeholders (stockholders, employees, board members) in an inner ring and external stakeholders (customers, suppliers, alliance partners, creditors, unions, communities, media, government) in an outer ring. Redraw the one from the Session 1 slides in your own style.',
         },
         {
           type: 'p',
@@ -232,6 +260,8 @@ export const whatIsStrategyTopic = {
     { front: 'Economic value created', back: 'WTP − WTS: what buyers would pay minus the firm’s cost.' },
     { front: 'Two ways to build advantage', back: 'Differentiation (higher value) or cost leadership (similar value at lower cost).' },
     { front: 'Three stakeholder attributes', back: 'Power, legitimacy, urgency.' },
+    { front: 'AFI in one line', back: 'Analysis (what is the challenge?), Formulation (our answer), Implementation (carry it out).' },
+    { front: 'Value created, in numbers', back: 'WTP minus WTS. Willingness to pay $100 and cost $60 creates $40 of economic value.' },
   ],
 
   // ------------------------------------------------------------------ real example
@@ -482,6 +512,61 @@ export const whatIsStrategyTopic = {
         '**(c)** Mostly **differentiation**: most of the gap comes from sponsors valuing Kestrel more.',
       ],
       review: { section: 'sports', slide: 1 },
+    },
+  ],
+
+  // ------------------------------------------------------------------ exam-level written questions
+  exam: [
+    {
+      id: 'e1',
+      marks: 8,
+      q: 'Explain the difference between competitive advantage, competitive parity and competitive disadvantage. Why is competitive advantage always described as relative? Give one sports example.',
+      answer: [
+        'A firm has a **competitive advantage** when it performs better than its rivals in the same industry, or better than the industry average.',
+        '**Competitive parity** means two or more firms perform at the same level. **Competitive disadvantage** means performing worse than rivals or the industry average.',
+        'It is **relative** because you can only judge performance by benchmarking: against competitors, or against the industry average. A firm that is profitable but less profitable than all its rivals has no advantage.',
+        'Example: a club with the highest revenue per fan in its league has an advantage over its league rivals. If another club matches it, they are at parity.',
+      ],
+      marking: [
+        'Defines advantage as superior performance relative to rivals or the industry average (2)',
+        'Defines parity and disadvantage correctly (2)',
+        'Explains that it is relative because of benchmarking, not absolute profit (2)',
+        'A relevant sports example that compares with rivals (2)',
+      ],
+    },
+    {
+      id: 'e2',
+      marks: 10,
+      q: 'Firm X: customers are willing to pay $120 and its cost is $70. Firm Y: customers are willing to pay $100 and its cost is $45. (a) Calculate the economic value each firm creates. (b) Which firm has the advantage, and by how much? (c) Name the two routes to advantage and say which route each firm appears to follow.',
+      answer: [
+        '**(a)** Economic value = WTP − WTS. Firm X: 120 − 70 = **$50**. Firm Y: 100 − 45 = **$55**.',
+        '**(b)** Firm Y has the advantage, by 55 − 50 = **$5** per unit.',
+        '**(c)** The two routes are **differentiation** (customers value the offering more) and **cost leadership** (similar offering at lower cost). Firm X has the higher willingness to pay, which points to differentiation. Firm Y has the much lower cost, which points to cost leadership.',
+      ],
+      marking: [
+        'Uses the formula WTP − WTS (2)',
+        'Firm X = $50 and Firm Y = $55 (2)',
+        'Firm Y has the advantage by $5 (2)',
+        'Names differentiation and cost leadership (2)',
+        'Matches X to differentiation and Y to cost leadership with a reason (2)',
+      ],
+    },
+    {
+      id: 'e3',
+      marks: 8,
+      q: 'What is stakeholder impact analysis? Name the three attributes it uses, say how a firm should treat a stakeholder that has all three, and illustrate with one stakeholder of a professional sports club.',
+      answer: [
+        'Stakeholder impact analysis is a **decision tool** that helps a firm recognize, prioritize and address the needs of its stakeholders.',
+        'It scores each stakeholder on **power** (can get the firm to do something it otherwise would not), **legitimacy** (the claim is seen as valid or appropriate) and **urgency** (needs immediate attention).',
+        'A stakeholder with all three should get the **most attention**.',
+        'Example: a league regulator threatening a penalty over a rules breach has power (it can sanction the club), legitimacy (it is the rule maker) and urgency (the deadline is near).',
+      ],
+      marking: [
+        'Describes it as a tool to recognize, prioritize and address stakeholder needs (2)',
+        'Names power, legitimacy and urgency (3)',
+        'A stakeholder with all three gets the most attention (1)',
+        'A sports example with all three attributes explained (2)',
+      ],
     },
   ],
 

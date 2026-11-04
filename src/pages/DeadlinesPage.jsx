@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useDeadlines, restore, formatDay } from '../lib/deadlines.js';
 import DueRow from '../components/DueRow.jsx';
+import TimerToggle from '../components/TimerToggle.jsx';
+import Ring from '../components/Ring.jsx';
 
 export default function DeadlinesPage() {
   const { active, archived } = useDeadlines();
@@ -13,6 +15,10 @@ export default function DeadlinesPage() {
           Tick an assignment when you have handed it in. It moves to the archive below. Your ticks are
           saved on this device only, so everyone keeps their own list.
         </p>
+        <div className="head-progress">
+          <Ring value={archived.length / (archived.length + active.length || 1)} size={72} stroke={8} label={`${archived.length}/${archived.length + active.length}`} sub="handed in" title={`${archived.length} of ${archived.length + active.length} handed in`} />
+          <TimerToggle />
+        </div>
       </header>
 
       <section className="stack" aria-labelledby="due-active">

@@ -1,3 +1,5 @@
+import ReadAloud from './ReadAloud.jsx';
+import { slideText } from '../data/index.js';
 import { useEffect, useRef, useState } from 'react';
 import Blocks from './Blocks.jsx';
 import Icon from './Icon.jsx';
@@ -93,6 +95,9 @@ export default function Slides({ slides, start = 0, label, onFinish, finishLabel
             }}
           />
         )}
+        <div className="slide-tools">
+          <ReadAloud text={`${slides[i].title}. ${slideText([slides[i]])}`} label="Read this slide" compact />
+        </div>
         <div className="slides-track" aria-live="polite">
           {slides.map((slide, n) => {
             const on = n === i;

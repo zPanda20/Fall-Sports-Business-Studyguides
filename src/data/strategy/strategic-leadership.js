@@ -68,6 +68,19 @@ export const strategicLeadershipTopic = {
           ],
         },
         {
+          type: 'flow',
+          items: [
+            { title: 'Vision', text: 'Where do we want to end up?' },
+            { title: 'Mission', text: 'What do we do to get there?' },
+            { title: 'Values', text: 'What do we stand for on the way?' },
+          ],
+        },
+        {
+          type: 'callout',
+          title: 'Example from class: adidas',
+          text: '**Vision:** through sport we have the power to change lives. **Mission:** to be the best sports brand in the world. The vision says why the firm exists. The mission says what it will do.',
+        },
+        {
           type: 'p',
           text: 'Values help employees understand the culture, handle complexity and resolve conflicts, and keep the firm acting legally and ethically as it pursues its vision and mission.',
         },
@@ -158,6 +171,16 @@ export const strategicLeadershipTopic = {
             { title: 'Resource allocation process', text: 'How the firm allocates resources according to its set policies.' },
           ],
         },
+        {
+          type: 'cycle',
+          center: 'Planned emergence',
+          items: [
+            { title: 'A starting plan', text: 'Top management sets direction from data.' },
+            { title: 'Initiatives', text: 'Employees act, and luck helps.' },
+            { title: 'Evaluate', text: 'Management reviews and coordinates.' },
+            { title: 'Back what works', text: 'Resources flow to the winners.' },
+          ],
+        },
       ],
     },
     {
@@ -219,6 +242,13 @@ export const strategicLeadershipTopic = {
           ],
         },
         {
+          type: 'figure',
+          src: 'bs-leadership-devils-advocacy-dialectic.png',
+          alt: 'Two side-by-side diagrams comparing devil’s advocacy and dialectic inquiry',
+          caption: 'Devil’s advocacy attacks one plan. Dialectic inquiry sets two plans against each other.',
+          need: 'Two small flow diagrams side by side. Devil’s advocacy: proposal, then a critic argues against it, then a decision. Dialectic inquiry: plan and counter-plan, then a debate, then a combined plan. Redraw the two diagrams from the Session 2 slides.',
+        },
+        {
           type: 'p',
           text: 'Both force a leader’s assumptions to be tested instead of just applauded.',
         },
@@ -267,6 +297,8 @@ export const strategicLeadershipTopic = {
     { front: 'Vision vs mission vs values', back: 'Vision: what we ultimately want. Mission: what we do and where. Values: the commitments and ethical norms that guide us.' },
     { front: 'Three approaches to strategy', back: 'Strategic planning (formal, top-down), scenario planning (several futures), planned emergence (top-down and bottom-up).' },
     { front: 'Name the six biases from class', back: 'Illusion of control, escalating commitment, confirmation bias, reasoning by analogy, representativeness, groupthink.' },
+    { front: 'Vision vs mission', back: 'Vision: where we want to end up. Mission: what we actually do to get there. Values: the commitments we keep on the way.' },
+    { front: 'Planned emergence in four words', back: 'Plan, try, evaluate, back winners. Top-down and bottom-up together.' },
   ],
 
   // ------------------------------------------------------------------ real example
@@ -474,6 +506,61 @@ export const strategicLeadershipTopic = {
         '**(c)** Top-down planning separates formulation from implementation and sends information one way. Leaders rarely see what front-line staff see, so they could have missed the idea.',
       ],
       review: { section: 'plain', slide: 6 },
+    },
+  ],
+
+  // ------------------------------------------------------------------ exam-level written questions
+  exam: [
+    {
+      id: 'e1',
+      marks: 8,
+      q: 'Compare strategic planning, scenario planning and strategy as planned emergence. For each, say what it is and one limitation or condition where it works best.',
+      answer: [
+        '**Strategic planning** is a formal, top-down, data-driven process. Top management sets the strategy from analysis of prices, costs, margins and demand. It works best in **stable, predictable** environments. Its shortcomings: formulation is separate from implementation, information flows one way, and the leaders’ view of the future can be wrong.',
+        '**Scenario planning** is also formal and top-down, but based on **“what if” questions**. Management imagines several futures, optimistic and pessimistic, and prepares a strategy for each, often giving them probabilities. It helps in uncertain settings but still depends on the planners.',
+        '**Planned emergence** starts with a plan but is **less formal**. Strategy comes from top-down and bottom-up together: employee initiatives, autonomous actions and even luck are evaluated and coordinated by management, with resources following what works.',
+      ],
+      marking: [
+        'Strategic planning: formal, top-down, data-driven, suits stable settings (2)',
+        'A limitation of strategic planning, for example one-way information or a wrong view of the future (1)',
+        'Scenario planning: “what if” questions, several futures, preparing strategies for each (2)',
+        'Planned emergence: begins with a plan, less formal, top-down and bottom-up (2)',
+        'Mentions autonomous actions, serendipity or the resource allocation process (1)',
+      ],
+    },
+    {
+      id: 'e2',
+      marks: 8,
+      q: 'Explain vision, mission and values. Why is a customer-oriented vision more useful than a product-oriented one?',
+      answer: [
+        'The **vision** captures the organization’s aspiration and long-term objectives. It is forward-looking and inspiring and gives employees meaning.',
+        'The **mission** says what the organization actually does: the products and services it provides and the markets it competes in. It explains how the vision will be achieved.',
+        '**Values** are the ethical standards and norms that govern behavior and give the strategy stability.',
+        'A **customer-oriented** vision focuses on solving the customer’s problem, so the firm can adapt as the environment changes. A **product-oriented** vision focuses on improving existing products, which can leave the firm stuck if the market moves on. Research links vision to performance most strongly when the vision is customer-oriented, internal stakeholders help shape it and the structure aligns with it.',
+      ],
+      marking: [
+        'Defines vision as long-term aspiration (2)',
+        'Defines mission as what the firm does and where it competes (2)',
+        'Defines values as ethical standards and norms (1)',
+        'Explains the customer-oriented versus product-oriented difference (2)',
+        'Links the customer focus to adaptability or performance (1)',
+      ],
+    },
+    {
+      id: 'e3',
+      marks: 6,
+      q: 'Describe System 1 and System 2 thinking. Name two biases that can harm strategic decisions and one tool that helps overcome them.',
+      answer: [
+        '**System 1** is the brain’s default mode: automatic, fast, familiar and low-effort, but prone to bias. **System 2** is logical, analytical and deliberate, but slower and more demanding.',
+        'Two biases: **confirmation bias** (looking only for information that supports existing beliefs) and **escalating commitment** (continuing to back a project that is showing signs of failing). Others are illusion of control, reasoning by analogy, representativeness and groupthink.',
+        'A helpful tool: **devil’s advocacy**, where someone is assigned to argue against a proposal, or **dialectic inquiry**, where two groups build opposing proposals and debate them.',
+      ],
+      marking: [
+        'System 1 described correctly (1)',
+        'System 2 described correctly (1)',
+        'Two biases named and explained (2)',
+        'One tool named and explained (2)',
+      ],
     },
   ],
 

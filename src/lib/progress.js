@@ -3,7 +3,7 @@ import { useSyncExternalStore } from 'react';
 // Progress lives only in the student's own browser (localStorage).
 // No accounts, no server. Clearing site data resets it.
 const KEY = 'sbsg:progress:v1';
-const EMPTY = { done: {}, quiz: {}, known: {} };
+const EMPTY = { done: {}, quiz: {}, known: {}, tests: {}, exams: {} };
 
 function load() {
   try {
@@ -14,6 +14,8 @@ function load() {
       done: parsed.done || {},
       quiz: parsed.quiz || {},
       known: parsed.known || {},
+      tests: parsed.tests || {},
+      exams: parsed.exams || {},
     };
   } catch {
     return { ...EMPTY };
@@ -64,4 +66,15 @@ export function setKnown(cardId, isKnown) {
 
 export function resetProgress() {
   commit({ ...EMPTY });
+}
+
+// Quick tests: the last 10 results per course, newest last.
+export function recordTest(courseId, correct, total) {
+  const list = [...(state.tests[courseId] || []), { at: Date.now(), correct, total }].slice(-10);
+  commit({ ...state, tests: { ...state.tests, [courseId]: list } });
+}
+
+// Exam-style questions: which ones were self-marked, and with how many points.
+export function recordExam(questionId, got, of) {
+  commit({ ...state, exams: { ...state.exams, [questionId]: { got, of, at: Date.now() } } });
 }

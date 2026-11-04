@@ -163,6 +163,20 @@ export const cvpTopic = {
         },
       ],
     },
+    {
+      kicker: 'Picture it',
+      title: 'Three shapes of cost',
+      blocks: [
+        { type: 'p', text: 'Plot total cost against activity and each type of cost has its own shape.' },
+        {
+          type: 'figure',
+          src: 'acc-cvp-cost-behavior.png',
+          alt: 'Three small graphs: a flat line for fixed cost, a rising line from zero for variable cost, and a rising line starting above zero for mixed cost',
+          caption: 'Fixed, variable and mixed cost behavior.',
+          need: 'Three small side-by-side graphs of total cost against activity: fixed (flat line), variable (straight line from zero) and mixed (straight line that starts above zero).',
+        },
+      ],
+    },
   ],
 
   // ------------------------------------------------------------------ terms
@@ -343,6 +357,16 @@ export const cvpTopic = {
             title: 'The pattern',
             text: 'Higher fixed costs raise break-even without changing the margin. A lower price or higher variable cost shrinks the margin, so each ticket does less work.',
           },
+          {
+            type: 'bars',
+            title: 'Break-even tickets by scenario',
+            items: [
+              { label: 'Price down to $80', value: unitsForProfit(priceDown) },
+              { label: 'Rent up $3M', value: unitsForProfit(rentUp) },
+              { label: 'Variable cost up $5', value: unitsForProfit(costUp) },
+              { label: 'Base case', value: beUnits },
+            ],
+          },
         ],
       },
     ],
@@ -406,6 +430,61 @@ export const cvpTopic = {
         `**(c)** ${num(target9)} ÷ ${num(capacity)} = **${pct(target9Share)}** of capacity, about ${num(target9PerGame)} fans per game. Realistic for a team that already fills most of the arena, but it leaves little room if attendance dips.`,
       ],
       review: { section: 'sports', slide: 3 },
+    },
+  ],
+
+  // ------------------------------------------------------------------ exam-level questions
+  exam: [
+    {
+      id: 'e1',
+      marks: 10,
+      q: `The Ironhawks’ ticket business: price ${money(base.price)} per ticket, variable cost ${money(base.variable)} per ticket, fixed costs ${money(base.fixed)} a season. (a) Find the contribution margin per ticket and the contribution margin ratio. (b) Find break-even in tickets and in revenue. (c) How many tickets give a ${moneyM(6_000_000)} profit? (d) If ${num(sold600)} tickets are sold, find the profit and the margin of safety as a percentage of sales.`,
+      answer: [
+        `**(a)** ${money(base.price)} − ${money(base.variable)} = **${money(cm)}** per ticket. Ratio = ${money(cm)} ÷ ${money(base.price)} = **${pct(cmr)}**.`,
+        `**(b)** ${money(base.fixed)} ÷ ${money(cm)} = **${num(beUnits)} tickets**. Revenue = ${num(beUnits)} × ${money(base.price)} = **${money(beRevenue)}**.`,
+        `**(c)** (${money(base.fixed)} + ${money(6_000_000)}) ÷ ${money(cm)} = **${num(target6)} tickets**.`,
+        `**(d)** Profit = ${num(sold600)} × ${money(cm)} − ${money(base.fixed)} = **${money(profit600)}**. Margin of safety = (${num(sold600)} − ${num(beUnits)}) ÷ ${num(sold600)} = **${pct(mos600.pct)}**.`,
+      ],
+      marking: [
+        `Contribution margin of ${money(cm)} (1)`,
+        `Contribution margin ratio of ${pct(cmr)} (1)`,
+        `Break-even of ${num(beUnits)} tickets with the formula (2)`,
+        `Break-even revenue of ${money(beRevenue)} (1)`,
+        `Target-profit tickets of ${num(target6)} (2)`,
+        `Profit of ${money(profit600)} at ${num(sold600)} tickets (1)`,
+        `Margin of safety of ${pct(mos600.pct)} (2)`,
+      ],
+    },
+    {
+      id: 'e2',
+      marks: 8,
+      q: 'Start from the base case in the previous question. Find the new break-even in tickets if (a) arena rent rises by $3M, (b) the ticket price falls to $80, (c) variable cost rises by $5 per ticket. (d) Which change pushes break-even up the most, and why?',
+      answer: [
+        `**(a)** Fixed costs become ${money(rentUp.fixed)}. Margin stays ${money(cm)}. Break-even = ${money(rentUp.fixed)} ÷ ${money(cm)} = **${num(unitsForProfit(rentUp))}**.`,
+        `**(b)** Margin becomes $80 − ${money(base.variable)} = ${money(contributionMargin(priceDown))}. Break-even = ${money(base.fixed)} ÷ ${money(contributionMargin(priceDown))} = **${num(unitsForProfit(priceDown))}**.`,
+        `**(c)** Margin becomes ${money(base.price)} − ${money(costUp.variable)} = ${money(contributionMargin(costUp))}. Break-even = ${money(base.fixed)} ÷ ${money(contributionMargin(costUp))} = ${(base.fixed / contributionMargin(costUp)).toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}, rounded up to **${num(unitsForProfit(costUp))}** because you cannot sell part of a ticket.`,
+        `**(d)** The **price cut** (${num(unitsForProfit(priceDown))}). It shrinks the margin on every ticket, from ${money(cm)} to ${money(contributionMargin(priceDown))}, while a rent rise only spreads a bigger fixed cost over the same margin.`,
+      ],
+      marking: [
+        `Rent scenario: ${num(unitsForProfit(rentUp))} (2)`,
+        `Price scenario: ${num(unitsForProfit(priceDown))} (2)`,
+        `Variable-cost scenario: ${num(unitsForProfit(costUp))}, rounded up (2)`,
+        'Identifies the price cut and explains the lower margin per ticket (2)',
+      ],
+    },
+    {
+      id: 'e3',
+      marks: 6,
+      q: 'Classify each Ironhawks cost as fixed, variable or mixed: (i) the arena lease, (ii) a payment-processing fee on each ticket sold, (iii) the head coach’s salary, (iv) arena electricity with a monthly base charge plus a charge for usage. Then explain in one or two sentences what the relevant range is and why it matters.',
+      answer: [
+        '**(i)** Fixed. **(ii)** Variable. **(iii)** Fixed. **(iv)** Mixed: part fixed (the base charge) and part variable (usage).',
+        'The **relevant range** is the span of activity over which the assumed cost behavior holds. Outside it, fixed costs can step up (for example a second arena) and unit costs can change, so break-even results are only reliable within the range.',
+      ],
+      marking: [
+        'Each of the four costs classified correctly, one mark each (4)',
+        'Defines the relevant range (1)',
+        'Explains why results are only reliable inside it (1)',
+      ],
     },
   ],
 

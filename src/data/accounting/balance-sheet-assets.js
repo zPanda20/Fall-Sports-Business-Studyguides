@@ -362,6 +362,66 @@ export const balanceSheetAssetsTopic = {
         },
       ],
     },
+    {
+      kicker: 'Picture it',
+      title: 'Assets in order, closest to cash first',
+      blocks: [
+        { type: 'p', text: 'The balance sheet lists assets from the most liquid to the least. Each one is measured in its own way.' },
+        {
+          type: 'flow',
+          items: [
+            { title: 'Cash', text: 'Face amount' },
+            { title: 'Short-term investments', text: 'Market value' },
+            { title: 'Receivables', text: 'Net realizable value' },
+            { title: 'Inventory', text: 'Cost, by the method chosen' },
+            { title: 'Plant assets', text: 'Cost less accumulated depreciation' },
+            { title: 'Intangibles', text: 'Cost less amortization' },
+          ],
+        },
+        {
+          type: 'figure',
+          src: 'acc-assets-classified-balance-sheet.png',
+          alt: 'The asset side of a classified balance sheet showing current and non-current assets',
+          caption: 'The asset side of a real balance sheet, from current to non-current.',
+          need: 'A crop of the asset side of a real company’s balance sheet (current assets, then property and equipment, then intangibles) from a public annual report. Note the company and year for the caption.',
+        },
+      ],
+    },
+    {
+      kicker: 'Picture it',
+      title: 'Same jerseys, three profits',
+      blocks: [
+        { type: 'p', text: 'The team shop sells 1,200 jerseys for $108,000. Only the cost-flow assumption changes. Prices rose, so FIFO shows the highest profit.' },
+        {
+          type: 'bars',
+          title: 'Gross profit by method ($)',
+          items: [
+            { label: 'FIFO', value: 58000 },
+            { label: 'Average cost', value: 54000 },
+            { label: 'LIFO', value: 50000 },
+          ],
+        },
+      ],
+    },
+    {
+      kicker: 'Picture it',
+      title: 'Straight-line depreciation, year by year',
+      blocks: [
+        { type: 'p', text: 'The $10M of training equipment loses $1.8M of book value every year, until only the $1M residual value is left.' },
+        {
+          type: 'bars',
+          title: 'Book value at the end of each year ($M)',
+          items: [
+            { label: 'Purchase', value: 10 },
+            { label: 'Year 1', value: 8.2 },
+            { label: 'Year 2', value: 6.4 },
+            { label: 'Year 3', value: 4.6 },
+            { label: 'Year 4', value: 2.8 },
+            { label: 'Year 5', value: 1 },
+          ],
+        },
+      ],
+    },
   ],
 
   // ------------------------------------------------------------------ terms
@@ -641,6 +701,68 @@ export const balanceSheetAssetsTopic = {
         '**(c)** Cash $4.0M − book value $4.6M = a **loss of $0.6M**.',
       ],
       review: { section: 'sports', slide: 3 },
+    },
+  ],
+
+  // ------------------------------------------------------------------ exam-level questions
+  exam: [
+    {
+      id: 'e1',
+      marks: 10,
+      q: 'The Ironhawks buy practice-court equipment: list price $1,000,000, sales tax $60,000, delivery $25,000 and installation $15,000. During unloading a crate is dropped and the repair costs $8,000. Separately, the club buys $10M of training equipment with a 5-year life and a $1M residual value. (a) What cost is recorded for the practice-court equipment? (b) How is the $8,000 treated and why? (c) Find annual straight-line depreciation on the training equipment. (d) Find accumulated depreciation and book value after 3 years. (e) Is there a gain or a loss if it is then sold for $5.5M? For $4.0M?',
+      answer: [
+        '**(a)** $1,000,000 + $60,000 + $25,000 + $15,000 = **$1,100,000**. Cost includes every reasonable and necessary expenditure to get the asset ready for use.',
+        '**(b)** An **expense** (a revenue expenditure). The damage was not needed to get the asset ready, so it is not part of the cost.',
+        '**(c)** ($10M − $1M) ÷ 5 = **$1.8M** a year.',
+        '**(d)** Accumulated depreciation = 3 × $1.8M = **$5.4M**. Book value = $10M − $5.4M = **$4.6M**.',
+        '**(e)** Sold for $5.5M: $5.5M − $4.6M = **$0.9M gain**. Sold for $4.0M: $4.0M − $4.6M = **$0.6M loss**.',
+      ],
+      marking: [
+        'Cost of $1,100,000 with all four items included (2)',
+        'The $8,000 is an expense, with a reason (1)',
+        'Annual depreciation of $1.8M with the formula (2)',
+        'Accumulated depreciation of $5.4M (1)',
+        'Book value of $4.6M (1)',
+        'Gain of $0.9M at $5.5M (1)',
+        'Loss of $0.6M at $4.0M (1)',
+        'Separates capital from revenue expenditure (1)',
+      ],
+    },
+    {
+      id: 'e2',
+      marks: 10,
+      q: 'The team shop starts with 1,000 jerseys that cost $40 each and buys 1,000 more at $50 each. It sells 1,200 jerseys at $90. For FIFO, LIFO and average cost, calculate cost of goods sold, gross profit and ending inventory. Which method gives the highest profit, and why?',
+      answer: [
+        'Revenue = 1,200 × $90 = $108,000. Goods available = $40,000 + $50,000 = $90,000.',
+        '**FIFO:** cost of goods sold = 1,000 × $40 + 200 × $50 = **$50,000**. Gross profit **$58,000**. Ending inventory 800 × $50 = **$40,000**.',
+        '**LIFO:** cost of goods sold = 1,000 × $50 + 200 × $40 = **$58,000**. Gross profit **$50,000**. Ending inventory 800 × $40 = **$32,000**.',
+        '**Average:** $90,000 ÷ 2,000 = $45 a jersey. Cost of goods sold = 1,200 × $45 = **$54,000**. Gross profit **$54,000**. Ending inventory 800 × $45 = **$36,000**.',
+        '**FIFO** gives the highest profit, $8,000 more than LIFO, because prices rose: the cheaper old units are matched against the sales.',
+      ],
+      marking: [
+        'FIFO: cost of goods sold, gross profit and ending inventory (3)',
+        'LIFO: cost of goods sold, gross profit and ending inventory (3)',
+        'Average: unit cost of $45, then cost of goods sold, gross profit and ending inventory (3)',
+        'FIFO is highest because prices rose (1)',
+      ],
+    },
+    {
+      id: 'e3',
+      marks: 8,
+      q: 'The Ironhawks put $20M into 60-day Treasury bills. (a) Is that a cash equivalent? Would a one-year deposit be? Sponsors owe the club $30M and the finance team expects 4% to go unpaid. (b) Find the allowance and net realizable value. A sponsor owing $0.5M then goes bust and is written off: give receivables, the allowance and net realizable value afterwards. (c) The club buys a trademark for $12M and expects to use it for 10 years: find yearly amortization and the book value after 4 years.',
+      answer: [
+        '**(a)** Yes: it is very safe, stable in value and matures within 90 days of purchase. A one-year deposit is not, because it matures after more than 90 days.',
+        '**(b)** Allowance = 4% × $30M = **$1.2M**. Net realizable value = $30M − $1.2M = **$28.8M**. After the write-off: receivables **$29.5M**, allowance **$0.7M**, net realizable value still **$28.8M**. A write-off does not change profit or net realizable value.',
+        '**(c)** $12M ÷ 10 = **$1.2M** a year. After 4 years: amortization $4.8M, book value **$7.2M**.',
+      ],
+      marking: [
+        'Treasury bills qualify, with the 90-day test (1)',
+        'A one-year deposit does not qualify (1)',
+        'Allowance of $1.2M and net realizable value of $28.8M (2)',
+        'After the write-off: $29.5M, $0.7M and $28.8M (2)',
+        'Yearly amortization of $1.2M (1)',
+        'Book value of $7.2M after 4 years (1)',
+      ],
     },
   ],
 

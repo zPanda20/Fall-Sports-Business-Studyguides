@@ -215,6 +215,46 @@ export const balanceSheetLiabilitiesEquityTopic = {
         },
       ],
     },
+    {
+      kicker: 'Picture it',
+      title: 'Who is paid first',
+      blocks: [
+        { type: 'p', text: 'If a business stops operating and sells its assets, the order is fixed by law: creditors before owners.' },
+        {
+          type: 'flow',
+          items: [
+            { title: 'Assets are sold', text: 'Everything the business owns' },
+            { title: 'Creditors are paid in full', text: 'Secured creditors from their collateral, then general credit obligations' },
+            { title: 'Owners get what is left', text: 'The residual claim' },
+          ],
+        },
+        {
+          type: 'figure',
+          src: 'acc-liabilities-balance-sheet.png',
+          alt: 'The liabilities and equity side of a classified balance sheet with current and long-term liabilities',
+          caption: 'The liabilities and equity side of a real balance sheet.',
+          need: 'A crop of the liabilities and equity side of a real company’s balance sheet (current liabilities, long-term debt, equity) from a public annual report, with the matching debt note beside it if possible.',
+        },
+      ],
+    },
+    {
+      kicker: 'Picture it',
+      title: 'The Ironhawks’ liabilities',
+      blocks: [
+        { type: 'p', text: 'The same $300M arena loan appears twice: $10M as a current liability and $290M as long-term. Together with the other items, total liabilities are $373M, of which $83M is current.' },
+        {
+          type: 'bars',
+          title: 'Liabilities by item ($M)',
+          items: [
+            { label: 'Arena loan, long-term part', value: 290 },
+            { label: 'Unearned ticket revenue', value: 62 },
+            { label: 'Arena loan, current part', value: 10 },
+            { label: 'Wages payable', value: 6 },
+            { label: 'Accounts payable', value: 5 },
+          ],
+        },
+      ],
+    },
   ],
 
   // ------------------------------------------------------------------ terms
@@ -466,6 +506,60 @@ export const balanceSheetLiabilitiesEquityTopic = {
         '**(c)** Any two of: accounts payable, accrued wages, unearned ticket revenue, interest payable, the current portion of the arena loan.',
       ],
       review: { section: 'sports', slide: 2 },
+    },
+  ],
+
+  // ------------------------------------------------------------------ exam-level questions
+  exam: [
+    {
+      id: 'e1',
+      marks: 10,
+      q: 'The Ironhawks owe: accounts payable $5M; wages earned but unpaid $6M; season tickets paid in advance, $62M still unearned; $10M of the arena loan due next year; and the other $290M of that loan. (a) Classify each as current or long-term and find current liabilities, long-term liabilities and total liabilities. (b) The club also borrowed $30M at 6% a year for a renovation, and four months of interest have built up. Calculate the interest and give the entry.',
+      answer: [
+        '**(a)** Current: accounts payable $5M, accrued wages $6M, unearned ticket revenue $62M and the current portion of the loan $10M, so current liabilities = **$83M**. Long-term: the rest of the loan, **$290M**. Total liabilities = 83 + 290 = **$373M**.',
+        '**(b)** Interest = principal × rate × time = $30M × 6% × 4/12 = **$0.6M**. Entry: debit Interest Expense $0.6M, credit Interest Payable $0.6M. Interest for months after year end is not yet a liability.',
+      ],
+      marking: [
+        'Four items classified as current and the loan remainder as long-term (2)',
+        'Current liabilities of $83M (2)',
+        'Long-term of $290M and total of $373M (2)',
+        'Interest of $0.6M with the formula (2)',
+        'Entry with the correct accounts (2)',
+      ],
+    },
+    {
+      id: 'e2',
+      marks: 8,
+      q: 'A former sponsor sues the Ironhawks for $12M. Explain what the club does in its books and notes in each case: (a) a loss is probable and the best estimate is $8M; (b) a loss is probable but the amount cannot be estimated; (c) a loss is reasonably possible; (d) a loss is remote.',
+      answer: [
+        '**(a)** Record it: debit Loss from Lawsuit $8M, credit Litigation Liability $8M. Both conditions are met: probable and reasonably estimable.',
+        '**(b)** Do not record it. Describe the lawsuit in a note.',
+        '**(c)** Do not record it. Describe the lawsuit in a note, since a material loss is reasonably possible.',
+        '**(d)** No entry and no note is needed.',
+      ],
+      marking: [
+        'Recorded at $8M with the correct entry (2)',
+        'Not recorded, note only, because it cannot be estimated (2)',
+        'Note only for reasonably possible (2)',
+        'Nothing needed for remote (2)',
+      ],
+    },
+    {
+      id: 'e3',
+      marks: 6,
+      q: 'After its first full year the Ironhawks have capital stock of $300M, no beginning retained earnings, net income of $40M and dividends of $5M. (a) Find ending retained earnings and total owners’ equity. (b) Give three differences between liabilities and owners’ equity, including what collateral does.',
+      answer: [
+        '**(a)** Retained earnings = 0 + 40 − 5 = **$35M**. Owners’ equity = 300 + 35 = **$335M**.',
+        '**(b)** Liabilities mature and must be repaid; owners’ equity does not mature. On liquidation, creditors are paid in full before owners receive anything. Creditors are lenders, not owners. Collateral is a specific asset pledged against a loan: if the borrower defaults, the creditor may foreclose on it, and pledged assets are disclosed in the notes.',
+      ],
+      marking: [
+        'Retained earnings of $35M (1)',
+        'Owners’ equity of $335M (1)',
+        'Liabilities mature, equity does not (1)',
+        'Creditors are paid before owners (1)',
+        'Creditors are not owners (1)',
+        'Collateral and foreclosure explained (1)',
+      ],
     },
   ],
 

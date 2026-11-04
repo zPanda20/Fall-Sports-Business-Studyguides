@@ -1,4 +1,11 @@
 import { cvpTopic } from './accounting/cost-volume-profit.js';
+import { whyMarketResearchTopic } from './market-research/why-market-research.js';
+import { methodologyParadigmsTopic } from './market-research/methodology-paradigms.js';
+import { researchQuestionProposalTopic } from './market-research/research-question-proposal.js';
+import { literatureReviewTopic } from './market-research/literature-review.js';
+import { measurementValidityTopic } from './market-research/measurement-validity.js';
+import { quantitativeOverviewTopic } from './market-research/quantitative-overview.js';
+import { excelBasicsTopic } from './accounting/excel-basics.js';
 import { accountingBasicsTopic } from './accounting/accounting-basics.js';
 import { accountingProcessTopic } from './accounting/accounting-process.js';
 import { statementsAndNotesTopic } from './accounting/statements-and-notes.js';
@@ -25,6 +32,13 @@ export const topics = [
   balanceSheetAssetsTopic,
   balanceSheetLiabilitiesEquityTopic,
   cvpTopic,
+  excelBasicsTopic,
+  whyMarketResearchTopic,
+  methodologyParadigmsTopic,
+  researchQuestionProposalTopic,
+  literatureReviewTopic,
+  measurementValidityTopic,
+  quantitativeOverviewTopic,
   whatIsStrategyTopic,
   strategicLeadershipTopic,
   pestelTopic,
@@ -45,6 +59,21 @@ export const universes = {
     blurb:
       'A fictional motorsport team in a made-up 10-team championship. One consistent industry for every Strategy topic.',
   },
+  northern: {
+    name: 'The Northern Cup Federation',
+    blurb:
+      'A fictional international sports federation with a flagship tournament. One consistent body for every Governance example: its board, its members and its scandals.',
+  },
+  summit: {
+    name: 'Summit Sports Group',
+    blurb:
+      'A fictional sports business with a club, an arena and a media arm. One consistent company for every Foundations of Sport Management example.',
+  },
+  harbor: {
+    name: 'Harbor City Rovers',
+    blurb:
+      'A fictional football club in a made-up league. One consistent club for every Market Research example: its fans, its sponsors and its questions.',
+  },
 };
 
 export const courses = [
@@ -55,6 +84,13 @@ export const courses = [
     blurb:
       'Read financial statements, understand how the numbers are built, and use them to plan and decide.',
     universe: 'ironhawks',
+    syllabusDate: '18 September 2026',
+    overview: [
+      { label: 'Format', text: '36 in-class hours plus 6 hours of asynchronous activities on the Connect platform.' },
+      { label: 'Continuous assessment (60%)', text: 'Class participation and engagement (40%, mostly the weekly Connect activities) and a group project (60%): a financial analysis of a listed company of your choice, with statements, ratios, benchmarking, an Excel file and a one-page AI reflection.' },
+      { label: 'Final exam (40%)', text: 'Individual, 2 hours, in the official exam week. Closed book, no notes, no internet and no AI. Exercises covering both financial and managerial accounting.' },
+      { label: 'Textbook', text: 'Financial and Managerial Accounting: Building Skills with Data Analytics (Williams, Bettner, Richardson and Smith), through the McGraw-Hill Connect platform.' },
+    ],
     blocks: [
       {
         title: 'Foundations',
@@ -87,6 +123,12 @@ export const courses = [
           { id: 'accounting-wrap-up', title: 'Course wrap-up and exam preparation', sessions: 'Session 18' },
         ],
       },
+      {
+        title: 'Skills',
+        units: [
+          { id: 'excel-basics', title: 'Excel basics for accounting', sessions: 'Skills' },
+        ],
+      },
     ],
   },
   {
@@ -96,6 +138,13 @@ export const courses = [
     blurb:
       'Understand how firms win and keep an advantage: analyze the environment, choose a strategy, and put it into action.',
     universe: 'kestrel',
+    syllabusDate: 'Fall 2026',
+    overview: [
+      { label: 'Format', text: '24 in-class hours plus 6 hours of asynchronous work (the first asynchronous session uses generative AI to evaluate strategic alternatives).' },
+      { label: 'Continuous assessment (60%)', text: 'Class participation and engagement (40%) and an evaluation (60%): a group assignment in groups of 4 to 5. Pick a company, give a 15-minute presentation using PESTEL, Porter\u2019s Five Forces, VRIO and SWOT, and end with a strategic recommendation for top management.' },
+      { label: 'Group assignment grading', text: 'Content and accuracy 40%, sources 20%, structure 15%, communication 10%, answers to questions 15%.' },
+      { label: 'Final exam (40%)', text: 'Individual, in the official exam week. Closed book, no notes, no internet and no AI. Questions may also link to the case studies.' },
+    ],
     blocks: [
       {
         title: 'Analysis',
@@ -137,7 +186,8 @@ export const courses = [
   },
   {
     id: 'market-research',
-    tag: 'Coming soon',
+    universe: 'harbor',
+    tag: 'Sessions 1\u20136 ready',
     syllabusDate: '15 September 2026',
     title: 'Market Research',
     short: 'Market Research',
@@ -300,6 +350,8 @@ export const courses = [
   },
   {
     id: 'sport-governance',
+    noExam: true,
+    universe: 'northern',
     tag: 'Coming soon',
     title: 'International Sports Governance',
     short: 'Sport Governance',
@@ -469,6 +521,7 @@ export const courses = [
   },
   {
     id: 'sport-management',
+    universe: 'summit',
     tag: 'Coming soon',
     title: 'Foundations of Sport Management',
     short: 'Sport Management',
@@ -656,7 +709,7 @@ export function slideText(slides = []) {
   const walk = (v) => {
     if (typeof v === 'string') out.push(v);
     else if (Array.isArray(v)) v.forEach(walk);
-    else if (v && typeof v === 'object') Object.entries(v).forEach(([k, x]) => !['model', 'url', 'type', 'tone'].includes(k) && walk(x));
+    else if (v && typeof v === 'object') Object.entries(v).forEach(([k, x]) => !['model', 'url', 'type', 'tone', 'cells', 'cellFormats', 'formats', 'editable', 'heads', 'effects', 'lines', 'src', 'need', 'unit'].includes(k) && walk(x));
   };
   walk(slides);
   return out.join(' ').replace(/\*\*/g, '');

@@ -183,3 +183,32 @@ export function toLocalInput(ms) {
   const p = (n) => String(n).padStart(2, '0');
   return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`;
 }
+
+// ---- show or hide the live clocks (saved on this device) ----
+const TKEY = 'sbsg:timers';
+let timersOn = (() => {
+  try {
+    return localStorage.getItem(TKEY) !== 'off';
+  } catch {
+    return true;
+  }
+})();
+const timerListeners = new Set();
+export function setTimersOn(on) {
+  timersOn = on;
+  try {
+    localStorage.setItem(TKEY, on ? 'on' : 'off');
+  } catch {
+    // ignore: it still works for this visit
+  }
+  timerListeners.forEach((l) => l());
+}
+export function useTimersOn() {
+  return useSyncExternalStore(
+    (l) => {
+      timerListeners.add(l);
+      return () => timerListeners.delete(l);
+    },
+    () => timersOn,
+  );
+}

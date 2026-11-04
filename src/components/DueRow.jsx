@@ -41,6 +41,17 @@ export default function DueRow({ item }) {
           {hasDate && <span className="due-when">{formatDue(item.dueMs)}</span>}
         </p>
         {item.note && <p className="due-note">{item.note}</p>}
+        {item.files?.length > 0 && (
+          <ul className="due-files" aria-label="Files for this assignment">
+            {item.files.map((f) => (
+              <li key={f.file}>
+                <a href={`${import.meta.env.BASE_URL || '/'}files/${f.file}`} download className="due-file">
+                  <span aria-hidden="true">⬇</span> {f.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
 
         {(editing || !hasDate) && (
           <form

@@ -92,6 +92,16 @@ export const performanceBusinessModelsTopic = {
             { title: 'Learning and growth', text: 'Can we continue to improve and create value?' },
           ],
         },
+        {
+          type: 'cycle',
+          center: 'Strategy',
+          items: [
+            { title: 'Financial', text: 'Profit for shareholders' },
+            { title: 'Customer', text: 'How they see us' },
+            { title: 'Internal processes', text: 'What we must excel at' },
+            { title: 'Learning and growth', text: 'Can we keep improving?' },
+          ],
+        },
       ],
     },
     {
@@ -129,6 +139,16 @@ export const performanceBusinessModelsTopic = {
             ['What?', 'What activities must be performed to create and deliver the offering?'],
             ['Who?', 'Who are the main stakeholders performing the activities?'],
             ['How?', 'How are the offerings created? (the linking of activities)'],
+          ],
+        },
+        {
+          type: 'cycle',
+          center: 'Business model',
+          items: [
+            { title: 'Why?', text: 'Revenue and cost models' },
+            { title: 'What?', text: 'Activities to create and deliver' },
+            { title: 'Who?', text: 'Stakeholders doing them' },
+            { title: 'How?', text: 'How activities link up' },
           ],
         },
       ],
@@ -171,6 +191,18 @@ export const performanceBusinessModelsTopic = {
             ['Bundling', 'Sell products with negatively correlated demand together at a discount', 'Microsoft Office suite'],
           ],
         },
+        {
+          type: 'p',
+          text: 'The **razor–razor blades** model in three steps:',
+        },
+        {
+          type: 'flow',
+          items: [
+            { title: 'Sell the first item cheaply', text: 'A razor or printer, even at a loss' },
+            { title: 'The customer is hooked', text: 'The replacement part only fits that product' },
+            { title: 'Profit on refills', text: 'Cartridges or ink at high margins' },
+          ],
+        },
       ],
     },
     {
@@ -209,6 +241,47 @@ export const performanceBusinessModelsTopic = {
         },
       ],
     },
+    {
+      kicker: 'Session goals',
+      title: 'What you should be able to do',
+      blocks: [
+        {
+          type: 'bullets',
+          items: [
+            'Explain **creating shared value** as a strategic approach.',
+            'Apply the **balanced scorecard** and the **triple bottom line** to assess advantage.',
+            'Use the **business model framework** to put strategy into action.',
+            'Discuss **popular business models**.',
+            'Explain **business model innovation**.',
+          ],
+        },
+      ],
+    },
+    {
+      kicker: 'Discussion prompts',
+      title: 'Questions from the class slides',
+      blocks: [
+        {
+          type: 'p',
+          text: 'The slides close with discussion questions about Patagonia and ESG. There is no single right answer. A strong answer weighs both sides and uses the course ideas.',
+        },
+        {
+          type: 'table',
+          head: ['Prompt', 'Ideas to weigh'],
+          rows: [
+            ['Is groupthink a risk for a firm with a very strong, founder-shaped culture?', 'A cohesive culture gives focus and loyalty. But when everyone shares one view, leaders’ assumptions go unchallenged. Tools such as devil’s advocacy can help.'],
+            ['Will a firm struggle when its iconic founder steps back?', 'Many well-known companies had a hard time after their founders left. Culture, succession planning and how deeply the values are shared matter.'],
+            ['Would going public help a mission-driven firm do more good?', 'More growth and impact and more people able to buy in, against less control over the mission and pressure for short-term profit.'],
+            ['Should companies pursue ESG goals?', 'Arguments for: shared value and long-term advantage. Arguments against: firms lack a democratic mandate, may be inefficient outside their expertise, and some use ESG as greenwashing.'],
+          ],
+        },
+        {
+          type: 'callout',
+          title: 'Use the course tools',
+          text: 'Link your answer to **shared value versus CSR**, the **triple bottom line** and **stakeholders**, and say which view you support and why.',
+        },
+      ],
+    },
   ],
 
   // ------------------------------------------------------------------ terms
@@ -235,6 +308,7 @@ export const performanceBusinessModelsTopic = {
     { front: 'The three Ps of the triple bottom line', back: 'Profits, People, Planet.' },
     { front: 'The business model framework', back: 'Why, What, Who, How.' },
     { front: 'Freemium vs ultra-low cost', back: 'Freemium: the core product is free, premium is paid. Ultra-low cost: the core product is cheap and extras cost more.' },
+    { front: 'Razor–razor blades in one line', back: 'Sell the first item cheaply or at a loss and earn high margins on the replacement part.' },
   ],
 
   // ------------------------------------------------------------------ real example
@@ -470,6 +544,65 @@ export const performanceBusinessModelsTopic = {
         '**(c)** A **subscription** model. The key metric is **churn**.',
       ],
       review: { section: 'sports', slide: 2 },
+    },
+  ],
+
+  // ------------------------------------------------------------------ exam-level written questions
+  exam: [
+    {
+      id: 'e1',
+      marks: 10,
+      q: 'Explain creating shared value (CSV). How does it differ from corporate social responsibility (CSR), and in what four ways can it build competitive advantage? Use Too Good To Go or Back Market as an example.',
+      answer: [
+        '**CSV** means policies and practices that make a firm more competitive while advancing societal conditions. It is built into the **core strategy** and serves both shareholders and society.',
+        '**CSR** is usually a separate budget or program, or a PR effort, and does not depend on the core business. In CSV the social benefit **is** the business.',
+        'It builds advantage by **differentiation** (higher willingness to pay), **cost efficiency** (less waste), **intangibles** (brand, reputation, trust) and **new markets** that rivals ignore.',
+        'Example: Too Good To Go sells shops’ unsold food as surprise bags at about a third of the price. Shops earn from food they would bin and less food is wasted, while the company takes a fee. Every sale creates both social and business value.',
+      ],
+      marking: [
+        'Defines CSV as part of core strategy serving both shareholders and society (2)',
+        'Contrasts it with CSR (2)',
+        'Four ways it builds advantage (2)',
+        'A correct example showing the benefit is the business (2)',
+        'Notes the example turns waste into a new market (2)',
+      ],
+    },
+    {
+      id: 'e2',
+      marks: 12,
+      q: 'Use the four questions of the business model framework to describe Microsoft’s move from one-time software licenses to cloud and AI subscriptions. What were the benefits?',
+      answer: [
+        '**Why:** the model creates value by giving customers the latest software anywhere while Microsoft earns steady recurring revenue.',
+        '**What:** the activities include rewriting software for the cloud, opening Office to other platforms, building Azure at the core and investing in OpenAI.',
+        '**Who:** individual consumers and more profitable business clients perform and use the activities, supported by dedicated AI and cloud divisions.',
+        '**How:** R&D and support moved to cloud and AI, with a global data-center network and agile development linking the activities.',
+        '**Benefits:** revenue lines up with costs instead of spiking at each release, less software piracy, and a better customer experience.',
+      ],
+      marking: [
+        'Why, with revenue and cost logic (2)',
+        'What, with activities (2)',
+        'Who, with stakeholders (2)',
+        'How, with how activities link (2)',
+        'Revenue aligned with costs (2)',
+        'Less piracy or better customer experience (2)',
+      ],
+    },
+    {
+      id: 'e3',
+      marks: 8,
+      q: 'Distinguish freemium from ultra-low cost, and wholesale from agency. Then explain why Dollar Shave Club is an example of business model innovation and how it extended its advantage.',
+      answer: [
+        '**Freemium:** the core product is **free** and premium features are paid. **Ultra-low cost:** the core product is **cheap** and extras are sold at a premium (a low-fare flight with paid bags).',
+        '**Wholesale:** the producer sells to retailers at a fixed price and the retailer sets the shelf price. **Agency:** an agent sells for a commission and the producer often controls the retail price.',
+        '**Dollar Shave Club** used an online subscription by mail order against Gillette’s razor–razor blades model. It was a novel, practical way to deliver value, which complements product innovation and raises barriers to imitation.',
+        'Outcome: Unilever bought it for $1bn in 2016, and Gillette had to launch its own shave club and cut prices.',
+      ],
+      marking: [
+        'Freemium versus ultra-low cost (2)',
+        'Wholesale versus agency (2)',
+        'Explains business model innovation (2)',
+        'Uses the Dollar Shave Club outcome as evidence (2)',
+      ],
     },
   ],
 

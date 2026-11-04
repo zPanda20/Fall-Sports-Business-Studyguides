@@ -2,6 +2,8 @@
 // Built from the course slides for Chapters 1 and 2. All explanations are written fresh.
 // Real-example figures: Manchester United plc, quarter ended 30 September 2025 (see sources slide).
 
+import { ironhawksBalanceLab } from './balance-lab.js';
+
 export const accountingBasicsTopic = {
   id: 'accounting-basics',
   course: 'accounting',
@@ -294,6 +296,30 @@ export const accountingBasicsTopic = {
         },
       ],
     },
+    {
+      kicker: 'Picture it',
+      title: 'From event to report',
+      blocks: [
+        { type: 'p', text: 'Every report starts as a business event. Three functions turn it into something a decision-maker can use.' },
+        {
+          type: 'flow',
+          items: [
+            { title: 'Business event', text: 'A sale, a purchase, a loan' },
+            { title: 'Record', text: 'Capture the effect of each transaction' },
+            { title: 'Classify', text: 'Group the effects into comparable totals' },
+            { title: 'Summarize and communicate', text: 'Turn the totals into reports' },
+            { title: 'Decision', text: 'Users act on what the reports show' },
+          ],
+        },
+        {
+          type: 'figure',
+          src: 'acc-basics-equation.png',
+          alt: 'A balance scale with assets on one side and liabilities plus owners’ equity on the other',
+          caption: 'The accounting equation as a balance: the two sides always match.',
+          need: 'A simple balance-scale diagram: Assets on the left pan, Liabilities + Owners’ equity on the right pan. Clean and without brand logos.',
+        },
+      ],
+    },
   ],
 
   // ------------------------------------------------------------------ terms
@@ -472,6 +498,14 @@ export const accountingBasicsTopic = {
         ],
       },
       {
+        kicker: 'Watch it move',
+        title: 'Every event, one balance sheet',
+        blocks: [
+          { type: 'p', text: 'Step through the Ironhawks’ first events. Watch which bars move, and notice that **assets always equal liabilities plus equity**. The last two events show how earning revenue and paying wages change equity.' },
+          { ...ironhawksBalanceLab },
+        ],
+      },
+      {
         kicker: 'Cost principle',
         title: 'The arena stays at its cost',
         blocks: [
@@ -577,6 +611,65 @@ export const accountingBasicsTopic = {
         '**(c)** Yes: $600M = $300M + $300M. Paying a bill swaps a cash asset for a smaller liability and leaves equity untouched.',
       ],
       review: { section: 'sports', slide: 2 },
+    },
+  ],
+
+  // ------------------------------------------------------------------ exam-level questions
+  exam: [
+    {
+      id: 'e1',
+      marks: 10,
+      q: 'The Ironhawks start up. Day 1: the owners invest $300M in cash for shares. Day 2: the club pays $560M for its arena, using $260M of cash and a $300M loan. Day 3: it buys $5M of training equipment on account. Day 4: it pays that supplier $5M in cash. (a) After each day, give total assets, total liabilities and owners’ equity. (b) The arena’s market value later rises well above $560M. Why does the balance sheet still start from $560M?',
+      answer: [
+        '**(a)** Day 1: assets $300M = liabilities $0 + equity $300M. Day 2: cash falls $260M to $40M, the arena is $560M, the loan is $300M, so assets $600M = liabilities $300M + equity $300M. Day 3: equipment and accounts payable both rise $5M, so assets $605M = liabilities $305M + equity $300M. Day 4: cash and accounts payable both fall $5M, so assets $600M = liabilities $300M + equity $300M.',
+        '**(b)** The **cost principle** records an asset at what was paid. **Going concern** says the club will keep using the arena rather than sell it, and **objectivity** favors the $560M, which an auditor can check against the contract. The balance sheet carries it at cost less depreciation so far.',
+      ],
+      marking: [
+        'Day 1 totals correct (1)',
+        'Day 2 totals correct, with cash $40M and arena $560M (2)',
+        'Day 3 totals correct (1)',
+        'Day 4 totals correct (1)',
+        'Shows the equation holds after every event (1)',
+        'Names the cost principle (2)',
+        'Adds going concern or objectivity with a reason (2)',
+      ],
+    },
+    {
+      id: 'e2',
+      marks: 8,
+      q: 'Compare financial, management and tax accounting by user, purpose and information. Then give one preventive control and one detective control the Ironhawks could use over cash payments, and explain why each belongs to its type.',
+      answer: [
+        '**Financial:** outside users such as lenders and investors; general reporting of resources and claims.',
+        '**Management:** managers inside the club; tailored information for planning and control, such as scouting spend by month.',
+        '**Tax:** tax authorities; tax compliance and tax filings.',
+        '**Preventive example:** two employees must sign before the club wires more than $1M. It stops an improper payment before the money leaves.',
+        '**Detective example:** a monthly bank reconciliation. It finds a problem after it has happened.',
+        'Controls give **reasonable assurance**, not certainty.',
+      ],
+      marking: [
+        'Financial lens: external users, general reporting (2)',
+        'Management lens: managers, tailored planning and control information (2)',
+        'Tax lens: tax authorities, compliance (1)',
+        'Preventive control with the reason it stops the problem beforehand (1)',
+        'Detective control with the reason it finds the problem afterwards (1)',
+        'States that controls give reasonable assurance, not certainty (1)',
+      ],
+    },
+    {
+      id: 'e3',
+      marks: 6,
+      q: 'Overnight Auto Service reports operating cash flow of +$800, investing cash flow of −$64,200 and financing cash flow of +$80,000 for its first period. (a) Calculate the change in cash. (b) In two or three sentences, explain why a positive operating cash flow can still go with little cash left.',
+      answer: [
+        '**(a)** Change in cash = $800 − $64,200 + $80,000 = **+$16,600**.',
+        '**(b)** Cash depends on all three groups, not only operations. Overnight spent most of the $80,000 that the owners put in on land and a building (investing). So even with a small positive operating figure, only $16,600 is left. Profit and cash are different things.',
+      ],
+      marking: [
+        'Adds the three groups (1)',
+        'Correct result of +$16,600 (2)',
+        'Explains that all three groups affect cash (1)',
+        'Links the investing outflow to the land and building (1)',
+        'States that profit is not cash (1)',
+      ],
     },
   ],
 

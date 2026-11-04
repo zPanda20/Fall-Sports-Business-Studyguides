@@ -6,6 +6,8 @@ import Icon from '../components/Icon.jsx';
 import Slides from '../components/Slides.jsx';
 import Terms from '../components/Terms.jsx';
 import Quiz from '../components/Quiz.jsx';
+import ExamQuestions from '../components/ExamQuestions.jsx';
+import Ring from '../components/Ring.jsx';
 import BookmarkButton from '../components/BookmarkButton.jsx';
 import { topicBookmarkId } from '../lib/bookmarks.js';
 
@@ -24,6 +26,7 @@ export default function TopicPage() {
   const progress = useProgress();
   const panelRef = useRef(null);
   const [visited, setVisited] = useState(() => new Set(['plain']));
+  const [practiceMode, setPracticeMode] = useState('mcq');
 
   const topic = getTopic(topicId);
   const section = SECTIONS.some((s) => s.id === params.get('s')) ? params.get('s') : 'plain';
@@ -106,6 +109,10 @@ export default function TopicPage() {
           <div className="side-title">
             <h1 className="serif">{topic.title}</h1>
             <p className="meta">{topic.sessions} · about {topic.minutes} min</p>
+            <div className="side-ring">
+              <Ring value={visited.size / SECTIONS.length} size={48} stroke={5} label={`${visited.size}/${SECTIONS.length}`} title={`${visited.size} of ${SECTIONS.length} sections opened`} />
+              <span className="meta">sections opened</span>
+            </div>
             <BookmarkButton item={topicMark} variant="topic" />
           </div>
           <ul className="side-nav">
@@ -164,7 +171,25 @@ export default function TopicPage() {
           {section === 'sports' && (
             <Slides key={slideKey} slides={topic.sports.slides} start={startSlide} label="Sports example" bookmark={slideMark('sports')} onFinish={finish} finishLabel={finishLabel} />
           )}
-          {section === 'practice' && <Quiz topic={topic} courseTitle={course.title} onReview={review} />}
+          {section === 'practice' && (
+            <>
+              {topic.exam?.length > 0 && (
+                <div className="mode-tabs" role="tablist" aria-label="Kind of practice">
+                  <button type="button" role="tab" aria-selected={practiceMode === 'mcq'} className="chip" aria-pressed={practiceMode === 'mcq'} onClick={() => setPracticeMode('mcq')}>
+                    Multiple choice
+                  </button>
+                  <button type="button" role="tab" aria-selected={practiceMode === 'exam'} className="chip" aria-pressed={practiceMode === 'exam'} onClick={() => setPracticeMode('exam')}>
+                    Exam-style ({topic.exam.length})
+                  </button>
+                </div>
+              )}
+              {practiceMode === 'exam' && topic.exam?.length > 0 ? (
+                <ExamQuestions topic={topic} />
+              ) : (
+                <Quiz topic={topic} courseTitle={course.title} onReview={review} />
+              )}
+            </>
+          )}
           {section === 'watch' && (
             <div className="stack">
               {topic.videos.length === 0 && (

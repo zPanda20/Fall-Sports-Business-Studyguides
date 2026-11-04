@@ -49,6 +49,13 @@ export const fiveForcesTopic = {
           ],
         },
         {
+          type: 'figure',
+          src: 'bs-five-forces-diagram.png',
+          alt: 'The five forces diagram with rivalry at the center and the four other forces around it',
+          caption: 'Rivalry sits in the middle and is pressed by the other four forces.',
+          need: 'The classic Five Forces diagram: Rivalry among existing competitors in the center, with Threat of new entrants (top), Bargaining power of suppliers (left), Bargaining power of buyers (right) and Threat of substitutes (bottom), joined by arrows. Redraw the one from the Session 3 slides.',
+        },
+        {
           type: 'p',
           text: 'Some textbooks add a sixth, **complements**. Check which version your instructor uses.',
         },
@@ -194,6 +201,55 @@ export const fiveForcesTopic = {
         },
       ],
     },
+    {
+      kicker: 'Class case: fashion retail',
+      title: 'The industry’s five forces',
+      blocks: [
+        {
+          type: 'p',
+          text: 'In class, the five forces were applied to **fashion retail**, the industry Shein entered. The ratings below follow the class case discussion.',
+        },
+        {
+          type: 'forces',
+          items: [
+            { name: 'Threat of new entrants', rating: 'Medium', why: 'Barriers are high for a store-based entrant (scale, brand, capital, distribution) but much lower online, as Shein showed.' },
+            { name: 'Buyer power', rating: 'High', why: 'Switching costs are almost zero, buyers are price-sensitive and compare prices instantly. Loyalty is weak when trends change weekly.' },
+            { name: 'Supplier power', rating: 'Low', why: 'Many contract factories compete for orders and garments are largely standardized.' },
+            { name: 'Threat of substitutes', rating: 'Medium', why: 'Second-hand platforms, rental, durable brands or simply buying less, a threat that grows with sustainability concerns.' },
+            { name: 'Rivalry', rating: 'High', why: 'Crowded market, easy-to-copy products, short-lived trends, price wars and markdowns on leftover stock.' },
+          ],
+        },
+        {
+          type: 'p',
+          text: 'Overall, fashion retail is **structurally tough**: powerful buyers and fierce rivalry squeeze margins, so success depends on cost efficiency and speed rather than pricing power.',
+        },
+      ],
+    },
+    {
+      kicker: 'Class case: fashion retail',
+      title: 'Going around the entry barriers',
+      blocks: [
+        {
+          type: 'p',
+          text: 'Shein’s key insight was **not to attack incumbents where they were strongest**. It chose the one area where they had no advantage, the online marketplace, and made each barrier irrelevant.',
+        },
+        {
+          type: 'table',
+          head: ['Barrier', 'How an incumbent was protected', 'How Shein got around it'],
+          rows: [
+            ['Capital requirements', 'Rent, fit-outs and staff for thousands of stores', 'Digital-native, no stores. Small first batches kept cash tied up in stock low.'],
+            ['Brand recognition', 'Decades of brand building', 'Influencers and viral “haul” videos borrowed the credibility of creators young buyers already followed.'],
+            ['Economies of scale', 'Huge volumes lower unit costs', 'Speed and flexibility instead of volume: small batches, data from the app, reorder only proven hits.'],
+            ['Distribution access', 'Store networks and regional centers', 'Sold direct through its own app and shipped individual parcels.'],
+          ],
+        },
+        {
+          type: 'callout',
+          title: 'Strengths became liabilities',
+          text: 'The incumbents’ store networks turned into **fixed costs** and their slower processes into a handicap. This is the classic pattern of disruption: the entrant’s weaknesses (no stores, no brand, no scale) became sources of flexibility and low cost.',
+        },
+      ],
+    },
   ],
 
   // ------------------------------------------------------------------ terms
@@ -221,6 +277,7 @@ export const fiveForcesTopic = {
     { front: 'Name four entry barriers', back: 'Economies of scale, network effects, customer switching costs, capital requirements. Also brand and patents, government policy, and a credible threat of retaliation.' },
     { front: 'When is buyer power high?', back: 'Few buyers each buying a lot, standardized products, low switching costs, or buyers able to integrate backward.' },
     { front: 'What decides how intense rivalry is?', back: 'Industry structure, industry growth, strategic commitments and exit barriers.' },
+    { front: 'Fashion retail in one line', back: 'Strong buyers and fierce rivalry squeeze margins, so success depends on cost and speed rather than pricing power (class case).' },
   ],
 
   // ------------------------------------------------------------------ real example
@@ -524,6 +581,63 @@ export const fiveForcesTopic = {
       answer: 0,
       explanation: 'When growth is slow, firms can only gain share at each other’s expense. High exit barriers keep unprofitable firms in the market, so the fight goes on.',
       review: { section: 'plain', slide: 6 },
+    },
+  ],
+
+  // ------------------------------------------------------------------ exam-level written questions
+  exam: [
+    {
+      id: 'e1',
+      marks: 12,
+      q: 'Apply Porter’s Five Forces to the fashion retail industry. Rate each force as low, medium or high and justify each rating in one or two sentences. State your overall conclusion about the industry.',
+      answer: [
+        '**Threat of new entrants: medium.** Barriers are high for store-based entrants (scale, brand, capital, distribution) but much lower online.',
+        '**Buyer power: high.** Switching costs are almost zero, buyers are price-sensitive and can compare prices instantly.',
+        '**Supplier power: low.** Many contract factories compete for orders and garments are largely standardized.',
+        '**Threat of substitutes: medium.** Second-hand, rental or simply buying less can meet the need, especially as sustainability concerns grow.',
+        '**Rivalry: high.** A crowded market with easy-to-copy products, short trends and price wars.',
+        '**Conclusion:** a structurally tough industry with limited profit potential. Success depends on cost efficiency and speed.',
+      ],
+      marking: [
+        'Entrants rated with a reason (2)',
+        'Buyers rated with a reason (2)',
+        'Suppliers rated with a reason (2)',
+        'Substitutes rated with a reason (2)',
+        'Rivalry rated with a reason (2)',
+        'Overall conclusion about profit potential (2)',
+      ],
+    },
+    {
+      id: 'e2',
+      marks: 8,
+      q: 'Name four barriers to entry. For each, explain briefly how a new entrant could get around it.',
+      answer: [
+        '**Economies of scale:** incumbents spread costs over big output. An entrant can compete on speed and flexibility, for example small batches guided by demand data.',
+        '**Capital requirements:** big upfront investment. An entrant can stay asset-light, selling online instead of building stores.',
+        '**Brand and other advantages independent of size:** brand, patents, exclusive resources. An entrant can borrow credibility through partners or influencers.',
+        '**Customer switching costs or network effects:** an entrant can make switching free or offer a better experience.',
+        'Others: government policy and the credible threat of retaliation by incumbents.',
+      ],
+      marking: [
+        'Four barriers correctly named (4)',
+        'A sensible way around each barrier (4)',
+      ],
+    },
+    {
+      id: 'e3',
+      marks: 6,
+      q: 'The Five Forces model is described as a snapshot. What does that mean, and what extra tools or ideas can make the analysis more complete?',
+      answer: [
+        'It describes the industry **at one point in time**, so it can miss change.',
+        'You should also track **structural changes** in the industry, the **rate of change** and the **rate of innovation** (industry dynamics).',
+        'A **strategic group** map shows which firms follow similar strategies, using two key dimensions and bubbles for market share.',
+        'A **sixth force, complements**, adds products that increase demand for yours, and can lead to cooperation among competitors (co-opetition).',
+      ],
+      marking: [
+        'Explains static or point-in-time (2)',
+        'Industry dynamics: structure, rate of change, innovation (2)',
+        'Strategic groups or complements named and explained (2)',
+      ],
     },
   ],
 

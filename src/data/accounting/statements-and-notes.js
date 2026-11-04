@@ -209,6 +209,48 @@ export const statementsAndNotesTopic = {
         },
       ],
     },
+    {
+      kicker: 'Picture it',
+      title: 'How the three statements connect',
+      blocks: [
+        { type: 'p', text: 'The order matters because each statement uses a number from the one before. Here are the Ironhawks’ figures.' },
+        {
+          type: 'flow',
+          items: [
+            { title: 'Adjusted trial balance', text: 'Every account, up to date' },
+            { title: 'Income statement', text: 'Net income **$40M**' },
+            { title: 'Retained earnings', text: 'Ending balance **$35M**' },
+            { title: 'Balance sheet', text: 'Owners’ equity **$335M**' },
+          ],
+        },
+        {
+          type: 'figure',
+          src: 'acc-statements-articulation.png',
+          alt: 'A diagram of the income statement, statement of retained earnings and balance sheet linked by arrows',
+          caption: 'Net income flows into retained earnings, which flows into the balance sheet.',
+          need: 'A one-page diagram of the three statements linked by arrows (net income to retained earnings to balance-sheet equity), ideally from a textbook or your own sketch.',
+        },
+      ],
+    },
+    {
+      kicker: 'Picture it',
+      title: 'Where each revenue dollar went',
+      blocks: [
+        { type: 'p', text: 'The Ironhawks’ $420M of revenue, split across the lines of the income statement. The bars add up to the whole $420M.' },
+        {
+          type: 'bars',
+          title: 'Use of the $420M of revenue ($M)',
+          items: [
+            { label: 'Player wages', value: 180 },
+            { label: 'Other operating costs', value: 155.2 },
+            { label: 'Net income', value: 40 },
+            { label: 'Interest', value: 18 },
+            { label: 'Depreciation', value: 16.8 },
+            { label: 'Income taxes', value: 10 },
+          ],
+        },
+      ],
+    },
   ],
 
   // ------------------------------------------------------------------ terms
@@ -485,6 +527,60 @@ export const statementsAndNotesTopic = {
         '**(c)** It is closed to Retained Earnings: debit Income Summary $39,942, credit Retained Earnings $39,942.',
       ],
       review: { section: 'plain', slide: 6 },
+    },
+  ],
+
+  // ------------------------------------------------------------------ exam-level questions
+  exam: [
+    {
+      id: 'e1',
+      marks: 12,
+      q: 'In its second season the Ironhawks report revenue of $450M, player wages of $190M, other operating costs of $160.2M, depreciation of $16.8M and interest of $18M. Income tax is 20% of income before taxes. At the start of the season retained earnings were $35M and capital stock was $300M. The club pays dividends of $10M. (a) Prepare the income statement down to net income. (b) Prepare the statement of retained earnings. (c) What are owners’ equity at the end of the season?',
+      answer: [
+        '**(a)** Income before income taxes = 450 − 190 − 160.2 − 16.8 − 18 = **$65.0M**. Income tax = 20% × 65.0 = **$13.0M**. Net income = **$52.0M**.',
+        '**(b)** Beginning retained earnings $35M + net income $52M − dividends $10M = **$77M**. Dividends are a payout of profit, not an expense, so they do not appear in the income statement.',
+        '**(c)** Capital stock $300M + retained earnings $77M = **$377M**.',
+      ],
+      marking: [
+        'Income before taxes of $65.0M (3)',
+        'Income tax of $13.0M (1)',
+        'Net income of $52.0M (1)',
+        'Roll-forward layout: beginning + net income − dividends (2)',
+        'Ending retained earnings of $77M (2)',
+        'Owners’ equity of $377M (2)',
+        'States that dividends are not an expense (1)',
+      ],
+    },
+    {
+      id: 'e2',
+      marks: 8,
+      q: 'Using the second-season figures in the previous question, give the four closing entries and say which account they close into.',
+      answer: [
+        '**1. Revenue:** debit revenue accounts $450M, credit Income Summary $450M.',
+        '**2. Expenses:** credit the expense accounts $398M (190 + 160.2 + 16.8 + 18 + 13) and debit Income Summary $398M.',
+        '**3. Income Summary:** it now has a credit balance of 450 − 398 = $52M. Debit Income Summary $52M, credit Retained Earnings $52M.',
+        '**4. Dividends:** debit Retained Earnings $10M, credit Dividends $10M. This goes straight to Retained Earnings and skips Income Summary.',
+      ],
+      marking: [
+        'Revenue closed to Income Summary at $450M (2)',
+        'Expenses closed with the correct total of $398M (2)',
+        'Income Summary of $52M closed to Retained Earnings (2)',
+        'Dividends closed directly to Retained Earnings, not through Income Summary (2)',
+      ],
+    },
+    {
+      id: 'e3',
+      marks: 8,
+      q: 'Classify each as a current asset, non-current asset, current liability or non-current liability: (i) cash, (ii) the arena, (iii) season tickets paid in advance, (iv) a trademark the club bought, (v) $10M of the arena loan due next year, (vi) the other $290M of that loan. Then explain in two sentences why the notes to the statements matter.',
+      answer: [
+        '**(i)** Current asset. **(ii)** Non-current asset (plant), at cost less accumulated depreciation. **(iii)** Current liability (unearned revenue). **(iv)** Non-current asset (intangible). **(v)** Current liability (current portion of long-term debt). **(vi)** Non-current liability.',
+        'The notes explain the numbers: the accounting policies and estimates behind them, details such as pledged assets and uncertain obligations. Under adequate disclosure, statements should carry whatever information users need to interpret them properly.',
+      ],
+      marking: [
+        'Each of the six items classified correctly, one mark each (6)',
+        'Notes explain or supplement the numbers, for example policies, estimates or risks (1)',
+        'Names adequate disclosure or its purpose: users can interpret the statements properly (1)',
+      ],
     },
   ],
 

@@ -2,6 +2,7 @@
 // dueAt is an exact moment with its offset, so the countdown is right in any time zone.
 // dueAt: null means no date has been added yet. Each student can add or change a date on their own device.
 // courseId links to a course in this app when there is one.
+// files: [{ label, file }] adds download links (files live in public/files/).
 // group: true marks a group project. approx is shown when only a rough time is known (no exact date yet).
 export const DEADLINES = [
   {

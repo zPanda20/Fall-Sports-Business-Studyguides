@@ -13,6 +13,8 @@ import FlashcardsPage from './pages/FlashcardsPage.jsx';
 import SearchPage from './pages/SearchPage.jsx';
 import BookmarksPage from './pages/BookmarksPage.jsx';
 import DeadlinesPage from './pages/DeadlinesPage.jsx';
+import QuickTestPage from './pages/QuickTestPage.jsx';
+import ExamPracticePage from './pages/ExamPracticePage.jsx';
 
 // Courses with their own look (see styles.css, "skins"). The page background and glow follow
 // the course you are reading, so the whole screen changes, not just the accent.
@@ -166,6 +168,8 @@ export default function App() {
         <Route path="search" element={<SearchPage />} />
         <Route path="bookmarks" element={<BookmarksPage />} />
         <Route path="deadlines" element={<DeadlinesPage />} />
+        <Route path="course/:courseId/test" element={<QuickTestPage />} />
+        <Route path="course/:courseId/exam" element={<ExamPracticePage />} />
         <Route path="course/:courseId" element={<CoursePage />} />
         <Route path="course/:courseId/flashcards" element={<FlashcardsPage />} />
         <Route path="topic/:topicId" element={<TopicPage />} />
