@@ -78,3 +78,12 @@ src/
 scripts/
   verify-numbers.mjs
 ```
+
+## Study companions (Seraph Orca and Demon Panda)
+
+Two small helpers live in the bottom-right corner. Seraph is on by default; Demon is off until someone turns him on at **Companions** in the header. Settings are saved in this browser only (`sbsg:companions:v1`) and survive updates.
+
+- Code is in `src/companions/`: `assets.js` (the one list of pictures), `prefs.js` (settings), `manager.js` (who is on screen, one panel at a time, message priorities), `reactions.js` (pose + motion + face for each reaction), `emotions.js` (how faces move between moods), `dialogue.js` (what they say, three sarcasm levels), `context.js` (help buttons that go to real pages), `CompanionLayer.jsx` and `companions.css` (screen and motion).
+- Pictures are in `public/companions/<character>/poses` and `/expressions`. To change one, replace the original PNG and run `python3 scripts/prepare-companion-art.py "<folder of originals>"`.
+- Motion is CSS only. It stops when the device asks for reduced motion, or when Animations is switched off.
+- Coming next, kept hidden from everyone until approved: the guided tour, quiz and flashcard reactions, deadline nagging and contextual help. They will sit behind a flag; open the site once with `?companions=preview` on your own device to see them (`?companions=off` hides them again).

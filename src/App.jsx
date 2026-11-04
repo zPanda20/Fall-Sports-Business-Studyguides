@@ -15,6 +15,8 @@ import BookmarksPage from './pages/BookmarksPage.jsx';
 import DeadlinesPage from './pages/DeadlinesPage.jsx';
 import QuickTestPage from './pages/QuickTestPage.jsx';
 import ExamPracticePage from './pages/ExamPracticePage.jsx';
+import CompanionsPage from './pages/CompanionsPage.jsx';
+import CompanionLayer from './companions/CompanionLayer.jsx';
 
 // Courses with their own look (see styles.css, "skins"). The page background and glow follow
 // the course you are reading, so the whole screen changes, not just the accent.
@@ -120,6 +122,13 @@ function Layout() {
               <span className="nav-label-wide">Bookmarks</span>
               {marks.length > 0 && <span className="nav-count" aria-hidden="true">{marks.length}</span>}
             </NavLink>
+            <NavLink to="/companions" className="nav-link" aria-label="Study companions">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z" />
+                <path d="M18.5 15.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z" />
+              </svg>
+              <span className="nav-label-wide">Companions</span>
+            </NavLink>
             <ThemeToggle />
           </nav>
         </div>
@@ -147,6 +156,7 @@ function Layout() {
           </p>
         </div>
       </footer>
+      <CompanionLayer />
     </div>
   );
 }
@@ -168,6 +178,7 @@ export default function App() {
         <Route path="search" element={<SearchPage />} />
         <Route path="bookmarks" element={<BookmarksPage />} />
         <Route path="deadlines" element={<DeadlinesPage />} />
+        <Route path="companions" element={<CompanionsPage />} />
         <Route path="course/:courseId/test" element={<QuickTestPage />} />
         <Route path="course/:courseId/exam" element={<ExamPracticePage />} />
         <Route path="course/:courseId" element={<CoursePage />} />

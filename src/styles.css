@@ -2281,8 +2281,9 @@ td {
   }
   .nav-link,
   .icon-btn {
-    padding: 0 9px;
-    gap: 5px;
+    min-width: 40px;
+    padding: 0 7px;
+    gap: 4px;
   }
 }
 
