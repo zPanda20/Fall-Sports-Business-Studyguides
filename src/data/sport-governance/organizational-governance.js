@@ -487,7 +487,7 @@ export const organizationalGovernanceTopic = {
         'Better process: the board or council adopts written criteria, an independent panel approves grants, recipients report on use and decisions are published. Large distributions are avoided in the election period.',
       ],
       marking: [
-        '1 mark each for four correct red flags, each linked to a principle (4 marks).',
+        '4 marks: one for each of four correct red flags, each linked to a principle.',
         '4 marks: a better process with at least three elements (criteria, independent approval, reporting, publication).',
         '2 marks: clear reasoning, using terms such as independence, transparency and accountability correctly.',
       ],

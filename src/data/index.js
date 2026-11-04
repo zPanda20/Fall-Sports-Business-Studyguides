@@ -5,6 +5,13 @@ import { researchQuestionProposalTopic } from './market-research/research-questi
 import { literatureReviewTopic } from './market-research/literature-review.js';
 import { measurementValidityTopic } from './market-research/measurement-validity.js';
 import { quantitativeOverviewTopic } from './market-research/quantitative-overview.js';
+import { governanceLevelsTopic } from './sport-governance/governance-levels.js';
+import { systemicGovernanceStakeholdersTopic } from './sport-governance/systemic-governance-stakeholders.js';
+import { olympicVsNonOlympicTopic } from './sport-governance/olympic-vs-non-olympic.js';
+import { organizationalGovernanceTopic } from './sport-governance/organizational-governance.js';
+import { fifaReformsTopic } from './sport-governance/fifa-reforms.js';
+import { politicalGovernanceAutonomyTopic } from './sport-governance/political-governance-autonomy.js';
+import { competitiveBalanceIntegrityTopic } from './sport-governance/competitive-balance-integrity.js';
 import { excelBasicsTopic } from './accounting/excel-basics.js';
 import { accountingBasicsTopic } from './accounting/accounting-basics.js';
 import { accountingProcessTopic } from './accounting/accounting-process.js';
@@ -33,6 +40,13 @@ export const topics = [
   balanceSheetLiabilitiesEquityTopic,
   cvpTopic,
   excelBasicsTopic,
+  governanceLevelsTopic,
+  systemicGovernanceStakeholdersTopic,
+  olympicVsNonOlympicTopic,
+  organizationalGovernanceTopic,
+  fifaReformsTopic,
+  politicalGovernanceAutonomyTopic,
+  competitiveBalanceIntegrityTopic,
   whyMarketResearchTopic,
   methodologyParadigmsTopic,
   researchQuestionProposalTopic,
@@ -352,7 +366,7 @@ export const courses = [
     id: 'sport-governance',
     noExam: true,
     universe: 'northern',
-    tag: 'Coming soon',
+    tag: 'In progress',
     title: 'International Sports Governance',
     short: 'Sport Governance',
     syllabusDate: '5 September 2026',

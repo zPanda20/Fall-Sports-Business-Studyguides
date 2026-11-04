@@ -266,7 +266,7 @@ export const fifaReformsTopic = {
                 note: 'Sports Illustrated, 26 February 2016. The 179 to 22 vote, the Council, committees cut from 26 to 9, term limits and pay disclosure.',
               },
               {
-                title: 'Justice Department Approves Remission of Over $32 Million in Forfeited Funds to Victims of FIFA Corruption',
+                title: 'Justice Department Approves Remission of Over $32 Million in Forfeited Funds to Victims in the FIFA Corruption Case',
                 url: 'https://www.justice.gov/archives/opa/pr/justice-department-approves-remission-over-32-million-forfeited-funds-victims-fifa-corruption',
                 note: 'US Department of Justice, 24 August 2021. The more than 201 million USD in approved losses, the World Football Remission Fund and its oversight and audit terms.',
               },

@@ -402,7 +402,7 @@ export const sportsMarketingTopic = {
       ],
       answer: 0,
       explanation: 'Experiential marketing creates immersive, interactive experiences. Traditional marketing transmits messages to a passive audience.',
-      review: { section: 'plain', slide: 7 },
+      review: { section: 'plain', slide: 6 },
     },
     {
       id: 'q3',
@@ -416,7 +416,7 @@ export const sportsMarketingTopic = {
       ],
       answer: 0,
       explanation: 'Digital marketing is cost effective, targeted, measurable, scalable with global reach, and gives quick feedback. It cannot guarantee a sale.',
-      review: { section: 'plain', slide: 8 },
+      review: { section: 'plain', slide: 7 },
     },
     {
       id: 'q4',

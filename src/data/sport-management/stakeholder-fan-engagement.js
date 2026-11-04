@@ -376,7 +376,7 @@ export const stakeholderFanEngagementTopic = {
       q: 'The Summit app has 40,000 monthly users and 25% play the fantasy game. How many fantasy players is that?',
       options: ['10,000', '1,000', '25,000', '16,000'],
       answer: 0,
-      explanation: '40,000 × 0.25 = 10,000.',
+      explanation: 'A quarter of 40,000 is 40,000 × 0.25 = 10,000.',
       review: { section: 'sports', slide: 2 },
     },
     {

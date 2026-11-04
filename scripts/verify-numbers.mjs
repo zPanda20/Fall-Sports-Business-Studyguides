@@ -311,7 +311,7 @@ for (const course of courses) {
   ok_(units.some((u) => u.sessions.startsWith('Async 1')) && units.some((u) => u.sessions.startsWith('Async 2')), 'Sport Governance has both asynchronous activities');
   ok_(units.some((u) => u.sessions.startsWith('Final assessment')), 'Sport Governance has the final assessment');
   ok_(units.every((u) => Array.isArray(u.covers)), 'Every Sport Governance unit lists what it covers');
-  ok_(g.tag === 'Coming soon', 'Sport Governance is tagged Coming soon');
+  ok_(typeof g.tag === 'string' && g.tag.length > 0, 'Sport Governance carries a status tag');
   const all = units.flatMap((u) => u.covers).join(' | ').toLowerCase();
   for (const word of ['three levels of governance', 'stakeholders', 'non-olympic', 'regulatory standards', 'fifagate', 'autonomy', 'competitive balance', 'integrity', 'safeguarding', 'ethical decision making', 'sustainability', 'race and socioeconomic']) {
     ok_(all.includes(word), `Sport Governance covers "${word}"`);
