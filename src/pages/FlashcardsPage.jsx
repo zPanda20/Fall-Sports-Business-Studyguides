@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { getCourse, getTopic, cardsForCourse } from '../data/index.js';
 import { useProgress, setKnown } from '../lib/progress.js';
+import { emit } from '../companions/events.js';
 
 export default function FlashcardsPage() {
   const { courseId } = useParams();
@@ -43,6 +44,7 @@ export default function FlashcardsPage() {
 
   function mark(isKnown) {
     setKnown(card.id, isKnown);
+    emit('study:flashcard-marked', { courseId: course.id, known: isKnown });
     if (hideKnown && isKnown) {
       setFlipped(false); // the card leaves the deck; stay at the same position
     } else {

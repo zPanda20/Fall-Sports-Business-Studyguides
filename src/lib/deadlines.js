@@ -1,4 +1,5 @@
 import { useMemo, useSyncExternalStore } from 'react';
+import { emit } from '../companions/events.js';
 import { DEADLINES } from '../data/deadlines.js';
 
 // ---------------------------------------------------------------------------
@@ -60,6 +61,7 @@ export function markDone(id) {
   if (!item || state.done[id]) return;
   commit({ ...state, done: { ...state.done, [id]: Date.now() } });
   setLast({ id, title: item.title });
+  emit('study:task-complete', { id });
 }
 export function restore(id) {
   if (!state.done[id]) return;
@@ -98,6 +100,8 @@ export function split(items) {
   const archived = items.filter((d) => d.doneAt).sort((a, b) => b.doneAt - a.doneAt);
   return { active, archived };
 }
+// Plain read for code outside React (the companions).
+export const snapshotDeadlines = () => split(resolve(state));
 export function useDeadlines() {
   const s = useSyncExternalStore(subscribe, () => state);
   return useMemo(() => split(resolve(s)), [s]);

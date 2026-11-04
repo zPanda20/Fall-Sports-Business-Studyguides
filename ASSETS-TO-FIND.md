@@ -101,7 +101,20 @@ No video links are in the guides. For each topic, add 1 to 3 short videos in the
 
 **Foundations of Sport Management** (4): Sponsorship of athletes and endorsements; Trends in sports sponsorship; Sources of athlete income and the male vs female gap; Introduction to sport analytics and review of the semester
 
-## 4. Other things only you can supply
+## 4. Companion art still to supply (Seraph Orca and Demon Panda)
+
+The 22 poses and 12 faces you made are already in the app. These extra pieces are not drawn yet, so the matching moments use the existing poses for now. Transparent PNG or WebP, same canvas size as the other poses.
+
+| Piece | Used for |
+|---|---|
+| Snack (a few kinds) | Reward for Seraph after quizzes, tasks and topics. Counted already, art needed to feed him |
+| Hammer | Reward for bonking Demon. Counted already |
+| Head pat hand, and a happy pat pose for each character | Optional reward for either character |
+| Seraph tangled in his wings, dropping his books, halo slipping off | His occasional silly mistakes (today he trips using the existing greeting pose) |
+| Demon: a genuine small smile or thumbs-up close-up | His rare supportive moment (today it uses the Reluctant Respect pose) |
+| Separate wing, halo, tail and flipper layers (optional, later) | Real wing flapping and tail flicks instead of whole-picture motion |
+
+## 5. Other things only you can supply
 
 - Real examples marked with a source date need re-checking before the exam, because published figures change.
 - Your own screenshots from the course platform or Excel (never include other students’ names or private grades).

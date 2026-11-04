@@ -97,8 +97,9 @@ const shown = new Set(); // message ids already shown this session, to avoid rep
 //   opts.auto      true when the app started it, false when the person asked
 //   opts.id        a repeat guard: the same id is shown once per session
 //   opts.reaction  which reaction to play with it; default 'greet'
+//   opts.ttl       close by itself after this many ms (automatic messages only)
 export function say(who, msg, opts = {}) {
-  const { priority = 2, auto = false, id, reaction = 'greet' } = opts;
+  const { priority = 2, auto = false, id, reaction = 'greet', ttl = 0 } = opts;
   const prefs = getPrefs();
   if (!WHO.includes(who) || !prefs[who]) return false;
   if (auto && prefs.quiet) return false;
@@ -118,7 +119,28 @@ export function say(who, msg, opts = {}) {
     later(EXIT_MS, () => tokens.exit === t && set({ closing: null }));
   }
   perform(who, reaction, { enter: true });
+  if (ttl && auto) {
+    const mine = state.msg;
+    later(ttl, () => {
+      // Leave it alone if it was replaced or closed, or if the person is reading or using it.
+      if (state.msg !== mine || hovering) return;
+      closePanel();
+    });
+  }
   return true;
+}
+
+// The panel tells us when the pointer or focus is inside it, so a timed message never vanishes mid-read.
+let hovering = false;
+export const holdPanel = (on) => {
+  hovering = on;
+};
+
+// Change the text (or buttons) of the message on screen without replaying the entrance.
+export function amend(patch, reaction) {
+  if (!state.msg) return;
+  set({ msg: { ...state.msg, ...patch } });
+  if (reaction) perform(state.msg.who, reaction);
 }
 
 export function closePanel() {

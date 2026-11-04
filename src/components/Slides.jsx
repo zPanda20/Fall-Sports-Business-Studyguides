@@ -67,7 +67,7 @@ export default function Slides({ slides, start = 0, label, onFinish, finishLabel
   }, [i]);
 
   return (
-    <div className="slides" ref={wrapRef} role="group" aria-roledescription="carousel" aria-label={label}>
+    <div className="slides" data-tutorial="slides" ref={wrapRef} role="group" aria-roledescription="carousel" aria-label={label}>
       <div
         className="stage glass"
         data-glow

@@ -26,6 +26,10 @@ export const DEFAULTS = {
   tourDone: false,
   tourDismissed: false,
   tipsSeen: {},
+  deadlineSeen: {}, // 'id:level' -> when a reminder was last shown
+  snoozed: {}, // deadline id -> snoozed until (ms)
+  rewards: { snacks: 0, hammers: 0, pats: 0 }, // earned by finishing quizzes, tasks and topics
+  last: '', // the topic you were last reading, so Seraph can offer to resume
 };
 
 const CHOICES = {
@@ -44,8 +48,10 @@ function clean(raw) {
       if (CHOICES[k].includes(v)) out[k] = v;
     } else if (typeof DEFAULTS[k] === 'boolean') {
       if (typeof v === 'boolean') out[k] = v;
-    } else if (k === 'tipsSeen') {
-      if (v && typeof v === 'object' && !Array.isArray(v)) out[k] = v;
+    } else if (k === 'last') {
+      if (typeof v === 'string' && v.length < 120) out[k] = v;
+    } else if (typeof DEFAULTS[k] === 'object') {
+      if (v && typeof v === 'object' && !Array.isArray(v)) out[k] = k === 'rewards' ? { ...DEFAULTS.rewards, ...v } : v;
     }
   }
   return out;

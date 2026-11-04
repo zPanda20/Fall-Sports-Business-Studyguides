@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getCourse, topicsForCourse } from '../data/index.js';
 import { recordTest, useProgress } from '../lib/progress.js';
+import { emit } from '../companions/events.js';
 import { questionPrompt, bundlePrompt } from '../lib/ai.js';
 import Rich from '../lib/Rich.jsx';
 import AskAI from '../components/AskAI.jsx';
@@ -69,12 +70,22 @@ export default function QuickTestPage() {
   function pick(i) {
     if (test.picked !== null) return;
     const q = test.qs[test.index];
+    emit('study:quiz-answer', {
+      source: 'test',
+      courseId: course.id,
+      topicId: q.topicId,
+      correct: i === q.answerPos,
+      explanation: q.explanation ? plain(q.explanation) : null,
+    });
     setTest({ ...test, picked: i, results: [...test.results, { q, i, ok: i === q.answerPos }] });
   }
   function next() {
     const done = test.index === test.qs.length - 1;
     if (done) {
-      recordTest(course.id, test.results.filter((r) => r.ok).length, test.qs.length);
+      const score = test.results.filter((r) => r.ok).length;
+      const before = history[history.length - 1];
+      emit('study:quiz-complete', { source: 'test', courseId: course.id, correct: score, total: test.qs.length, prev: before ? { last: before.correct, total: before.total } : null });
+      recordTest(course.id, score, test.qs.length);
       setTest({ ...test, finished: true });
     } else {
       setTest({ ...test, index: test.index + 1, picked: null });

@@ -1,4 +1,5 @@
 import { useSyncExternalStore } from 'react';
+import { emit } from '../companions/events.js';
 
 // Progress lives only in the student's own browser (localStorage).
 // No accounts, no server. Clearing site data resets it.
@@ -40,15 +41,18 @@ function subscribe(listener) {
   return () => listeners.delete(listener);
 }
 
+export const getProgress = () => state;
 export function useProgress() {
   return useSyncExternalStore(subscribe, () => state);
 }
 
 export function toggleDone(topicId) {
   const done = { ...state.done };
+  const nowDone = !done[topicId];
   if (done[topicId]) delete done[topicId];
   else done[topicId] = true;
   commit({ ...state, done });
+  if (nowDone) emit('study:module-complete', { topicId });
 }
 
 export function recordQuiz(topicId, correct, total) {

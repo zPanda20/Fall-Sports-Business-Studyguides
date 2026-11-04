@@ -674,3 +674,144 @@
 .cmp-switch {
   flex: none;
 }
+
+/* ---------- tour, compact reactions, focus (unreleased parts) ---------- */
+.cmp-heading {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.cmp-note {
+  margin: -2px 0 0;
+  font-size: 0.78rem;
+  opacity: 0.75;
+}
+.cmp-progress {
+  position: relative;
+  height: 18px;
+  border-radius: 999px;
+  background: rgba(127, 127, 127, 0.22);
+  overflow: hidden;
+}
+.cmp-progress span {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #3cc99b, #9ff0cf);
+  transition: width 0.3s ease;
+}
+.cmp-progress em {
+  position: relative;
+  display: block;
+  font-size: 0.7rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+  color: #03241b;
+}
+.cmp-spot {
+  position: fixed;
+  z-index: 44;
+  border-radius: 16px;
+  box-shadow: 0 0 0 9999px rgba(10, 16, 30, 0.5), 0 0 0 3px rgba(159, 240, 207, 0.95), 0 0 24px rgba(60, 201, 155, 0.7);
+  pointer-events: none;
+  transition: top 0.3s ease, left 0.3s ease, width 0.3s ease, height 0.3s ease;
+}
+.cmp-dim {
+  position: fixed;
+  inset: 0;
+  z-index: 44;
+  background: rgba(10, 16, 30, 0.5);
+  pointer-events: none;
+}
+.cmp-root[data-motion='off'] .cmp-spot {
+  transition: none;
+}
+.cmp-root[data-place='top'] .cmp-panel {
+  position: fixed;
+  right: 16px;
+  top: 78px;
+}
+@media (max-width: 919px) {
+  .cmp-root[data-place='top'] .cmp-panel {
+    top: 70px;
+  }
+}
+.cmp-root[data-focus='1'] {
+  display: none;
+}
+
+/* short reactions: on phones just the avatar and the words, so answer buttons stay clear */
+@media (max-width: 480px) {
+  .cmp-panel[data-compact='1'] {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 10px 12px;
+  }
+  .cmp-panel[data-compact='1'] .cmp-fig-col {
+    display: none;
+  }
+}
+/* without major glitch effects, Demon fades instead of fragmenting */
+.cmp-root[data-glitch='off'] .cmp-panel[data-who='demon'] .cmp-fig {
+  filter: none !important;
+}
+.cmp-root[data-glitch='off'] .cmp-panel[data-who='demon'] .cmp-fig[data-anim='enter'] {
+  animation: cmp-fade-in 0.2s ease both;
+}
+.cmp-root[data-glitch='off'] .cmp-panel[data-who='demon'] .cmp-fig[data-anim='exit'] {
+  animation: cmp-fade-out 0.2s ease both;
+}
+.cmp-root[data-glitch='off'] .cmp-panel[data-who='demon'] .cmp-fig[data-anim='meltdown'] {
+  animation: cmp-laugh 1.2s steps(2, jump-none) both;
+}
+
+/* characters resting on a real card */
+.cmp-perch-host {
+  position: relative;
+}
+.cmp-perch {
+  position: absolute;
+  bottom: calc(100% - 14px);
+  width: 92px;
+  z-index: 2;
+  pointer-events: none;
+}
+.cmp-perch[data-who='seraph'] {
+  right: 22px;
+}
+.cmp-perch[data-who='demon'] {
+  right: 126px;
+}
+@media (max-width: 700px) {
+  .cmp-perch-host[data-perch='1'] {
+    margin-top: 74px;
+  }
+  .cmp-perch[data-who='demon'] {
+    right: 100px;
+  }
+}
+.cmp-perch img {
+  display: block;
+  width: 100%;
+  height: auto;
+  animation: cmp-float 6s ease-in-out infinite;
+}
+.cmp-perch[data-who='demon'] img {
+  animation: cmp-sway 4s ease-in-out infinite;
+}
+.cmp-perch[data-motion='off'] img {
+  animation: none;
+}
+@media (max-width: 480px) {
+  .cmp-perch {
+    width: 68px;
+  }
+}
+@media print {
+  .cmp-perch,
+  .cmp-spot,
+  .cmp-dim {
+    display: none;
+  }
+}

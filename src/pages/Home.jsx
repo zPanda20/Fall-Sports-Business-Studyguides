@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { courses, allUnits, topicsForCourse } from '../data/index.js';
 import { useProgress } from '../lib/progress.js';
 import Icon from '../components/Icon.jsx';
+import Perch from '../companions/Perch.jsx';
 import UpNext from '../components/UpNext.jsx';
 import Ring from '../components/Ring.jsx';
 
@@ -59,9 +60,11 @@ export default function Home() {
         </p>
       </section>
 
-      <UpNext />
+      <Perch>
+        <UpNext />
+      </Perch>
 
-      <section className="course-grid" aria-label="Courses with an exam">
+      <section className="course-grid" aria-label="Courses with an exam" data-tutorial="courses">
         {courses.filter((c) => !c.noExam).map((course) => (
           <CourseCard key={course.id} course={course} progress={progress} />
         ))}

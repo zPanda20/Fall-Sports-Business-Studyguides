@@ -105,24 +105,24 @@ function Layout() {
             <span>Study Guides</span>
           </Link>
           <nav className="header-nav" aria-label="Main">
-            <NavLink to="/search" className="nav-link">
+            <NavLink to="/search" className="nav-link" data-tutorial="nav-search">
               <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
                 <circle cx="11" cy="11" r="6.5" />
                 <path d="M16 16l4.5 4.5" />
               </svg>
               <span className="nav-label-wide">Search</span>
             </NavLink>
-            <NavLink to="/deadlines" className="nav-link" aria-label={`Due dates, ${dueActive.length} to do`}>
+            <NavLink to="/deadlines" className="nav-link" data-tutorial="nav-due" aria-label={`Due dates, ${dueActive.length} to do`}>
               <Icon name="calendar" size={18} />
               <span className="nav-label-wide">Due dates</span>
               {dueActive.length > 0 && <span className="nav-count" aria-hidden="true">{dueActive.length}</span>}
             </NavLink>
-            <NavLink to="/bookmarks" className="nav-link" aria-label={`Bookmarks, ${marks.length} saved`}>
+            <NavLink to="/bookmarks" className="nav-link" data-tutorial="nav-bookmarks" aria-label={`Bookmarks, ${marks.length} saved`}>
               <Icon name="bookmark" size={18} />
               <span className="nav-label-wide">Bookmarks</span>
               {marks.length > 0 && <span className="nav-count" aria-hidden="true">{marks.length}</span>}
             </NavLink>
-            <NavLink to="/companions" className="nav-link" aria-label="Study companions">
+            <NavLink to="/companions" className="nav-link" data-tutorial="nav-companions" aria-label="Study companions">
               <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z" />
                 <path d="M18.5 15.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z" />

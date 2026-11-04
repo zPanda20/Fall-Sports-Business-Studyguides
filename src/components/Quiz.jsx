@@ -1,16 +1,30 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import Rich from '../lib/Rich.jsx';
 import AskAI from './AskAI.jsx';
-import { recordQuiz } from '../lib/progress.js';
+import { recordQuiz, getProgress } from '../lib/progress.js';
+import { emit } from '../companions/events.js';
 import { questionPrompt, bundlePrompt } from '../lib/ai.js';
 
 const plain = (s) => String(s).replace(/\*\*/g, '');
+
+// The answer choices are written with the right one first, so each attempt mixes them up.
+// (The answer index and everything that depends on it move together.)
+function mix(q) {
+  if (q.type !== 'mcq') return q;
+  const order = q.options.map((_, i) => i);
+  for (let i = order.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  return { ...q, options: order.map((i) => q.options[i]), answer: order.indexOf(q.answer) };
+}
 
 // One question at a time. Multiple-choice questions are scored; "exercise"
 // questions are self-checked. A wrong answer offers two ways forward: jump back
 // to the part of the topic that explains it, or ask an AI to explain it.
 export default function Quiz({ topic, courseTitle, onReview }) {
-  const questions = topic.questions;
+  const [attempt, setAttempt] = useState(0);
+  const questions = useMemo(() => topic.questions.map(mix), [topic, attempt]);
   const [index, setIndex] = useState(0);
   const [picked, setPicked] = useState(null);
   const [revealed, setRevealed] = useState(false);
@@ -25,6 +39,12 @@ export default function Quiz({ topic, courseTitle, onReview }) {
   function choose(i) {
     if (picked !== null) return;
     setPicked(i);
+    emit('study:quiz-answer', {
+      source: 'quiz',
+      topicId: topic.id,
+      correct: i === q.answer,
+      explanation: q.explanation ? plain(q.explanation) : null,
+    });
     if (i === q.answer) {
       setCorrect((c) => c + 1);
     } else {
@@ -37,6 +57,7 @@ export default function Quiz({ topic, courseTitle, onReview }) {
 
   function next() {
     if (isLast) {
+      emit('study:quiz-complete', { source: 'quiz', topicId: topic.id, correct, total: scored, prev: getProgress().quiz[topic.id] || null });
       recordQuiz(topic.id, correct, scored);
       setFinished(true);
       return;
@@ -47,6 +68,7 @@ export default function Quiz({ topic, courseTitle, onReview }) {
   }
 
   function restart() {
+    setAttempt((a) => a + 1);
     setIndex(0);
     setPicked(null);
     setRevealed(false);

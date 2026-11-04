@@ -105,7 +105,7 @@ export default function TopicPage() {
 
       <div className="shell">
         {/* Glass sidebar (desktop) */}
-        <aside className="side glass" data-glow aria-label="Topic sections">
+        <aside data-tutorial="topic-sections" className="side glass" data-glow aria-label="Topic sections">
           <div className="side-title">
             <h1 className="serif">{topic.title}</h1>
             <p className="meta">{topic.sessions} · about {topic.minutes} min</p>
@@ -236,7 +236,7 @@ export default function TopicPage() {
       </div>
 
       {/* Glass tab bar (phones) */}
-      <nav className="tabbar glass" aria-label="Topic sections">
+      <nav className="tabbar glass" aria-label="Topic sections" data-tutorial="topic-sections">
         {SECTIONS.map((s) => (
           <button
             key={s.id}

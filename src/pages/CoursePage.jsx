@@ -66,7 +66,7 @@ export default function CoursePage() {
               : `${done} of ${ready.length} available topics done · ${allUnits(course).length} planned`}
           </p>
         </div>
-        <div className="study-actions">
+        <div className="study-actions" data-tutorial="study-actions">
           {cardCount > 0 && (
             <Link to={`/course/${course.id}/flashcards`} className="button fit">
               <Icon name="cards" size={20} />

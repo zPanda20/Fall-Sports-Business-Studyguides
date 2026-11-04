@@ -1,4 +1,5 @@
 import { useSyncExternalStore } from 'react';
+import { emit } from '../companions/events.js';
 
 // "Clarification bookmarks": a student flags a topic or a slide they did not understand,
 // optionally adds a note, and finds everything again on the Bookmarks page.
@@ -35,6 +36,7 @@ function subscribe(listener) {
   return () => listeners.delete(listener);
 }
 
+export const getBookmarks = () => state;
 export function useBookmarks() {
   return useSyncExternalStore(subscribe, () => state);
 }
@@ -49,6 +51,7 @@ export function toggleBookmark(item) {
     commit(state.filter((b) => b.id !== item.id));
   } else {
     commit([{ ...item, note: '', createdAt: Date.now() }, ...state]);
+    emit('study:bookmark-added', { scope: item.scope, topicId: item.topicId });
   }
 }
 

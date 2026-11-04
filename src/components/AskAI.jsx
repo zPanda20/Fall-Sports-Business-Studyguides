@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { emit } from '../companions/events.js';
 import { PROVIDERS, MAX_URL_PROMPT, getProvider, setAiPref, useAiPref } from '../lib/ai.js';
 
 // Sends a ready-made prompt to the student's preferred AI.
@@ -19,6 +20,7 @@ export default function AskAI({ prompt, label = 'Ask an AI' }) {
   }
 
   function ask() {
+    emit('study:ai-open', {});
     if (direct) {
       window.open(provider.url(prompt), '_blank', 'noopener,noreferrer');
       setMessage(`Opened ${provider.name} with your question ready to send.`);
@@ -37,6 +39,7 @@ export default function AskAI({ prompt, label = 'Ask an AI' }) {
   }
 
   async function copyOnly() {
+    emit('study:chat-export', {});
     setMessage((await copy()) ? 'Message copied.' : 'Could not copy automatically. Select the text below and copy it.');
   }
 

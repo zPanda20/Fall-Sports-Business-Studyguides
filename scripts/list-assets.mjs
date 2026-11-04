@@ -45,7 +45,16 @@ for (const course of courses) {
   if (!missing.length) continue;
   md += `**${course.title}** (${missing.length}): ${missing.map((u) => u.title).join('; ')}\n\n`;
 }
-md += '## 4. Other things only you can supply\n\n';
+md += '## 4. Companion art still to supply (Seraph Orca and Demon Panda)\n\n';
+md += 'The 22 poses and 12 faces you made are already in the app. These extra pieces are not drawn yet, so the matching moments use the existing poses for now. Transparent PNG or WebP, same canvas size as the other poses.\n\n';
+md += '| Piece | Used for |\n|---|---|\n';
+md += '| Snack (a few kinds) | Reward for Seraph after quizzes, tasks and topics. Counted already, art needed to feed him |\n';
+md += '| Hammer | Reward for bonking Demon. Counted already |\n';
+md += '| Head pat hand, and a happy pat pose for each character | Optional reward for either character |\n';
+md += '| Seraph tangled in his wings, dropping his books, halo slipping off | His occasional silly mistakes (today he trips using the existing greeting pose) |\n';
+md += '| Demon: a genuine small smile or thumbs-up close-up | His rare supportive moment (today it uses the Reluctant Respect pose) |\n';
+md += '| Separate wing, halo, tail and flipper layers (optional, later) | Real wing flapping and tail flicks instead of whole-picture motion |\n\n';
+md += '## 5. Other things only you can supply\n\n';
 md += '- Real examples marked with a source date need re-checking before the exam, because published figures change.\n';
 md += '- Your own screenshots from the course platform or Excel (never include other students’ names or private grades).\n';
 md += '- Any slide figure you want from your instructor’s decks: ask whether you may reuse it, or redraw it yourself.\n';

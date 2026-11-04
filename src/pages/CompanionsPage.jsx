@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { usePrefs, setPref, resetPrefs } from '../companions/prefs.js';
+import { usePrefs, setPref, resetPrefs, isPreview } from '../companions/prefs.js';
+import { tourReset, tourStart } from '../companions/tour.js';
 import { say, closePanel } from '../companions/manager.js';
 import { line } from '../companions/dialogue.js';
 import { CHARACTERS, faceUrl } from '../companions/assets.js';
@@ -146,6 +147,35 @@ export default function CompanionsPage() {
         </div>
         {!p.demon && <p className="meta">Turn Demon on above to try his moves.</p>}
       </section>
+
+      {isPreview() && (
+        <section className="glass cmp-card" aria-labelledby="cmp-early">
+          <h2 id="cmp-early" className="serif">Early access settings</h2>
+          <p className="meta">You can see these because preview mode is on in this browser. The tour, quiz reactions and reminders are not visible to anyone else yet.</p>
+          <Switch id="cmp-tour" label="Tour guidance" hint="Seraph offers the tour once and explains pages." checked={p.tutorial} onChange={(v) => setPref('tutorial', v)} />
+          <div className="cmp-ask-actions">
+            <button type="button" className="button small" onClick={() => { tourReset(); tourStart(); }}>Restart the tour</button>
+            <button type="button" className="button small secondary" onClick={tourReset}>Reset tour progress</button>
+          </div>
+          <Switch id="cmp-sugg" label="Study suggestions" hint="Resume where you left off, review weak topics, and Seraph's deadline tips." checked={p.suggestions} onChange={(v) => setPref('suggestions', v)} />
+          <Switch id="cmp-cel" label="Celebrations" hint="Seraph's small cheers after right answers and good results." checked={p.celebrate} onChange={(v) => setPref('celebrate', v)} />
+          <Switch id="cmp-dq" label="Demon reacts to quizzes" checked={p.demonQuiz} onChange={(v) => setPref('demonQuiz', v)} />
+          <Switch id="cmp-dd" label="Demon deadline reminders" hint="Uses your real due dates. Never late at night, and you can snooze." checked={p.demonDeadlines} onChange={(v) => setPref('demonDeadlines', v)} />
+          <Switch id="cmp-gl" label="Major glitch effects" hint="Demon's short digital glitches when he appears or melts down." checked={p.glitch} onChange={(v) => setPref('glitch', v)} />
+          <Switch id="cmp-focus" label="Hide during focused study" hint="Hides the helpers on topic, quiz, test and flashcard pages." checked={p.focusHide} onChange={(v) => setPref('focusHide', v)} />
+          <fieldset className="cmp-fieldset">
+            <legend>How often they speak up</legend>
+            <div className="cmp-choices">
+              <Choice name="popups" value="rare" current={p.popups} onPick={(v) => setPref('popups', v)} title="Rarely" text="Only the important moments." />
+              <Choice name="popups" value="normal" current={p.popups} onPick={(v) => setPref('popups', v)} title="Normal" text="Selective reactions with cooldowns." />
+              <Choice name="popups" value="lively" current={p.popups} onPick={(v) => setPref('popups', v)} title="Lively" text="More reactions, still never twice at once." />
+            </div>
+          </fieldset>
+          <p className="meta">
+            Rewards earned so far (art for these is still to come): {p.rewards.snacks} snacks for Seraph, {p.rewards.hammers} hammers for Demon, {p.rewards.pats} head pats.
+          </p>
+        </section>
+      )}
 
       <p>
         <button type="button" className="button small secondary" onClick={() => { closePanel(); resetPrefs(); }}>
