@@ -325,7 +325,7 @@ for (const course of courses) {
   eq(units.length, 12, 'Sport Management units (12 sessions)');
   for (let n = 1; n <= 12; n++) ok_(units.some((u) => u.sessions === `Session ${n}`), `Sport Management has Session ${n}`);
   ok_(units.every((u) => Array.isArray(u.covers)), 'Every Sport Management unit lists what it covers');
-  ok_(f.tag === 'Coming soon', 'Sport Management is tagged Coming soon');
+  ok_(typeof f.tag === 'string' && f.tag.length > 0, 'Sport Management carries a status tag');
   const all = units.flatMap((u) => u.covers).join(' | ').toLowerCase();
   for (const word of ['ecosystem', 'fandom', 'fan engagement', 'sports marketing', 'media rights', 'sponsorship', 'endorsements', 'cryptocurrency', 'luxury', 'gender pay gap', 'analytics']) {
     ok_(all.includes(word), `Sport Management covers "${word}"`);

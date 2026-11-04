@@ -12,6 +12,14 @@ import { organizationalGovernanceTopic } from './sport-governance/organizational
 import { fifaReformsTopic } from './sport-governance/fifa-reforms.js';
 import { politicalGovernanceAutonomyTopic } from './sport-governance/political-governance-autonomy.js';
 import { competitiveBalanceIntegrityTopic } from './sport-governance/competitive-balance-integrity.js';
+import { sportMgmtIntroTopic } from './sport-management/sport-mgmt-intro.js';
+import { sportIndustryEcosystemTopic } from './sport-management/sport-industry-ecosystem.js';
+import { stakeholderFanEngagementTopic } from './sport-management/stakeholder-fan-engagement.js';
+import { socialResponsibilityMarketingIntroTopic } from './sport-management/social-responsibility-marketing-intro.js';
+import { sportsMarketingTopic } from './sport-management/sports-marketing.js';
+import { sportsMediaRightsTopic } from './sport-management/sports-media-rights.js';
+import { mediaAndSponsorshipIntroTopic } from './sport-management/media-and-sponsorship-intro.js';
+import { sportsSponsorshipTopic } from './sport-management/sports-sponsorship.js';
 import { excelBasicsTopic } from './accounting/excel-basics.js';
 import { accountingBasicsTopic } from './accounting/accounting-basics.js';
 import { accountingProcessTopic } from './accounting/accounting-process.js';
@@ -40,6 +48,14 @@ export const topics = [
   balanceSheetLiabilitiesEquityTopic,
   cvpTopic,
   excelBasicsTopic,
+  sportMgmtIntroTopic,
+  sportIndustryEcosystemTopic,
+  stakeholderFanEngagementTopic,
+  socialResponsibilityMarketingIntroTopic,
+  sportsMarketingTopic,
+  sportsMediaRightsTopic,
+  mediaAndSponsorshipIntroTopic,
+  sportsSponsorshipTopic,
   governanceLevelsTopic,
   systemicGovernanceStakeholdersTopic,
   olympicVsNonOlympicTopic,
@@ -536,7 +552,7 @@ export const courses = [
   {
     id: 'sport-management',
     universe: 'summit',
-    tag: 'Coming soon',
+    tag: 'In progress',
     title: 'Foundations of Sport Management',
     short: 'Sport Management',
     syllabusDate: '24 August 2026',
@@ -617,6 +633,7 @@ export const courses = [
             covers: [
               'An introduction to sports media rights and content distribution',
               'Distribution and consumption of sport content, with a focus on new media',
+              'Fifteen trends in media consumption',
               'Async activity 3: review sports media rights and look for practical examples during the Sportel experience',
             ],
           },
@@ -626,18 +643,18 @@ export const courses = [
             sessions: 'Session 7',
             covers: [
               'Guest speaker on media rights',
-              'The scope of sports sponsorship',
+              'The history and pricing of media rights, and streamers entering live sport',
+              'The scope of sports sponsorship: who sponsors sport and the eight reasons brands sponsor',
               'Async activity 4: read about sponsorship and sports marketing in Formula 1 and MotoGP',
             ],
           },
           {
             id: 'sports-sponsorship',
-            title: 'Sponsorship of teams and leagues, and activation',
+            title: 'Sponsorship of teams (leagues and activation to follow)',
             sessions: 'Session 8',
             covers: [
-              'Sponsorship of teams and leagues',
-              'Why activation is critical to achieving sponsorship goals',
-              'Case study: the Guinness sponsorship of the Six Nations',
+              'Sponsorship of teams: benefits, cash and in-kind support, assets and disparity',
+              'Sponsorship of leagues, activation and the Guinness and Six Nations case (slides to follow)',
             ],
           },
           {
