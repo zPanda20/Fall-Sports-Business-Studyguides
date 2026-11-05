@@ -290,7 +290,8 @@ for (const course of courses) {
   const mr = courses.find((c) => c.id === 'market-research');
   ok_(mr, 'Market Research course exists');
   const units = allUnits(mr);
-  eq(units.length, 14, 'Market Research units (12 sessions + 2 async)');
+  eq(units.length, 15, 'Market Research units (12 sessions + 2 async + the group project)');
+  ok_(units.some((u) => u.id === 'group-project'), 'Market Research has the group project guide');
   for (let n = 1; n <= 12; n++) ok_(units.some((u) => u.sessions === `Session ${n}`), `Market Research has Session ${n}`);
   ok_(units.some((u) => u.sessions.startsWith('Async A')), 'Market Research has Async A');
   ok_(units.some((u) => u.sessions.startsWith('Async B')), 'Market Research has Async B');

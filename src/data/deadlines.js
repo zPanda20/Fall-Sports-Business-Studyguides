@@ -95,5 +95,6 @@ export const DEADLINES = [
     dueAt: null,
     approx: 'Mid-December',
     group: true,
+    note: 'One student uploads for the group on Boostcamp. Quantitative: report, jamovi file and Qualtrics file. Qualitative: report, instrument, synthetic data, Taguette export and AI documentation. Check the exact deadline on Boostcamp.',
   },
 ];

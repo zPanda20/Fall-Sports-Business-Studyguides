@@ -5,6 +5,8 @@ import { researchQuestionProposalTopic } from './market-research/research-questi
 import { literatureReviewTopic } from './market-research/literature-review.js';
 import { measurementValidityTopic } from './market-research/measurement-validity.js';
 import { quantitativeOverviewTopic } from './market-research/quantitative-overview.js';
+import { samplingTopic } from './market-research/sampling.js';
+import { groupProjectTopic } from './market-research/group-project.js';
 import { governanceLevelsTopic } from './sport-governance/governance-levels.js';
 import { systemicGovernanceStakeholdersTopic } from './sport-governance/systemic-governance-stakeholders.js';
 import { olympicVsNonOlympicTopic } from './sport-governance/olympic-vs-non-olympic.js';
@@ -69,6 +71,8 @@ export const topics = [
   literatureReviewTopic,
   measurementValidityTopic,
   quantitativeOverviewTopic,
+  samplingTopic,
+  groupProjectTopic,
   whatIsStrategyTopic,
   strategicLeadershipTopic,
   pestelTopic,
@@ -217,7 +221,7 @@ export const courses = [
   {
     id: 'market-research',
     universe: 'harbor',
-    tag: 'Sessions 1\u20136 ready',
+    tag: 'Sessions 1\u20137 and project ready',
     syllabusDate: '15 September 2026',
     title: 'Market Research',
     short: 'Market Research',
@@ -372,6 +376,22 @@ export const courses = [
               'Basic coding and theme identification',
               'Turning qualitative evidence into managerial insights',
               'Judging whether the qualitative project path suits you',
+            ],
+          },
+        ],
+      },
+      {
+        title: 'The group project',
+        units: [
+          {
+            id: 'group-project',
+            title: 'The group project: quantitative or qualitative',
+            sessions: 'Graded group project',
+            covers: [
+              'The two paths and how to choose',
+              'What to build, analyze and hand in',
+              'Honesty about synthetic data',
+              'Report structure and grading',
             ],
           },
         ],
