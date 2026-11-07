@@ -263,6 +263,8 @@ function Inner() {
   useEffect(() => {
     if (!prefs.seraph || prefs.quiet || pathname === '/companions') return undefined;
     if (offerTour) {
+      // The welcome tour is offered on the home page only, never on a first visit to another page.
+      if (pathname !== '/') return undefined;
       const t = setTimeout(() => {
         const shown = say(
           'seraph',
