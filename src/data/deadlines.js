@@ -4,6 +4,7 @@
 // courseId links to a course in this app when there is one.
 // files: [{ label, file }] adds download links (files live in public/files/).
 // brief: { objective, intro, points: [{ label, text }] } shows the task details under the title.
+// unconfirmed: true shows a big "Unconfirmed due date" badge until the date is confirmed.
 // videos: [{ label, url }] adds red "Watch video" buttons that open in a new tab.
 // group: true marks a group project. approx is shown when only a rough time is known (no exact date yet).
 export const DEADLINES = [
@@ -73,8 +74,9 @@ export const DEADLINES = [
     id: 'presentation-skills-speaker-analysis',
     title: 'Asynchronous work: Speaker Analysis',
     course: 'Presentation Skills',
-    dueAt: null,
-    note: 'No due date was shown yet. Bring your notes to the first class for the class discussion.',
+    dueAt: '2026-11-09T10:00:00+01:00',
+    unconfirmed: true,
+    note: 'The due date is not confirmed yet: 10:00 on 9 November is our best information. Bring your notes to the first class for the class discussion.',
     brief: {
       objective:
         'Deepen critical analysis skills by evaluating real-world public speakers, helping students identify how body language and grounding techniques dictate a speaker\'s presence before applying these insights to their own performance.',

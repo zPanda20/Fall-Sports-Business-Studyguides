@@ -3708,3 +3708,17 @@ td {
 }
 .due-video:hover { background: #a82722; }
 .due-video:focus-visible { outline: 3px solid var(--accent-ink); outline-offset: 2px; }
+
+.due-unconfirmed {
+  display: inline-block;
+  margin: 4px 0 2px;
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #3d2a00;
+  background: #ffc933;
+  box-shadow: 0 0 0 2px #b27d00 inset;
+}

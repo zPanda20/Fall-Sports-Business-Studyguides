@@ -31,6 +31,7 @@ export default function DueRow({ item }) {
 
       <div className="due-main">
         <h3 className="due-title">{item.title}</h3>
+        {item.unconfirmed && <p className="due-unconfirmed" role="note">Unconfirmed due date</p>}
         <p className="due-meta">
           {item.courseId ? (
             <Link to={`/course/${item.courseId}`} className="due-course">{item.course}</Link>
