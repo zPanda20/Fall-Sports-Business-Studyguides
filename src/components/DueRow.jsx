@@ -41,6 +41,33 @@ export default function DueRow({ item }) {
           {hasDate && <span className="due-when">{formatDue(item.dueMs)}</span>}
         </p>
         {item.note && <p className="due-note">{item.note}</p>}
+        {item.brief && (
+          <div className="due-brief">
+            {item.brief.objective && (
+              <p><strong>Objective:</strong> {item.brief.objective}</p>
+            )}
+            {item.brief.intro && <p>{item.brief.intro}</p>}
+            {item.brief.points?.length > 0 && (
+              <ul>
+                {item.brief.points.map((pt) => (
+                  <li key={pt.label}><strong>{pt.label}:</strong> {pt.text}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
+        {item.videos?.length > 0 && (
+          <ul className="due-videos" aria-label="Videos for this assignment">
+            {item.videos.map((v) => (
+              <li key={v.url}>
+                <a href={v.url} target="_blank" rel="noopener noreferrer" className="due-video">
+                  <span aria-hidden="true">▶</span> {v.label}
+                  <span className="sr-only"> (opens YouTube in a new tab)</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
         {item.files?.length > 0 && (
           <ul className="due-files" aria-label="Files for this assignment">
             {item.files.map((f) => (

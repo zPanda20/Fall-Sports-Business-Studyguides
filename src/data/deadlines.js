@@ -3,6 +3,8 @@
 // dueAt: null means no date has been added yet. Each student can add or change a date on their own device.
 // courseId links to a course in this app when there is one.
 // files: [{ label, file }] adds download links (files live in public/files/).
+// brief: { objective, intro, points: [{ label, text }] } shows the task details under the title.
+// videos: [{ label, url }] adds red "Watch video" buttons that open in a new tab.
 // group: true marks a group project. approx is shown when only a rough time is known (no exact date yet).
 export const DEADLINES = [
   {
@@ -72,7 +74,32 @@ export const DEADLINES = [
     title: 'Asynchronous work: Speaker Analysis',
     course: 'Presentation Skills',
     dueAt: null,
-    note: 'No due date was shown yet.',
+    note: 'No due date was shown yet. Bring your notes to the first class for the class discussion.',
+    brief: {
+      objective:
+        'Deepen critical analysis skills by evaluating real-world public speakers, helping students identify how body language and grounding techniques dictate a speaker\'s presence before applying these insights to their own performance.',
+      intro:
+        'Please watch the three pre-selected speeches featuring distinctly different styles of speakers. Write notes on the areas below and bring these to our first class for a class discussion.',
+      points: [
+        {
+          label: 'Body Language & Physical Delivery',
+          text: 'Evaluate each speaker\'s posture, movement across the stage, facial expressions, and hand gestures. Identify which physical behaviours build trust and project presence, and which might distract from the messaging.',
+        },
+        {
+          label: 'Calm & Control',
+          text: 'Assess each speaker\'s level of physical grounding and composure. Look for signs of how they manage their nervous system, their use of stillness versus frantic movement, and how they project an air of calm and control under the spotlight.',
+        },
+        {
+          label: 'Personal Preference',
+          text: 'Which speaker did you connect best to and why? Describe how their specific style resonated with you and reflect on which of their style choices you can use in your own work.',
+        },
+      ],
+    },
+    videos: [
+      { label: 'Watch video 1', url: 'https://www.youtube.com/watch?v=eVFzbxmKNUw' },
+      { label: 'Watch video 2', url: 'https://www.youtube.com/watch?v=zy2Zj8yIe6c' },
+      { label: 'Watch video 3', url: 'https://www.youtube.com/watch?v=v1ojZKWfShQ' },
+    ],
   },
   {
     id: 'governance-super-league',
