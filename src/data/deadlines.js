@@ -107,10 +107,9 @@ export const DEADLINES = [
     title: 'Financial analysis of a company',
     course: 'Accounting and Forecasting',
     courseId: 'accounting',
-    dueAt: null,
-    approx: 'Around 19 December (date to be confirmed)',
+    dueAt: '2026-12-21T23:59:00+01:00',
     group: true,
-    note: 'Carry out a financial analysis of a company and present it.',
+    note: 'Only the day (21 December) was given, so this is set to the end of that day. Carry out a financial analysis of a company and present it.',
   },
   {
     id: 'market-research-project',
