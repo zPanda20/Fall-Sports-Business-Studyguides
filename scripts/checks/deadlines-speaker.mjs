@@ -10,5 +10,5 @@ export default function ({ eq, ok_ }) {
   eq(d.videos.map((v) => new URL(v.url).searchParams.get('v')).join(), 'eVFzbxmKNUw,zy2Zj8yIe6c,v1ojZKWfShQ', 'speaker analysis: the three links as given');
   ok_(d.videos.every((v) => v.url.startsWith('https://www.youtube.com/watch?v=')), 'speaker analysis: links are YouTube watch URLs');
   eq(Date.parse(d.dueAt), Date.UTC(2026, 10, 9, 9, 0), 'speaker analysis: due 10:00 on 9 Nov (UTC+1)');
-  ok_(d.unconfirmed === true, 'speaker analysis: marked as an unconfirmed due date');
+  ok_(!d.unconfirmed, 'speaker analysis: due date is confirmed, no badge');
 }

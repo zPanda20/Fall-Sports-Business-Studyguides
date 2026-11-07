@@ -75,7 +75,6 @@ export const DEADLINES = [
     title: 'Asynchronous work: Speaker Analysis',
     course: 'Presentation Skills',
     dueAt: '2026-11-09T10:00:00+01:00',
-    unconfirmed: true,
     brief: {
       objective:
         'Deepen critical analysis skills by evaluating real-world public speakers, helping students identify how body language and grounding techniques dictate a speaker\'s presence before applying these insights to their own performance.',
