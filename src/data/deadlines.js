@@ -106,9 +106,9 @@ export const DEADLINES = [
     title: 'Group assignment: governance case analysis',
     course: 'International Sports Governance',
     courseId: 'sport-governance',
-    dueAt: '2026-12-09T23:59:00+01:00',
+    dueAt: '2026-12-16T23:59:00+01:00',
     group: true,
-    note: 'Only the day (9 December) was given, so this is set to the end of that day. Observation (what we know about the event), integration (connect it to the theory and ideas from the course) and critique (analyze and criticize the situation).',
+    note: 'Only the day (16 December) was given, so this is set to the end of that day. Observation (what we know about the event), integration (connect it to the theory and ideas from the course) and critique (analyze and criticize the situation).',
   },
   {
     id: 'accounting-company-analysis',

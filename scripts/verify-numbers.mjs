@@ -364,7 +364,7 @@ for (const c of courses.filter((c) => c.overview)) ok_(typeof c.syllabusDate ===
   eq(at('strategy-final-group-assignment'), Date.UTC(2026, 10, 27, 22, 59), 'Final group assignment: 27 Nov 23:59 (UTC+1)');
   eq(DEADLINES.filter((d) => d.dueAt === null).length, 2, 'two items have no exact date yet');
   eq(Date.parse(DEADLINES.find((d) => d.id === 'leadership-final-assignment').dueAt), Date.UTC(2026, 10, 15, 22, 59), 'Leadership final: 15 Nov (end of day, UTC+1)');
-  eq(Date.parse(DEADLINES.find((d) => d.id === 'governance-super-league').dueAt), Date.UTC(2026, 11, 9, 22, 59), 'Governance final: 9 Dec (end of day, UTC+1)');
+  eq(Date.parse(DEADLINES.find((d) => d.id === 'governance-super-league').dueAt), Date.UTC(2026, 11, 16, 22, 59), 'Governance final: 16 Dec (end of day, UTC+1)');
   eq(Date.parse(DEADLINES.find((d) => d.id === 'market-research-project').dueAt), Date.UTC(2026, 11, 14, 22, 59), 'Market Research project: 14 Dec (end of day, UTC+1)');
   eq(DEADLINES.filter((d) => d.group).map((d) => d.id).join(), 'sport-management-async-group-assignment,strategy-final-group-assignment,strategy-final-presentation,governance-super-league,accounting-company-analysis,market-research-project', 'group projects are tagged');
   eq(Date.parse(DEADLINES.find((d) => d.id === 'strategy-final-presentation').dueAt), Date.UTC(2026, 10, 30, 22, 59), 'Strategy presentation: 30 Nov (end of day, UTC+1)');
