@@ -7,6 +7,8 @@ import Icon from './Icon.jsx';
 // One assignment: a tick to mark it done (which archives it), its course, its date, and the live clock.
 export default function DueRow({ item }) {
   const [editing, setEditing] = useState(false);
+  const [showMore, setShowMore] = useState(false);
+  const hasMore = Boolean(item.brief || item.videos?.length);
   const [value, setValue] = useState(item.dueMs ? toLocalInput(item.dueMs) : '');
   const hasDate = item.dueMs !== null;
 
@@ -16,6 +18,18 @@ export default function DueRow({ item }) {
     setDueDate(item.id, new Date(ms).toISOString());
     setEditing(false);
   }
+
+  const moreBtn = hasMore && (
+    <button
+      type="button"
+      className="due-link"
+      aria-expanded={showMore}
+      aria-controls={`more-${item.id}`}
+      onClick={() => setShowMore((v) => !v)}
+    >
+      {showMore ? 'Hide details' : 'More details'}
+    </button>
+  );
 
   return (
     <li className="due-item nm" data-course={item.courseId}>
@@ -42,33 +56,7 @@ export default function DueRow({ item }) {
           {hasDate && <span className="due-when">{formatDue(item.dueMs)}</span>}
         </p>
         {item.note && <p className="due-note">{item.note}</p>}
-        {item.brief && (
-          <div className="due-brief">
-            {item.brief.objective && (
-              <p><strong>Objective:</strong> {item.brief.objective}</p>
-            )}
-            {item.brief.intro && <p>{item.brief.intro}</p>}
-            {item.brief.points?.length > 0 && (
-              <ul>
-                {item.brief.points.map((pt) => (
-                  <li key={pt.label}><strong>{pt.label}:</strong> {pt.text}</li>
-                ))}
-              </ul>
-            )}
-          </div>
-        )}
-        {item.videos?.length > 0 && (
-          <ul className="due-videos" aria-label="Videos for this assignment">
-            {item.videos.map((v) => (
-              <li key={v.url}>
-                <a href={v.url} target="_blank" rel="noopener noreferrer" className="due-video">
-                  <span aria-hidden="true">▶</span> {v.label}
-                  <span className="sr-only"> (opens YouTube in a new tab)</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        )}
+        {hasMore && (editing || !hasDate) && <p className="due-links">{moreBtn}</p>}
         {item.files?.length > 0 && (
           <ul className="due-files" aria-label="Files for this assignment">
             {item.files.map((f) => (
@@ -104,6 +92,7 @@ export default function DueRow({ item }) {
 
         {hasDate && !editing && (
           <p className="due-links">
+            {moreBtn}
             <button type="button" className="due-link" onClick={() => { setValue(toLocalInput(item.dueMs)); setEditing(true); }}>
               Change date
             </button>
@@ -113,6 +102,37 @@ export default function DueRow({ item }) {
               </button>
             )}
           </p>
+        )}
+        {hasMore && showMore && (
+          <div id={`more-${item.id}`} className="due-more">
+            {item.brief && (
+              <div className="due-brief">
+                {item.brief.objective && (
+                  <p><strong>Objective:</strong> {item.brief.objective}</p>
+                )}
+                {item.brief.intro && <p>{item.brief.intro}</p>}
+                {item.brief.points?.length > 0 && (
+                  <ul>
+                    {item.brief.points.map((pt) => (
+                      <li key={pt.label}><strong>{pt.label}:</strong> {pt.text}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+            {item.videos?.length > 0 && (
+              <ul className="due-videos" aria-label="Videos for this assignment">
+                {item.videos.map((v) => (
+                  <li key={v.url}>
+                    <a href={v.url} target="_blank" rel="noopener noreferrer" className="due-video">
+                      <span aria-hidden="true">▶</span> {v.label}
+                      <span className="sr-only"> (opens YouTube in a new tab)</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         )}
       </div>
 

@@ -76,7 +76,6 @@ export const DEADLINES = [
     course: 'Presentation Skills',
     dueAt: '2026-11-09T10:00:00+01:00',
     unconfirmed: true,
-    note: 'The due date is not confirmed yet: 10:00 on 9 November is our best information. Bring your notes to the first class for the class discussion.',
     brief: {
       objective:
         'Deepen critical analysis skills by evaluating real-world public speakers, helping students identify how body language and grounding techniques dictate a speaker\'s presence before applying these insights to their own performance.',

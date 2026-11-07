@@ -3722,3 +3722,20 @@ td {
   background: #ffc933;
   box-shadow: 0 0 0 2px #b27d00 inset;
 }
+
+.due-more-btn {
+  align-self: flex-start;
+  min-height: 34px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 999px;
+  color: var(--accent-ink);
+  background: var(--nm-bg);
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 650;
+  cursor: pointer;
+  box-shadow: 3px 3px 8px var(--nm-dark), -3px -3px 8px var(--nm-light);
+}
+.due-more-btn:focus-visible { outline: 3px solid var(--accent-ink); outline-offset: 2px; }
+.due-more { margin-top: 6px; }
