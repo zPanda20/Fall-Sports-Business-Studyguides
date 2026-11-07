@@ -63,14 +63,6 @@ export const DEADLINES = [
     note: 'Only the day (30 November) was given, so this is set to the end of that day. Use "Change date" if you know the time.',
   },
   {
-    id: 'governance-fifa-reforms',
-    title: 'Governance reforms @FIFA post-FIFAGate: actual reforms or PR exercise?',
-    course: 'International Sports Governance',
-    courseId: 'sport-governance',
-    dueAt: null,
-    note: 'Read the articles and answer the questions on the forum. No due date was shown yet.',
-  },
-  {
     id: 'presentation-skills-speaker-analysis',
     title: 'Asynchronous work: Speaker Analysis',
     course: 'Presentation Skills',
