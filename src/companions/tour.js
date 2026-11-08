@@ -2,7 +2,7 @@ import { useSyncExternalStore } from 'react';
 import { courses, topicsForCourse } from '../data/index.js';
 import { say, closePanel, cancelAll } from './manager.js';
 import { line } from './dialogue.js';
-import { setPref } from './prefs.js';
+import { getPrefs, setPref } from './prefs.js';
 
 // The guided tour. Steps are data: where to go, which element to light up (found through a stable
 // data-tutorial attribute, never a CSS class), what Seraph says and which pose he uses.
@@ -171,12 +171,16 @@ function show(n, el) {
   actions.push({ label: last ? 'Finish' : 'Next', primary: true, keep: true, fn: () => (last ? tourFinish() : tourGo(n + 1, 1)) });
   if (!last) actions.push({ label: 'Skip tour', keep: true, fn: () => tourStop() });
   set({ active: true, i: n, rect: el ? true : null });
+  const guide = tourGuide();
   say(
-    'seraph',
-    { text: step.text || line('seraph', 'tourEnd'), heading: step.title, actions, progress: { i: n, n: STEPS.length }, tour: true },
+    guide,
+    { text: step.text || line(guide, 'tourEnd'), heading: step.title, actions, progress: { i: n, n: STEPS.length }, tour: true },
     { priority: 6, auto: false, reaction: step.pose === 'celebration' ? 'celebrate' : step.pose === 'pointing' ? 'point' : step.pose === 'flashcards' ? 'flashcards' : step.pose === 'bookmark' ? 'bookmark' : step.pose === 'scholar' ? 'think' : 'greet' },
   );
 }
+
+// Seraph leads the tour. If he is switched off and Cosmic is on, Cosmic leads it.
+export const tourGuide = () => (getPrefs().seraph || !getPrefs().cosmic ? 'seraph' : 'cosmic');
 
 export function tourStart() {
   run++;

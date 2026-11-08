@@ -3,6 +3,7 @@ import { getPrefs, subscribePrefs } from './prefs.js';
 import { REACTIONS } from './reactions.js';
 import { facePath } from './emotions.js';
 import { NEUTRAL_FACE, WHO } from './assets.js';
+import { ui } from './dialogue.js';
 
 // One shared brain for both characters. It decides who is on screen, which pose and face each
 // one has, and which message is showing. Only one panel can be open at a time.
@@ -13,13 +14,15 @@ import { NEUTRAL_FACE, WHO } from './assets.js';
 
 const EXIT_MS = 300;
 
+const each = (fn) => Object.fromEntries(WHO.map((w) => [w, fn(w)]));
+
 const fresh = () => ({
-  panel: null, // 'seraph' | 'demon' | null: who has the open panel
+  panel: null, // a character id, or null: who has the open panel
   closing: null, // the character whose panel is fading out
   msg: null, // { id, who, text, actions, priority, auto }
-  pose: { seraph: 'idle', demon: 'idle' },
-  face: { seraph: NEUTRAL_FACE.seraph, demon: NEUTRAL_FACE.demon },
-  anim: { seraph: 'idle', demon: 'idle' },
+  pose: each(() => 'idle'),
+  face: each((w) => NEUTRAL_FACE[w]),
+  anim: each(() => 'idle'),
   enterKey: 0, // bumps on each entrance so the animation replays
 });
 
@@ -38,7 +41,7 @@ export const getCompanionState = () => state;
 
 // Every timer is tagged with a token. Starting something new bumps the token, so an old timer that
 // fires late does nothing (this is what stops a dismissed character from popping back up).
-const tokens = { seraph: 0, demon: 0, face: { seraph: 0, demon: 0 }, exit: 0 };
+const tokens = { ...each(() => 0), face: each(() => 0), exit: 0 };
 const timers = new Set();
 function later(ms, fn) {
   const t = setTimeout(() => {
@@ -112,7 +115,7 @@ export function say(who, msg, opts = {}) {
   set({
     panel: who,
     closing: switching ? state.panel : null,
-    msg: { actions: [], ...msg, who, priority, auto, id },
+    msg: { actions: [], ...msg, who, priority, auto, id, ...(msg.actions ? { actions: msg.actions.map((a) => ({ ...a, label: ui(who, a.label) })) } : {}) },
   });
   if (switching) {
     const t = ++tokens.exit;
@@ -139,7 +142,9 @@ export const holdPanel = (on) => {
 // Change the text (or buttons) of the message on screen without replaying the entrance.
 export function amend(patch, reaction) {
   if (!state.msg) return;
-  set({ msg: { ...state.msg, ...patch } });
+  const who = state.msg.who;
+  const next = patch.actions ? { ...patch, actions: patch.actions.map((a) => ({ ...a, label: ui(who, a.label) })) } : patch;
+  set({ msg: { ...state.msg, ...next } });
   if (reaction) perform(state.msg.who, reaction);
 }
 
@@ -160,11 +165,11 @@ export function closePanel() {
 export function cancelAll() {
   timers.forEach(clearTimeout);
   timers.clear();
-  tokens.seraph++;
-  tokens.demon++;
+  WHO.forEach((w) => {
+    tokens[w]++;
+    tokens.face[w]++;
+  });
   tokens.exit++;
-  tokens.face.seraph++;
-  tokens.face.demon++;
   state = { ...fresh(), enterKey: state.enterKey };
   listeners.forEach((l) => l());
 }

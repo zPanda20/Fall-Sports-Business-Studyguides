@@ -7,6 +7,16 @@ const KEY = 'sbsg:companions:v1';
 export const DEFAULTS = {
   seraph: true, // on by default, can be switched off
   demon: false, // off until someone turns him on
+  // The two unlockable companions. They stay hidden and switched off until their code is entered
+  // (unlock.js). `unlocked` is the only thing that reveals them.
+  unlocked: { hexie: false, cosmic: false },
+  hexie: false,
+  cosmic: false,
+  hexieSeen: false,
+  cosmicSeen: false,
+  hexieStyle: 'standard', // 'standard' | 'spicy' (spicy also needs hexieAdult)
+  hexieAdult: false, // the person confirmed they are 18 or older and chose the adult humor
+  cosmicLang: 'en', // 'en' | 'it'
   introSeen: false, // Seraph has said hello once on this device
   demonSeen: false, // Demon has been introduced once
   sarcasm: 'playful', // 'mild' | 'playful' | 'spicy'
@@ -33,6 +43,8 @@ export const DEFAULTS = {
 
 const CHOICES = {
   sarcasm: ['mild', 'playful', 'spicy'],
+  hexieStyle: ['standard', 'spicy'],
+  cosmicLang: ['en', 'it'],
   motion: ['auto', 'reduced', 'full'],
   popups: ['rare', 'normal', 'lively'],
 };
@@ -53,6 +65,16 @@ function clean(raw) {
       if (v && typeof v === 'object' && !Array.isArray(v)) out[k] = k === 'rewards' ? { ...DEFAULTS.rewards, ...v } : v;
     }
   }
+  // Locked characters can never be on, and Spicy Hexie needs the adult confirmation, whatever is saved.
+  const u = out.unlocked && typeof out.unlocked === 'object' ? out.unlocked : {};
+  out.unlocked = { hexie: u.hexie === true, cosmic: u.cosmic === true };
+  if (!out.unlocked.hexie) {
+    out.hexie = false;
+    out.hexieStyle = 'standard';
+    out.hexieAdult = false;
+  }
+  if (!out.unlocked.cosmic) out.cosmic = false;
+  if (!out.hexieAdult) out.hexieStyle = 'standard';
   return out;
 }
 
@@ -92,8 +114,9 @@ export function setPref(key, value) {
 export function setPrefs(patch) {
   commit(clean({ ...state, ...patch }));
 }
+// A reset puts the settings back to how they started. Unlocked characters stay unlocked (but switched off).
 export function resetPrefs() {
-  commit({ ...DEFAULTS });
+  commit(clean({ ...DEFAULTS, unlocked: state.unlocked }));
 }
 
 // The tour, quiz reactions, reminders and help are all live. This stays as one switch in case a part ever

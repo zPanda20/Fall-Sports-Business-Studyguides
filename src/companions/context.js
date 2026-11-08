@@ -3,8 +3,9 @@ import { mcqPool } from '../pages/QuickTestPage.jsx';
 import { getProgress } from '../lib/progress.js';
 import { getBookmarks } from '../lib/bookmarks.js';
 import { snapshotDeadlines } from '../lib/deadlines.js';
-import { getPrefs, isPreview } from './prefs.js';
-import { line } from './dialogue.js';
+import { getPrefs, isPreview, setPref } from './prefs.js';
+import { line, speaksItalian, ui } from './dialogue.js';
+import { ROLE } from './assets.js';
 import { session } from './rules.js';
 import { whenText } from './deadlineWatch.js';
 
@@ -27,7 +28,7 @@ function smart(who, pathname) {
   let text = null;
   const p = getPrefs();
   const progress = getProgress();
-  const demon = who === 'demon';
+  const demon = ROLE[who] === 'sharp';
 
   // flashcards just studied -> suggest a quick test of the same course
   const course = courseFromPath(pathname) || courses.find((c) => topicsForCourse(c.id).length)?.id;
@@ -39,7 +40,7 @@ function smart(who, pathname) {
   const last = p.last && getTopic(p.last);
   if (last && !progress.done[last.id] && pathname !== `/topic/${last.id}`) {
     out.push({ label: `${demon ? 'Finish' : 'Resume'}: ${short(last.title)}`, to: `/topic/${last.id}` });
-    if (!demon) text = line('seraph', 'resume', 'playful', { title: last.title });
+    if (!demon) text = line(who, 'resume', 'playful', { title: last.title });
   }
 
   // a topic where the last quiz went badly
@@ -52,12 +53,12 @@ function smart(who, pathname) {
   // the nearest real deadline in the next week
   const now = Date.now();
   const next = snapshotDeadlines().active.find((d) => d.dueMs != null && d.dueMs > now && d.dueMs - now < 7 * 86_400_000);
-  if (next) out.push({ label: `Next due: ${short(next.title, 26)} ${whenText(next.dueMs, now)}`, to: '/deadlines' });
+  if (next) out.push({ label: `Next due: ${short(next.title, 26)} ${whenText(next.dueMs - now, now, speaksItalian(who) ? 'it' : 'en')}`, to: '/deadlines' });
   return { out: out.slice(0, 3), text };
 }
 
 export function helpActions(who, pathname) {
-  const demon = who === 'demon';
+  const demon = ROLE[who] === 'sharp';
   const out = [];
   const course = courseFromPath(pathname);
   if (course) {
@@ -73,8 +74,21 @@ export function helpActions(who, pathname) {
 }
 
 // The whole help message: a greeting plus buttons.
+// Static help labels in Italian for Cosmic. Labels that carry a count or a title are matched by their start.
+const IT_PREFIX = [
+  ['Review my bookmarks', 'Rivedi i segnalibri'],
+  ['Resume: ', 'Riprendi: '],
+  ['Review: ', 'Ripassa: '],
+  ['Next due: ', 'Prossima: '],
+];
+function toItalian(label) {
+  const hit = IT_PREFIX.find(([en]) => label.startsWith(en));
+  return hit ? hit[1] + label.slice(hit[0].length) : ui('cosmic', label);
+}
+
 export function helpMessage(who, pathname) {
   const level = getPrefs().sarcasm;
+  const it = speaksItalian(who);
   let text = line(who, 'help', level);
   let actions = helpActions(who, pathname);
   if (isPreview() && getPrefs().suggestions) {
@@ -83,7 +97,11 @@ export function helpMessage(who, pathname) {
     const seen = new Set(s.out.map((a) => a.to));
     actions = [...s.out, ...actions.filter((a) => !seen.has(a.to))];
   }
-  // The tour can always be started on request, once it is released.
-  if (isPreview() && getPrefs().tutorial && who === 'seraph') actions = [...actions.slice(0, 4), { label: 'Show me around', run: 'tour' }];
-  return { text, actions: actions.slice(0, 5) };
+  // The tour can always be started on request (Seraph or Cosmic leads it, never the sharp characters).
+  if (isPreview() && getPrefs().tutorial && ROLE[who] === 'sup') actions = [...actions.slice(0, 4), { label: 'Show me around', run: 'tour' }];
+  // Spicy Hexie always has a quick way back to Standard Hexie.
+  if (who === 'hexie' && getPrefs().hexieStyle === 'spicy') {
+    actions = [...actions.slice(0, 4), { label: 'Back to Standard Hexie', fn: () => setPref('hexieStyle', 'standard') }];
+  }
+  return { text, actions: actions.slice(0, 5).map((a) => (it ? { ...a, label: toItalian(a.label) } : a)) };
 }

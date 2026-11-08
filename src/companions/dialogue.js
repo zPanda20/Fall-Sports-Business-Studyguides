@@ -2,6 +2,9 @@
 // Demon's lines change with the sarcasm level. He teases the situation, the answer or the
 // procrastination, never the person. 'spicy' allows mild swearing, nothing worse.
 
+import { getPrefs } from './prefs.js';
+import { HEXIE_STANDARD, HEXIE_SPICY, SPICY_STANDS_DOWN, COSMIC_EN, COSMIC_IT, IT_LABELS } from './dialogueSecret.js';
+
 const SERAPH = {
   help: [
     'What would you like help with today?',
@@ -197,14 +200,48 @@ const DEMON = {
 
 const last = new Map(); // key -> index used last, so a line never repeats back to back
 
-// {title} and {when} in a line are replaced from `vars`.
+// Lines Seraph and Demon call by one name that the two newer characters call by another.
+const ALIAS = { intro: 'welcome', help: 'returning', wrong: 'wrong1', zero: 'tough' };
+
+// Option A is the preferred line. B is there for variety, so it is used about 1 time in 3.
+const A_SHARE = 0.7;
+const SPICY_SHARE = 0.75; // even with Spicy on, about 1 line in 4 stays Standard
+
+// Which table a character speaks from right now.
+function secretTable(who, key) {
+  const p = getPrefs();
+  const k = ALIAS[key] || key;
+  if (who === 'hexie') {
+    const spicy = p.hexieStyle === 'spicy' && p.hexieAdult && !SPICY_STANDS_DOWN.has(k) && Math.random() < SPICY_SHARE;
+    return (spicy && HEXIE_SPICY[k]) || HEXIE_STANDARD[k] || null;
+  }
+  return (p.cosmicLang === 'it' ? COSMIC_IT[k] : COSMIC_EN[k]) || COSMIC_EN[k] || null;
+}
+
+// {title}, {when} and {streak_days} in a line are replaced from `vars`.
 export function line(who, key, level = 'playful', vars) {
-  const table = who === 'demon' ? DEMON[key]?.[level] ?? DEMON[key]?.playful : SERAPH[key];
+  let table;
+  let ab = false;
+  if (who === 'hexie' || who === 'cosmic') {
+    table = secretTable(who, key);
+    ab = true;
+  } else {
+    table = who === 'demon' ? DEMON[key]?.[level] ?? DEMON[key]?.playful : SERAPH[key];
+  }
   if (!table || !table.length) return '';
   const id = `${who}:${key}:${level}`;
-  let i = Math.floor(Math.random() * table.length);
-  if (table.length > 1 && i === last.get(id)) i = (i + 1) % table.length;
+  const draw = () => (ab && table.length === 2 ? (Math.random() < A_SHARE ? 0 : 1) : Math.floor(Math.random() * table.length));
+  let i = draw();
+  // A repeat is drawn again once. (Forcing a swap would make two options simply take turns, 50/50.)
+  if (table.length > 1 && i === last.get(id)) i = ab ? draw() : (i + 1) % table.length;
   last.set(id, i);
   const text = table[i];
   return vars ? text.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m)) : text;
 }
+
+// Button text in the language the character is speaking (only Cosmic has a second language).
+export function ui(who, label) {
+  if (who === 'cosmic' && getPrefs().cosmicLang === 'it') return IT_LABELS[label] || label;
+  return label;
+}
+export const speaksItalian = (who) => who === 'cosmic' && getPrefs().cosmicLang === 'it';

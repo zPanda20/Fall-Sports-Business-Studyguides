@@ -4,7 +4,7 @@ import './companions.css';
 import { CHARACTERS, POSE_SIZE, faceUrl, poseUrl, warm, warmDefaults, WHO } from './assets.js';
 import { usePrefs, setPref, isPreview } from './prefs.js';
 import { useCompanion, say, closePanel, cancelAll, holdPanel } from './manager.js';
-import { line } from './dialogue.js';
+import { line, speaksItalian } from './dialogue.js';
 import { helpMessage } from './context.js';
 import { emit } from './events.js';
 import { startRules } from './rules.js';
@@ -153,7 +153,7 @@ function Panel({ who, msg, state, c, onAction, onOff, panelRef }) {
         )}
         {!msg?.tour && (
           <button type="button" className="cmp-off" onClick={() => onOff(who)}>
-            Switch {ch.short} off
+            {speaksItalian(who) ? `Spegni ${ch.short}` : `Switch ${ch.short} off`}
           </button>
         )}
       </div>
@@ -247,7 +247,7 @@ function Inner() {
     if (!preview || tourActive()) return undefined;
     const t = setTimeout(() => checkDeadlines(), pathname === '/' ? 3500 : 6000);
     return () => clearTimeout(t);
-  }, [pathname, preview, prefs.seraph, prefs.demon, prefs.quiet]);
+  }, [pathname, preview, prefs.seraph, prefs.demon, prefs.hexie, prefs.cosmic, prefs.quiet]);
 
   // Get the small default pictures ready once the browser is idle.
   useEffect(() => {
@@ -255,21 +255,23 @@ function Inner() {
     const cancel = window.cancelIdleCallback || clearTimeout;
     const id = idle(() => WHO.forEach((w) => prefs[w] && warmDefaults(w)));
     return () => cancel(id);
-  }, [prefs.seraph, prefs.demon]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [prefs.seraph, prefs.demon, prefs.hexie, prefs.cosmic]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // First visit on this device: Seraph says hello once and never forces anything.
   // (Once the tour is released he offers it here instead.)
   const offerTour = preview && prefs.tutorial && !prefs.tourDone && !prefs.tourDismissed && !prefs.tipsSeen.tourOffer;
+  // If Seraph is switched off and Cosmic is on, Cosmic offers the tour instead.
+  const lead = prefs.seraph ? 'seraph' : prefs.cosmic ? 'cosmic' : null;
   useEffect(() => {
-    if (!prefs.seraph || prefs.quiet || pathname === '/companions') return undefined;
+    if (!lead || prefs.quiet || pathname === '/companions') return undefined;
     if (offerTour) {
       // The welcome tour is offered on the home page only, never on a first visit to another page.
       if (pathname !== '/') return undefined;
       const t = setTimeout(() => {
         const shown = say(
-          'seraph',
+          lead,
           {
-            text: line('seraph', 'tourOffer'),
+            text: line(lead, 'tourOffer'),
             actions: [
               { label: 'Show me around', run: 'tour', primary: true },
               { label: 'Not now', run: 'close' },
@@ -285,7 +287,7 @@ function Inner() {
       }, 2600);
       return () => clearTimeout(t);
     }
-    if (prefs.introSeen) return undefined;
+    if (prefs.introSeen || lead !== 'seraph') return undefined;
     const t = setTimeout(() => {
       const shown = say(
         'seraph',
@@ -301,7 +303,7 @@ function Inner() {
       if (shown) setPref('introSeen', true);
     }, 2600);
     return () => clearTimeout(t);
-  }, [prefs.seraph, prefs.introSeen, prefs.quiet, pathname, offerTour]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [lead, prefs.introSeen, prefs.quiet, pathname, offerTour]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Escape closes the panel (unless you are typing somewhere).
   useEffect(() => {

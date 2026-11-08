@@ -19,6 +19,22 @@ export const NEIGHBOURS = {
     hysterical: ['shocked', 'smug'],
     furious: ['suspicious', 'shocked'],
   },
+  hexie: {
+    innocent: ['sly', 'delighted', 'flustered'],
+    sly: ['innocent', 'smug', 'cackle'],
+    smug: ['sly', 'cackle'],
+    cackle: ['smug', 'delighted', 'sly'],
+    delighted: ['cackle', 'innocent', 'flustered'],
+    flustered: ['innocent', 'delighted'],
+  },
+  cosmic: {
+    sparkle: ['notes', 'idea', 'question'],
+    notes: ['sparkle', 'idea'],
+    idea: ['sparkle', 'notes', 'alert'],
+    alert: ['idea', 'question', 'sweat'],
+    question: ['sparkle', 'alert', 'sweat'],
+    sweat: ['alert', 'question'],
+  },
 };
 
 // Shortest list of faces to pass through, including both ends. [] if the faces are unknown.

@@ -7,8 +7,17 @@ const base = () => (import.meta.env && import.meta.env.BASE_URL) || '/';
 export const CHARACTERS = {
   seraph: { id: 'seraph', name: 'Seraph Orca', short: 'Seraph', role: 'Study helper' },
   demon: { id: 'demon', name: 'Demon Panda', short: 'Demon', role: 'Sarcastic advisor' },
+  // The two below stay hidden until their secret code is entered on the Companions page (see unlock.js).
+  hexie: { id: 'hexie', name: 'Hexie Magpie', short: 'Hexie', role: 'Frostbound trickster', secret: true },
+  cosmic: { id: 'cosmic', name: 'The Little Cosmic Bassist', short: 'Cosmic', role: 'Study buddy', secret: true },
 };
 export const WHO = Object.keys(CHARACTERS);
+
+// Every character plays one of two parts. Supportive ones lead on learning and encouragement;
+// sharp ones lead on sarcasm and deadlines. The rules pick between the ones that are switched on.
+export const ROLE = { seraph: 'sup', cosmic: 'sup', demon: 'sharp', hexie: 'sharp' };
+export const SUP = WHO.filter((w) => ROLE[w] === 'sup');
+export const SHARP = WHO.filter((w) => ROLE[w] === 'sharp');
 
 // pose name -> what it is for (S02-S11 and D02-D11 from the brief, plus a calm idle pose for each)
 export const POSES = {
@@ -38,19 +47,46 @@ export const POSES = {
     perch: 'D10 Judgmental Percher: resting on a panel',
     scholar: 'D11 Suspicious Scholar: reviewing notes',
   },
+  hexie: {
+    idle: 'Guilty Snow Witch: resting pose, the default',
+    greeting: 'Frosty Glide: welcome and hello',
+    spell: 'Frostbound Spell Skate: pointing out features, deadlines, reviewing notes',
+    leap: 'Crystal Skating Leap: spare big move',
+    spin: 'Icy Spin: laughing at a funny mistake',
+    victory: 'Icy Victory Pose: reluctant respect, good results',
+    performance: 'Icy Witch Performance: inviting a quiz',
+    mishap: 'Magical Ice Mishap: wrong answers and meltdowns',
+    perch: 'Scheming Magpie perched: resting on a panel',
+  },
+  cosmic: {
+    idle: 'Standing, the default',
+    greeting: 'Friendly wave: welcome and hello',
+    pointing: 'Pointing and explaining',
+    playing: 'Playing the bass: thinking and reviewing',
+    celebrate: 'Fist pump: great results',
+    dance: 'Dancing: hints and eureka moments',
+    walk: 'Walking with ice cream: progress and milestones',
+    offer: 'Offering ice cream: flashcards',
+    stumble: 'Stumbling: a clumsy moment',
+    perch: 'Sitting: resting on a panel',
+    curl: 'Curled up: reassurance after a hard round',
+  },
 };
 
 // D01 / S01: the two six-face sheets, cut into single heads
 export const FACES = {
   seraph: ['friendly', 'delighted', 'thinking', 'confused', 'reassuring', 'shocked'],
   demon: ['smug', 'deadpan', 'suspicious', 'shocked', 'hysterical', 'furious'],
+  hexie: ['cackle', 'sly', 'delighted', 'innocent', 'flustered', 'smug'],
+  // Cosmic's visor never shows a face. His "expressions" are the symbols that float beside his helmet.
+  cosmic: ['sparkle', 'notes', 'alert', 'question', 'idea', 'sweat'],
 };
-export const NEUTRAL_FACE = { seraph: 'friendly', demon: 'deadpan' };
+export const NEUTRAL_FACE = { seraph: 'friendly', demon: 'deadpan', hexie: 'innocent', cosmic: 'sparkle' };
 
 // Flip to true once snack / hammer / head-pat art exists, so the app can show earned rewards.
 export const REWARD_ART_READY = false;
 
-export const POSE_SIZE = { seraph: [487, 640], demon: [480, 640] };
+export const POSE_SIZE = { seraph: [487, 640], demon: [480, 640], hexie: [480, 640], cosmic: [480, 640] };
 
 export const poseUrl = (who, pose) => `${base()}companions/${who}/poses/${pose}.webp`;
 export const faceUrl = (who, face) => `${base()}companions/${who}/expressions/${face}.webp`;

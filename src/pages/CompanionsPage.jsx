@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { usePrefs, setPref, resetPrefs, isPreview } from '../companions/prefs.js';
+import { usePrefs, setPref, setPrefs, resetPrefs, isPreview } from '../companions/prefs.js';
+import { tryUnlock, relock } from '../companions/unlock.js';
 import { tourReset, tourStart } from '../companions/tour.js';
 import { say, closePanel } from '../companions/manager.js';
 import { line } from '../companions/dialogue.js';
@@ -35,6 +36,41 @@ function Choice({ name, value, current, onPick, title, text }) {
 export default function CompanionsPage() {
   const p = usePrefs();
   const [asking, setAsking] = useState(false);
+  const [askingAdult, setAskingAdult] = useState(false);
+  const [code, setCode] = useState('');
+  const [codeMsg, setCodeMsg] = useState('');
+  const hexie = p.unlocked.hexie;
+  const cosmic = p.unlocked.cosmic;
+  const secretNames = [hexie && 'Hexie', cosmic && 'Cosmic'].filter(Boolean);
+
+  // The code box at the bottom. A right code reveals the character and has them say hello.
+  function submitCode(e) {
+    e.preventDefault();
+    const who = tryUnlock(code);
+    if (!who) {
+      setCodeMsg(code.trim() ? "That code doesn't open anything." : 'Type a code first.');
+      return;
+    }
+    setCode('');
+    setCodeMsg(`Unlocked: ${CHARACTERS[who].name}. ${CHARACTERS[who].short} is now on, and settings for ${CHARACTERS[who].short} have appeared above.`);
+    setPref(who === 'hexie' ? 'hexieSeen' : 'cosmicSeen', true);
+    // Wait one tick so the new setting is saved before the message is requested.
+    setTimeout(() => say(who, { text: line(who, 'welcome'), actions: [{ label: 'Close', run: 'close' }] }, { priority: 6, auto: false, reaction: 'greet' }), 0);
+  }
+
+  function pickSpicy() {
+    if (p.hexieAdult) setPref('hexieStyle', 'spicy');
+    else setAskingAdult(true);
+  }
+  function confirmAdult() {
+    setPrefs({ hexieAdult: true, hexieStyle: 'spicy' });
+    setAskingAdult(false);
+  }
+  function hide(who) {
+    closePanel();
+    relock(who);
+    setCodeMsg('');
+  }
 
   const demo = (who, key, reaction) =>
     say(who, { text: line(who, key, p.sarcasm), actions: [{ label: 'Close', run: 'close' }] }, { priority: 6, auto: false, reaction });
@@ -52,8 +88,8 @@ export default function CompanionsPage() {
       <header className="stack">
         <h1>Study companions</h1>
         <p className="lead">
-          Two little helpers live in the corner of the screen. Seraph Orca is a friendly guide. Demon Panda is
-          an optional, sarcastic advisor. Both can be switched off at any time. These settings are saved on this
+          Little helpers live in the corner of the screen. Seraph Orca is a friendly guide. Demon Panda is
+          an optional, sarcastic advisor. They can be switched off at any time. These settings are saved on this
           device only.
         </p>
       </header>
@@ -112,6 +148,65 @@ export default function CompanionsPage() {
         </fieldset>
       </section>
 
+      {hexie && (
+        <section className="glass cmp-card cmp-secret" data-who="hexie" aria-labelledby="cmp-hexie">
+          <div className="cmp-card-head">
+            <img src={faceUrl('hexie', 'sly')} alt="" width="72" height="72" />
+            <div>
+              <h2 id="cmp-hexie" className="serif">Hexie Magpie</h2>
+              <p className="meta">The Frostbound Trickster. Mischievous, theatrical and secretly on your side, with a little German thrown in.</p>
+            </div>
+          </div>
+          <Switch id="cmp-h-on" label="Show Hexie" checked={p.hexie} onChange={(v) => { if (!v) closePanel(); setPref('hexie', v); }} />
+          <fieldset className="cmp-fieldset" disabled={!p.hexie}>
+            <legend>Her style</legend>
+            <div className="cmp-choices">
+              <Choice name="hexieStyle" value="standard" current={p.hexieStyle} onPick={() => { setPref('hexieStyle', 'standard'); setAskingAdult(false); }} title="Standard" text="Cheeky and theatrical, safe for any audience." />
+              <Choice name="hexieStyle" value="spicy" current={askingAdult ? '' : p.hexieStyle} onPick={pickSpicy} title="Spicy (adults only)" text="Flirty, suggestive humor. Never graphic, and she stays serious when you are struggling." />
+            </div>
+          </fieldset>
+          {askingAdult && (
+            <div className="cmp-adult" role="group" aria-label="Adults only">
+              <p>
+                <strong>Spicy Hexie is for adults.</strong> Her jokes are flirty and suggestive. She switches to her
+                Standard voice on low scores, missed deadlines and anything where you need real help, and you can
+                switch back to Standard at any time, here or from her help menu.
+              </p>
+              <div className="cmp-ask-actions">
+                <button type="button" className="button small" onClick={confirmAdult}>I am 18 or older. Make her spicy</button>
+                <button type="button" className="button small secondary" onClick={() => setAskingAdult(false)}>Keep her Standard</button>
+              </div>
+            </div>
+          )}
+          <p>
+            <button type="button" className="button small secondary" onClick={() => hide('hexie')}>Hide Hexie again</button>
+          </p>
+        </section>
+      )}
+
+      {cosmic && (
+        <section className="glass cmp-card cmp-secret" data-who="cosmic" aria-labelledby="cmp-cosmic">
+          <div className="cmp-card-head">
+            <img src={faceUrl('cosmic', 'notes')} alt="" width="72" height="72" />
+            <div>
+              <h2 id="cmp-cosmic" className="serif">The Little Cosmic Bassist</h2>
+              <p className="meta">A calm, friendly study buddy with a bass on his back and a soft spot for ice cream.</p>
+            </div>
+          </div>
+          <Switch id="cmp-c-on" label="Show Cosmic" checked={p.cosmic} onChange={(v) => { if (!v) closePanel(); setPref('cosmic', v); }} />
+          <fieldset className="cmp-fieldset" disabled={!p.cosmic}>
+            <legend>Language</legend>
+            <div className="cmp-choices">
+              <Choice name="cosmicLang" value="en" current={p.cosmicLang} onPick={(v) => setPref('cosmicLang', v)} title="English" text="He talks in English." />
+              <Choice name="cosmicLang" value="it" current={p.cosmicLang} onPick={(v) => setPref('cosmicLang', v)} title="Italiano" text="Parla in italiano, anche nelle scadenze." />
+            </div>
+          </fieldset>
+          <p>
+            <button type="button" className="button small secondary" onClick={() => hide('cosmic')}>Hide Cosmic again</button>
+          </p>
+        </section>
+      )}
+
       <section className="glass cmp-card" aria-labelledby="cmp-shared">
         <h2 id="cmp-shared" className="serif">Motion and quiet</h2>
         <Switch id="cmp-anim" label="Animations" hint="Floating, bouncing and glitch effects." checked={p.animations} onChange={(v) => setPref('animations', v)} />
@@ -144,6 +239,22 @@ export default function CompanionsPage() {
           <button type="button" className="button small secondary" disabled={!p.demon} onClick={() => demo('demon', 'previewLaugh', 'laugh')}>Demon laughs</button>
           <button type="button" className="button small secondary" disabled={!p.demon} onClick={() => demo('demon', 'previewMeltdown', 'meltdown')}>Demon melts down</button>
           <button type="button" className="button small secondary" disabled={!p.demon} onClick={() => demo('demon', 'previewRespect', 'respect')}>Demon approves</button>
+          {hexie && (
+            <>
+              <button type="button" className="button small secondary" disabled={!p.hexie} onClick={() => demo('hexie', 'previewWave', 'greet')}>Hexie glides in</button>
+              <button type="button" className="button small secondary" disabled={!p.hexie} onClick={() => demo('hexie', 'previewLaugh', 'laugh')}>Hexie cackles</button>
+              <button type="button" className="button small secondary" disabled={!p.hexie} onClick={() => demo('hexie', 'previewFacepalm', 'facepalm')}>Hexie wipes out</button>
+              <button type="button" className="button small secondary" disabled={!p.hexie} onClick={() => demo('hexie', 'previewRespect', 'respect')}>Hexie takes a bow</button>
+            </>
+          )}
+          {cosmic && (
+            <>
+              <button type="button" className="button small secondary" disabled={!p.cosmic} onClick={() => demo('cosmic', 'previewWave', 'greet')}>Cosmic waves</button>
+              <button type="button" className="button small secondary" disabled={!p.cosmic} onClick={() => demo('cosmic', 'previewCelebrate', 'celebrate')}>Cosmic celebrates</button>
+              <button type="button" className="button small secondary" disabled={!p.cosmic} onClick={() => demo('cosmic', 'previewReassure', 'reassure')}>Cosmic reassures</button>
+              <button type="button" className="button small secondary" disabled={!p.cosmic} onClick={() => demo('cosmic', 'previewStumble', 'stumble')}>Cosmic trips</button>
+            </>
+          )}
         </div>
         {!p.demon && <p className="meta">Turn Demon on above to try his moves.</p>}
       </section>
@@ -158,9 +269,9 @@ export default function CompanionsPage() {
             <button type="button" className="button small secondary" onClick={tourReset}>Reset tour progress</button>
           </div>
           <Switch id="cmp-sugg" label="Study suggestions" hint="Resume where you left off, review weak topics, and Seraph's deadline tips." checked={p.suggestions} onChange={(v) => setPref('suggestions', v)} />
-          <Switch id="cmp-cel" label="Celebrations" hint="Seraph's small cheers after right answers and good results." checked={p.celebrate} onChange={(v) => setPref('celebrate', v)} />
-          <Switch id="cmp-dq" label="Demon reacts to quizzes" checked={p.demonQuiz} onChange={(v) => setPref('demonQuiz', v)} />
-          <Switch id="cmp-dd" label="Demon deadline reminders" hint="Uses your real due dates. Never late at night, and you can snooze." checked={p.demonDeadlines} onChange={(v) => setPref('demonDeadlines', v)} />
+          <Switch id="cmp-cel" label="Celebrations" hint="Small cheers after right answers and good results from the friendly helpers." checked={p.celebrate} onChange={(v) => setPref('celebrate', v)} />
+          <Switch id="cmp-dq" label={`${['Demon', ...(hexie ? ['Hexie'] : [])].join(' and ')} react${hexie ? '' : 's'} to quizzes`} checked={p.demonQuiz} onChange={(v) => setPref('demonQuiz', v)} />
+          <Switch id="cmp-dd" label={`${['Demon', ...(hexie ? ['Hexie'] : [])].join(' and ')} deadline reminders`} hint="Uses your real due dates. Never late at night, and you can snooze." checked={p.demonDeadlines} onChange={(v) => setPref('demonDeadlines', v)} />
           <Switch id="cmp-gl" label="Major glitch effects" hint="Demon's short digital glitches when he appears or melts down." checked={p.glitch} onChange={(v) => setPref('glitch', v)} />
           <Switch id="cmp-focus" label="Hide during focused study" hint="Hides the helpers on topic, quiz, test and flashcard pages." checked={p.focusHide} onChange={(v) => setPref('focusHide', v)} />
           <fieldset className="cmp-fieldset">
@@ -180,10 +291,32 @@ export default function CompanionsPage() {
       )}
 
       <p>
-        <button type="button" className="button small secondary" onClick={() => { closePanel(); resetPrefs(); }}>
+        <button type="button" className="button small secondary" onClick={() => { closePanel(); resetPrefs(); setAskingAdult(false); }}>
           Reset companion settings
         </button>
       </p>
+
+      <section className="cmp-code" aria-labelledby="cmp-code-h">
+        <h2 id="cmp-code-h" className="serif">Secret code</h2>
+        <p className="meta">Got a code from someone? Type it here to meet a hidden helper.</p>
+        <form onSubmit={submitCode} autoComplete="off">
+          <input
+            type="text"
+            value={code}
+            onChange={(e) => { setCode(e.target.value); setCodeMsg(''); }}
+            aria-label="Secret code"
+            aria-describedby="cmp-code-msg"
+            placeholder="Enter code"
+            autoComplete="off"
+            autoCapitalize="characters"
+            autoCorrect="off"
+            spellCheck="false"
+            maxLength={40}
+          />
+          <button type="submit" className="button small">Unlock</button>
+        </form>
+        <p id="cmp-code-msg" className="meta cmp-code-msg" role="status" aria-live="polite">{codeMsg || (secretNames.length ? `Already unlocked: ${secretNames.join(' and ')}.` : '')}</p>
+      </section>
     </div>
   );
 }

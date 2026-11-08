@@ -11,6 +11,10 @@
   --d-edge: #e23bd0;
   --d-violet: #8f5cff;
   --d-text: #f6e9ff;
+  --h-ink: #14183d;
+  --h-ice: #8fd3ff;
+  --c-ink: #0f2a20;
+  --c-gold: #f2b52c;
   position: fixed;
   right: var(--cmp-right);
   bottom: calc(var(--cmp-bottom) + env(safe-area-inset-bottom));
@@ -783,12 +787,24 @@
 .cmp-perch[data-who='demon'] {
   right: 126px;
 }
+.cmp-perch[data-who='hexie'] {
+  right: 230px;
+}
+.cmp-perch[data-who='cosmic'] {
+  right: 334px;
+}
 @media (max-width: 700px) {
   .cmp-perch-host[data-perch='1'] {
     margin-top: 74px;
   }
   .cmp-perch[data-who='demon'] {
     right: 100px;
+  }
+  .cmp-perch[data-who='hexie'] {
+    right: 178px;
+  }
+  .cmp-perch[data-who='cosmic'] {
+    right: 256px;
   }
 }
 .cmp-perch img {
@@ -799,6 +815,12 @@
 }
 .cmp-perch[data-who='demon'] img {
   animation: cmp-sway 4s ease-in-out infinite;
+}
+.cmp-perch[data-who='hexie'] img {
+  animation: cmp-glide 5s ease-in-out infinite;
+}
+.cmp-perch[data-who='cosmic'] img {
+  animation: cmp-groove 3.2s ease-in-out infinite;
 }
 .cmp-perch[data-motion='off'] img {
   animation: none;
@@ -814,4 +836,165 @@
   .cmp-dim {
     display: none;
   }
+}
+
+/* ---------- Hexie Magpie (unlockable): icy indigo, frost blue, a red tassel accent ---------- */
+.cmp-launch[data-who='hexie'] {
+  background: radial-gradient(circle at 35% 25%, #3a4a9a, #151a46 72%);
+  border-color: var(--h-ice);
+  border-radius: 50% 50% 50% 14%;
+  box-shadow: 0 8px 24px rgba(90, 170, 255, 0.4), 0 0 0 1px rgba(143, 211, 255, 0.55);
+}
+.cmp-launch[data-who='hexie'] .cmp-face {
+  animation: cmp-glide 4.6s ease-in-out infinite;
+}
+.cmp-panel[data-who='hexie'] {
+  color: #eaf4ff;
+  background: linear-gradient(150deg, rgba(28, 34, 88, 0.96), rgba(15, 18, 52, 0.96));
+  border: 1px solid var(--h-ice);
+  border-radius: 24px 24px 24px 8px;
+  box-shadow: 0 0 0 1px rgba(143, 211, 255, 0.35), 0 14px 44px rgba(80, 150, 255, 0.32);
+}
+.cmp-panel[data-who='hexie'] .cmp-avatar {
+  background: #151a46;
+  box-shadow: inset 0 0 0 2px var(--h-ice);
+}
+.cmp-panel[data-who='hexie'] .cmp-btn {
+  color: #eaf4ff;
+  background: rgba(143, 211, 255, 0.14);
+  border: 1px solid rgba(143, 211, 255, 0.6);
+}
+.cmp-panel[data-who='hexie'] .cmp-btn:hover {
+  background: rgba(143, 211, 255, 0.3);
+}
+.cmp-panel[data-who='hexie'] .cmp-btn.is-primary {
+  color: #0b1030;
+  background: linear-gradient(180deg, #c9ecff, #6fbfff);
+  border-color: #e4f6ff;
+}
+.cmp-panel[data-who='hexie'] .cmp-title strong {
+  letter-spacing: 0.02em;
+}
+.cmp-panel[data-who='hexie'] .cmp-icon-btn:hover {
+  background: rgba(143, 211, 255, 0.25);
+}
+.cmp-panel[data-who='hexie'] .cmp-off:focus-visible,
+.cmp-panel[data-who='hexie'] .cmp-btn:focus-visible,
+.cmp-panel[data-who='hexie'] .cmp-icon-btn:focus-visible {
+  outline-color: #e4f6ff;
+}
+.cmp-panel[data-who='hexie'] .cmp-fig[data-anim='idle'] {
+  animation: cmp-glide 5s ease-in-out infinite;
+}
+.cmp-panel[data-who='hexie'] .cmp-fig[data-anim='enter'] {
+  animation: cmp-swoosh-in 0.5s cubic-bezier(0.2, 0.85, 0.3, 1) both;
+}
+
+/* ---------- The Little Cosmic Bassist (unlockable): forest green, gold trim, cream ---------- */
+.cmp-launch[data-who='cosmic'] {
+  background: radial-gradient(circle at 35% 28%, #2f7a56, #0d2a1f 74%);
+  border-color: var(--c-gold);
+  box-shadow: 0 8px 24px rgba(30, 140, 90, 0.4), 0 0 0 1px rgba(242, 181, 44, 0.55);
+}
+.cmp-launch[data-who='cosmic'] .cmp-face {
+  animation: cmp-groove 3.2s ease-in-out infinite;
+}
+.cmp-panel[data-who='cosmic'] {
+  color: #f6f0dc;
+  background: linear-gradient(150deg, rgba(16, 58, 42, 0.96), rgba(10, 30, 24, 0.96));
+  border: 1px solid var(--c-gold);
+  box-shadow: 0 0 0 1px rgba(242, 181, 44, 0.3), 0 14px 44px rgba(20, 110, 70, 0.4);
+}
+.cmp-panel[data-who='cosmic'] .cmp-avatar {
+  background: #0d2a1f;
+  box-shadow: inset 0 0 0 2px var(--c-gold);
+}
+.cmp-panel[data-who='cosmic'] .cmp-btn {
+  color: #f6f0dc;
+  background: rgba(242, 181, 44, 0.12);
+  border: 1px solid rgba(242, 181, 44, 0.55);
+}
+.cmp-panel[data-who='cosmic'] .cmp-btn:hover {
+  background: rgba(242, 181, 44, 0.28);
+}
+.cmp-panel[data-who='cosmic'] .cmp-btn.is-primary {
+  color: #2a1c00;
+  background: linear-gradient(180deg, #ffe08a, #f2b52c);
+  border-color: #fff0bd;
+}
+.cmp-panel[data-who='cosmic'] .cmp-icon-btn:hover {
+  background: rgba(242, 181, 44, 0.22);
+}
+.cmp-panel[data-who='cosmic'] .cmp-off:focus-visible,
+.cmp-panel[data-who='cosmic'] .cmp-btn:focus-visible,
+.cmp-panel[data-who='cosmic'] .cmp-icon-btn:focus-visible {
+  outline-color: #fff0bd;
+}
+.cmp-panel[data-who='cosmic'] .cmp-fig[data-anim='idle'] {
+  animation: cmp-groove 3.2s ease-in-out infinite;
+}
+
+@keyframes cmp-glide {
+  0%, 100% { transform: translateX(0) rotate(0); }
+  30% { transform: translateX(-4px) rotate(-1.2deg); }
+  60% { transform: translateX(4px) rotate(1.2deg); }
+}
+@keyframes cmp-groove {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  25% { transform: translateY(-3px) rotate(-1deg); }
+  75% { transform: translateY(1px) rotate(1deg); }
+}
+@keyframes cmp-swoosh-in {
+  0% { opacity: 0; transform: translateX(46px) skewX(-8deg); }
+  70% { opacity: 1; transform: translateX(-4px) skewX(2deg); }
+  100% { opacity: 1; transform: none; }
+}
+
+/* ---------- the secret code box and the unlocked cards on the Companions page ---------- */
+.cmp-code {
+  display: grid;
+  gap: 8px;
+  padding-top: 6px;
+}
+.cmp-code form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.cmp-code input {
+  flex: 1 1 200px;
+  min-width: 0;
+}
+.cmp-code-msg {
+  margin: 0;
+  min-height: 1.3em;
+}
+.cmp-secret {
+  border: 1px solid rgba(143, 211, 255, 0.45);
+}
+.cmp-secret[data-who='cosmic'] {
+  border-color: rgba(242, 181, 44, 0.5);
+}
+.cmp-adult {
+  padding: 14px 16px;
+  border-radius: var(--r-sm);
+  border: 1px solid rgba(143, 211, 255, 0.5);
+  background: rgba(143, 211, 255, 0.08);
+}
+.cmp-adult p {
+  margin: 0 0 10px;
+}
+.cmp-code input {
+  min-height: 44px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--nm-bg);
+  box-shadow: inset 3px 3px 8px var(--nm-dark), inset -3px -3px 8px var(--nm-light);
+  letter-spacing: 0.04em;
+}
+.cmp-code input:focus {
+  outline: none;
+  box-shadow: inset 3px 3px 8px var(--nm-dark), inset -3px -3px 8px var(--nm-light), 0 0 0 3px var(--accent);
 }
