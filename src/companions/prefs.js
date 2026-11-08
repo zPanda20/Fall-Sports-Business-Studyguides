@@ -7,9 +7,9 @@ const KEY = 'sbsg:companions:v1';
 export const DEFAULTS = {
   seraph: true, // on by default, can be switched off
   demon: false, // off until someone turns him on
-  // The two unlockable companions. They stay hidden and switched off until their code is entered
-  // (unlock.js). `unlocked` is the only thing that reveals them.
-  unlocked: { hexie: false, cosmic: false },
+  // Hexie stays hidden and switched off until her code is entered (unlock.js). `unlocked` is the only thing that
+  // reveals her. Cosmic is a normal companion: off until someone activates him, like Demon.
+  unlocked: { hexie: false },
   hexie: false,
   cosmic: false,
   hexieSeen: false,
@@ -65,15 +65,14 @@ function clean(raw) {
       if (v && typeof v === 'object' && !Array.isArray(v)) out[k] = k === 'rewards' ? { ...DEFAULTS.rewards, ...v } : v;
     }
   }
-  // Locked characters can never be on, and Spicy Hexie needs the adult confirmation, whatever is saved.
+  // A locked character can never be on, and Spicy Hexie needs the adult confirmation, whatever is saved.
   const u = out.unlocked && typeof out.unlocked === 'object' ? out.unlocked : {};
-  out.unlocked = { hexie: u.hexie === true, cosmic: u.cosmic === true };
+  out.unlocked = { hexie: u.hexie === true };
   if (!out.unlocked.hexie) {
     out.hexie = false;
     out.hexieStyle = 'standard';
     out.hexieAdult = false;
   }
-  if (!out.unlocked.cosmic) out.cosmic = false;
   if (!out.hexieAdult) out.hexieStyle = 'standard';
   return out;
 }

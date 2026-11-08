@@ -1,7 +1,8 @@
 import { getPrefs, setPrefs } from './prefs.js';
 
-// The secret codes for the two hidden companions. Nothing about them shows anywhere in the app until
-// the right code is typed into the box at the bottom of the Companions page.
+// The secret code for the one hidden companion (Hexie). Nothing about her shows anywhere in the app until
+// the code is typed into the box at the bottom of the Companions page. (Cosmic is not hidden: he is
+// activated like Demon.)
 //
 // The codes are not stored as plain text, only as a scrambled fingerprint. That keeps them out of casual
 // view, but it is not real security (anyone with browser developer tools can get around a purely
@@ -31,8 +32,7 @@ export const normalizeCode = (s) => String(s || '').toUpperCase().replace(/[^A-Z
 export const fingerprintOf = (code) => fingerprint(`sbsg:${normalizeCode(code)}`);
 
 export const CODES = {
-  hexie: '0a62a45e3e168e11839c94beeb34',
-  cosmic: '0f2a026db83d3f136f7cd43d7335',
+  hexie: '1d2c4e0a4ded2312ce4e459fbae6',
 };
 
 // Which hidden companion this code opens, or null.

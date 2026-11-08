@@ -40,8 +40,7 @@ export default function CompanionsPage() {
   const [code, setCode] = useState('');
   const [codeMsg, setCodeMsg] = useState('');
   const hexie = p.unlocked.hexie;
-  const cosmic = p.unlocked.cosmic;
-  const secretNames = [hexie && 'Hexie', cosmic && 'Cosmic'].filter(Boolean);
+  const [askingCosmic, setAskingCosmic] = useState(false);
 
   // The code box at the bottom. A right code reveals the character and has them say hello.
   function submitCode(e) {
@@ -53,9 +52,16 @@ export default function CompanionsPage() {
     }
     setCode('');
     setCodeMsg(`Unlocked: ${CHARACTERS[who].name}. ${CHARACTERS[who].short} is now on, and settings for ${CHARACTERS[who].short} have appeared above.`);
-    setPref(who === 'hexie' ? 'hexieSeen' : 'cosmicSeen', true);
+    setPref('hexieSeen', true);
     // Wait one tick so the new setting is saved before the message is requested.
     setTimeout(() => say(who, { text: line(who, 'welcome'), actions: [{ label: 'Close', run: 'close' }] }, { priority: 6, auto: false, reaction: 'greet' }), 0);
+  }
+
+  function activateCosmic() {
+    setPrefs({ cosmic: true, cosmicSeen: true });
+    setAskingCosmic(false);
+    // Wait one tick so the new setting is saved before the message is requested.
+    setTimeout(() => say('cosmic', { text: line('cosmic', 'welcome'), actions: [{ label: 'Close', run: 'close' }] }, { priority: 6, auto: false, reaction: 'greet' }), 0);
   }
 
   function pickSpicy() {
@@ -89,7 +95,7 @@ export default function CompanionsPage() {
         <h1>Study companions</h1>
         <p className="lead">
           Little helpers live in the corner of the screen. Seraph Orca is a friendly guide. Demon Panda is
-          an optional, sarcastic advisor. They can be switched off at any time. These settings are saved on this
+          an optional, sarcastic advisor, and The Little Cosmic Bassist is an optional, easygoing study buddy. They can be switched off at any time. These settings are saved on this
           device only.
         </p>
       </header>
@@ -148,6 +154,45 @@ export default function CompanionsPage() {
         </fieldset>
       </section>
 
+      <section className="glass cmp-card" aria-labelledby="cmp-cosmic">
+        <div className="cmp-card-head">
+          <img src={faceUrl('cosmic', 'notes')} alt="" width="72" height="72" />
+          <div>
+            <h2 id="cmp-cosmic" className="serif">The Little Cosmic Bassist</h2>
+            <p className="meta">A calm, friendly study buddy with a bass on his back and a soft spot for ice cream. Off until you turn him on.</p>
+          </div>
+        </div>
+        {p.cosmic ? (
+          <Switch id="cmp-c-on" label="Show Cosmic" checked onChange={() => { closePanel(); setPref('cosmic', false); }} />
+        ) : askingCosmic ? (
+          <div className="cmp-ask" role="group" aria-label="Meet Cosmic">
+            <p>
+              <strong>Meet Cosmic.</strong> He is relaxed and encouraging. He explains things gently, helps you plan around
+              deadlines and talks in English or Italian. You can turn him off at any time.
+            </p>
+            <div className="cmp-ask-actions">
+              <button type="button" className="button small" onClick={activateCosmic}>Activate Cosmic</button>
+              <button type="button" className="button small secondary" onClick={() => setAskingCosmic(false)}>Not now</button>
+            </div>
+          </div>
+        ) : (
+          <div className="cmp-row">
+            <div>
+              <span className="cmp-row-label">Show Cosmic</span>
+              <p className="meta">He stays hidden until you say so.</p>
+            </div>
+            <button type="button" className="button small" onClick={() => setAskingCosmic(true)}>Meet Cosmic</button>
+          </div>
+        )}
+        <fieldset className="cmp-fieldset" disabled={!p.cosmic}>
+          <legend>Language</legend>
+          <div className="cmp-choices">
+            <Choice name="cosmicLang" value="en" current={p.cosmicLang} onPick={(v) => setPref('cosmicLang', v)} title="English" text="He talks in English." />
+            <Choice name="cosmicLang" value="it" current={p.cosmicLang} onPick={(v) => setPref('cosmicLang', v)} title="Italiano" text="Parla in italiano, anche nelle scadenze." />
+          </div>
+        </fieldset>
+      </section>
+
       {hexie && (
         <section className="glass cmp-card cmp-secret" data-who="hexie" aria-labelledby="cmp-hexie">
           <div className="cmp-card-head">
@@ -180,29 +225,6 @@ export default function CompanionsPage() {
           )}
           <p>
             <button type="button" className="button small secondary" onClick={() => hide('hexie')}>Hide Hexie again</button>
-          </p>
-        </section>
-      )}
-
-      {cosmic && (
-        <section className="glass cmp-card cmp-secret" data-who="cosmic" aria-labelledby="cmp-cosmic">
-          <div className="cmp-card-head">
-            <img src={faceUrl('cosmic', 'notes')} alt="" width="72" height="72" />
-            <div>
-              <h2 id="cmp-cosmic" className="serif">The Little Cosmic Bassist</h2>
-              <p className="meta">A calm, friendly study buddy with a bass on his back and a soft spot for ice cream.</p>
-            </div>
-          </div>
-          <Switch id="cmp-c-on" label="Show Cosmic" checked={p.cosmic} onChange={(v) => { if (!v) closePanel(); setPref('cosmic', v); }} />
-          <fieldset className="cmp-fieldset" disabled={!p.cosmic}>
-            <legend>Language</legend>
-            <div className="cmp-choices">
-              <Choice name="cosmicLang" value="en" current={p.cosmicLang} onPick={(v) => setPref('cosmicLang', v)} title="English" text="He talks in English." />
-              <Choice name="cosmicLang" value="it" current={p.cosmicLang} onPick={(v) => setPref('cosmicLang', v)} title="Italiano" text="Parla in italiano, anche nelle scadenze." />
-            </div>
-          </fieldset>
-          <p>
-            <button type="button" className="button small secondary" onClick={() => hide('cosmic')}>Hide Cosmic again</button>
           </p>
         </section>
       )}
@@ -247,7 +269,7 @@ export default function CompanionsPage() {
               <button type="button" className="button small secondary" disabled={!p.hexie} onClick={() => demo('hexie', 'previewRespect', 'respect')}>Hexie takes a bow</button>
             </>
           )}
-          {cosmic && (
+          {(
             <>
               <button type="button" className="button small secondary" disabled={!p.cosmic} onClick={() => demo('cosmic', 'previewWave', 'greet')}>Cosmic waves</button>
               <button type="button" className="button small secondary" disabled={!p.cosmic} onClick={() => demo('cosmic', 'previewCelebrate', 'celebrate')}>Cosmic celebrates</button>
@@ -256,7 +278,7 @@ export default function CompanionsPage() {
             </>
           )}
         </div>
-        {!p.demon && <p className="meta">Turn Demon on above to try his moves.</p>}
+        {(!p.demon || !p.cosmic) && <p className="meta">Turn a helper on above to try their moves.</p>}
       </section>
 
       {isPreview() && (
@@ -315,7 +337,7 @@ export default function CompanionsPage() {
           />
           <button type="submit" className="button small">Unlock</button>
         </form>
-        <p id="cmp-code-msg" className="meta cmp-code-msg" role="status" aria-live="polite">{codeMsg || (secretNames.length ? `Already unlocked: ${secretNames.join(' and ')}.` : '')}</p>
+        <p id="cmp-code-msg" className="meta cmp-code-msg" role="status" aria-live="polite">{codeMsg || (hexie ? 'Already unlocked: Hexie.' : '')}</p>
       </section>
     </div>
   );

@@ -26,31 +26,33 @@ const PLACEHOLDERS = new Set(['title', 'when', 'streak_days']);
 const holders = (t) => [...t.matchAll(/\{(\w+)\}/g)].map((m) => m[1]);
 
 export default function ({ eq, ok_ }) {
-  // ---- the codes ----
-  eq(whichCode('MAGPIE-ON-ICE'), 'hexie', 'hexie code opens hexie');
-  eq(whichCode('  magpie on ice '), 'hexie', 'codes ignore case, spaces and dashes');
-  eq(whichCode('stardust-bass'), 'cosmic', 'cosmic code opens cosmic');
-  eq(whichCode('stardust'), null, 'a partial code opens nothing');
+  // ---- the code (only Hexie is hidden; Cosmic is activated like Demon) ----
+  eq(whichCode('Blades of Glory'), 'hexie', 'hexie code opens hexie');
+  eq(whichCode('  BLADES-of-glory '), 'hexie', 'codes ignore case, spaces and dashes');
+  eq(whichCode('blades'), null, 'a partial code opens nothing');
   eq(whichCode(''), null, 'an empty code opens nothing');
   eq(whichCode('seraph'), null, 'a guess opens nothing');
-  eq(normalizeCode('Magpie-on Ice!'), 'MAGPIEONICE', 'normalize strips punctuation');
+  eq(whichCode('magpie on ice'), null, 'the old code no longer works');
+  eq(whichCode('stardust bass'), null, 'cosmic has no code');
+  eq(normalizeCode('Blades-of Glory!'), 'BLADESOFGLORY', 'normalize strips punctuation');
   const src = fs.readFileSync(path.join(here, '../../src/companions/unlock.js'), 'utf8');
-  ok_(!/magpie|stardust/i.test(src), 'the codes are not written in plain text in the source');
+  ok_(!/blades|glory|magpie/i.test(src.replace(/^\/\/.*$/gm, '')), 'the code is not written in plain text in the source');
 
-  // ---- locked by default ----
+  // ---- Hexie locked by default, Cosmic a normal companion ----
   eq(DEFAULTS.hexie, false, 'hexie off by default');
-  eq(DEFAULTS.cosmic, false, 'cosmic off by default');
-  eq(DEFAULTS.unlocked.hexie || DEFAULTS.unlocked.cosmic, false, 'both locked by default');
-  setPrefs({ unlocked: { hexie: false, cosmic: false } });
+  eq(DEFAULTS.cosmic, false, 'cosmic off by default, like Demon');
+  eq(DEFAULTS.unlocked.hexie, false, 'hexie locked by default');
+  setPrefs({ unlocked: { hexie: false } });
   setPrefs({ hexie: true, cosmic: true });
-  ok_(!getPrefs().hexie && !getPrefs().cosmic, 'a locked character can never be switched on');
+  ok_(!getPrefs().hexie, 'a locked hexie can never be switched on');
+  ok_(getPrefs().cosmic, 'cosmic can be switched on without any code');
+  setPrefs({ cosmic: false });
   setPrefs({ hexieStyle: 'spicy', hexieAdult: true });
   eq(getPrefs().hexieStyle, 'standard', 'spicy cannot be set while Hexie is locked');
   eq(tryUnlock('nope'), null, 'a wrong code unlocks nothing');
-  ok_(!getPrefs().unlocked.hexie && !getPrefs().unlocked.cosmic, 'still locked after a wrong code');
-  eq(tryUnlock('Magpie on ice'), 'hexie', 'the right code unlocks and returns who');
+  ok_(!getPrefs().unlocked.hexie, 'still locked after a wrong code');
+  eq(tryUnlock('Blades of Glory'), 'hexie', 'the right code unlocks and returns who');
   ok_(getPrefs().unlocked.hexie && getPrefs().hexie, 'hexie is unlocked and on');
-  ok_(!getPrefs().cosmic, 'cosmic is still locked');
   setPrefs({ hexieStyle: 'spicy', hexieAdult: false });
   eq(getPrefs().hexieStyle, 'standard', 'spicy needs the adult confirmation');
   resetPrefs();
@@ -104,8 +106,7 @@ export default function ({ eq, ok_ }) {
   eq(whenText(2 * 86_400_000, Date.now(), 'en').startsWith('in '), true, 'english "when" is unchanged');
 
   // ---- picking a line ----
-  tryUnlock('stardust bass');
-  setPrefs({ cosmicLang: 'en' });
+  setPrefs({ cosmic: true, cosmicLang: 'en' });
   const en = new Set(COSMIC_EN.correct);
   let a = 0;
   const N = 800;
@@ -124,7 +125,7 @@ export default function ({ eq, ok_ }) {
   ok_(COSMIC_IT.welcome.includes(line('cosmic', 'intro')), 'intro uses the first-activation lines');
 
   // ---- Hexie: Standard by default; Spicy only with the opt-in; steps aside when help is needed ----
-  tryUnlock('magpie on ice');
+  tryUnlock('blades of glory');
   eq(getPrefs().hexieStyle, 'standard', 'hexie starts Standard');
   const std = new Set(Object.values(HEXIE_STANDARD).flat());
   for (let i = 0; i < 300; i++) ok_(std.has(line('hexie', 'correct')), 'standard hexie never says a spicy line');
@@ -153,5 +154,5 @@ export default function ({ eq, ok_ }) {
   ok_(HEXIE_STANDARD.correct.includes(line('hexie', 'correct')), 'one switch takes her straight back to Standard');
 
   // leave the test state clean
-  setPrefs({ unlocked: { hexie: false, cosmic: false } });
+  setPrefs({ unlocked: { hexie: false }, cosmic: false });
 }
