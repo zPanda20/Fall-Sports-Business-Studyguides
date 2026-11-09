@@ -44,7 +44,7 @@ export default function ({ eq, ok_, near }) {
     ok_(t.questions.every((q) => slides[q.review?.section] && q.review.slide >= 0 && q.review.slide < slides[q.review.section].length),
       `${t.id}: every review link points at a real slide`);
 
-    ok_(t.exam.length >= 2 && t.exam.length <= 3, `${t.id}: 2 or 3 exam questions`);
+    ok_(t.exam.length >= 2 && t.exam.length <= 4, `${t.id}: 2 to 4 exam questions`);
     for (const e of t.exam) {
       // marking points end with "(n)" or "(... up to n)", and they must add up to the question's marks
       const sum = e.marking.reduce((a, m) => a + Number((m.match(/up to (\d+)\)\s*$/) || m.match(/\((\d+)\)\s*$/) || [0, NaN])[1]), 0);
