@@ -22,6 +22,7 @@ import { sportsMarketingTopic } from './sport-management/sports-marketing.js';
 import { sportsMediaRightsTopic } from './sport-management/sports-media-rights.js';
 import { mediaAndSponsorshipIntroTopic } from './sport-management/media-and-sponsorship-intro.js';
 import { sportsSponsorshipTopic } from './sport-management/sports-sponsorship.js';
+import { sponsorshipF1ActivationTopic } from './sport-management/sponsorship-f1-activation.js';
 import { excelBasicsTopic } from './accounting/excel-basics.js';
 import { accountingBasicsTopic } from './accounting/accounting-basics.js';
 import { accountingProcessTopic } from './accounting/accounting-process.js';
@@ -71,6 +72,7 @@ export const topics = [
   sportsMediaRightsTopic,
   mediaAndSponsorshipIntroTopic,
   sportsSponsorshipTopic,
+  sponsorshipF1ActivationTopic,
   governanceLevelsTopic,
   systemicGovernanceStakeholdersTopic,
   olympicVsNonOlympicTopic,
@@ -611,7 +613,7 @@ export const courses = [
       'See sport as an industry: its ecosystem and stakeholders, fan engagement, marketing, media rights, sponsorship, athlete income and analytics.',
     overview: [
       { label: 'Format', text: '12 in-class sessions (24 hours) plus 6 asynchronous activities: readings and videos to complete after class.' },
-      { label: 'Continuous assessment (60%)', text: 'Class participation and engagement (40%), including your contribution to the group work, and a group assignment (60%): a 4,000 to 5,000 word report that builds an evidence-based forecast of the global sports industry in 2035, using the Nielsen Sports 2025 Global Sports Report as the baseline. Due 13 November by 17:00. AI is used to propose new ideas on the future of fan engagement and sport marketing, with your own reasoning.' },
+      { label: 'Continuous assessment (60%)', text: 'Class participation and engagement (40%), including your contribution to the group work, and a group assignment (60%): a 4,000 to 6,000 word report that builds an evidence-based forecast of the global sports industry in 2035, using the Nielsen Sports 2025 Global Sports Report as the baseline. Due 13 November by 17:00. AI is used to propose new ideas on the future of fan engagement and sport marketing, with your own reasoning.' },
       { label: 'Final exam (40%)', text: 'A 2-hour sitting exam in the week of 10 to 19 December. Multiple-choice and essay questions. Closed book, no AI.' },
     ],
     blocks: [
@@ -701,11 +703,22 @@ export const courses = [
           },
           {
             id: 'sports-sponsorship',
-            title: 'Sponsorship of teams (leagues and activation to follow)',
+            title: 'Sponsorship of teams (leagues and the Guinness case to follow)',
             sessions: 'Session 8',
             covers: [
               'Sponsorship of teams: benefits, cash and in-kind support, assets and disparity',
-              'Sponsorship of leagues, activation and the Guinness and Six Nations case (slides to follow)',
+              'Sponsorship of leagues and the Guinness and Six Nations case (slides to follow)',
+            ],
+          },
+          {
+            id: 'sponsorship-f1-activation',
+            title: 'Sponsorship in Formula 1, the Oracle case and activation',
+            sessions: 'Session 8',
+            covers: [
+              'Why Formula 1 and MotoGP are strong sponsorship platforms',
+              'Team sponsorship in Formula 1: size, sponsors and why industries join',
+              'Case study: Oracle and Red Bull Racing',
+              'Why activation is critical to sponsorship goals, and the activation ratio',
             ],
           },
           {

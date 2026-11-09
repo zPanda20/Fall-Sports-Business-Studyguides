@@ -149,7 +149,7 @@ export const sportMgmtIntroTopic = {
         {
           type: 'bullets',
           items: [
-            '**Format:** group work, 4,000 to 5,000 words, single spaced, 12 point font (about 8 to 10 pages).',
+            '**Format:** group work, single spaced, 12 point font. The Lecture 8 slides say the word count was increased to **4,000 to 6,000 words**, so check the brief on the course platform.',
             '**Due:** 13 November, 17:00, on the course platform.',
             '**AI use:** be open about it, show your own judgment, check what the AI gives you, and use it ethically.',
           ],

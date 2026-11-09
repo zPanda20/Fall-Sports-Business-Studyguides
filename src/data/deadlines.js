@@ -28,7 +28,7 @@ export const DEADLINES = [
     courseId: 'sport-management',
     dueAt: '2026-11-13T17:00:00+01:00',
     group: true,
-    note: '4,000 to 5,000 word report: an evidence-based forecast of the global sports industry in 2035.',
+    note: '4,000 to 6,000 word report (the limit was raised in Lecture 8): an evidence-based forecast of the global sports industry in 2035.',
   },
   {
     id: 'careers-submit-cv',

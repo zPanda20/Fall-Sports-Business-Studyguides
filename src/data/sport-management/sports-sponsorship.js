@@ -1,7 +1,7 @@
 // Foundations of Sport Management, Lecture 7 (second half): sponsorship of teams.
 // Built from the "Sponsorship of Teams" slides: what team sponsorship gives each side, cash and in-kind support, the assets a
 // team can offer, shirt-advertising limits and disparity between teams.
-// The outline also lists leagues, activation and the Guinness and Six Nations case, which are not in the slides received so far.
+// The outline also lists leagues and the Guinness and Six Nations case, which are not in the slides received so far. Activation is covered in the next topic (Lecture 8).
 // Real example: the top shirt sponsorship deals of 2025/26 (Finance Football). The Summit numbers are made up.
 
 export const sportsSponsorshipTopic = {
@@ -12,7 +12,7 @@ export const sportsSponsorshipTopic = {
   reading: 'Lecture 7 slides (sponsorship of teams)',
   minutes: 30,
   summary:
-    'What a team gets from its sponsors, what a sponsor gets back, the assets a team can sell, and why some teams earn far more than others. Leagues, activation and the Guinness case are not in the slides yet.',
+    'What a team gets from its sponsors, what a sponsor gets back, the assets a team can sell, and why some teams earn far more than others. Activation is in the next topic. Leagues and the Guinness case are not in the slides yet.',
 
   // ------------------------------------------------------------------ plain words
   plain: [
@@ -126,18 +126,18 @@ export const sportsSponsorshipTopic = {
     },
     {
       kicker: 'What is not covered yet',
-      title: 'Leagues, activation and the Guinness case',
+      title: 'Leagues and the Guinness case',
       blocks: [
         {
           type: 'p',
-          text: 'The slides received so far cover **team sponsorship** only. The outline for this session also lists three topics that depend on slides not yet available.',
+          text: 'The slides received so far cover **team sponsorship** only. The outline for this session also lists two topics that depend on slides not yet available, and a third that is now covered.',
         },
         {
           type: 'table',
           head: ['Listed in the outline', 'Status'],
           rows: [
             ['Sponsorship of leagues', 'Awaiting slides'],
-            ['Why activation is critical to sponsorship goals', 'Awaiting slides. The team asset list includes the right to activate'],
+            ['Why activation is critical to sponsorship goals', 'Covered in the next topic, from the Lecture 8 slides'],
             ['Case study: Guinness and the Six Nations', 'Awaiting slides'],
           ],
         },

@@ -9,6 +9,7 @@ import { sportsMarketingTopic } from '../../src/data/sport-management/sports-mar
 import { sportsMediaRightsTopic } from '../../src/data/sport-management/sports-media-rights.js';
 import { mediaAndSponsorshipIntroTopic } from '../../src/data/sport-management/media-and-sponsorship-intro.js';
 import { sportsSponsorshipTopic } from '../../src/data/sport-management/sports-sponsorship.js';
+import { sponsorshipF1ActivationTopic } from '../../src/data/sport-management/sponsorship-f1-activation.js';
 
 export default function ({ eq, ok_, near }) {
   const all = [
@@ -20,6 +21,7 @@ export default function ({ eq, ok_, near }) {
     sportsMediaRightsTopic,
     mediaAndSponsorshipIntroTopic,
     sportsSponsorshipTopic,
+    sponsorshipF1ActivationTopic,
   ];
 
   // ---- Structure ----
@@ -106,6 +108,20 @@ export default function ({ eq, ok_, near }) {
   near(summit.sponsorship.jersey / 76 * 100, 10.5, 'Jersey share of revenue, %', 0.05);
   eq(76 - summit.sponsorship.jersey, 68, 'Revenue after losing the jersey sponsor $M');
   near(summit.sponsorsByIndustry.financial / 22 * 100, 31.8, 'Financial share of Summit sponsors, %', 0.05);
+
+  // Lecture 8: activation ratio and the telecom sponsor's return
+  eq(6 + 6 * 1, 12, 'Activation 1:1 on a $6M fee: total $M');
+  eq(6 + 6 * 3, 24, 'Activation 3:1 on a $6M fee: total $M');
+  eq(6 + 6 * 5, 36, 'Activation 5:1 on a $6M fee: total $M');
+  eq(9_000 * 800, 7_200_000, 'Telecom value with 9,000 customers $');
+  near((7.2 - 12) / 12 * 100, -40, 'Telecom return with 1:1 activation and no extra customers, %', 1e-9);
+  eq(18_000 * 800, 14_400_000, 'Telecom value with 18,000 customers $');
+  near((14.4 - 12) / 12 * 100, 20, 'Telecom return with 1:1 activation and double customers, %', 1e-9);
+  near(2040 / 340, 6.0, 'F1 team sponsorship per deal, $M (lecture: about 6)', 0.05);
+  near(2040 / 340, 6.01, 'F1 average deal per SponsorUnited, $M', 0.02);
+  ok_(543 > 379, 'F1 technology sponsorship exceeds financial services');
+  near(500 / 5, 100, 'Oracle and Red Bull reported total / 5 years = $M a year', 1e-9);
+  near(300 / 5, 60, 'Lecture low end of Oracle deal per year, $M', 1e-9);
 
   // ---- Real figures ----
   // Manchester United fiscal 2025 (SEC exhibit 99.1, 17 September 2025), GBP M

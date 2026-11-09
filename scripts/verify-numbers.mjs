@@ -323,7 +323,7 @@ for (const course of courses) {
   const f = courses.find((c) => c.id === 'sport-management');
   ok_(f, 'Sport Management course exists');
   const units = allUnits(f);
-  eq(units.length, 12, 'Sport Management units (12 sessions)');
+  ok_(units.length >= 12, 'Sport Management has a unit for each of the 12 sessions (a session can hold two units)');
   for (let n = 1; n <= 12; n++) ok_(units.some((u) => u.sessions === `Session ${n}`), `Sport Management has Session ${n}`);
   ok_(units.every((u) => Array.isArray(u.covers)), 'Every Sport Management unit lists what it covers');
   ok_(typeof f.tag === 'string' && f.tag.length > 0, 'Sport Management carries a status tag');
