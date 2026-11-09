@@ -20,7 +20,7 @@ import CompanionLayer from './companions/CompanionLayer.jsx';
 
 // Courses with their own look (see styles.css, "skins"). The page background and glow follow
 // the course you are reading, so the whole screen changes, not just the accent.
-const SKINNED = new Set(['market-research', 'sport-governance', 'sport-management']);
+const SKINNED = new Set(['market-research', 'techway', 'sport-governance', 'sport-management']);
 // Skins whose colours drift over time. The animation only runs where one of them is on screen.
 const SHIFTING = new Set(['sport-governance', 'sport-management']);
 

@@ -333,8 +333,8 @@ for (const course of courses) {
   }
   for (let n = 1; n <= 6; n++) ok_(all.includes(`async activity ${n}`), `Sport Management lists async activity ${n}`);
 }
-// every course names the date of its syllabus
-for (const c of courses.filter((c) => c.overview)) ok_(typeof c.syllabusDate === 'string' && c.syllabusDate.length > 0, `${c.id}: syllabus date`);
+// every course names the date of its syllabus (or, for a course built from a lesson document, says so)
+for (const c of courses.filter((c) => c.overview)) ok_((typeof c.syllabusDate === 'string' && c.syllabusDate.length > 0) || (typeof c.overviewSource === 'string' && c.overviewSource.length > 0), `${c.id}: syllabus date`);
 
 // ---- Bookmark message ----
 {

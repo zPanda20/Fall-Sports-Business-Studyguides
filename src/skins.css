@@ -305,3 +305,75 @@
 :is([data-course='sport-governance'], :root[data-skin='sport-governance']) :is(.button:not(.secondary), .arrow-btn.primary) {
   text-shadow: 0 1px 1px rgba(10, 20, 50, 0.6);
 }
+
+/* ---------- skins: Techway, simmering topaz ----------
+   Orange into yellow, like a topaz held over a low flame. Static (it does not drift). */
+[data-course='techway'],
+:root[data-skin='techway'] {
+  --accent: #b2500a;
+  --accent-b: #8f3d05;
+  --accent-ink: #9a4207;
+  --accent-soft: rgba(224, 112, 20, 0.14);
+  --glow: rgba(244, 150, 30, 0.42);
+  --metal: linear-gradient(180deg, #fff1b8 0%, #ffc94d 20%, #f59a1c 47%, #dd7208 52%, #f6a62e 80%, #ffe08a 100%);
+  --metal-edge: rgba(110, 46, 0, 0.5);
+  --metal-glow: rgba(244, 150, 30, 0.5);
+  --on-metal: #2e1300;
+  --on-accent: #ffffff;
+  --copper: #c9610f;
+  --copper-ink: #9a4207;
+  --i1: #f59a1c;
+  --i2: #ffe08a;
+  --i3: #ff7a2e;
+  --i4: #fff1c4;
+  --i5: #d9690a;
+  --g-tint-a: rgba(255, 205, 90, 0.34);
+  --g-tint-b: rgba(255, 150, 70, 0.26);
+  --g-disp-a: rgba(250, 170, 40, 0.32);
+  --g-disp-b: rgba(255, 120, 50, 0.26);
+  --g-drop: rgba(150, 70, 0, 0.22);
+  --g-drop2: rgba(250, 160, 40, 0.16);
+  --side-l1: rgba(255, 176, 40, 0.55);
+  --side-l2: rgba(255, 120, 50, 0.42);
+  --side-l3: rgba(255, 215, 90, 0.45);
+}
+:root[data-skin='techway'] {
+  --bg: #fbecd2;
+  --bg-2: #fdf3df;
+  --bg-grad: linear-gradient(135deg, #fdf0d4 0%, #fbe3b8 44%, #f9d7a2 100%);
+  --nm-bg: #fbeacb;
+  --orb1: rgba(255, 176, 40, 0.42);
+  --orb2: rgba(255, 126, 50, 0.3);
+  --orb3: rgba(255, 220, 100, 0.36);
+}
+:root[data-theme='dark'] [data-course='techway'],
+:root[data-theme='dark'][data-skin='techway'] {
+  --accent: #ffb23e;
+  --accent-b: #f08a1c;
+  --accent-ink: #ffc872;
+  --accent-soft: rgba(255, 178, 62, 0.16);
+  --glow: rgba(255, 150, 30, 0.45);
+  --on-accent: #2a1200;
+  --copper: #ffbf66;
+  --copper-ink: #ffd08a;
+  --g-tint-a: rgba(255, 170, 40, 0.16);
+  --g-tint-b: rgba(255, 110, 40, 0.12);
+  --g-disp-a: rgba(255, 160, 40, 0.32);
+  --g-disp-b: rgba(255, 110, 50, 0.26);
+  --g-drop: rgba(0, 0, 0, 0.55);
+  --g-drop2: rgba(255, 150, 40, 0.12);
+}
+:root[data-theme='dark'][data-skin='techway'] {
+  --bg: #1a0e04;
+  --bg-2: #2a1606;
+  --bg-grad: linear-gradient(135deg, #2c1706 0%, #1f1005 46%, #150a03 100%);
+  --nm-bg: #24130a;
+  --nm-light: rgba(255, 190, 90, 0.07);
+  --glass-solid: rgba(42, 22, 8, 0.96);
+  --orb1: rgba(255, 140, 20, 0.34);
+  --orb2: rgba(255, 190, 50, 0.24);
+  --orb3: rgba(230, 90, 30, 0.24);
+}
+:is([data-course='techway'], :root[data-skin='techway']) :is(.button:not(.secondary), .arrow-btn.primary) {
+  text-shadow: 0 1px 1px rgba(255, 230, 160, 0.35);
+}

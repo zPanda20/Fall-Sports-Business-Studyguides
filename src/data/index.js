@@ -35,6 +35,19 @@ import { fiveForcesTopic } from './strategy/five-forces.js';
 import { internalAnalysisTopic } from './strategy/internal-analysis.js';
 import { swotTopic } from './strategy/swot.js';
 import { performanceBusinessModelsTopic } from './strategy/performance-business-models.js';
+import { genaiBasicsTopic } from './techway/genai-basics.js';
+import { chatgptStartTopic } from './techway/chatgpt-start.js';
+import { promptFundamentalsTopic } from './techway/prompt-fundamentals.js';
+import { masterclassAssistantsTopic } from './techway/masterclass-assistants.js';
+import { promptTechniquesTopic } from './techway/prompt-techniques.js';
+import { productivityImpactTopic } from './techway/productivity-impact.js';
+import { creativityGeniusTopic } from './techway/creativity-genius.js';
+import { insightAnalysisTopic } from './techway/insight-analysis.js';
+import { advancedPromptingTopic } from './techway/advanced-prompting.js';
+import { gdprAiActTopic } from './techway/gdpr-ai-act.js';
+import { practicalGdprAiTopic } from './techway/practical-gdpr-ai.js';
+import { beyondChatgptTopic } from './techway/beyond-chatgpt.js';
+import { mockExamTopic } from './techway/mock-exam.js';
 
 // ---------------------------------------------------------------------------
 // To add a topic: write a content file like the two samples, import it here,
@@ -80,6 +93,19 @@ export const topics = [
   internalAnalysisTopic,
   swotTopic,
   performanceBusinessModelsTopic,
+  genaiBasicsTopic,
+  chatgptStartTopic,
+  promptFundamentalsTopic,
+  masterclassAssistantsTopic,
+  promptTechniquesTopic,
+  productivityImpactTopic,
+  creativityGeniusTopic,
+  insightAnalysisTopic,
+  advancedPromptingTopic,
+  gdprAiActTopic,
+  practicalGdprAiTopic,
+  beyondChatgptTopic,
+  mockExamTopic,
 ];
 
 export const universes = {
@@ -107,6 +133,11 @@ export const universes = {
     name: 'Harbor City Rovers',
     blurb:
       'A fictional football club in a made-up league. One consistent club for every Market Research example: its fans, its sponsors and its questions.',
+  },
+  beacon: {
+    name: 'Beacon Athletic',
+    blurb:
+      'A fictional mid-sized football club with ticketing, sponsorship, hospitality, fan services and communications teams. One consistent club for every Techway example.',
   },
 };
 
@@ -725,6 +756,56 @@ export const courses = [
               'Async activity 6: watch \u201cThe Rise of Sports Data Analytics\u201d',
             ],
           },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'techway',
+    universe: 'beacon',
+    tag: 'Has an exam',
+    title: 'Techway',
+    short: 'Techway',
+    blurb:
+      'Generative AI and prompt engineering, from how a chatbot works to prompt frameworks, assistants, workflows, analysis, data protection and the AI ecosystem. Includes a mock exam and final-exam preparation.',
+    overviewSource: 'From the Techway lesson document',
+    overview: [
+      { label: 'What it covers', text: 'Chapters 1 to 8 of the lesson (how generative AI works, getting started with ChatGPT, prompt engineering with CLEAR, writing techniques, productivity with IMPACT, creativity with GENIUS, analysis with INSIGHT, advanced prompting), plus two masterclass and practical sessions, the GDPR and AI Act chapter, the Beyond ChatGPT ecosystem chapter and a mock exam.' },
+      { label: 'Exam', text: 'This course has an exam. The lesson describes the final as multiple choice (single answer) on themes such as CLEAR, GDPR by design, configuring assistants, workflows, image prompts, chain-of-thought and adapted communication. The mock exam topic shows the longer written format used for practice.' },
+      { label: 'How to use this guide', text: 'Each topic has plain-language slides, key terms, a real example, a sports example (all set at the fictional Beacon Athletic football club), multiple-choice practice and exam-style questions with marking points. Some lesson content is a snapshot of fast-moving tools and rules, and the topics flag where facts needed updating.' },
+    ],
+    blocks: [
+      {
+        title: 'Foundations of generative AI',
+        units: [
+          { id: 'genai-basics', title: 'Discovering generative AI: predictions, tokens and limits', sessions: 'Chapter 1' },
+          { id: 'chatgpt-start', title: 'Getting started with ChatGPT: interface, models, safeguards and habits', sessions: 'Chapter 2' },
+        ],
+      },
+      {
+        title: 'Prompt engineering',
+        units: [
+          { id: 'prompt-fundamentals', title: 'Prompt engineering fundamentals: the CLEAR framework', sessions: 'Chapter 3' },
+          { id: 'masterclass-assistants', title: 'TP Masterclass 2: diagnosing, building assistants, workflows and deployment', sessions: 'TP Masterclass 2' },
+          { id: 'prompt-techniques', title: 'Prompt writing techniques: precision, tone, few-shot and correction', sessions: 'Chapter 4' },
+        ],
+      },
+      {
+        title: 'Using AI at work',
+        units: [
+          { id: 'productivity-impact', title: 'Professional productivity: the IMPACT framework', sessions: 'Chapter 5' },
+          { id: 'creativity-genius', title: 'Creativity and brainstorming: the GENIUS framework', sessions: 'Chapter 6' },
+          { id: 'insight-analysis', title: 'AI-assisted analysis: the INSIGHT framework', sessions: 'Chapter 7' },
+          { id: 'advanced-prompting', title: 'Advanced prompting: chains, pipelines and complex problems', sessions: 'Chapter 8' },
+        ],
+      },
+      {
+        title: 'Rules, ecosystem and exam',
+        units: [
+          { id: 'gdpr-ai-act', title: 'GDPR, AI ethics and the EU AI Act', sessions: 'Complementary chapter' },
+          { id: 'practical-gdpr-ai', title: 'Practical 2: GDPR and AI Act in your prompts', sessions: 'Practical 2' },
+          { id: 'beyond-chatgpt', title: 'Beyond ChatGPT: the AI ecosystem and multi-AI workflows', sessions: 'Ecosystem chapter' },
+          { id: 'mock-exam', title: 'Mock exam and final exam preparation', sessions: 'Mock exam' },
         ],
       },
     ],
