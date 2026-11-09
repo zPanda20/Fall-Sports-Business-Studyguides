@@ -42,6 +42,10 @@ export const DEADLINES = [
     title: 'Final assignment (individual)',
     course: 'Leadership',
     dueAt: '2026-11-15T23:59:00+01:00',
+    brief: {
+      intro:
+        'Present a considered rationale as to why the continuing development of leaders and managers is essential to working practices and organizational success of modern organizations in the Sports Industry.',
+    },
     note: 'Only the day (15 November) was given, so this is set to the end of that day. Use "Change date" if you know the time.',
   },
   {
