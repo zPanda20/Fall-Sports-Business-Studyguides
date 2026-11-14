@@ -49,6 +49,16 @@ export const DEADLINES = [
     note: 'Only the day (15 November) was given, so this is set to the end of that day. Use "Change date" if you know the time.',
   },
   {
+    id: 'presentation-skills-final-exam-video',
+    title: 'Final exam video',
+    course: 'Presentation Skills',
+    dueAt: '2026-11-20T01:00:00+01:00',
+    brief: {
+      intro: 'Submit a 3 minute video of the speech you delivered in Thursday\'s class.',
+    },
+    note: 'The platform shows 1:00 AM on Friday 20 November, so in practice submit before you go to bed on Thursday the 19th. It opened on 12 November at 6:13 PM.',
+  },
+  {
     id: 'strategy-final-group-assignment',
     title: 'Final Group Assignment: business analysis',
     course: 'Business Strategy',
