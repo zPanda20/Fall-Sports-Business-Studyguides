@@ -6,6 +6,7 @@ import { literatureReviewTopic } from './market-research/literature-review.js';
 import { measurementValidityTopic } from './market-research/measurement-validity.js';
 import { quantitativeOverviewTopic } from './market-research/quantitative-overview.js';
 import { samplingTopic } from './market-research/sampling.js';
+import { questionnaireDesignTopic } from './market-research/questionnaire-design.js';
 import { groupProjectTopic } from './market-research/group-project.js';
 import { governanceLevelsTopic } from './sport-governance/governance-levels.js';
 import { systemicGovernanceStakeholdersTopic } from './sport-governance/systemic-governance-stakeholders.js';
@@ -87,6 +88,7 @@ export const topics = [
   measurementValidityTopic,
   quantitativeOverviewTopic,
   samplingTopic,
+  questionnaireDesignTopic,
   groupProjectTopic,
   whatIsStrategyTopic,
   strategicLeadershipTopic,
@@ -254,7 +256,7 @@ export const courses = [
   {
     id: 'market-research',
     universe: 'harbor',
-    tag: 'Sessions 1\u20137 and project ready',
+    tag: 'Sessions 1\u20138 and project ready',
     syllabusDate: '15 September 2026',
     title: 'Market Research',
     short: 'Market Research',
@@ -357,7 +359,7 @@ export const courses = [
               'Principles of questionnaire design',
               'Unbiased question formulation',
               'Types of questions and measurement scales',
-              'Online survey tools, with an introduction to Qualtrics',
+              'Online survey tools, with an introduction to Qualtrics (the Qualtrics build comes in the next session)',
             ],
           },
           {
