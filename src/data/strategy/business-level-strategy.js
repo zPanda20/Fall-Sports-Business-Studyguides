@@ -484,7 +484,7 @@ export const businessLevelStrategyTopic = {
     {
       id: 'q1',
       type: 'mcq',
-      q: 'How does the lecture define economic value created?',
+      q: 'Economic value created by a firm is defined as…',
       options: ['Value minus cost', 'Price minus cost', 'Revenue minus expenses', 'Value divided by cost'],
       answer: 0,
       explanation: 'Economic value created is the value customers get minus the cost to the firm. It is the same as willingness to pay minus willingness to sell.',
@@ -502,7 +502,7 @@ export const businessLevelStrategyTopic = {
     {
       id: 'q3',
       type: 'mcq',
-      q: 'Which is one of the four most important value drivers of a differentiation strategy in the lecture?',
+      q: 'Which is one of the four most important value drivers of a differentiation strategy?',
       options: ['Marketing and promotion', 'Learning-curve effects', 'Economies of scale', 'Cost of input factors'],
       answer: 0,
       explanation: 'The differentiation drivers are unique product features, service, new product launches, and marketing and promotion. The other three options drive cost.',
@@ -528,7 +528,7 @@ export const businessLevelStrategyTopic = {
         'How far away the firm’s suppliers are',
       ],
       answer: 0,
-      explanation: 'Scope is the size, narrow or broad, of the target market. The lecture says both generic strategies can be used at either scope.',
+      explanation: 'Scope is the size, narrow or broad, of the target market. Both generic strategies can be used at either scope.',
       review: { section: 'plain', slide: 3 },
     },
     {
@@ -571,7 +571,7 @@ export const businessLevelStrategyTopic = {
     {
       id: 'q9',
       type: 'mcq',
-      q: 'A firm tries to be both low cost and differentiated but achieves neither. The lecture calls this…',
+      q: 'A firm tries to be both low cost and differentiated but achieves neither. This is known as…',
       options: ['Stuck in the middle', 'A blue ocean', 'Value innovation', 'Economies of scope'],
       answer: 0,
       explanation: 'Value innovation succeeds at both. A firm that tries and fails at both is stuck in the middle.',
@@ -580,7 +580,7 @@ export const businessLevelStrategyTopic = {
     {
       id: 'q10',
       type: 'mcq',
-      q: 'Which example did the lecture use for a blue ocean strategy?',
+      q: 'Which of these is a well-known example of a blue ocean strategy?',
       options: ['Cirque du Soleil', 'Apple', 'Tesla', 'Ryanair'],
       answer: 0,
       explanation: 'Cirque du Soleil offered a differentiated show at a cost that reconciled the usual trade-off. Apple was the differentiation example and Tesla the learning-curve example.',

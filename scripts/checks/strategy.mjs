@@ -86,20 +86,37 @@ export default function ({ eq, ok_ }) {
   // ---- Select-ALL exam bank ----
   const topicById = Object.fromEntries(all.map((t) => [t.id, t]));
   const slidesOf = (t, sec) => (sec === 'plain' ? t.plain : sec === 'real' ? t.real.slides : t.sports.slides);
-  ok_(examBank.length >= 40, 'exam bank: at least 40 select-all questions');
+  const singles = examBank.filter((q) => q.answers.length === 1);
+  const multis = examBank.filter((q) => q.answers.length > 1);
+  ok_(singles.length >= 45, 'exam bank: at least 45 single-answer questions');
+  ok_(multis.length >= 15, 'exam bank: at least 15 select-ALL questions');
   eq(new Set(examBank.map((q) => q.id)).size, examBank.length, 'exam bank: unique ids');
+  // the correct answer must not sit in one place: every position A-D gets a fair share of the single-answer questions
+  for (let pos = 0; pos < 4; pos++) {
+    const n = singles.filter((q) => q.answers[0] === pos).length;
+    ok_(n >= singles.length * 0.15, `exam bank: correct answer is in position ${pos + 1} often enough (${n} of ${singles.length})`);
+  }
   for (const q of examBank) {
     const t = topicById[q.topic];
     ok_(t, `${q.id}: topic exists`);
-    ok_(q.options.length >= 4 && q.options.length <= 5, `${q.id}: 4 or 5 options`);
+    ok_(q.options.length >= 3 && q.options.length <= 6, `${q.id}: 3 to 6 options`);
     eq(new Set(q.options).size, q.options.length, `${q.id}: options are distinct`);
-    ok_(q.answers.length >= 2 && q.answers.length < q.options.length, `${q.id}: more than one correct answer, but not all options`);
+    ok_(q.answers.length >= 1 && q.answers.length < q.options.length, `${q.id}: at least one correct answer, but not all options`);
     ok_(q.answers.every((a) => Number.isInteger(a) && a >= 0 && a < q.options.length) && new Set(q.answers).size === q.answers.length, `${q.id}: valid answer indexes`);
-    ok_(/select all correct answers|choose all correct answers/i.test(q.q), `${q.id}: question says to select ALL correct answers`);
+    if (q.answers.length > 1) ok_(/choose all correct answers\.$/i.test(q.q), `${q.id}: multi-answer question tells the student to choose ALL correct answers`);
+    else ok_(!/choose all|select all/i.test(q.q), `${q.id}: single-answer question does not ask for all`);
+    ok_(!/\blectures?\b|\bsessions?\b|\bslides?\b|\bthe course\b|\bcourse case\b|\bthe class\b|\bas discussed\b/i.test(q.q + ' ' + q.options.join(' ')), `${q.id}: no mention of lectures, sessions or slides in the question or options`);
+    ok_(!/\ball of the above|\bnone of the above/i.test(q.options.join(' ')), `${q.id}: no all/none of the above`);
     ok_(q.explanation && q.explanation.length > 20, `${q.id}: has an explanation`);
     const slides = t && slidesOf(t, q.review.section);
     ok_(slides && q.review.slide >= 0 && q.review.slide < slides.length, `${q.id}: review points at a real slide`);
     ok_(!/\[object|\bNaN\b|\$\{/.test(JSON.stringify(q)), `${q.id}: no broken text`);
+  }
+  // topic practice questions: no lecture/session wording, and answers not stacked in one position
+  for (const t of all) {
+    const mcqs = (t.questions || []).filter((q) => q.type === 'mcq');
+    for (const q of mcqs) ok_(!/\blectures?\b|\blecturer\b|\bsessions?\b|\bslides?\b|\bthe course\b/i.test(q.q + ' ' + q.options.join(' ')), `${t.id}/${q.id}: question does not mention lectures, sessions or slides`);
+    ok_(mcqs.filter((q) => q.answer === 0).length <= Math.ceil(mcqs.length * 0.5), `${t.id}: correct answers are not all in the first position`);
   }
   // every topic has select-all questions
   for (const id of Object.keys(topicById)) ok_(examBank.some((q) => q.topic === id), `exam bank covers ${id}`);

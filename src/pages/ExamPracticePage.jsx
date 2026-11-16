@@ -111,18 +111,10 @@ function buildMock(bank, mcq) {
 }
 
 // ---- all-multiple-choice sittings (Business Strategy): single answer and "select ALL correct answers" ----
-function prepSingle(q) {
-  const options = shuffle(q.options.map((text, i) => ({ text, i })));
-  return {
-    key: q.key, multi: false, q: q.q, topicId: q.topicId, topicTitle: q.topicTitle, review: q.review, explanation: q.explanation,
-    options: options.map((o) => o.text),
-    correct: options.map((o, pos) => (o.i === q.answer ? pos : -1)).filter((n) => n >= 0),
-  };
-}
-function prepMulti(b, topicTitle) {
+function prepItem(b, topicTitle) {
   const options = shuffle(b.options.map((text, i) => ({ text, i })));
   return {
-    key: `bank:${b.id}`, multi: true, q: b.q, topicId: b.topic, topicTitle, review: b.review, explanation: b.explanation,
+    key: `bank:${b.id}`, multi: b.answers.length > 1, q: b.q, topicId: b.topic, topicTitle, review: b.review, explanation: b.explanation,
     options: options.map((o) => o.text),
     correct: options.map((o, pos) => (b.answers.includes(o.i) ? pos : -1)).filter((n) => n >= 0),
   };
@@ -278,15 +270,16 @@ export default function ExamPracticePage() {
   if (course.mcqExam) {
     const fmt = course.examFormat;
     const titles = Object.fromEntries(topicsForCourse(course.id).map((t) => [t.id, t.title]));
-    const singles = mcq;
-    const multis = (course.examBank || []).map((b) => ({ b, t: titles[b.topic] || b.topic }));
+    const items = (course.examBank || []).map((b) => ({ b, t: titles[b.topic] || b.topic }));
+    const singles = items.filter(({ b }) => b.answers.length === 1);
+    const multis = items.filter(({ b }) => b.answers.length > 1);
 
     function build(kind) {
       const take = (list, n) => shuffle(list).slice(0, Math.min(n, list.length));
       const mk = (nSingle, nMulti) =>
         shuffle([
-          ...take(singles, nSingle).map(prepSingle),
-          ...take(multis, nMulti).map(({ b, t }) => prepMulti(b, t)),
+          ...take(singles, nSingle).map(({ b, t }) => prepItem(b, t)),
+          ...take(multis, nMulti).map(({ b, t }) => prepItem(b, t)),
         ]);
       if (kind === 'mock') return mk(45, 15);
       if (kind === 'quick') return mk(15, 5);

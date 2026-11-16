@@ -574,10 +574,10 @@ export const innovationPlatformsTopic = {
     {
       id: 'q10',
       type: 'mcq',
-      q: 'Which of these did the lecture give as a sports-context platform?',
+      q: 'Which of these is a platform business that connects viewers with live-streaming creators?',
       options: ['Twitch', 'Gillette', 'Tesla', 'Decathlon'],
       answer: 0,
-      explanation: 'The lecture named Strava, Steam and Twitch. The others are pipeline businesses.',
+      explanation: 'Strava, Steam and Twitch connect users and creators. The others are pipeline businesses.',
       review: { section: 'plain', slide: 9 },
     },
     {

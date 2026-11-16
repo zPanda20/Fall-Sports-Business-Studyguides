@@ -118,6 +118,18 @@ export const topics = [
   mockExamTopic,
 ];
 
+// Strategy practice questions are written with the right answer first. Spread it over positions A to D
+// so the stored order is never a giveaway (the quiz mixes the order again on every attempt).
+for (const t of topics.filter((x) => x.course === 'strategy')) {
+  let n = 0;
+  for (const q of t.questions || []) {
+    if (q.type !== 'mcq' || q.answer !== 0) continue;
+    const k = (n++ * 3 + 1) % q.options.length;
+    q.options.splice(k, 0, q.options.shift());
+    q.answer = k;
+  }
+}
+
 export const universes = {
   ironhawks: {
     name: 'The Ironhawks',
