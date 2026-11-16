@@ -1,4 +1,4 @@
-// Business Strategy, Session 6: competitive advantage, firm performance and business models.
+// Business Strategy, Session 5: shared value, firm performance and business models.
 // Built from the lecture slides titled "Shared Value, Competitive Advantage and Business Models".
 // Company statistics in the first two plain-word slides are the figures given on those slides.
 // Real-example facts: NFL Sunday Ticket moving to YouTube TV, as reported by NBC News (see sources slide).
@@ -6,9 +6,9 @@
 export const performanceBusinessModelsTopic = {
   id: 'performance-business-models',
   course: 'strategy',
-  title: 'Competitive advantage, firm performance and business models',
-  sessions: 'Session 6',
-  reading: 'Session 6 slides (file titled “Session 5 - Business Models and Shared Value”)',
+  title: 'Shared value, firm performance and business models',
+  sessions: 'Session 5',
+  reading: 'Session 5 slides (“Business Models and Shared Value”)',
   minutes: 35,
   summary:
     'How a firm can earn profit while doing good, how to measure performance beyond profit, and how a business model turns strategy into action.',

@@ -110,6 +110,131 @@ function buildMock(bank, mcq) {
   };
 }
 
+// ---- all-multiple-choice sittings (Business Strategy): single answer and "select ALL correct answers" ----
+function prepSingle(q) {
+  const options = shuffle(q.options.map((text, i) => ({ text, i })));
+  return {
+    key: q.key, multi: false, q: q.q, topicId: q.topicId, topicTitle: q.topicTitle, review: q.review, explanation: q.explanation,
+    options: options.map((o) => o.text),
+    correct: options.map((o, pos) => (o.i === q.answer ? pos : -1)).filter((n) => n >= 0),
+  };
+}
+function prepMulti(b, topicTitle) {
+  const options = shuffle(b.options.map((text, i) => ({ text, i })));
+  return {
+    key: `bank:${b.id}`, multi: true, q: b.q, topicId: b.topic, topicTitle, review: b.review, explanation: b.explanation,
+    options: options.map((o) => o.text),
+    correct: options.map((o, pos) => (b.answers.includes(o.i) ? pos : -1)).filter((n) => n >= 0),
+  };
+}
+function sameSet(a, b) {
+  return a.size === b.length && b.every((n) => a.has(n));
+}
+
+function McqSitting({ qs, clock, minutes, onNew, onBack }) {
+  const [picks, setPicks] = useState({});
+  const [finished, setFinished] = useState(false);
+  const answered = Object.values(picks).filter((p) => p.size > 0).length;
+  const results = qs.map((q, n) => sameSet(picks[n] || new Set(), q.correct));
+  const score = results.filter(Boolean).length;
+  const missed = qs.map((q, n) => ({ q, n })).filter(({ n }) => !results[n]);
+
+  function toggle(n, i, multi) {
+    if (finished) return;
+    const cur = new Set(picks[n] || []);
+    if (multi) {
+      if (cur.has(i)) cur.delete(i);
+      else cur.add(i);
+    } else {
+      cur.clear();
+      cur.add(i);
+    }
+    setPicks({ ...picks, [n]: cur });
+  }
+
+  return (
+    <>
+      {clock && <ExamClock minutes={minutes} />}
+      {finished && (
+        <section className="exam-score glass" aria-live="polite">
+          <h2>Score: {score} of {qs.length}</h2>
+          <p className="meta">
+            {Math.round((score / qs.length) * 100)}%. A “select ALL” question counts only when you choose every correct answer and nothing else. The real exam may mark partial answers differently, so treat this as the strict version.
+          </p>
+          {missed.length > 0 && (
+            <p className="meta">{missed.length} to revisit. Each one shows the correct answers and a link back to the slides.</p>
+          )}
+        </section>
+      )}
+      <div className="stack">
+        {qs.map((q, n) => {
+          const set = picks[n] || new Set();
+          const ok = results[n];
+          return (
+            <article key={q.key} className="exam-q glass" aria-label={`Question ${n + 1}`}>
+              <div className="exam-head">
+                <span className="pill">{q.multi ? 'Select ALL correct answers' : 'Choose one'}</span>
+                <span className="meta">{n + 1} of {qs.length}</span>
+              </div>
+              <p className="question"><Rich text={q.q} /></p>
+              <ul className="options" role="list">
+                {q.options.map((text, i) => {
+                  const isCorrect = q.correct.includes(i);
+                  const isPicked = set.has(i);
+                  const state = !finished
+                    ? isPicked ? 'picked' : ''
+                    : isCorrect ? 'right' : isPicked ? 'wrong' : 'dim';
+                  const mark = !finished
+                    ? isPicked ? '✓' : q.multi ? '☐' : String.fromCharCode(65 + i)
+                    : isCorrect ? '✓' : isPicked ? '✕' : String.fromCharCode(65 + i);
+                  return (
+                    <li key={text}>
+                      <button
+                        type="button"
+                        className={`option irid ${state}`}
+                        aria-pressed={isPicked}
+                        disabled={finished}
+                        onClick={() => toggle(n, i, q.multi)}
+                      >
+                        <span className="option-mark" aria-hidden="true">{mark}</span>
+                        <span>{text}</span>
+                        {finished && isCorrect && <span className="sr-only"> (correct answer)</span>}
+                        {finished && isPicked && !isCorrect && <span className="sr-only"> (your answer, incorrect)</span>}
+                        {finished && isCorrect && !isPicked && <span className="sr-only"> (you missed this one)</span>}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+              {finished && (
+                <div className={`feedback ${ok ? 'right' : 'wrong'}`}>
+                  <strong>{ok ? 'Correct.' : 'Not quite.'}</strong>
+                  <span><Rich text={q.explanation} /></span>
+                </div>
+              )}
+              {finished && !ok && (
+                <Link className="text-link" to={`/topic/${q.topicId}?s=${q.review?.section || 'plain'}&slide=${q.review?.slide ?? 0}`}>
+                  Review: {q.topicTitle}
+                </Link>
+              )}
+            </article>
+          );
+        })}
+      </div>
+      <div className="row">
+        {!finished ? (
+          <button type="button" className="button" onClick={() => setFinished(true)}>
+            Finish and mark ({answered} of {qs.length} answered)
+          </button>
+        ) : (
+          <button type="button" className="button" onClick={onNew}>New set</button>
+        )}
+        <button type="button" className="button secondary" onClick={onBack}>Back to the exam menu</button>
+      </div>
+    </>
+  );
+}
+
 export default function ExamPracticePage() {
   const { courseId } = useParams();
   const course = getCourse(courseId);
@@ -147,6 +272,112 @@ export default function ExamPracticePage() {
       <Link to={`/course/${course.id}`}>{course.short}</Link> <span aria-hidden="true">/</span> <span>Exam practice</span>
     </nav>
   );
+
+
+  // ------------------------------------------------------------------ all-multiple-choice exam (Business Strategy)
+  if (course.mcqExam) {
+    const fmt = course.examFormat;
+    const titles = Object.fromEntries(topicsForCourse(course.id).map((t) => [t.id, t.title]));
+    const singles = mcq;
+    const multis = (course.examBank || []).map((b) => ({ b, t: titles[b.topic] || b.topic }));
+
+    function build(kind) {
+      const take = (list, n) => shuffle(list).slice(0, Math.min(n, list.length));
+      const mk = (nSingle, nMulti) =>
+        shuffle([
+          ...take(singles, nSingle).map(prepSingle),
+          ...take(multis, nMulti).map(({ b, t }) => prepMulti(b, t)),
+        ]);
+      if (kind === 'mock') return mk(45, 15);
+      if (kind === 'quick') return mk(15, 5);
+      return mk(0, 10);
+    }
+    function start(kind) {
+      setMock({ kind, qs: build(kind), id: Date.now() });
+      setMode(kind);
+    }
+    const leave = () => {
+      setMode(null);
+      setMock(null);
+    };
+    function startOlder() {
+      setDrawn(shuffle(pool).slice(0, Math.min(5, pool.length)));
+      setMode('older');
+    }
+
+    return (
+      <div className="stack-lg narrow" data-course={course.id}>
+        <header className="stack">
+          {crumbs}
+          <h1>Exam practice</h1>
+          <p className="lead">Built to match the real final exam: {fmt.minutes / 60} hours, all multiple choice, and some questions with more than one correct answer.</p>
+        </header>
+
+        {mode === null && (
+          <>
+            <section className="exam-format glass" aria-label="The real exam format">
+              <h2>What the real exam looks like</h2>
+              <ol className="exam-parts">
+                {fmt.parts.map((pt) => (
+                  <li key={pt.name}><strong>{pt.name}.</strong> {pt.detail}</li>
+                ))}
+              </ol>
+              <p className="meta">The exam date, the number of questions and how partial answers are marked have not been announced. The mock below uses 60 questions as a guess, and marks “select ALL” questions all-or-nothing, which is the strictest reading.</p>
+            </section>
+            <div className="exam-modes">
+              <button type="button" className="exam-mode nm irid" onClick={() => start('mock')}>
+                <Icon name="dice" size={22} />
+                <b>Full mock exam</b>
+                <span>60 questions (45 single answer and 15 “select ALL”) with the 2-hour clock.</span>
+              </button>
+              <button type="button" className="exam-mode nm irid" onClick={() => start('quick')}>
+                <Icon name="practice" size={22} />
+                <b>Quick set</b>
+                <span>20 questions, with 5 “select ALL”. No clock.</span>
+              </button>
+              <button type="button" className="exam-mode nm irid" onClick={() => start('multi')}>
+                <Icon name="practice" size={22} />
+                <b>“Select ALL” drill ({multis.length})</b>
+                <span>10 questions that all have more than one correct answer. The hardest type to get right.</span>
+              </button>
+              {pool.length > 0 && (
+                <button type="button" className="exam-mode nm irid" onClick={() => startOlder()}>
+                  <Icon name="practice" size={22} />
+                  <b>Written practice ({pool.length})</b>
+                  <span>Longer questions with model answers. Not in the real format, but good for understanding.</span>
+                </button>
+              )}
+            </div>
+          </>
+        )}
+
+        {mock && ['mock', 'quick', 'multi'].includes(mode) && (
+          <McqSitting
+            key={mock.id}
+            qs={mock.qs}
+            clock={mode === 'mock'}
+            minutes={fmt.minutes}
+            onNew={() => start(mode)}
+            onBack={leave}
+          />
+        )}
+
+        {mode === 'older' && drawn && (
+          <>
+            <div className="stack">
+              {drawn.map((item, i) => (
+                <ExamQuestion key={item.qid} q={item.q} qid={item.qid} heading={`${i + 1} of ${drawn.length} · ${item.topic}`} />
+              ))}
+            </div>
+            <div className="row">
+              <button type="button" className="button" onClick={() => startOlder()}>New random set</button>
+              <button type="button" className="button secondary" onClick={() => { setMode(null); setDrawn(null); }}>Back to the exam menu</button>
+            </div>
+          </>
+        )}
+      </div>
+    );
+  }
 
   // ------------------------------------------------------------------ courses with a known exam format
   if (course.examFormat) {

@@ -3910,3 +3910,37 @@ td {
   font-variant-numeric: tabular-nums;
   color: var(--accent-ink);
 }
+
+/* all-multiple-choice sittings: a picked option before marking, and the score card after */
+.option.picked {
+  box-shadow: inset 0 0 0 2px var(--accent);
+  background: var(--accent-soft);
+}
+.option.picked .option-mark {
+  color: var(--accent-ink);
+  font-weight: 800;
+}
+.exam-score {
+  padding: 18px 20px;
+  display: grid;
+  gap: 6px;
+}
+.mock-clock {
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  background: var(--glass-solid);
+  box-shadow: 0 6px 18px var(--nm-dark);
+}
+.mock-clock b {
+  font-size: 1.3rem;
+}
+.mock-clock .button {
+  flex: none;
+  min-height: 36px;
+  padding: 0 14px;
+}
+@media (max-width: 600px) {
+  .mock-clock .meta {
+    display: none;
+  }
+}

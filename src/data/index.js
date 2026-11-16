@@ -38,6 +38,9 @@ import { fiveForcesTopic } from './strategy/five-forces.js';
 import { internalAnalysisTopic } from './strategy/internal-analysis.js';
 import { swotTopic } from './strategy/swot.js';
 import { performanceBusinessModelsTopic } from './strategy/performance-business-models.js';
+import { businessLevelStrategyTopic } from './strategy/business-level-strategy.js';
+import { innovationPlatformsTopic } from './strategy/innovation-platforms.js';
+import { examBank as strategyExamBank } from './strategy/exam-bank.js';
 import { genaiBasicsTopic } from './techway/genai-basics.js';
 import { chatgptStartTopic } from './techway/chatgpt-start.js';
 import { promptFundamentalsTopic } from './techway/prompt-fundamentals.js';
@@ -98,6 +101,8 @@ export const topics = [
   internalAnalysisTopic,
   swotTopic,
   performanceBusinessModelsTopic,
+  businessLevelStrategyTopic,
+  innovationPlatformsTopic,
   genaiBasicsTopic,
   chatgptStartTopic,
   promptFundamentalsTopic,
@@ -209,11 +214,25 @@ export const courses = [
       'Understand how firms win and keep an advantage: analyze the environment, choose a strategy, and put it into action.',
     universe: 'kestrel',
     syllabusDate: 'Fall 2026',
+    tag: 'Sessions 1\u20137 ready',
+    mcqExam: true,
+    examFormat: {
+      date: null,
+      minutes: 120,
+      mode: 'On a computer, closed book',
+      parts: [
+        { name: 'All multiple choice', detail: 'Two hours. Closed book, no notes, no internet and no AI.' },
+        { name: 'Some questions have more than one correct answer', detail: 'Those questions say so and ask you to choose ALL correct answers.' },
+        { name: 'May link to the case studies', detail: 'The syllabus says the final assessment might have questions linked to the F1 case studies.' },
+      ],
+      focus: 'Everything taught in class, from what strategy is to the latest session.',
+    },
+    examBank: strategyExamBank,
     overview: [
       { label: 'Format', text: '24 in-class hours plus 6 hours of asynchronous work (the first asynchronous session uses generative AI to evaluate strategic alternatives).' },
       { label: 'Continuous assessment (60%)', text: 'Class participation and engagement (40%) and an evaluation (60%): a group assignment in groups of 4 to 5. Pick a company, give a 15-minute presentation using PESTEL, Porter\u2019s Five Forces, VRIO and SWOT, and end with a strategic recommendation for top management.' },
       { label: 'Group assignment grading', text: 'Content and accuracy 40%, sources 20%, structure 15%, communication 10%, answers to questions 15%.' },
-      { label: 'Final exam (40%)', text: 'Individual, in the official exam week. Closed book, no notes, no internet and no AI. Questions may also link to the case studies.' },
+      { label: 'Final exam (40%)', text: 'Individual, 2 hours, in the official exam week. All multiple choice. Some questions have more than one correct answer and will say so, asking you to choose ALL correct answers. Closed book, no notes, no internet and no AI. Questions may also link to the case studies.' },
     ],
     blocks: [
       {
@@ -225,31 +244,33 @@ export const courses = [
           { id: 'five-forces', title: "Porter's Five Forces & industry analysis", sessions: 'Session 3' },
           { id: 'internal-analysis', title: 'Internal analysis: resources, VRIO and dynamic capabilities', sessions: 'Session 4' },
           { id: 'swot', title: 'SWOT analysis', sessions: 'Session 4' },
-          { id: 'genai-decisions', title: 'Using generative AI in strategic decisions', sessions: 'Session 5 (async)' },
+          { id: 'genai-decisions', title: 'Using generative AI in strategic decisions', sessions: 'Async: GenAI' },
         ],
       },
       {
         title: 'Formulation',
         units: [
-          { id: 'performance-business-models', title: 'Competitive advantage, firm performance and business models', sessions: 'Session 6' },
-          { id: 'vertical-integration-diversification', title: 'Corporate strategy: vertical integration and diversification', sessions: 'Session 7' },
-          { id: 'alliances-mergers', title: 'Corporate strategy: alliances, mergers and acquisitions', sessions: 'Session 8' },
-          { id: 'global-strategy', title: 'Global strategy: competing around the world', sessions: 'Session 9' },
-          { id: 'case-studies', title: 'Case studies: the F1 cases', sessions: 'Session 10 (async)' },
+          { id: 'performance-business-models', title: 'Shared value, firm performance and business models', sessions: 'Session 5' },
+          { id: 'business-level-strategy', title: 'Business-level strategy: differentiation, cost leadership and blue oceans', sessions: 'Session 6' },
+          { id: 'innovation-platforms', title: 'Innovation, industry life cycle and platform business models', sessions: 'Session 7' },
+          { id: 'vertical-integration-diversification', title: 'Corporate strategy: vertical integration and diversification', sessions: 'Syllabus Session 7' },
+          { id: 'alliances-mergers', title: 'Corporate strategy: alliances, mergers and acquisitions', sessions: 'Syllabus Session 8' },
+          { id: 'global-strategy', title: 'Global strategy: competing around the world', sessions: 'Syllabus Session 9' },
+          { id: 'case-studies', title: 'Case studies: the F1 cases', sessions: 'Syllabus Session 10 (async)' },
         ],
       },
       {
         title: 'Implementation',
         units: [
-          { id: 'organizational-design', title: 'Organizational design: structure, culture and control', sessions: 'Session 11' },
-          { id: 'governance-ethics', title: 'Corporate governance, business ethics and business models', sessions: 'Session 12' },
+          { id: 'organizational-design', title: 'Organizational design: structure, culture and control', sessions: 'Syllabus Session 11' },
+          { id: 'governance-ethics', title: 'Corporate governance, business ethics and business models', sessions: 'Syllabus Session 12' },
         ],
       },
       {
         title: 'Strategy and AI, and the group project',
         units: [
-          { id: 'strategy-age-of-ai', title: 'Strategy in the age of AI', sessions: 'Session 13' },
-          { id: 'group-project', title: 'Group project: putting the frameworks together', sessions: 'Session 14' },
+          { id: 'strategy-age-of-ai', title: 'Strategy in the age of AI', sessions: 'Syllabus Session 13' },
+          { id: 'group-project', title: 'Group project: putting the frameworks together', sessions: 'Syllabus Session 14' },
         ],
       },
     ],
