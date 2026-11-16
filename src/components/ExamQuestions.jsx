@@ -5,7 +5,7 @@ import Ring from './Ring.jsx';
 
 // Exam-style written questions: write your answer, reveal the model answer, then tick
 // the marking points you would have earned. Nothing here is sent anywhere.
-export function ExamQuestion({ q, qid, heading }) {
+export function ExamQuestion({ q, qid, heading, note }) {
   const progress = useProgress();
   const prev = progress.exams[qid];
   const [text, setText] = useState('');
@@ -26,11 +26,12 @@ export function ExamQuestion({ q, qid, heading }) {
   return (
     <article className="exam-q glass">
       <div className="exam-head">
-        <span className="pill">{q.marks} marks</span>
+        <span className="pill">{q.marks} {q.kind === 'short' ? 'points' : 'marks'}</span>
         {heading && <span className="meta">{heading}</span>}
         {prev && !shown && <span className="meta">Last self-mark: {prev.got} of {prev.of} points</span>}
       </div>
       <p className="question"><Rich text={q.q} /></p>
+      {note && <p className="meta">{note}</p>}
       <label className="exam-answer">
         <span>Your answer (optional, stays on this screen)</span>
         <textarea rows={6} value={text} onChange={(e) => setText(e.target.value)} placeholder="Write it as you would in the exam…" />

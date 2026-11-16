@@ -23,6 +23,7 @@ import { sportsMarketingTopic } from './sport-management/sports-marketing.js';
 import { sportsMediaRightsTopic } from './sport-management/sports-media-rights.js';
 import { mediaAndSponsorshipIntroTopic } from './sport-management/media-and-sponsorship-intro.js';
 import { sportsSponsorshipTopic } from './sport-management/sports-sponsorship.js';
+import { examBank as foundationsExamBank } from './sport-management/exam-bank.js';
 import { sponsorshipF1ActivationTopic } from './sport-management/sponsorship-f1-activation.js';
 import { excelBasicsTopic } from './accounting/excel-basics.js';
 import { accountingBasicsTopic } from './accounting/accounting-basics.js';
@@ -611,12 +612,24 @@ export const courses = [
     title: 'Foundations of Sport Management',
     short: 'Sport Management',
     syllabusDate: '24 August 2026',
+    examFormat: {
+      date: 'Wednesday 16 December 2026',
+      minutes: 120,
+      mode: 'On a computer',
+      parts: [
+        { name: 'Multiple choice', detail: 'Questions on the concepts from the lectures.' },
+        { name: '4 to 5 short answers', detail: '5 to 6 points each. Answer with an equal number of points. Some can be written as bullet points.' },
+        { name: '2 essays', detail: 'One essay everyone answers, and one you choose from two options.' },
+      ],
+      focus: 'Fan engagement, sports marketing and its concepts, media consumption and distribution, and critical thinking.',
+    },
+    examBank: foundationsExamBank,
     blurb:
       'See sport as an industry: its ecosystem and stakeholders, fan engagement, marketing, media rights, sponsorship, athlete income and analytics.',
     overview: [
       { label: 'Format', text: '12 in-class sessions (24 hours) plus 6 asynchronous activities: readings and videos to complete after class.' },
       { label: 'Continuous assessment (60%)', text: 'Class participation and engagement (40%), including your contribution to the group work, and a group assignment (60%): a 4,000 to 6,000 word report that builds an evidence-based forecast of the global sports industry in 2035, using the Nielsen Sports 2025 Global Sports Report as the baseline. Due 13 November by 17:00. AI is used to propose new ideas on the future of fan engagement and sport marketing, with your own reasoning.' },
-      { label: 'Final exam (40%)', text: 'A 2-hour sitting exam in the week of 10 to 19 December. Multiple-choice and essay questions. Closed book, no AI.' },
+      { label: 'Final exam (40%)', text: 'Wednesday 16 December 2026, 2 hours, on a computer. Closed book, no AI. Multiple choice, 4 to 5 short answers (5 to 6 points each, bullet points allowed), and 2 essays (one everyone answers, one chosen from two). It tests fan engagement, sports marketing and its concepts, and media consumption and distribution, with critical thinking.' },
     ],
     blocks: [
       {

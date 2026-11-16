@@ -108,6 +108,25 @@ export const DEADLINES = [
     ],
   },
   {
+    id: 'sport-management-final-exam',
+    title: 'Final exam: Foundations of Sport Management',
+    course: 'Foundations of Sport Management',
+    courseId: 'sport-management',
+    dueAt: '2026-12-16T23:59:00+01:00',
+    gem: 'emerald',
+    timeTbc: true,
+    note: 'Wednesday 16 December. The start time has not been given yet, so the clock runs to the end of the day. Use Change date to add the exact time. 2 hours, on a computer, closed book. Practice questions in the Foundations exam practice match this format.',
+    brief: {
+      objective: 'Assess your understanding of fan engagement, sports marketing and its concepts, and media consumption and distribution, together with your critical thinking.',
+      points: [
+        { label: 'Multiple choice', text: 'Questions on the concepts from the lectures.' },
+        { label: 'Short answers', text: '4 to 5 questions (for example: what are data analytics and how are they used in sport?). Each is worth 5 to 6 points, so answer with an equal number of points. Some can be written as bullet points.' },
+        { label: 'Essays', text: '2 questions. One essay everyone answers, and one you choose from two options.' },
+        { label: 'Setup', text: 'Two hours, on a computer, not on paper.' },
+      ],
+    },
+  },
+  {
     id: 'governance-super-league',
     title: 'Group assignment: governance case analysis',
     course: 'International Sports Governance',

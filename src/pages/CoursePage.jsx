@@ -31,7 +31,7 @@ export default function CoursePage() {
   const done = ready.filter((t) => progress.done[t.id]).length;
   const cardCount = cardsForCourse(course.id).length;
   const mcqCount = mcqPool(course.id).length;
-  const examCount = ready.reduce((n, t) => n + (t.exam || []).length, 0);
+  const examCount = ready.reduce((n, t) => n + (t.exam || []).length, 0) + (course.examBank || []).length;
 
   return (
     <div className="stack-lg" data-course={course.id}>

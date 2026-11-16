@@ -348,7 +348,7 @@ for (const c of courses.filter((c) => c.overview)) ok_((typeof c.syllabusDate ==
 
 // ---- Due dates ----
 {
-  eq(DEADLINES.length, 12, 'twelve due dates');
+  eq(DEADLINES.length, 13, 'thirteen due dates');
   eq(new Set(DEADLINES.map((d) => d.id)).size, DEADLINES.length, 'due date ids are unique');
   for (const d of DEADLINES) {
     ok_(d.title && d.course, `${d.id}: has a title and a course`);
@@ -367,6 +367,12 @@ for (const c of courses.filter((c) => c.overview)) ok_((typeof c.syllabusDate ==
   eq(Date.parse(DEADLINES.find((d) => d.id === 'leadership-final-assignment').dueAt), Date.UTC(2026, 10, 15, 22, 59), 'Leadership final: 15 Nov (end of day, UTC+1)');
   eq(Date.parse(DEADLINES.find((d) => d.id === 'governance-super-league').dueAt), Date.UTC(2026, 11, 16, 22, 59), 'Governance final: 16 Dec (end of day, UTC+1)');
   eq(Date.parse(DEADLINES.find((d) => d.id === 'market-research-project').dueAt), Date.UTC(2026, 11, 14, 22, 59), 'Market Research project: 14 Dec (end of day, UTC+1)');
+  {
+    const ex = DEADLINES.find((d) => d.id === 'sport-management-final-exam');
+    eq(Date.parse(ex.dueAt), Date.UTC(2026, 11, 16, 22, 59), 'Foundations final exam: Wed 16 Dec (end of day, UTC+1, time to be confirmed)');
+    eq(new Date(ex.dueAt).getUTCDay(), 3, 'Foundations final exam falls on a Wednesday');
+    ok_(ex.gem === 'emerald' && ex.timeTbc === true && ex.courseId === 'sport-management', 'Foundations final exam: emerald card, time to be confirmed, linked to the course');
+  }
   eq(Date.parse(DEADLINES.find((d) => d.id === 'presentation-skills-final-exam-video').dueAt), Date.UTC(2026, 10, 20, 0, 0), 'Presentation Skills final exam video: 20 Nov 1:00 AM (UTC+1)');
   eq(DEADLINES.filter((d) => d.group).map((d) => d.id).join(), 'sport-management-async-group-assignment,strategy-final-group-assignment,strategy-final-presentation,governance-super-league,accounting-company-analysis,market-research-project', 'group projects are tagged');
   eq(Date.parse(DEADLINES.find((d) => d.id === 'strategy-final-presentation').dueAt), Date.UTC(2026, 10, 30, 22, 59), 'Strategy presentation: 30 Nov (end of day, UTC+1)');
@@ -390,7 +396,7 @@ for (const c of courses.filter((c) => c.overview)) ok_((typeof c.syllabusDate ==
   // active / archive split
   const empty = { done: {}, dates: {} };
   const all = split(resolve(empty));
-  eq(all.active.length, 12, 'all twelve start in the list');
+  eq(all.active.length, 13, 'all thirteen start in the list');
   eq(all.archived.length, 0, 'nothing is archived at the start');
   const dated = all.active.filter((d) => d.dueMs !== null).map((d) => d.dueMs);
   ok_(dated.every((v, i) => i === 0 || dated[i - 1] <= v), 'list is soonest first');
@@ -399,7 +405,7 @@ for (const c of courses.filter((c) => c.overview)) ok_((typeof c.syllabusDate ==
     ok_(firstUndated === -1 || all.active.slice(firstUndated).every((d) => d.dueMs === null), 'undated items come last');
   }
   const done = split(resolve({ done: { 'careers-submit-cv': 5, 'strategy-async-assignment-1': 9 }, dates: {} }));
-  eq(done.active.length, 10, 'ticked items leave the list');
+  eq(done.active.length, 11, 'ticked items leave the list');
   eq(done.archived.map((d) => d.id).join(), 'strategy-async-assignment-1,careers-submit-cv', 'archive shows the newest first');
   const changed = resolve({ done: {}, dates: { 'careers-submit-cv': '2026-11-20T12:00:00+01:00' } }).find((d) => d.id === 'careers-submit-cv');
   ok_(changed.changed && changed.dueMs === Date.parse('2026-11-20T12:00:00+01:00'), 'a changed date overrides the original');

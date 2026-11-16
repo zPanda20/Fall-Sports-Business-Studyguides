@@ -88,6 +88,7 @@ export function resolve(s) {
       ...d,
       dueMs: Number.isFinite(ms) ? ms : null,
       changed: Boolean(s.dates[d.id]),
+      timeTbc: Boolean(d.timeTbc) && !s.dates[d.id],
       doneAt: s.done[d.id] || null,
     };
   });
@@ -176,6 +177,10 @@ export function formatDue(ms) {
     minute: '2-digit',
     timeZoneName: 'short',
   }).format(new Date(ms));
+}
+// Date only, for things whose start time has not been announced.
+export function formatDateOnly(ms) {
+  return new Intl.DateTimeFormat(undefined, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }).format(new Date(ms));
 }
 export function formatDay(ms) {
   return new Intl.DateTimeFormat(undefined, { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' }).format(new Date(ms));

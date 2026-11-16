@@ -3739,3 +3739,174 @@ td {
 }
 .due-more-btn:focus-visible { outline: 3px solid var(--accent-ink); outline-offset: 2px; }
 .due-more { margin-top: 6px; }
+
+/* ---------- the final exam card: a cut emerald ----------
+   Deep green with faceted light, mint highlights and a slow glint. It stays dark in both themes so
+   the white text keeps strong contrast, and the clock colors are reset for a green background. */
+.due-item.gem-emerald {
+  --ink: #f2fff9;
+  --muted: #c4eedd;
+  --accent: #5ff0b4;
+  --accent-b: #1fb57f;
+  --accent-ink: #9ff7d3;
+  --accent-soft: rgba(95, 240, 180, 0.2);
+  --nm-bg: rgba(2, 40, 28, 0.55);
+  --nm-dark: rgba(0, 20, 12, 0.6);
+  --nm-light: rgba(150, 255, 210, 0.16);
+  --warm: #ffe08a;
+  --bad: #ffc2b5;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--ink);
+  border: 1px solid rgba(160, 255, 215, 0.55);
+  background:
+    linear-gradient(118deg, transparent 0 18%, rgba(190, 255, 230, 0.28) 18.4%, transparent 19.6% 41%, rgba(190, 255, 230, 0.2) 41.3%, transparent 42.4% 66%, rgba(0, 40, 26, 0.35) 66.3%, transparent 67.5%),
+    linear-gradient(62deg, transparent 0 28%, rgba(0, 30, 20, 0.4) 28.3%, transparent 29.5% 55%, rgba(190, 255, 230, 0.22) 55.3%, transparent 56.5% 80%, rgba(190, 255, 230, 0.18) 80.3%, transparent 81.4%),
+    radial-gradient(120% 140% at 12% 0%, rgba(120, 255, 200, 0.55) 0%, transparent 46%),
+    radial-gradient(100% 120% at 100% 100%, rgba(0, 25, 16, 0.75) 0%, transparent 60%),
+    linear-gradient(135deg, #0f9a66 0%, #067a4f 38%, #035338 68%, #02402c 100%);
+  box-shadow:
+    0 0 0 1px rgba(2, 40, 28, 0.9),
+    inset 0 1px 0 rgba(220, 255, 240, 0.7),
+    inset 0 -14px 30px rgba(0, 30, 20, 0.5),
+    0 14px 34px rgba(3, 110, 72, 0.42),
+    0 0 36px rgba(60, 230, 160, 0.3);
+}
+.due-item.gem-emerald::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(105deg, transparent 38%, rgba(230, 255, 245, 0.42) 50%, transparent 62%);
+  transform: translateX(-120%);
+  animation: gem-glint 7s ease-in-out 1.5s infinite;
+  pointer-events: none;
+}
+@keyframes gem-glint {
+  0%, 62% { transform: translateX(-120%); }
+  100% { transform: translateX(120%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .due-item.gem-emerald::before {
+    animation: none;
+    opacity: 0;
+  }
+}
+.gem-emerald .gem-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  margin: 0;
+  padding: 2px 11px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #02402c;
+  background: linear-gradient(180deg, #dffff1, #8ff2c8);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 2px 8px rgba(0, 40, 26, 0.45);
+}
+.gem-emerald .due-title {
+  color: #fff;
+  text-shadow: 0 1px 6px rgba(0, 40, 26, 0.55);
+}
+.gem-emerald .due-when {
+  font-weight: 650;
+  color: #fff;
+}
+.gem-emerald .due-course {
+  color: #02402c;
+  background: #b8f7dc;
+}
+.gem-emerald .due-link {
+  color: #d5fff0;
+}
+.gem-emerald .due-check {
+  background: rgba(2, 40, 28, 0.6);
+  box-shadow: inset 2px 2px 6px rgba(0, 20, 12, 0.7), 0 0 0 1.5px #9ff7d3;
+}
+.gem-emerald .due-check:hover,
+.gem-emerald .due-check:focus-visible {
+  color: #02402c;
+  background: #9ff7d3;
+}
+.gem-emerald .due-edit input {
+  color: #f2fff9;
+}
+.gem-emerald .cd-tile {
+  background: rgba(2, 40, 28, 0.6);
+  box-shadow: inset 2px 2px 6px rgba(0, 20, 12, 0.7), inset -1px -1px 4px rgba(150, 255, 210, 0.18);
+}
+.gem-emerald .due-brief,
+.gem-emerald .due-more {
+  color: var(--ink);
+}
+.gem-emerald .button.secondary {
+  color: #f2fff9;
+}
+
+/* exam practice menu (courses with a known exam format) */
+.exam-format {
+  padding: 20px;
+  display: grid;
+  gap: 10px;
+}
+.exam-parts {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 6px;
+}
+.exam-modes {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+  .exam-modes {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.exam-mode {
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+  padding: 16px 18px;
+  border: 0;
+  text-align: left;
+  font: inherit;
+  color: var(--ink);
+  cursor: pointer;
+}
+.exam-mode b {
+  font-size: 1.05rem;
+}
+.exam-mode span {
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+.exam-section {
+  font-size: 1.25rem;
+  margin-top: 8px;
+}
+.mock-clock {
+  position: sticky;
+  top: 8px;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  padding: 10px 14px;
+  border-radius: var(--r-sm);
+  background: var(--nm-bg);
+}
+.mock-clock b {
+  font-family: 'Fraunces Variable', Georgia, serif;
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent-ink);
+}

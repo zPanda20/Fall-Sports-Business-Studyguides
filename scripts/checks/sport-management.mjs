@@ -9,6 +9,7 @@ import { sportsMarketingTopic } from '../../src/data/sport-management/sports-mar
 import { sportsMediaRightsTopic } from '../../src/data/sport-management/sports-media-rights.js';
 import { mediaAndSponsorshipIntroTopic } from '../../src/data/sport-management/media-and-sponsorship-intro.js';
 import { sportsSponsorshipTopic } from '../../src/data/sport-management/sports-sponsorship.js';
+import { examBank, EXAM_AREAS } from '../../src/data/sport-management/exam-bank.js';
 import { sponsorshipF1ActivationTopic } from '../../src/data/sport-management/sponsorship-f1-activation.js';
 
 export default function ({ eq, ok_, near }) {
@@ -163,4 +164,30 @@ export default function ({ eq, ok_, near }) {
   near(shirts.reduce((a, b) => a + b, 0), 641, 'Top 10 shirt deals total, EUR M', 1e-9);
   near(641 / 10, 64.1, 'Top 10 shirt deals average, EUR M', 1e-9);
   near(70 / 45, 1.56, 'Largest shirt deal against the tenth', 0.01);
+
+  // ---- Exam bank: matches the announced exam format (16 Dec 2026) ----
+  const topicIds = new Set(all.map((t) => t.id));
+  const shorts = examBank.filter((q) => q.kind === 'short');
+  const essays = examBank.filter((q) => q.kind === 'essay');
+  ok_(shorts.length >= 10, 'exam bank: at least 10 short answers');
+  ok_(essays.filter((q) => q.group === 'core').length >= 2, 'exam bank: at least 2 core essays');
+  ok_(essays.filter((q) => q.group === 'choice').length >= 4, 'exam bank: at least 4 choice essays');
+  ok_(new Set(examBank.map((q) => q.id)).size === examBank.length, 'exam bank: unique ids');
+  for (const q of examBank) {
+    ok_(EXAM_AREAS.includes(q.area) && topicIds.has(q.topic), `${q.id}: has a known area and topic`);
+    ok_(q.q && q.answer.length >= 4, `${q.id}: has a question and a model answer`);
+    ok_(!/\[object|NaN|\$\{/.test(JSON.stringify(q)), `${q.id}: no broken text`);
+    const sum = q.marking.reduce((a, m) => a + Number((m.match(/\((\d+)\)\s*$/) || [0, NaN])[1]), 0);
+    eq(sum, q.marks, `${q.id}: marking adds up to ${q.marks}`);
+    if (q.kind === 'short') {
+      ok_(q.marks === 5 || q.marks === 6, `${q.id}: short answer is 5 or 6 points`);
+      eq(q.marking.length, q.marks, `${q.id}: one marking line per point`);
+      eq(q.answer.length, q.marks, `${q.id}: model answer has one line per point`);
+      ok_(/\(\d points?\)\s*$/.test(q.q) && q.q.includes(`(${q.marks} points)`), `${q.id}: question states its points`);
+    } else {
+      eq(q.marks, 20, `${q.id}: essay practice marks`);
+      ok_(q.group === 'core' || q.group === 'choice', `${q.id}: essay has a group`);
+    }
+  }
+  ok_(shorts.some((q) => /data analytics/i.test(q.q)), 'exam bank: includes the data analytics example question');
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { markDone, setDueDate, formatDue, toLocalInput } from '../lib/deadlines.js';
+import { markDone, setDueDate, formatDue, formatDateOnly, toLocalInput } from '../lib/deadlines.js';
 import Countdown from './Countdown.jsx';
 import Icon from './Icon.jsx';
 
@@ -32,7 +32,7 @@ export default function DueRow({ item }) {
   );
 
   return (
-    <li className="due-item nm" data-course={item.courseId}>
+    <li className={`due-item nm${item.gem ? ` gem gem-${item.gem}` : ''}`} data-course={item.courseId}>
       <button
         type="button"
         className="due-check"
@@ -44,6 +44,7 @@ export default function DueRow({ item }) {
       </button>
 
       <div className="due-main">
+        {item.gem && <p className="gem-flag"><span aria-hidden="true">◆</span> Final exam</p>}
         <h3 className="due-title">{item.title}</h3>
         {item.unconfirmed && <p className="due-unconfirmed" role="note">Unconfirmed due date</p>}
         <p className="due-meta">
@@ -53,7 +54,11 @@ export default function DueRow({ item }) {
             <span className="due-course plain">{item.course}</span>
           )}
           {item.group && <span className="due-course group">Group project</span>}
-          {hasDate && <span className="due-when">{formatDue(item.dueMs)}</span>}
+          {hasDate && (
+            <span className="due-when">
+              {item.timeTbc ? `${formatDateOnly(item.dueMs)} · time to be confirmed` : formatDue(item.dueMs)}
+            </span>
+          )}
         </p>
         {item.note && <p className="due-note">{item.note}</p>}
         {hasMore && (editing || !hasDate) && <p className="due-links">{moreBtn}</p>}
