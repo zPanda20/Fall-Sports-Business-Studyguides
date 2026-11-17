@@ -2,6 +2,7 @@ import { Routes, Route, Link, NavLink, Outlet, useLocation, matchPath } from 're
 import { useEffect, useLayoutEffect } from 'react';
 import { getTopic } from './data/index.js';
 import { useBookmarks } from './lib/bookmarks.js';
+import { useDaily, streakNow } from './lib/daily.js';
 import { useDeadlines, useLastArchived, restore } from './lib/deadlines.js';
 import Icon from './components/Icon.jsx';
 import makerMark from './assets/panda-mark.png';
@@ -16,6 +17,7 @@ import DeadlinesPage from './pages/DeadlinesPage.jsx';
 import QuickTestPage from './pages/QuickTestPage.jsx';
 import ExamPracticePage from './pages/ExamPracticePage.jsx';
 import CompanionsPage from './pages/CompanionsPage.jsx';
+import DailyPage from './pages/DailyPage.jsx';
 import CompanionLayer from './companions/CompanionLayer.jsx';
 
 // Courses with their own look (see styles.css, "skins"). The page background and glow follow
@@ -59,6 +61,7 @@ function ThemeToggle() {
 function Layout() {
   const { pathname } = useLocation();
   const marks = useBookmarks();
+  const streak = streakNow(useDaily());
   const { active: dueActive } = useDeadlines();
   const archivedNow = useLastArchived();
 
@@ -105,6 +108,11 @@ function Layout() {
             <span>Study Guides</span>
           </Link>
           <nav className="header-nav" aria-label="Main">
+            <NavLink to="/daily" className="nav-link" data-tutorial="nav-daily" aria-label={`Daily quiz, ${streak.count} day streak`}>
+              <Icon name="flame" size={18} />
+              <span className="nav-label-wide">Daily</span>
+              {streak.count > 0 && <span className="nav-count" aria-hidden="true">{streak.count}</span>}
+            </NavLink>
             <NavLink to="/search" className="nav-link" data-tutorial="nav-search">
               <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
                 <circle cx="11" cy="11" r="6.5" />
@@ -175,6 +183,7 @@ export default function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route index element={<Home />} />
+        <Route path="daily" element={<DailyPage />} />
         <Route path="search" element={<SearchPage />} />
         <Route path="bookmarks" element={<BookmarksPage />} />
         <Route path="deadlines" element={<DeadlinesPage />} />

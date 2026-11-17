@@ -371,7 +371,7 @@ export const sportIndustryEcosystemTopic = {
     {
       id: 'q1',
       type: 'mcq',
-      q: 'The lecture puts the core sports industry at about $500 billion and the broader sports economy at about $2.3 trillion. What is the difference?',
+      q: 'The core sports industry is about $500 billion and the broader sports economy about $2.3 trillion. What is the difference?',
       options: [
         'The broader economy adds apparel, fitness, tourism, betting, wearables, streaming and more',
         'The core industry only counts professional athletes’ salaries',
@@ -454,7 +454,7 @@ export const sportIndustryEcosystemTopic = {
     {
       id: 'c2',
       type: 'mcq',
-      q: 'Which event does the lecture name as a turning point in the rise of media revenue?',
+      q: 'Which event is named as a turning point in the rise of media revenue?',
       options: [
         'The first Super Bowl',
         'The 2010 World Cup',

@@ -350,7 +350,7 @@ export const sportsSponsorshipTopic = {
     {
       id: 'q3',
       type: 'mcq',
-      q: 'Where is advertising on team or athlete uniforms prohibited, according to the lecture?',
+      q: 'Where is advertising on team or athlete uniforms prohibited?',
       options: [
         'The Olympic Games, some IF events and some American professional sports',
         'Every professional football league',
@@ -364,7 +364,7 @@ export const sportsSponsorshipTopic = {
     {
       id: 'q4',
       type: 'mcq',
-      q: 'Which is NOT one of the assets a team can offer a sponsor in the lecture?',
+      q: 'Which is NOT one of the assets a team can offer a sponsor?',
       options: [
         'Choosing the match officials',
         'Perimeter signage',

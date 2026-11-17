@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { courses, allUnits, topicsForCourse } from '../data/index.js';
 import { useProgress } from '../lib/progress.js';
+import { useDaily, streakNow, todayQuiz } from '../lib/daily.js';
 import Icon from '../components/Icon.jsx';
 import Perch from '../companions/Perch.jsx';
 import UpNext from '../components/UpNext.jsx';
@@ -46,6 +47,10 @@ function CourseCard({ course, progress }) {
 
 export default function Home() {
   const progress = useProgress();
+  const daily = useDaily();
+  const streak = streakNow(daily);
+  const today = todayQuiz(daily);
+  const doneToday = streak.status === 'safe';
 
   return (
     <div className="stack-lg">
@@ -63,6 +68,15 @@ export default function Home() {
       <Perch>
         <UpNext />
       </Perch>
+
+      <Link to="/daily" className="daily-card glass irid" data-glow>
+        <span className={`flame ${streak.count > 0 ? 'lit' : ''}`} aria-hidden="true"><Icon name="flame" size={30} /></span>
+        <span className="daily-card-text">
+          <b>{doneToday ? 'Daily quiz done' : today && !today.finished ? 'Finish today’s quiz' : 'Today’s quiz is ready'}</b>
+          <span>{streak.count} day streak · 5, 10 or 15 mixed questions from every course</span>
+        </span>
+        <span className="card-cta">{doneToday ? 'Bonus set →' : 'Start →'}</span>
+      </Link>
 
       <section className="course-grid" aria-label="Courses with an exam" data-tutorial="courses">
         {courses.filter((c) => !c.noExam).map((course) => (

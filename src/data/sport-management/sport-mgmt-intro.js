@@ -331,7 +331,7 @@ export const sportMgmtIntroTopic = {
     {
       id: 'q1',
       type: 'mcq',
-      q: 'Which four areas does the first lecture give for the global importance of the sporting industry?',
+      q: 'In which four areas is the global importance of the sporting industry usually described?',
       options: [
         'Economic, social, political and technological',
         'Economic, legal, medical and cultural',
@@ -452,7 +452,7 @@ export const sportMgmtIntroTopic = {
     {
       id: 'c4',
       type: 'mcq',
-      q: 'Which sequence matches how the course is built, in the order the lecture gives?',
+      q: 'Which sequence best follows how the sports business builds on itself, from the industry to the people in it?',
       options: [
         'Athletes, sponsorship, media rights, fans, the industry',
         'Media rights, marketing, the industry, athletes',

@@ -492,7 +492,7 @@ export const sportsMediaRightsTopic = {
     {
       id: 'q1',
       type: 'mcq',
-      q: 'Which of these is NOT one of the five traits that make sport attractive to media companies in the lecture?',
+      q: 'Which of these is NOT one of the five traits that make sport attractive to media companies?',
       options: ['Free to produce', 'Live', 'Scarce', 'Predictable'],
       answer: 0,
       explanation: 'The five traits are live, scarce, predictable, engaging and social. Sport is not free to produce.',
@@ -612,7 +612,7 @@ export const sportsMediaRightsTopic = {
     {
       id: 'c4',
       type: 'mcq',
-      q: 'Which property does the lecture call the world’s biggest sports property for media rights?',
+      q: 'Which property is the world’s biggest sports property for media rights?',
       options: [
         'The Premier League',
         'The NFL',
@@ -640,7 +640,7 @@ export const sportsMediaRightsTopic = {
     {
       id: 'c6',
       type: 'mcq',
-      q: 'Where does the lecture expect growth in global media-rights value to 2030 to come from?',
+      q: 'Where is growth in global media-rights value to 2030 expected to come from?',
       options: [
         'A return to free-to-air only',
         'Streaming platforms, demand for live premium sport, cricket, women’s sport and renewals',

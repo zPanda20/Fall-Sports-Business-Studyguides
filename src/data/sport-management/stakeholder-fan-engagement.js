@@ -405,7 +405,7 @@ export const stakeholderFanEngagementTopic = {
     {
       id: 'c2',
       type: 'mcq',
-      q: 'Which sport has the most athletes on the lecture’s most-followed list?',
+      q: 'Which sport has the most athletes on the most-followed athletes list?',
       options: [
         'Basketball',
         'Cricket',

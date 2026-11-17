@@ -407,7 +407,7 @@ export const sportsMarketingTopic = {
     {
       id: 'q3',
       type: 'mcq',
-      q: 'Which of these is NOT a benefit of digital marketing listed in the lecture?',
+      q: 'Which of these is NOT a benefit of digital marketing?',
       options: [
         'It guarantees every customer will buy',
         'It is highly targeted',
@@ -453,7 +453,7 @@ export const sportsMarketingTopic = {
     {
       id: 'q7',
       type: 'mcq',
-      q: 'In the lecture’s marketing plan, what comes first?',
+      q: 'In a sports marketing plan, what comes first?',
       options: [
         'Goals, objectives and KPIs',
         'The budget',
@@ -481,7 +481,7 @@ export const sportsMarketingTopic = {
     {
       id: 'c2',
       type: 'mcq',
-      q: 'According to the lecture, when does marketing work?',
+      q: 'When does marketing work?',
       options: [
         'When many people see the advert',
         'When the budget is largest',
@@ -495,7 +495,7 @@ export const sportsMarketingTopic = {
     {
       id: 'c3',
       type: 'mcq',
-      q: 'Which two rules does the lecture give for marketing messages?',
+      q: 'Which two rules apply to marketing messages?',
       options: [
         'They must be long and detailed',
         'They must reach the intended audience and be understood',

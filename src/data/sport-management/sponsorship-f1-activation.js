@@ -411,7 +411,7 @@ export const sponsorshipF1ActivationTopic = {
     {
       id: 'q1',
       type: 'mcq',
-      q: 'According to the lecture, what is Formula 1 sponsorship “not simply about”?',
+      q: 'What is Formula 1 sponsorship “not simply about”?',
       options: [
         'Putting a company’s logo on a racing car',
         'Earning money for the team',
@@ -425,7 +425,7 @@ export const sponsorshipF1ActivationTopic = {
     {
       id: 'q2',
       type: 'mcq',
-      q: 'Which is NOT one of the tangible benefits of F1 sponsorship listed in the lecture?',
+      q: 'Which is NOT one of the tangible benefits of F1 sponsorship?',
       options: [
         'A guaranteed race win for the sponsor’s team',
         'Increased brand visibility and awareness',
@@ -467,7 +467,7 @@ export const sponsorshipF1ActivationTopic = {
     {
       id: 'q5',
       type: 'mcq',
-      q: 'A luxury fashion brand sponsors F1. What does the lecture say it wants?',
+      q: 'A luxury fashion brand sponsors F1. What does it typically want?',
       options: [
         'Prestige, exclusivity and premium positioning',
         'Mass-market visibility',
@@ -523,7 +523,7 @@ export const sponsorshipF1ActivationTopic = {
     {
       id: 'q9',
       type: 'mcq',
-      q: 'The lecture says the activation ratio is at least 1:1 and sometimes as high as 5:1. What does that mean for a sponsor?',
+      q: 'A sponsorship activation ratio is at least 1:1 and sometimes as high as 5:1. What does that mean for a sponsor?',
       options: [
         'It spends at least as much on activation as on the rights, and sometimes several times more',
         'It spends nothing on activation',
@@ -603,7 +603,7 @@ export const sponsorshipF1ActivationTopic = {
     {
       id: 'c4',
       type: 'mcq',
-      q: 'Which restriction applies to sponsorship in Formula 1 according to the lecture?',
+      q: 'Which restriction applies to sponsorship in Formula 1?',
       options: [
         'Tobacco is restricted, and alcohol to some extent',
         'Technology companies are banned',

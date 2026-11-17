@@ -615,7 +615,7 @@ export const whyMarketResearchTopic = {
     {
       id: 'q8',
       type: 'mcq',
-      q: 'Which is a real risk of using AI in research, according to the slides?',
+      q: 'Which is a real risk of using AI in market research?',
       options: [
         'AI always gives biased results, so it must never be used',
         'AI can make up convincing but false information, so outputs must be checked',

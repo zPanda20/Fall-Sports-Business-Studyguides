@@ -93,6 +93,7 @@ const PATHS = {
   left: <path d="M15 5l-7 7 7 7" />,
   right: <path d="M9 5l7 7-7 7" />,
   check: <path d="M5 12.5l4.5 4.5L19 7.5" />,
+  flame: <path d="M12 3c.6 3.2-1.4 4.6-2.8 6.4C7.8 11.2 7 12.6 7 14.4A5 5 0 0 0 12 19.5a5 5 0 0 0 5-5.1c0-2.2-1.1-3.6-2.2-4.9-.2 1.1-.8 1.9-1.6 2.3.5-2.7-.1-6.2-1.2-8.8z" />,
 };
 
 export default function Icon({ name, size = 20 }) {

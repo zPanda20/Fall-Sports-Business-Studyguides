@@ -680,7 +680,7 @@ export const questionnaireDesignTopic = {
     {
       id: 'q1',
       type: 'mcq',
-      q: 'According to the lecture, where in a questionnaire should screening questions appear?',
+      q: 'Where in a questionnaire should screening questions appear?',
       options: [
         'Before the main blocks, to filter out ineligible people early',
         'At the very end',
@@ -791,7 +791,7 @@ export const questionnaireDesignTopic = {
     {
       id: 'q10',
       type: 'mcq',
-      q: 'What does the lecture say about a single Likert item?',
+      q: 'What is true of a single Likert item?',
       options: [
         'It is ordinal, and a response of 1 to 7 does not automatically establish equal psychological intervals',
         'It is always a ratio scale',
@@ -814,7 +814,7 @@ export const questionnaireDesignTopic = {
     {
       id: 'q12',
       type: 'mcq',
-      q: 'You adapt a published scale for your survey. What does the lecture say to do?',
+      q: 'You adapt a published scale for your survey. What should you do?',
       options: [
         'Keep the wording and response anchors where feasible and document exactly what changed and why',
         'Rewrite every item in your own words',

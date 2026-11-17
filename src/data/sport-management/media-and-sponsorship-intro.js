@@ -510,7 +510,7 @@ export const mediaAndSponsorshipIntroTopic = {
     {
       id: 'q8',
       type: 'mcq',
-      q: 'Which is NOT one of the main reasons brands sponsor sport listed in the lecture?',
+      q: 'Which is NOT one of the main reasons brands sponsor sport?',
       options: [
         'To avoid paying any other marketing costs',
         'To increase sales',
@@ -594,7 +594,7 @@ export const mediaAndSponsorshipIntroTopic = {
     {
       id: 'c6',
       type: 'mcq',
-      q: 'Which best describes the lecture’s forecast for global sports sponsorship spend between 2025 and 2030?',
+      q: 'Which best describes the forecast for global sports sponsorship spend between 2025 and 2030?',
       options: [
         'It falls by half',
         'It almost doubles',
@@ -608,7 +608,7 @@ export const mediaAndSponsorshipIntroTopic = {
     {
       id: 'c7',
       type: 'mcq',
-      q: 'Of the two North American leagues in the lecture’s sponsorship figures, which earns more from sponsors?',
+      q: 'Of the two North American leagues in the sponsorship figures, which earns more from sponsors?',
       options: [
         'The NBA',
         'They are equal',
@@ -622,7 +622,7 @@ export const mediaAndSponsorshipIntroTopic = {
     {
       id: 'c8',
       type: 'mcq',
-      q: 'What does the lecture say consumers think of sports sponsorship as a form of advertising?',
+      q: 'What do consumers think of sports sponsorship as a form of advertising?',
       options: [
         'It is the least trusted channel',
         'It is one of the most trusted advertising channels',
