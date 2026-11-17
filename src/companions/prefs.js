@@ -113,9 +113,10 @@ export function setPref(key, value) {
 export function setPrefs(patch) {
   commit(clean({ ...state, ...patch }));
 }
-// A reset puts the settings back to how they started. Unlocked characters stay unlocked (but switched off).
+// A reset puts the settings back to how they started. Unlocked characters stay unlocked (but switched off),
+// and rewards you earned are kept.
 export function resetPrefs() {
-  commit(clean({ ...DEFAULTS, unlocked: state.unlocked }));
+  commit(clean({ ...DEFAULTS, unlocked: state.unlocked, rewards: state.rewards }));
 }
 
 // The tour, quiz reactions, reminders and help are all live. This stays as one switch in case a part ever

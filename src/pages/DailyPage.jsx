@@ -4,9 +4,11 @@ import { getCourse } from '../data/index.js';
 import { useBookmarks } from '../lib/bookmarks.js';
 import { buildCatalog, SIZES } from '../lib/dailyPick.js';
 import {
-  BADGES, MAX_SHIELDS, POINTS, SHOP,
-  answer, buy, equip, finishQuiz, nextRank, rankFor, startQuiz, streakNow, todayQuiz, useDaily, viewItem, weekStrip,
+  BADGES, MAX_SHIELDS, POINTS, RANKS, SHOP,
+  answer, art, buy, equip, finishQuiz, flameFor, nextRank, rankFor, startQuiz, streakNow, todayQuiz, useDaily, viewItem, weekStrip,
 } from '../lib/daily.js';
+import { REWARD_KINDS } from '../companions/rewards.js';
+import RewardCorner from '../components/RewardCorner.jsx';
 import { bundlePrompt, questionPrompt } from '../lib/ai.js';
 import Rich from '../lib/Rich.jsx';
 import AskAI from '../components/AskAI.jsx';
@@ -18,15 +20,18 @@ const DAY_LETTERS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 const dayLetter = (key) => DAY_LETTERS[new Date(`${key}T12:00:00`).getDay()];
 const shopItem = (id) => SHOP.find((s) => s.id === id);
 
-// A short burst of falling emoji when a quiz is finished. Hidden for people who prefer reduced motion (see the CSS).
-function Burst({ glyphs }) {
+// A short burst of falling pieces when a quiz is finished: emoji or the drawn sports balls and medals.
+// Hidden for people who prefer reduced motion (see the CSS).
+function Burst({ pack }) {
   const [on, setOn] = useState(true);
+  const pieces = pack.images ? pack.images.map((p) => ({ img: art(...p.split('/')) })) : pack.glyphs.map((g) => ({ glyph: g }));
   const bits = useMemo(
-    () => Array.from({ length: 28 }, (_, i) => ({
+    () => Array.from({ length: pack.images ? 22 : 28 }, (_, i) => ({
       left: Math.random() * 100, delay: Math.random() * 0.9, dur: 2.4 + Math.random() * 1.6,
-      glyph: glyphs[i % glyphs.length], size: 16 + Math.random() * 16, drift: Math.round((Math.random() - 0.5) * 90),
+      piece: pieces[i % pieces.length], size: pack.images ? 30 + Math.random() * 22 : 16 + Math.random() * 16,
+      drift: Math.round((Math.random() - 0.5) * 90),
     })),
-    [glyphs],
+    [pack.id], // eslint-disable-line react-hooks/exhaustive-deps
   );
   useEffect(() => {
     const t = setTimeout(() => setOn(false), 5200);
@@ -36,7 +41,9 @@ function Burst({ glyphs }) {
   return (
     <div className="burst" aria-hidden="true">
       {bits.map((b, i) => (
-        <span key={i} style={{ left: `${b.left}%`, animationDelay: `${b.delay}s`, animationDuration: `${b.dur}s`, fontSize: b.size, '--drift': `${b.drift}px` }}>{b.glyph}</span>
+        <span key={i} style={{ left: `${b.left}%`, animationDelay: `${b.delay}s`, animationDuration: `${b.dur}s`, fontSize: b.size, '--drift': `${b.drift}px` }}>
+          {b.piece.img ? <img src={b.piece.img} alt="" width={b.size} height={b.size} /> : b.piece.glyph}
+        </span>
       ))}
     </div>
   );
@@ -47,6 +54,7 @@ function StreakCard({ d }) {
   const week = weekStrip(d);
   const rank = rankFor(d.lifetime);
   const upcoming = nextRank(d.lifetime);
+  const flame = flameFor(streak.count);
   const status = {
     safe: 'Done for today. See you tomorrow.',
     open: 'Finish today’s quiz to keep it going.',
@@ -56,7 +64,7 @@ function StreakCard({ d }) {
   return (
     <section className="streak-card glass" aria-label="Your streak and points">
       <div className="streak-main">
-        <span className={`flame ${streak.count > 0 ? 'lit' : ''}`} aria-hidden="true"><Icon name="flame" size={34} /></span>
+        <img className={`flame-art ${flame.lit ? 'lit' : ''}`} src={flame.src} alt="" width="76" height="76" />
         <div>
           <p className="streak-count"><b>{streak.count}</b> day streak</p>
           <p className="meta">{status}</p>
@@ -66,15 +74,15 @@ function StreakCard({ d }) {
         {week.map((w) => (
           <li key={w.key} className={`${w.done ? 'done' : ''} ${w.today ? 'today' : ''} ${w.shielded && !w.done ? 'shielded' : ''}`} aria-label={`${w.key}: ${w.done ? 'quiz done' : w.shielded ? 'covered by a shield' : 'no quiz'}`}>
             <span>{dayLetter(w.key)}</span>
-            <i aria-hidden="true">{w.done ? '✓' : w.shielded ? '🛡' : ''}</i>
+            <i aria-hidden="true">{w.done ? '✓' : w.shielded ? <img src={art('items', 'shield-cracked')} alt="" width="22" height="22" /> : ''}</i>
           </li>
         ))}
       </ol>
       <div className="stat-row">
         <div className="stat nm-inset"><b>{d.points}</b><span>points</span></div>
-        <div className="stat nm-inset"><b>{rank.name}</b><span>{upcoming ? `${upcoming.at - d.lifetime} to ${upcoming.name}` : 'top rank'}</span></div>
+        <div className="stat nm-inset rank-stat"><img src={art('ranks', rank.id)} alt="" width="40" height="40" /><b>{rank.name}</b><span>{upcoming ? `${upcoming.at - d.lifetime} to ${upcoming.name}` : 'top rank'}</span></div>
         <div className="stat nm-inset"><b>{d.best}</b><span>best streak</span></div>
-        <div className="stat nm-inset"><b>{d.shields}/{MAX_SHIELDS}</b><span>shields</span></div>
+        <div className="stat nm-inset"><img src={art('items', 'shield')} alt="" width="28" height="28" /><b>{d.shields}/{MAX_SHIELDS}</b><span>shields</span></div>
       </div>
     </section>
   );
@@ -95,10 +103,17 @@ function Shelf({ d }) {
             <div key={it.id} className="shelf-item nm" data-kind={it.kind} data-id={it.id}>
               <div className="shelf-top">
                 <b>{it.name}</b>
-                {it.kind === 'theme' && <span className={`swatch ${it.id}`} aria-hidden="true" />}
-                {it.kind === 'burst' && <span className="glyphs" aria-hidden="true">{it.glyphs.slice(0, 3).join(' ')}</span>}
-                {it.kind === 'shield' && <span className="glyphs" aria-hidden="true">🛡️</span>}
+                {it.kind === 'burst' && (
+                  <span className="glyphs" aria-hidden="true">
+                    {it.images ? it.images.slice(0, 3).map((p) => <img key={p} src={art(...p.split('/'))} alt="" width="30" height="30" loading="lazy" />) : it.glyphs.slice(0, 3).join(' ')}
+                  </span>
+                )}
+                {it.kind === 'shield' && <img src={art('items', 'shield')} alt="" width="36" height="36" loading="lazy" />}
+                {it.kind === 'reward' && <img src={art('items', REWARD_KINDS[it.reward].icon)} alt="" width="36" height="36" loading="lazy" />}
               </div>
+              {it.kind === 'theme' && (it.banner
+                ? <img className="theme-thumb" src={art('banners', it.banner)} alt="" loading="lazy" />
+                : <span className="theme-thumb classic" aria-hidden="true" />)}
               <p className="meta">{it.blurb}</p>
               {owned ? (
                 <button type="button" className="button small secondary" disabled={equipped} onClick={() => equip(it.id)}>
@@ -113,10 +128,21 @@ function Shelf({ d }) {
           );
         })}
       </div>
+      <h3>Ranks</h3>
+      <ul className="rank-row" role="list">
+        {RANKS.map((r) => (
+          <li key={r.id} className={`rank nm-inset ${d.lifetime >= r.at ? 'got' : ''} ${rankFor(d.lifetime).id === r.id ? 'current' : ''}`}>
+            <img src={art('ranks', r.id)} alt="" width="64" height="64" loading="lazy" />
+            <b>{r.name}</b>
+            <span>{r.at === 0 ? 'Start here' : `${r.at} points`}</span>
+          </li>
+        ))}
+      </ul>
       <h3>Badges</h3>
       <ul className="badge-grid" role="list">
         {BADGES.map((b) => (
           <li key={b.id} className={`badge nm-inset ${d.badges[b.id] ? 'got' : ''}`}>
+            <img src={art('badges', b.id)} alt="" width="64" height="64" loading="lazy" />
             <b>{b.name}</b>
             <span>{d.badges[b.id] ? 'Earned' : b.blurb}</span>
           </li>
@@ -219,13 +245,13 @@ function Results({ d, quiz, justFinished }) {
     .map((it, i) => ({ q: viewItem(it), i }))
     .filter(({ i }) => quiz.results[i] === false);
   const optText = (q, list) => q.options.filter((o) => list.includes(o.orig)).map((o) => plain(o.text)).join('; ');
-  const burst = shopItem(d.burst)?.glyphs || ['🎉'];
+  const burst = shopItem(d.burst) || shopItem('burst-confetti');
   const daily = quiz.mode === 'daily';
   const streak = streakNow(d);
   const rows = Object.values(s.byCourse);
   return (
     <div className="quiz glass" aria-live="polite">
-      {justFinished && s.correct > 0 && <Burst glyphs={burst} />}
+      {justFinished && s.correct > 0 && <Burst pack={burst} />}
       <div className="test-score">
         <Ring value={s.correct / s.total} size={112} stroke={10} label={`${s.correct}/${s.total}`} sub="correct" />
         <div>
@@ -237,7 +263,12 @@ function Results({ d, quiz, justFinished }) {
         <li><b>+{s.earned}</b> points {daily ? `(${POINTS.correct} per correct answer, ${POINTS.complete} for finishing)` : `(${POINTS.bonusCorrect} per correct answer)`}</li>
         {daily && <li><b>{streak.count}</b> day streak{s.shieldSaved ? '. A streak shield covered the day you missed.' : ''}</li>}
         {s.milestones.map((m) => <li key={m.days}><b>+{m.points}</b> bonus for a {m.days}-day streak</li>)}
-        {s.badges.map((id) => <li key={id}>New badge: <b>{BADGES.find((b) => b.id === id)?.name}</b></li>)}
+        {s.badges.map((id) => (
+          <li key={id} className="new-badge"><img src={art('badges', id)} alt="" width="40" height="40" /><span>New badge: <b>{BADGES.find((b) => b.id === id)?.name}</b></span></li>
+        ))}
+        {daily && Object.entries(s.rewards || {}).filter(([, n]) => n > 0).map(([kind, n]) => (
+          <li key={kind} className="new-badge"><img src={art('items', REWARD_KINDS[kind].icon)} alt="" width="40" height="40" /><span>Reward: <b>{n} {n === 1 ? REWARD_KINDS[kind].single : REWARD_KINDS[kind].plural}</b> (use it in the reward corner below)</span></li>
+        ))}
       </ul>
       {rows.length > 1 && (
         <div className="chips" aria-label="Score by course">
@@ -318,10 +349,13 @@ export default function DailyPage() {
     } else setIdx(idx + 1);
   }
 
+  const banner = shopItem(d.theme)?.banner;
   const header = (
-    <header className="stack">
-      <h1>Daily quiz</h1>
-      <p className="lead">A few questions a day, mixed from every course with an exam. A different set each day, with the ones you missed coming back.</p>
+    <header className={`daily-hero ${banner ? 'has-banner' : ''}`} style={banner ? { backgroundImage: `url(${art('banners', banner)})` } : undefined}>
+      <div className="daily-hero-text stack">
+        <h1>Daily quiz</h1>
+        <p className="lead">A few questions a day, mixed from every course with an exam. A different set each day, with the ones you missed coming back.</p>
+      </div>
     </header>
   );
 
@@ -351,6 +385,7 @@ export default function DailyPage() {
             <Setup size={size} setSize={setSize} focus={focus} setFocus={setFocus} topicIds={topicIds} focusCount={focusCount} courseCount={courseCount} onStart={() => begin('bonus')} label="Start a bonus set" />
           </section>
         )}
+        <RewardCorner />
         <Shelf d={d} />
       </div>
     );
@@ -365,6 +400,7 @@ export default function DailyPage() {
         <h2>Today’s quiz</h2>
         <Setup size={size} setSize={setSize} focus={focus} setFocus={setFocus} topicIds={topicIds} focusCount={focusCount} courseCount={courseCount} onStart={() => begin('daily')} label="Start today’s quiz" />
       </section>
+      <RewardCorner />
       <Shelf d={d} />
     </div>
   );
@@ -374,7 +410,7 @@ function StreakCardCompact({ d }) {
   const s = streakNow(d);
   return (
     <p className="daily-strip glass">
-      <span className={`flame ${s.count > 0 ? 'lit' : ''}`} aria-hidden="true"><Icon name="flame" size={18} /></span>
+      <img className={`flame-art small ${s.count > 0 ? 'lit' : ''}`} src={flameFor(s.count).src} alt="" width="28" height="28" />
       <b>{s.count}</b> day streak
       <span className="spacer" />
       <b>{d.points}</b> points

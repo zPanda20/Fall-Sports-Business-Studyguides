@@ -83,10 +83,16 @@ export const FACES = {
 };
 export const NEUTRAL_FACE = { seraph: 'friendly', demon: 'deadpan', hexie: 'innocent', cosmic: 'sparkle' };
 
-// Flip to true once snack / hammer / head-pat art exists, so the app can show earned rewards.
-export const REWARD_ART_READY = false;
+// Snack / hammer / head-pat art exists, so earned rewards can be used (see components/RewardStage.jsx).
+export const REWARD_ART_READY = true;
 
 export const POSE_SIZE = { seraph: [487, 640], demon: [480, 640], hexie: [480, 640], cosmic: [480, 640] };
+
+// Any file in /public, with the right base path.
+export const publicUrl = (path) => `${base()}${path}`;
+// The reward animation frames: seraph pat/snack1-3, demon pat/hammer1-3.
+export const rewardUrl = (who, name) => `${base()}companions/${who}/rewards/${name}.webp`;
+export const REWARD_FRAMES = { seraph: ['pat', 'snack1', 'snack2', 'snack3'], demon: ['pat', 'hammer1', 'hammer2', 'hammer3'] };
 
 export const poseUrl = (who, pose) => `${base()}companions/${who}/poses/${pose}.webp`;
 export const faceUrl = (who, face) => `${base()}companions/${who}/expressions/${face}.webp`;

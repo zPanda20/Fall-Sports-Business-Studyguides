@@ -2,7 +2,11 @@
 // and the streak, shield and points rules.
 import { courses } from '../../src/data/index.js';
 import { buildCatalog, dateKey, dayNumber, pickQuestions, seeded, optionOrder, sameSet } from '../../src/lib/dailyPick.js';
-import { getDaily, startQuiz, answer, finishQuiz, buy, viewItem, streakNow, todayQuiz, POINTS, MILESTONES, SHOP } from '../../src/lib/daily.js';
+import fs from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { getPrefs } from '../../src/companions/prefs.js';
+import { REWARD_FRAMES } from '../../src/companions/assets.js';
+import { RANKS, BADGES, flameFor, art, getDaily, startQuiz, answer, finishQuiz, buy, viewItem, streakNow, todayQuiz, POINTS, MILESTONES, SHOP } from '../../src/lib/daily.js';
 
 export default function ({ eq, ok_ }) {
   const catalog = buildCatalog();
@@ -102,6 +106,21 @@ export default function ({ eq, ok_ }) {
     ok_(sameSet([1, 0], [0, 1]) && !sameSet([0], [0, 1]), 'daily: answer sets compare by content, not order');
   }
 
+  // ---- artwork: every picture the daily quiz points at exists ----
+  const pub = (rel) => fileURLToPath(new URL(`../../public/${rel}`, import.meta.url));
+  const has = (rel) => fs.existsSync(pub(rel)) && fs.statSync(pub(rel)).size > 1000;
+  for (const r of RANKS) ok_(has(`daily/ranks/${r.id}.webp`), `daily art: rank emblem ${r.id}`);
+  for (const b of BADGES) ok_(has(`daily/badges/${b.id}.webp`), `daily art: badge ${b.id}`);
+  for (const n of ['ember', 'small', 'big', 'inferno']) ok_(has(`daily/flames/${n}.webp`), `daily art: flame ${n}`);
+  for (const n of ['shield', 'shield-cracked', 'snack', 'mallet', 'hand']) ok_(has(`daily/items/${n}.webp`), `daily art: item ${n}`);
+  for (const it of SHOP) {
+    if (it.banner) ok_(has(`daily/banners/${it.banner}.webp`), `daily art: banner for ${it.id}`);
+    for (const img of it.images || []) ok_(has(`daily/${img}.webp`), `daily art: ${it.id} piece ${img}`);
+  }
+  for (const [who, names] of Object.entries(REWARD_FRAMES)) for (const n of names) ok_(has(`companions/${who}/rewards/${n}.webp`), `reward frame: ${who} ${n}`);
+  eq([0, 1, 2, 3, 6, 7, 13, 14, 40].map((n) => flameFor(n).id).join(','), 'ember,ember,ember,small,small,big,big,inferno,inferno', 'daily art: the flame grows with the streak');
+  ok_(!flameFor(0).lit && flameFor(1).lit, 'daily art: a zero streak shows a cold flame');
+
   // ---- streaks, shields, points (a pretend calendar in November 2026) ----
   const at = (d) => new Date(`2026-11-${String(d).padStart(2, '0')}T12:00:00`);
   const play = (d, { allRight = true, size = 5, mode = 'daily' } = {}) => {
@@ -128,6 +147,9 @@ export default function ({ eq, ok_ }) {
   eq(streakNow(getDaily(), at(10)).status, 'open', 'daily: streak is open the next day');
   ok_(Object.keys(getDaily().missed).length === 5, 'daily: wrong answers are remembered to come back');
 
+  eq(getPrefs().rewards.pats, 1, 'daily rewards: finishing a daily quiz earns a head pat');
+  eq(getPrefs().rewards.snacks, 0, 'daily rewards: no snack below 80%');
+  eq(getPrefs().rewards.hammers, 0, 'daily rewards: no hammer without a perfect score or milestone');
   const before = getDaily().points;
   const d2 = play(10);
   eq(d2.streak, 2, 'daily: the next day adds to the streak');
@@ -136,17 +158,22 @@ export default function ({ eq, ok_ }) {
   ok_(d1.badges.includes('first') && d1.badges.includes('everyCourse'), 'daily: first-quiz and full-squad badges');
   ok_(d2.badges.includes('sweep'), 'daily: clean-sheet badge');
 
+  eq(getPrefs().rewards.pats, 2, 'daily rewards: a second head pat');
+  eq(getPrefs().rewards.snacks, 1, 'daily rewards: 80% or better earns a snack');
+  eq(getPrefs().rewards.hammers, 1, 'daily rewards: a perfect score earns a hammer');
   const bonusBefore = getDaily().points;
   const b = play(10, { mode: 'bonus' });
   eq(getDaily().streak, 2, 'daily: a bonus set does not change the streak');
   eq(getDaily().points - bonusBefore, 5 * POINTS.bonusCorrect, 'daily: a bonus set earns reduced points and no completion bonus');
   ok_(b.correct === 5, 'daily: bonus set scored');
+  eq(getPrefs().rewards.pats, 2, 'daily rewards: a bonus set earns no rewards');
 
   const d3 = play(11);
   eq(d3.streak, 3, 'daily: three days in a row');
   eq(d3.milestones.length, 1, 'daily: the 3-day milestone pays out');
   eq(d3.milestones[0].points, MILESTONES[0].points, 'daily: milestone amount');
   ok_(d3.badges.includes('streak3'), 'daily: hat-trick badge');
+  eq(getPrefs().rewards.hammers, 2, 'daily rewards: a perfect score on a milestone day');
   const again = finishQuiz(at(11));
   eq(again.streak, 3, 'daily: finishing twice does not double count');
 
@@ -167,6 +194,10 @@ export default function ({ eq, ok_ }) {
   // two missed days: shield cannot help
   buy('shield');
   eq(streakNow(getDaily(), at(18)).status, 'broken', 'daily: two missed days break the streak even with a shield');
+  const pointsBeforePat = getDaily().points;
+  const patsBefore = getPrefs().rewards.pats;
+  ok_(buy('reward-pat') && getPrefs().rewards.pats === patsBefore + 1, 'daily rewards: a head pat can be bought with points');
+  eq(pointsBeforePat - getDaily().points, SHOP.find((x) => x.id === 'reward-pat').cost, 'daily rewards: and costs its price');
   ok_(!buy('theme-gold') || getDaily().owned['theme-gold'], 'daily: buying a theme unlocks it');
   ok_(getDaily().points >= 0, 'daily: points never go negative');
 }

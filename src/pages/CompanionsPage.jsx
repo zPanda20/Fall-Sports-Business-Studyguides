@@ -5,6 +5,7 @@ import { tourReset, tourStart } from '../companions/tour.js';
 import { say, closePanel } from '../companions/manager.js';
 import { line } from '../companions/dialogue.js';
 import { CHARACTERS, REWARD_ART_READY, faceUrl } from '../companions/assets.js';
+import RewardCorner from '../components/RewardCorner.jsx';
 
 function Switch({ checked, onChange, label, hint, id }) {
   return (
@@ -304,11 +305,7 @@ export default function CompanionsPage() {
               <Choice name="popups" value="lively" current={p.popups} onPick={(v) => setPref('popups', v)} title="Lively" text="More reactions, still never twice at once." />
             </div>
           </fieldset>
-          {REWARD_ART_READY && (
-            <p className="meta">
-              Rewards earned so far: {p.rewards.snacks} snacks for Seraph, {p.rewards.hammers} hammers for Demon, {p.rewards.pats} head pats.
-            </p>
-          )}
+          {REWARD_ART_READY && <RewardCorner />}
         </section>
       )}
 

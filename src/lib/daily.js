@@ -1,9 +1,19 @@
 import { useSyncExternalStore } from 'react';
 import { emit } from '../companions/events.js';
+import { publicUrl } from '../companions/assets.js';
+import { addReward } from '../companions/rewards.js';
 import { buildCatalog, dateKey, dayNumber, optionOrder, pickQuestions, sameSet } from './dailyPick.js';
 
 // Daily quiz state: today's quiz, streak, points, unlocks. Stored only in this browser, like progress.
 const KEY = 'sbsg:daily:v1';
+
+// Artwork lives in public/daily/<folder>/<name>.webp (made by scripts/prepare-daily-art.py).
+export const art = (folder, name) => publicUrl(`daily/${folder}/${name}.webp`);
+// The streak flame grows with the streak. Zero shows a cold, dimmed ember.
+export function flameFor(count) {
+  const id = count >= 14 ? 'inferno' : count >= 7 ? 'big' : count >= 3 ? 'small' : 'ember';
+  return { id, lit: count > 0, src: art('flames', id) };
+}
 
 export const POINTS = { correct: 10, bonusCorrect: 5, complete: 20 };
 export const MILESTONES = [
@@ -15,12 +25,12 @@ export const MILESTONES = [
   { days: 100, points: 1000 },
 ];
 export const RANKS = [
-  { at: 0, name: 'Rookie' },
-  { at: 100, name: 'Reserve' },
-  { at: 300, name: 'Starter' },
-  { at: 700, name: 'Captain' },
-  { at: 1500, name: 'All-Star' },
-  { at: 3000, name: 'Hall of Famer' },
+  { at: 0, id: 'rookie', name: 'Rookie' },
+  { at: 100, id: 'reserve', name: 'Reserve' },
+  { at: 300, id: 'starter', name: 'Starter' },
+  { at: 700, id: 'captain', name: 'Captain' },
+  { at: 1500, id: 'allstar', name: 'All-Star' },
+  { at: 3000, id: 'hall', name: 'Hall of Famer' },
 ];
 export const rankFor = (lifetime) => [...RANKS].reverse().find((r) => lifetime >= r.at) || RANKS[0];
 export const nextRank = (lifetime) => RANKS.find((r) => r.at > lifetime) || null;
@@ -28,14 +38,17 @@ export const nextRank = (lifetime) => RANKS.find((r) => r.at > lifetime) || null
 // The unlock shelf. Add an item here and it shows up. `kind` decides where it applies.
 export const SHOP = [
   { id: 'theme-classic', kind: 'theme', name: 'Classic', cost: 0, blurb: 'The usual study-guide colors.' },
-  { id: 'theme-sunset', kind: 'theme', name: 'Sunset', cost: 60, blurb: 'Warm orange and rose for the daily quiz.' },
-  { id: 'theme-midnight', kind: 'theme', name: 'Midnight', cost: 100, blurb: 'Deep indigo and electric blue.' },
-  { id: 'theme-gold', kind: 'theme', name: 'Gold', cost: 200, blurb: 'Trophy gold. Earned, not given.' },
+  { id: 'theme-sunset', kind: 'theme', name: 'Sunset', cost: 60, blurb: 'A candy-pastel sky behind your daily quiz.', banner: 'sunset' },
+  { id: 'theme-midnight', kind: 'theme', name: 'Midnight', cost: 100, blurb: 'Glassy cosmic waves in deep violet.', banner: 'midnight' },
+  { id: 'theme-gold', kind: 'theme', name: 'Gold', cost: 200, blurb: 'A golden celebration. Earned, not given.', banner: 'gold' },
   { id: 'burst-confetti', kind: 'burst', name: 'Confetti', cost: 0, blurb: 'The classic finish.', glyphs: ['🎉', '✨', '🎊'] },
-  { id: 'burst-balls', kind: 'burst', name: 'Ball game', cost: 80, blurb: 'Footballs, basketballs and tennis balls.', glyphs: ['⚽', '🏀', '🎾', '🏈'] },
+  { id: 'burst-balls', kind: 'burst', name: 'Ball game', cost: 80, blurb: 'Footballs, basketballs, tennis balls and more rain down.', images: ['balls/football', 'balls/basketball', 'balls/tennis', 'balls/volleyball', 'balls/rugby'] },
   { id: 'burst-racing', kind: 'burst', name: 'Pit lane', cost: 120, blurb: 'Checkered flags and race cars.', glyphs: ['🏁', '🏎️', '🏆'] },
-  { id: 'burst-trophies', kind: 'burst', name: 'Trophy rain', cost: 150, blurb: 'Medals and trophies.', glyphs: ['🏆', '🥇', '🥈', '🥉', '⭐'] },
+  { id: 'burst-trophies', kind: 'burst', name: 'Medal shower', cost: 150, blurb: 'Crests and medals rain down.', images: ['ranks/allstar', 'ranks/hall', 'ranks/captain', 'badges/streak30', 'badges/sweep'] },
   { id: 'shield', kind: 'shield', name: 'Streak shield', cost: 120, blurb: 'Saves your streak if you miss one day. Holds up to 2.', consumable: true },
+  { id: 'reward-pat', kind: 'reward', reward: 'pats', name: 'Head pat', cost: 15, blurb: 'One head pat to give Seraph or Demon.', consumable: true },
+  { id: 'reward-snack', kind: 'reward', reward: 'snacks', name: 'Snack for Seraph', cost: 25, blurb: 'A golden fish cracker for Seraph.', consumable: true },
+  { id: 'reward-hammer', kind: 'reward', reward: 'hammers', name: 'Hammer for Demon', cost: 25, blurb: 'One swing at Demon. He had it coming.', consumable: true },
 ];
 export const MAX_SHIELDS = 2;
 
@@ -257,7 +270,15 @@ export function finishQuiz(now = new Date()) {
     row.total += 1;
     if (t.results[i]) row.correct += 1;
   });
-  const summary = { correct, total, bonus, earned: t.earned + bonus, streak, shieldSaved, milestones: milestonesHit, badges: newBadges, byCourse };
+  // Finishing a daily quiz earns something to play with: a head pat always, a snack for 80% or better,
+  // and a hammer swing for a perfect score or a streak milestone.
+  const rewards = { pats: 0, snacks: 0, hammers: 0 };
+  if (daily) {
+    rewards.pats = 1;
+    if (total > 0 && correct / total >= 0.8) rewards.snacks = 1;
+    if ((total >= 5 && correct === total) || milestonesHit.length) rewards.hammers = 1;
+  }
+  const summary = { correct, total, bonus, earned: t.earned + bonus, streak, shieldSaved, milestones: milestonesHit, badges: newBadges, byCourse, rewards };
   commit({
     ...state,
     streak, best, lastDay, shields, shieldsUsed, days, milestones, badges,
@@ -265,6 +286,7 @@ export function finishQuiz(now = new Date()) {
     lifetime: state.lifetime + bonus,
     today: { ...t, finished: true, summary },
   });
+  for (const [kind, n] of Object.entries(rewards)) if (n) addReward(kind, n);
   emit('study:quiz-complete', { source: 'daily', courseId: null, topicId: null, correct, total, prev: null });
   return summary;
 }
@@ -272,6 +294,11 @@ export function finishQuiz(now = new Date()) {
 export function buy(id) {
   const item = SHOP.find((s) => s.id === id);
   if (!item || state.points < item.cost) return false;
+  if (item.kind === 'reward') {
+    commit({ ...state, points: state.points - item.cost });
+    addReward(item.reward, 1);
+    return true;
+  }
   if (item.consumable) {
     if (state.shields >= MAX_SHIELDS) return false;
     commit({ ...state, points: state.points - item.cost, shields: state.shields + 1 });
