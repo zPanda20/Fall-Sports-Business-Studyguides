@@ -6,6 +6,7 @@
 // brief: { objective, intro, points: [{ label, text }] } shows the task details under the title.
 // unconfirmed: true shows a big "Unconfirmed due date" badge until the date is confirmed.
 // videos: [{ label, url }] adds red "Watch video" buttons that open in a new tab.
+// gem: 'ruby' | 'sapphire' | 'emerald' | 'amethyst' makes the card a final exam with a gemstone of that color. endAt is when the exam ends.
 // group: true marks a group project. approx is shown when only a rough time is known (no exact date yet).
 export const DEADLINES = [
   {
@@ -112,10 +113,10 @@ export const DEADLINES = [
     title: 'Final exam: Foundations of Sport Management',
     course: 'Foundations of Sport Management',
     courseId: 'sport-management',
-    dueAt: '2026-12-16T23:59:00+01:00',
+    dueAt: '2026-12-16T09:30:00+01:00',
+    endAt: '2026-12-16T11:30:00+01:00',
     gem: 'emerald',
-    timeTbc: true,
-    note: 'Wednesday 16 December. The start time has not been given yet, so the clock runs to the end of the day. Use Change date to add the exact time. 2 hours, on a computer, closed book. Practice questions in the Foundations exam practice match this format.',
+    note: 'Wednesday 16 December, 09:30 to 11:30, in Salle 100 and 101. 2 hours, on a computer, closed book. Practice questions in the Foundations exam practice match this format.',
     brief: {
       objective: 'Assess your understanding of fan engagement, sports marketing and its concepts, and media consumption and distribution, together with your critical thinking.',
       points: [
@@ -123,6 +124,55 @@ export const DEADLINES = [
         { label: 'Short answers', text: '4 to 5 questions (for example: what are data analytics and how are they used in sport?). Each is worth 5 to 6 points, so answer with an equal number of points. Some can be written as bullet points.' },
         { label: 'Essays', text: '2 questions. One essay everyone answers, and one you choose from two options.' },
         { label: 'Setup', text: 'Two hours, on a computer, not on paper.' },
+      ],
+    },
+  },
+  {
+    id: 'accounting-final-exam',
+    title: 'Final exam: Accounting and Forecasting',
+    course: 'Accounting and Forecasting',
+    courseId: 'accounting',
+    dueAt: '2026-12-14T09:30:00+01:00',
+    endAt: '2026-12-14T12:30:00+01:00',
+    gem: 'ruby',
+    note: 'Monday 14 December, 09:30 to 12:30, in Classroom 207 and 208. The timetable slot is three hours; the syllabus describes the exam itself as 2 hours.',
+    brief: {
+      points: [
+        { label: 'Content', text: 'Exercises covering both financial and managerial accounting.' },
+        { label: 'Setup', text: 'Individual. Closed book: no notes, no internet and no AI.' },
+      ],
+    },
+  },
+  {
+    id: 'strategy-final-exam',
+    title: 'Final exam: Business Strategy',
+    course: 'Business Strategy',
+    courseId: 'strategy',
+    dueAt: '2026-12-15T09:30:00+01:00',
+    endAt: '2026-12-15T11:30:00+01:00',
+    gem: 'sapphire',
+    note: 'Tuesday 15 December, 09:30 to 11:30, in Salle 100 and 101. 2 hours, all multiple choice. Practice questions in the Strategy exam practice match this format.',
+    brief: {
+      points: [
+        { label: 'Multiple choice', text: 'Every question is multiple choice. Some have more than one correct answer and ask you to choose ALL correct answers.' },
+        { label: 'Case studies', text: 'Questions may link to the F1 case studies.' },
+        { label: 'Setup', text: 'Individual, 2 hours. Closed book: no notes, no internet and no AI.' },
+      ],
+    },
+  },
+  {
+    id: 'market-research-final-exam',
+    title: 'Final exam: Market Research',
+    course: 'Market Research',
+    courseId: 'market-research',
+    dueAt: '2026-12-16T13:00:00+01:00',
+    endAt: '2026-12-16T15:00:00+01:00',
+    gem: 'amethyst',
+    note: 'Wednesday 16 December, 13:00 to 15:00, in Classroom 207 and 208. It is the same day as the Foundations exam, in the afternoon.',
+    brief: {
+      points: [
+        { label: 'Question types', text: 'Multiple-choice and open-ended questions.' },
+        { label: 'Setup', text: 'Individual. Closed book, no AI.' },
       ],
     },
   },

@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { markDone, setDueDate, formatDue, formatDateOnly, toLocalInput } from '../lib/deadlines.js';
+import { markDone, setDueDate, formatDue, formatDateOnly, formatSlot, toLocalInput } from '../lib/deadlines.js';
 import Countdown from './Countdown.jsx';
 import Icon from './Icon.jsx';
+import GemIcon, { GEMS } from './GemIcon.jsx';
 
 // One assignment: a tick to mark it done (which archives it), its course, its date, and the live clock.
 export default function DueRow({ item }) {
@@ -44,7 +45,12 @@ export default function DueRow({ item }) {
       </button>
 
       <div className="due-main">
-        {item.gem && <p className="gem-flag"><span aria-hidden="true">◆</span> Final exam</p>}
+        {item.gem && (
+          <p className="gem-flag">
+            <GemIcon gem={item.gem} size={18} /> Final exam
+            <span className="gem-name"> · {GEMS[item.gem]?.name}</span>
+          </p>
+        )}
         <h3 className="due-title">{item.title}</h3>
         {item.unconfirmed && <p className="due-unconfirmed" role="note">Unconfirmed due date</p>}
         <p className="due-meta">
@@ -56,7 +62,7 @@ export default function DueRow({ item }) {
           {item.group && <span className="due-course group">Group project</span>}
           {hasDate && (
             <span className="due-when">
-              {item.timeTbc ? `${formatDateOnly(item.dueMs)} · time to be confirmed` : formatDue(item.dueMs)}
+              {item.timeTbc ? `${formatDateOnly(item.dueMs)} · time to be confirmed` : item.endMs ? formatSlot(item.dueMs, item.endMs) : formatDue(item.dueMs)}
             </span>
           )}
         </p>
@@ -142,7 +148,7 @@ export default function DueRow({ item }) {
       </div>
 
       <div className="due-clock">
-        {hasDate ? <Countdown dueMs={item.dueMs} /> : <span className="due-nodate">{item.approx ? `Expected: ${item.approx.toLowerCase()}` : 'No due date yet'}</span>}
+        {hasDate ? <Countdown dueMs={item.dueMs} starts={Boolean(item.gem)} /> : <span className="due-nodate">{item.approx ? `Expected: ${item.approx.toLowerCase()}` : 'No due date yet'}</span>}
       </div>
     </li>
   );

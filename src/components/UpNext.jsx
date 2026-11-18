@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useDeadlines, markDone, formatDue } from '../lib/deadlines.js';
 import Countdown from './Countdown.jsx';
 import Icon from './Icon.jsx';
+import GemIcon from './GemIcon.jsx';
 import TimerToggle from './TimerToggle.jsx';
 
 // The next few things due, on the home page, with the same live clock.
@@ -27,10 +28,10 @@ export default function UpNext() {
                 <Icon name="check" size={16} />
               </button>
               <div className="up-main">
-                <span className="up-title">{d.title}</span>
+                <span className="up-title">{d.gem && <GemIcon gem={d.gem} size={16} className="up-gem" />}{d.title}</span>
                 <span className="meta">{d.course}{d.group ? ' · Group' : ''} · {formatDue(d.dueMs)}</span>
               </div>
-              <Countdown dueMs={d.dueMs} compact />
+              <Countdown dueMs={d.dueMs} compact starts={Boolean(d.gem)} />
             </li>
           ))}
         </ul>

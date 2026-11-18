@@ -89,6 +89,7 @@ export function resolve(s) {
       dueMs: Number.isFinite(ms) ? ms : null,
       changed: Boolean(s.dates[d.id]),
       timeTbc: Boolean(d.timeTbc) && !s.dates[d.id],
+      endMs: d.endAt && !s.dates[d.id] ? Date.parse(d.endAt) : null,
       doneAt: s.done[d.id] || null,
     };
   });
@@ -157,13 +158,14 @@ export function urgency(ms) {
 }
 
 // A phrase for people who use a screen reader (it does not tick every second).
-export function spoken(ms) {
+export function spoken(ms, starts = false) {
   const { days, hours, minutes, late } = splitDuration(ms);
   const bits = [];
   if (days) bits.push(`${days} ${days === 1 ? 'day' : 'days'}`);
   if (hours) bits.push(`${hours} ${hours === 1 ? 'hour' : 'hours'}`);
   if (!days && minutes) bits.push(`${minutes} ${minutes === 1 ? 'minute' : 'minutes'}`);
   if (bits.length === 0) bits.push('less than a minute');
+  if (starts) return late ? `Started ${bits.join(' ')} ago` : `Starts in ${bits.join(' ')}`;
   return late ? `Overdue by ${bits.join(' ')}` : `Due in ${bits.join(' ')}`;
 }
 
@@ -177,6 +179,12 @@ export function formatDue(ms) {
     minute: '2-digit',
     timeZoneName: 'short',
   }).format(new Date(ms));
+}
+// A timetable slot such as "Mon, 14 Dec, 9:30 AM to 12:30 PM CET" (the zone is named once, at the end).
+export function formatSlot(startMs, endMs) {
+  const day = new Intl.DateTimeFormat(undefined, { weekday: 'short', day: 'numeric', month: 'short' }).format(new Date(startMs));
+  const t = (ms, zone) => new Intl.DateTimeFormat(undefined, { hour: 'numeric', minute: '2-digit', ...(zone ? { timeZoneName: 'short' } : {}) }).format(new Date(ms));
+  return `${day}, ${t(startMs)} to ${t(endMs, true)}`;
 }
 // Date only, for things whose start time has not been announced.
 export function formatDateOnly(ms) {

@@ -7,7 +7,7 @@ export default function Countdown(props) {
   return on ? <Clock {...props} /> : null;
 }
 
-function Clock({ dueMs, compact = false }) {
+function Clock({ dueMs, compact = false, starts = false }) {
   const now = useNow();
   const ms = dueMs - now;
   const { days, hours, minutes, seconds, late } = splitDuration(ms);
@@ -18,8 +18,8 @@ function Clock({ dueMs, compact = false }) {
     const text = `${days ? `${days}d ` : ''}${two(hours)}h ${two(minutes)}m ${two(seconds)}s`;
     return (
       <span className={`cd-line ${tone}`}>
-        <span aria-hidden="true">{late ? `Overdue ${text}` : text}</span>
-        <span className="sr-only">{spoken(ms)}</span>
+        <span aria-hidden="true">{late ? `${starts ? 'Started' : 'Overdue'} ${text}` : text}</span>
+        <span className="sr-only">{spoken(ms, starts)}</span>
       </span>
     );
   }
@@ -32,7 +32,7 @@ function Clock({ dueMs, compact = false }) {
   ];
   return (
     <div className={`cd ${tone}`} role="timer">
-      <span className="cd-label" aria-hidden="true">{late ? 'Overdue by' : 'Due in'}</span>
+      <span className="cd-label" aria-hidden="true">{late ? (starts ? 'Started' : 'Overdue by') : (starts ? 'Starts in' : 'Due in')}</span>
       <div className="cd-tiles" aria-hidden="true">
         {parts.map(([unit, n]) => (
           <span key={unit} className="cd-tile">
@@ -41,7 +41,7 @@ function Clock({ dueMs, compact = false }) {
           </span>
         ))}
       </div>
-      <span className="sr-only">{spoken(ms)}</span>
+      <span className="sr-only">{spoken(ms, starts)}</span>
     </div>
   );
 }

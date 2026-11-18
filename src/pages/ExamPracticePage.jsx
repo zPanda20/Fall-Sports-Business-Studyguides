@@ -315,7 +315,7 @@ export default function ExamPracticePage() {
                   <li key={pt.name}><strong>{pt.name}.</strong> {pt.detail}</li>
                 ))}
               </ol>
-              <p className="meta">The exam date, the number of questions and how partial answers are marked have not been announced. The mock below uses 60 questions as a guess, and marks “select ALL” questions all-or-nothing, which is the strictest reading.</p>
+              <p className="meta">The exam is on {fmt.date}, but the number of questions and how partial answers are marked have not been announced. The mock below uses 60 questions as a guess, and marks “select ALL” questions all-or-nothing, which is the strictest reading.</p>
             </section>
             <div className="exam-modes">
               <button type="button" className="exam-mode nm irid" onClick={() => start('mock')}>

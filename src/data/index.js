@@ -175,7 +175,7 @@ export const courses = [
     overview: [
       { label: 'Format', text: '36 in-class hours plus 6 hours of asynchronous activities on the Connect platform.' },
       { label: 'Continuous assessment (60%)', text: 'Class participation and engagement (40%, mostly the weekly Connect activities) and a group project (60%): a financial analysis of a listed company of your choice, with statements, ratios, benchmarking, an Excel file and a one-page AI reflection.' },
-      { label: 'Final exam (40%)', text: 'Individual, 2 hours, in the official exam week. Closed book, no notes, no internet and no AI. Exercises covering both financial and managerial accounting.' },
+      { label: 'Final exam (40%)', text: 'Monday 14 December 2026, 09:30 to 12:30 (the timetable slot; classrooms 207 and 208). Individual, 2 hours. Closed book, no notes, no internet and no AI. Exercises covering both financial and managerial accounting.' },
       { label: 'Textbook', text: 'Financial and Managerial Accounting: Building Skills with Data Analytics (Williams, Bettner, Richardson and Smith), through the McGraw-Hill Connect platform.' },
     ],
     blocks: [
@@ -229,7 +229,7 @@ export const courses = [
     tag: 'Sessions 1\u20137 ready',
     mcqExam: true,
     examFormat: {
-      date: null,
+      date: 'Tuesday 15 December 2026',
       minutes: 120,
       mode: 'On a computer, closed book',
       parts: [
@@ -244,7 +244,7 @@ export const courses = [
       { label: 'Format', text: '24 in-class hours plus 6 hours of asynchronous work (the first asynchronous session uses generative AI to evaluate strategic alternatives).' },
       { label: 'Continuous assessment (60%)', text: 'Class participation and engagement (40%) and an evaluation (60%): a group assignment in groups of 4 to 5. Pick a company, give a 15-minute presentation using PESTEL, Porter\u2019s Five Forces, VRIO and SWOT, and end with a strategic recommendation for top management.' },
       { label: 'Group assignment grading', text: 'Content and accuracy 40%, sources 20%, structure 15%, communication 10%, answers to questions 15%.' },
-      { label: 'Final exam (40%)', text: 'Individual, 2 hours, in the official exam week. All multiple choice. Some questions have more than one correct answer and will say so, asking you to choose ALL correct answers. Closed book, no notes, no internet and no AI. Questions may also link to the case studies.' },
+      { label: 'Final exam (40%)', text: 'Tuesday 15 December 2026, 09:30 to 11:30 (Salle 100 and 101). Individual, 2 hours. All multiple choice. Some questions have more than one correct answer and will say so, asking you to choose ALL correct answers. Closed book, no notes, no internet and no AI. Questions may also link to the case studies.' },
     ],
     blocks: [
       {
@@ -299,7 +299,7 @@ export const courses = [
     overview: [
       { label: 'Format', text: '12 in-class sessions (24 hours) plus 2 asynchronous activities (6 hours).' },
       { label: 'Continuous assessment (60%)', text: 'Class participation and engagement (40%) and a group project (60%). The group picks one option: a quantitative project built in Qualtrics and analyzed statistically, or a qualitative project using interviews, AI-generated data and coding in Taguette.' },
-      { label: 'Final exam (40%)', text: 'Individual, in the official exam week. Closed book, no AI. Multiple-choice and open-ended questions.' },
+      { label: 'Final exam (40%)', text: 'Wednesday 16 December 2026, 13:00 to 15:00 (classrooms 207 and 208). Individual. Closed book, no AI. Multiple-choice and open-ended questions.' },
       { label: 'Tools you will meet', text: 'Zotero, Qualtrics, Jamovi and Taguette.' },
     ],
     blocks: [
@@ -662,7 +662,7 @@ export const courses = [
     overview: [
       { label: 'Format', text: '12 in-class sessions (24 hours) plus 6 asynchronous activities: readings and videos to complete after class.' },
       { label: 'Continuous assessment (60%)', text: 'Class participation and engagement (40%), including your contribution to the group work, and a group assignment (60%): a 4,000 to 6,000 word report that builds an evidence-based forecast of the global sports industry in 2035, using the Nielsen Sports 2025 Global Sports Report as the baseline. Due 13 November by 17:00. AI is used to propose new ideas on the future of fan engagement and sport marketing, with your own reasoning.' },
-      { label: 'Final exam (40%)', text: 'Wednesday 16 December 2026, 2 hours, on a computer. Closed book, no AI. Multiple choice, 4 to 5 short answers (5 to 6 points each, bullet points allowed), and 2 essays (one everyone answers, one chosen from two). It tests fan engagement, sports marketing and its concepts, and media consumption and distribution, with critical thinking.' },
+      { label: 'Final exam (40%)', text: 'Wednesday 16 December 2026, 09:30 to 11:30 (Salle 100 and 101), 2 hours, on a computer. Closed book, no AI. Multiple choice, 4 to 5 short answers (5 to 6 points each, bullet points allowed), and 2 essays (one everyone answers, one chosen from two). It tests fan engagement, sports marketing and its concepts, and media consumption and distribution, with critical thinking.' },
     ],
     blocks: [
       {

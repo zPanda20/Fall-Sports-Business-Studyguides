@@ -3773,113 +3773,174 @@ td {
 .due-more-btn:focus-visible { outline: 3px solid var(--accent-ink); outline-offset: 2px; }
 .due-more { margin-top: 6px; }
 
-/* ---------- the final exam card: a cut emerald ----------
-   Deep green with faceted light, mint highlights and a slow glint. It stays dark in both themes so
-   the white text keeps strong contrast, and the clock colors are reset for a green background. */
+/* ---------- the final exam cards: cut gemstones ----------
+   Ruby, sapphire, emerald and amethyst share one design; each gem only sets its own colors below.
+   The cards stay dark and saturated in both themes so the white text keeps strong contrast, and the
+   clock colors are reset for a colored background. The --g-hi, --g-facet, --g-panel, --g-shade, --g-black,
+   --g-edge, --g-glow and --g-drop values are bare "r, g, b" triplets so one rule can make every tint. */
 .due-item.gem-emerald {
-  --ink: #f2fff9;
-  --muted: #c4eedd;
-  --accent: #5ff0b4;
-  --accent-b: #1fb57f;
-  --accent-ink: #9ff7d3;
-  --accent-soft: rgba(95, 240, 180, 0.2);
-  --nm-bg: rgba(2, 40, 28, 0.55);
-  --nm-dark: rgba(0, 20, 12, 0.6);
-  --nm-light: rgba(150, 255, 210, 0.16);
+  --g-1: #0f9a66; --g-2: #067a4f; --g-3: #035338; --g-4: #02402c;
+  --g-hi: 120, 255, 200;     /* bright corner glow */
+  --g-facet: 190, 255, 230;  /* light facet lines */
+  --g-panel: 2, 40, 28;      /* tiles, buttons */
+  --g-shade: 0, 30, 20;      /* shadow facets */
+  --g-black: 0, 20, 12;
+  --g-edge: 160, 255, 215;   /* border */
+  --g-glow: 60, 230, 160;
+  --g-drop: 3, 110, 72;
+  --g-text: #f2fff9; --g-soft: #c4eedd; --g-accent: #5ff0b4; --g-accent-b: #1fb57f; --g-accent-ink: #9ff7d3; --g-link: #d5fff0;
+  --g-pale: #dffff1; --g-mid: #8ff2c8; --g-chip: #b8f7dc; --g-dark: #02402c;
+}
+.due-item.gem-ruby {
+  --g-1: #cf1c47; --g-2: #a40f35; --g-3: #770a26; --g-4: #520519;
+  --g-hi: 255, 140, 170;
+  --g-facet: 255, 205, 220;
+  --g-panel: 60, 4, 20;
+  --g-shade: 50, 2, 16;
+  --g-black: 30, 0, 8;
+  --g-edge: 255, 170, 195;
+  --g-glow: 245, 70, 115;
+  --g-drop: 150, 10, 50;
+  --g-text: #fff5f7; --g-soft: #ffe8ee; --g-accent: #ff8fab; --g-accent-b: #e22d5b; --g-accent-ink: #ffb3c6; --g-link: #ffe3ea;
+  --g-pale: #ffe6ec; --g-mid: #ffa9bf; --g-chip: #ffd2dc; --g-dark: #520519;
+}
+.due-item.gem-sapphire {
+  --g-1: #2f6fe6; --g-2: #1f50c0; --g-3: #12338a; --g-4: #0b2263;
+  --g-hi: 140, 190, 255;
+  --g-facet: 200, 224, 255;
+  --g-panel: 6, 24, 78;
+  --g-shade: 4, 18, 62;
+  --g-black: 2, 10, 38;
+  --g-edge: 170, 205, 255;
+  --g-glow: 80, 140, 255;
+  --g-drop: 20, 60, 170;
+  --g-text: #f3f8ff; --g-soft: #e6f0ff; --g-accent: #8db8ff; --g-accent-b: #3d7bf0; --g-accent-ink: #b4d0ff; --g-link: #dfeaff;
+  --g-pale: #e4eeff; --g-mid: #a3c4ff; --g-chip: #cfe0ff; --g-dark: #0b2263;
+}
+.due-item.gem-amethyst {
+  --g-1: #8546d0; --g-2: #7539bb; --g-3: #532585; --g-4: #3a1862;
+  --g-hi: 215, 170, 255;
+  --g-facet: 232, 208, 255;
+  --g-panel: 40, 14, 72;
+  --g-shade: 34, 10, 60;
+  --g-black: 20, 4, 38;
+  --g-edge: 220, 185, 255;
+  --g-glow: 170, 100, 245;
+  --g-drop: 90, 40, 160;
+  --g-text: #fbf5ff; --g-soft: #f4eaff; --g-accent: #cf9bff; --g-accent-b: #9b55e6; --g-accent-ink: #e2c4ff; --g-link: #f1e3ff;
+  --g-pale: #f2e6ff; --g-mid: #d6a9fb; --g-chip: #e6d3fb; --g-dark: #3a1862;
+}
+.due-item.gem {
+  --ink: var(--g-text);
+  --muted: var(--g-soft);
+  --accent: var(--g-accent);
+  --accent-b: var(--g-accent-b);
+  --accent-ink: var(--g-accent-ink);
+  --accent-soft: rgba(var(--g-hi), 0.2);
+  --nm-bg: rgba(var(--g-panel), 0.55);
+  --nm-dark: rgba(var(--g-black), 0.6);
+  --nm-light: rgba(var(--g-facet), 0.16);
   --warm: #ffe08a;
-  --bad: #ffc2b5;
+  --bad: #ffd2c6;
   position: relative;
   overflow: hidden;
   isolation: isolate;
   color: var(--ink);
-  border: 1px solid rgba(160, 255, 215, 0.55);
+  border: 1px solid rgba(var(--g-edge), 0.55);
   background:
-    linear-gradient(118deg, transparent 0 18%, rgba(190, 255, 230, 0.28) 18.4%, transparent 19.6% 41%, rgba(190, 255, 230, 0.2) 41.3%, transparent 42.4% 66%, rgba(0, 40, 26, 0.35) 66.3%, transparent 67.5%),
-    linear-gradient(62deg, transparent 0 28%, rgba(0, 30, 20, 0.4) 28.3%, transparent 29.5% 55%, rgba(190, 255, 230, 0.22) 55.3%, transparent 56.5% 80%, rgba(190, 255, 230, 0.18) 80.3%, transparent 81.4%),
-    radial-gradient(120% 140% at 12% 0%, rgba(120, 255, 200, 0.55) 0%, transparent 46%),
-    radial-gradient(100% 120% at 100% 100%, rgba(0, 25, 16, 0.75) 0%, transparent 60%),
-    linear-gradient(135deg, #0f9a66 0%, #067a4f 38%, #035338 68%, #02402c 100%);
+    linear-gradient(118deg, transparent 0 18%, rgba(var(--g-facet), 0.28) 18.4%, transparent 19.6% 41%, rgba(var(--g-facet), 0.2) 41.3%, transparent 42.4% 66%, rgba(var(--g-shade), 0.35) 66.3%, transparent 67.5%),
+    linear-gradient(62deg, transparent 0 28%, rgba(var(--g-shade), 0.4) 28.3%, transparent 29.5% 55%, rgba(var(--g-facet), 0.22) 55.3%, transparent 56.5% 80%, rgba(var(--g-facet), 0.18) 80.3%, transparent 81.4%),
+    radial-gradient(120% 140% at 12% 0%, rgba(var(--g-hi), 0.55) 0%, transparent 46%),
+    radial-gradient(100% 120% at 100% 100%, rgba(var(--g-black), 0.75) 0%, transparent 60%),
+    linear-gradient(135deg, var(--g-1) 0%, var(--g-2) 38%, var(--g-3) 68%, var(--g-4) 100%);
   box-shadow:
-    0 0 0 1px rgba(2, 40, 28, 0.9),
-    inset 0 1px 0 rgba(220, 255, 240, 0.7),
-    inset 0 -14px 30px rgba(0, 30, 20, 0.5),
-    0 14px 34px rgba(3, 110, 72, 0.42),
-    0 0 36px rgba(60, 230, 160, 0.3);
+    0 0 0 1px rgba(var(--g-panel), 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -14px 30px rgba(var(--g-shade), 0.5),
+    0 14px 34px rgba(var(--g-drop), 0.42),
+    0 0 36px rgba(var(--g-glow), 0.3);
 }
-.due-item.gem-emerald::before {
+/* the slow glint that sweeps across the stone; each gem starts at a different moment so they never flash together */
+.due-item.gem::before {
   content: '';
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(105deg, transparent 38%, rgba(230, 255, 245, 0.42) 50%, transparent 62%);
+  background: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, 0.4) 50%, transparent 62%);
   transform: translateX(-120%);
   animation: gem-glint 7s ease-in-out 1.5s infinite;
   pointer-events: none;
 }
+.due-item.gem-ruby::before { animation-delay: 3s; }
+.due-item.gem-sapphire::before { animation-delay: 4.5s; }
+.due-item.gem-amethyst::before { animation-delay: 6s; }
 @keyframes gem-glint {
   0%, 62% { transform: translateX(-120%); }
   100% { transform: translateX(120%); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .due-item.gem-emerald::before {
+  .due-item.gem::before {
     animation: none;
     opacity: 0;
   }
 }
-.gem-emerald .gem-flag {
+.gem .gem-flag {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   width: fit-content;
   margin: 0;
-  padding: 2px 11px;
+  padding: 2px 12px 2px 8px;
   border-radius: 999px;
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #02402c;
-  background: linear-gradient(180deg, #dffff1, #8ff2c8);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 2px 8px rgba(0, 40, 26, 0.45);
+  color: var(--g-dark);
+  background: linear-gradient(180deg, var(--g-pale), var(--g-mid));
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 2px 8px rgba(var(--g-black), 0.45);
 }
-.gem-emerald .due-title {
+.gem .gem-flag .gem-icon { flex: none; filter: drop-shadow(0 1px 1px rgba(var(--g-black), 0.45)); }
+.gem .gem-name { font-weight: 700; opacity: 0.85; white-space: pre; }
+.gem .due-title {
   color: #fff;
-  text-shadow: 0 1px 6px rgba(0, 40, 26, 0.55);
+  text-shadow: 0 1px 6px rgba(var(--g-black), 0.55);
 }
-.gem-emerald .due-when {
+.gem .due-when {
   font-weight: 650;
   color: #fff;
 }
-.gem-emerald .due-course {
-  color: #02402c;
-  background: #b8f7dc;
+.gem .due-course {
+  color: var(--g-dark);
+  background: var(--g-chip);
 }
-.gem-emerald .due-link {
-  color: #d5fff0;
+.gem .due-link {
+  color: var(--g-link);
 }
-.gem-emerald .due-check {
-  background: rgba(2, 40, 28, 0.6);
-  box-shadow: inset 2px 2px 6px rgba(0, 20, 12, 0.7), 0 0 0 1.5px #9ff7d3;
+.gem .due-check {
+  background: rgba(var(--g-panel), 0.6);
+  box-shadow: inset 2px 2px 6px rgba(var(--g-black), 0.7), 0 0 0 1.5px var(--g-accent-ink);
 }
-.gem-emerald .due-check:hover,
-.gem-emerald .due-check:focus-visible {
-  color: #02402c;
-  background: #9ff7d3;
+.gem .due-check:hover,
+.gem .due-check:focus-visible {
+  color: var(--g-dark);
+  background: var(--g-accent-ink);
 }
-.gem-emerald .due-edit input {
-  color: #f2fff9;
+.gem .due-edit input {
+  color: var(--g-text);
 }
-.gem-emerald .cd-tile {
-  background: rgba(2, 40, 28, 0.6);
-  box-shadow: inset 2px 2px 6px rgba(0, 20, 12, 0.7), inset -1px -1px 4px rgba(150, 255, 210, 0.18);
+.gem .cd-tile {
+  background: rgba(var(--g-panel), 0.6);
+  box-shadow: inset 2px 2px 6px rgba(var(--g-black), 0.7), inset -1px -1px 4px rgba(var(--g-facet), 0.18);
 }
-.gem-emerald .due-brief,
-.gem-emerald .due-more {
+.gem .due-brief,
+.gem .due-more {
   color: var(--ink);
 }
-.gem-emerald .button.secondary {
-  color: #f2fff9;
+.gem .button.secondary {
+  color: var(--g-text);
 }
+.up-gem { vertical-align: -3px; margin-right: 6px; }
 
 /* exam practice menu (courses with a known exam format) */
 .exam-format {
