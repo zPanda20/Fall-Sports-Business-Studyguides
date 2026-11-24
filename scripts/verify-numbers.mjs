@@ -362,6 +362,7 @@ for (const c of courses.filter((c) => c.overview)) ok_((typeof c.syllabusDate ==
   eq(at('sport-management-async-group-assignment'), Date.UTC(2026, 10, 13, 16, 0), 'Group assignment: 13 Nov 17:00 (UTC+1)');
   eq(at('careers-submit-cv'), Date.UTC(2026, 10, 14, 23, 0), 'CV: 15 Nov 00:00 (UTC+1)');
   eq(at('strategy-async-assignment-2'), Date.UTC(2026, 11, 13, 22, 59), 'Strategy assignment 2: 13 Dec 23:59 (UTC+1)');
+  eq(DEADLINES.find((d) => d.id === 'strategy-async-assignment-2').brief.points.map((x) => x.label).join(), 'Question 1,Question 2,Question 3', 'Strategy assignment 2: the case\'s three closing questions are in the details');
   eq(at('strategy-final-group-assignment'), Date.UTC(2026, 10, 27, 22, 59), 'Final group assignment: 27 Nov 23:59 (UTC+1)');
   eq(DEADLINES.filter((d) => d.dueAt === null).length, 0, 'every item has an exact date now');
   eq(Date.parse(DEADLINES.find((d) => d.id === 'accounting-company-analysis').dueAt), Date.UTC(2026, 11, 21, 22, 59), 'Accounting analysis: 21 Dec (end of day, UTC+1)');
