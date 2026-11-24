@@ -23,6 +23,14 @@ export const DEADLINES = [
     dueAt: '2026-11-08T23:59:00+01:00',
   },
   {
+    id: 'strategy-async-assignment-2',
+    title: 'Asynchronous Assignment 2',
+    course: 'Business Strategy',
+    courseId: 'strategy',
+    dueAt: '2026-12-13T23:59:00+01:00',
+    note: 'Sunday 13 December, 11:59 PM. The platform status is "To do: Make a submission". The file attached to it is the Harvard Business School case "On (A)" (35 pages). The task questions were not included, so check the platform for exactly what to submit.',
+  },
+  {
     id: 'sport-management-async-group-assignment',
     title: 'Asynchronous Group Assignment',
     course: 'Foundations of Sport Management',
