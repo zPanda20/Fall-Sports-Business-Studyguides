@@ -30,11 +30,13 @@ export const DEADLINES = [
     dueAt: '2026-12-13T23:59:00+01:00',
     note: 'Sunday 13 December, 11:59 PM. The platform status is "To do: Make a submission". The file attached to it is the Harvard Business School case "On (A)" (35 pages). Open "More details" for the questions the case ends with. The platform page did not say how long the answer should be or what format to submit, so check it for that.',
     brief: {
-      intro: 'The case ends on page 13 with the decision On faces, under the heading "How to stay Switched On?". These are the questions to answer.',
+      intro: 'The case ends on page 13 with the decision On faces, under the heading "How to stay Switched On?". Questions 1 to 3 are those closing questions. These are the only questions in the case; pages 14 to 35 are exhibits, appendices and references.',
       points: [
         { label: 'Question 1', text: 'Should On leave the formula that has worked so far, and break new ground in the running shoe industry with a new business model?' },
         { label: 'Question 2', text: 'If yes, which pricing model should On choose for the Cyclon subscription? Cyclon A costs $30 a month. Cyclon B costs $15 a month plus $90 for each shoe replacement.' },
         { label: 'Question 3', text: 'Or would it be better to drop the subscription idea and launch the Cloudneo, its recyclable running shoe, with a different business model?' },
+        { label: 'Also asked on page 1', text: 'The case opens with four more questions about the same decision. Which pricing approach was best? Could a circular business model (one that takes shoes back and recycles them) for a performance running shoe succeed in this fast-paced, brand-driven industry? Would customers favor a subscription over buying shoes the usual way? Could Cyclon meet the expectations of investors who saw On as a proven growth story?' },
+        { label: 'Where the numbers are', text: 'Exhibit 16 (page 25) compares what a customer spends in a year on conventional purchases, Cyclon A and Cyclon B at different weekly mileages.' },
       ],
     },
   },
