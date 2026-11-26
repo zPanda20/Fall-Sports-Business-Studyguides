@@ -348,7 +348,7 @@ for (const c of courses.filter((c) => c.overview)) ok_((typeof c.syllabusDate ==
 
 // ---- Due dates ----
 {
-  eq(DEADLINES.length, 17, 'seventeen due dates');
+  eq(DEADLINES.length, 18, 'eighteen due dates');
   eq(new Set(DEADLINES.map((d) => d.id)).size, DEADLINES.length, 'due date ids are unique');
   for (const d of DEADLINES) {
     ok_(d.title && d.course, `${d.id}: has a title and a course`);
@@ -398,7 +398,7 @@ for (const c of courses.filter((c) => c.overview)) ok_((typeof c.syllabusDate ==
   // active / archive split
   const empty = { done: {}, dates: {} };
   const all = split(resolve(empty));
-  eq(all.active.length, 17, 'all seventeen start in the list');
+  eq(all.active.length, 18, 'all eighteen start in the list');
   eq(all.archived.length, 0, 'nothing is archived at the start');
   const dated = all.active.filter((d) => d.dueMs !== null).map((d) => d.dueMs);
   ok_(dated.every((v, i) => i === 0 || dated[i - 1] <= v), 'list is soonest first');
@@ -407,7 +407,7 @@ for (const c of courses.filter((c) => c.overview)) ok_((typeof c.syllabusDate ==
     ok_(firstUndated === -1 || all.active.slice(firstUndated).every((d) => d.dueMs === null), 'undated items come last');
   }
   const done = split(resolve({ done: { 'careers-submit-cv': 5, 'strategy-async-assignment-1': 9 }, dates: {} }));
-  eq(done.active.length, 15, 'ticked items leave the list');
+  eq(done.active.length, 16, 'ticked items leave the list');
   eq(done.archived.map((d) => d.id).join(), 'strategy-async-assignment-1,careers-submit-cv', 'archive shows the newest first');
   const changed = resolve({ done: {}, dates: { 'careers-submit-cv': '2026-11-20T12:00:00+01:00' } }).find((d) => d.id === 'careers-submit-cv');
   ok_(changed.changed && changed.dueMs === Date.parse('2026-11-20T12:00:00+01:00'), 'a changed date overrides the original');

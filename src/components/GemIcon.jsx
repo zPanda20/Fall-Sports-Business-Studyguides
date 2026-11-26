@@ -1,13 +1,15 @@
 import { useId } from 'react';
 
 // The four exam gemstones. Each has its own color and its own cut, so they can be told apart without relying on color alone.
-//   ruby (oval cut), sapphire (classic diamond cut), emerald (emerald cut), amethyst (hexagon cut)
+//   ruby (oval cut), sapphire (classic diamond cut), emerald (emerald cut), amethyst (hexagon cut), topaz (pear cut)
+// The names are for the code only; the app does not print them.
 // tones: hi = catches the light, mid, base, deep = in shadow.
 export const GEMS = {
   ruby: { name: 'Ruby', tones: { hi: '#ffa3b9', mid: '#ee3560', base: '#b8133f', deep: '#6d0a25' } },
   sapphire: { name: 'Sapphire', tones: { hi: '#a6c8ff', mid: '#4382f2', base: '#2150c4', deep: '#112f7c' } },
   emerald: { name: 'Emerald', tones: { hi: '#b4fadc', mid: '#32d49a', base: '#0b9c6a', deep: '#04563a' } },
   amethyst: { name: 'Amethyst', tones: { hi: '#e0bfff', mid: '#aa63f2', base: '#7b39c6', deep: '#47217d' } },
+  topaz: { name: 'Topaz', tones: { hi: '#ffe7a3', mid: '#ffb02e', base: '#e07b00', deep: '#7d3f00' } },
 };
 export const GEM_IDS = Object.keys(GEMS);
 
@@ -33,6 +35,21 @@ const CUTS = {
       ['21,17 12,22 12,12', 'deep'],
       ['12,22 3,17 12,12', 'base'],
       ['3,17 3,7 12,12', 'mid'],
+    ],
+  },
+  topaz: {
+    outline: '12,2 17,8 20,13.5 18.5,19 14.5,22 9.5,22 5.5,19 4,13.5 7,8',
+    facets: [
+      ['12,2 17,8 12,14', 'hi'],
+      ['17,8 20,13.5 12,14', 'mid'],
+      ['20,13.5 18.5,19 12,14', 'base'],
+      ['18.5,19 14.5,22 12,14', 'deep'],
+      ['14.5,22 9.5,22 12,14', 'deep'],
+      ['9.5,22 5.5,19 12,14', 'base'],
+      ['5.5,19 4,13.5 12,14', 'mid'],
+      ['4,13.5 7,8 12,14', 'mid'],
+      ['7,8 12,2 12,14', 'hi'],
+      ['12,8.5 14.6,12 13.4,16.4 10.6,16.4 9.4,12', 'hi'],
     ],
   },
   emerald: {

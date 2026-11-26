@@ -6,7 +6,7 @@
 // brief: { objective, intro, points: [{ label, text }] } shows the task details under the title.
 // unconfirmed: true shows a big "Unconfirmed due date" badge until the date is confirmed.
 // videos: [{ label, url }] adds red "Watch video" buttons that open in a new tab.
-// gem: 'ruby' | 'sapphire' | 'emerald' | 'amethyst' makes the card a final exam with a gemstone of that color. endAt is when the exam ends.
+// gem: 'ruby' | 'sapphire' | 'emerald' | 'amethyst' | 'topaz' makes the card an exam with a gemstone of that color (the name is never shown). flag overrides the "Final exam" label. endAt is when the exam ends.
 // group: true marks a group project. approx is shown when only a rough time is known (no exact date yet).
 export const DEADLINES = [
   {
@@ -169,7 +169,7 @@ export const DEADLINES = [
     dueAt: '2026-12-15T09:30:00+01:00',
     endAt: '2026-12-15T11:30:00+01:00',
     gem: 'sapphire',
-    note: 'Tuesday 15 December, 09:30 to 11:30, in Salle 100 and 101. 2 hours, all multiple choice. Practice questions in the Strategy exam practice match this format.',
+    note: 'Tuesday 15 December, 09:30 to 11:30, in Salle 100, Salle 101 and Classroom 105. 2 hours, all multiple choice. Practice questions in the Strategy exam practice match this format.',
     brief: {
       points: [
         { label: 'Multiple choice', text: 'Every question is multiple choice. Some have more than one correct answer and ask you to choose ALL correct answers.' },
@@ -177,6 +177,16 @@ export const DEADLINES = [
         { label: 'Setup', text: 'Individual, 2 hours. Closed book: no notes, no internet and no AI.' },
       ],
     },
+  },
+  {
+    id: 'time-management-exam',
+    title: 'Exam: Time Management & Collaborative Work',
+    course: 'Time Management & Collaborative Work',
+    dueAt: '2026-12-15T16:00:00+01:00',
+    endAt: '2026-12-15T17:00:00+01:00',
+    gem: 'topaz',
+    flag: 'Exam',
+    note: 'Tuesday 15 December, 16:00 to 17:00, in Classroom 200, 201 and 202. The timetable lists it as an evaluation (class meeting 1 of 1). The format has not been shared yet.',
   },
   {
     id: 'market-research-final-exam',

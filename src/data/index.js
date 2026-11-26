@@ -244,7 +244,7 @@ export const courses = [
       { label: 'Format', text: '24 in-class hours plus 6 hours of asynchronous work (the first asynchronous session uses generative AI to evaluate strategic alternatives).' },
       { label: 'Continuous assessment (60%)', text: 'Class participation and engagement (40%) and an evaluation (60%): a group assignment in groups of 4 to 5. Pick a company, give a 15-minute presentation using PESTEL, Porter\u2019s Five Forces, VRIO and SWOT, and end with a strategic recommendation for top management.' },
       { label: 'Group assignment grading', text: 'Content and accuracy 40%, sources 20%, structure 15%, communication 10%, answers to questions 15%.' },
-      { label: 'Final exam (40%)', text: 'Tuesday 15 December 2026, 09:30 to 11:30 (Salle 100 and 101). Individual, 2 hours. All multiple choice. Some questions have more than one correct answer and will say so, asking you to choose ALL correct answers. Closed book, no notes, no internet and no AI. Questions may also link to the case studies.' },
+      { label: 'Final exam (40%)', text: 'Tuesday 15 December 2026, 09:30 to 11:30 (Salle 100, Salle 101 and Classroom 105). Individual, 2 hours. All multiple choice. Some questions have more than one correct answer and will say so, asking you to choose ALL correct answers. Closed book, no notes, no internet and no AI. Questions may also link to the case studies.' },
     ],
     blocks: [
       {

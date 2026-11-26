@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { markDone, setDueDate, formatDue, formatDateOnly, formatSlot, toLocalInput } from '../lib/deadlines.js';
 import Countdown from './Countdown.jsx';
 import Icon from './Icon.jsx';
-import GemIcon, { GEMS } from './GemIcon.jsx';
+import GemIcon from './GemIcon.jsx';
 
 // One assignment: a tick to mark it done (which archives it), its course, its date, and the live clock.
 export default function DueRow({ item }) {
@@ -47,8 +47,7 @@ export default function DueRow({ item }) {
       <div className="due-main">
         {item.gem && (
           <p className="gem-flag">
-            <GemIcon gem={item.gem} size={18} /> Final exam
-            <span className="gem-name"> · {GEMS[item.gem]?.name}</span>
+            <GemIcon gem={item.gem} size={18} /> {item.flag || 'Final exam'}
           </p>
         )}
         <h3 className="due-title">{item.title}</h3>

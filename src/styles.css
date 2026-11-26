@@ -3774,7 +3774,7 @@ td {
 .due-more { margin-top: 6px; }
 
 /* ---------- the final exam cards: cut gemstones ----------
-   Ruby, sapphire, emerald and amethyst share one design; each gem only sets its own colors below.
+   Ruby, sapphire, emerald, amethyst and topaz share one design; each gem only sets its own colors below.
    The cards stay dark and saturated in both themes so the white text keeps strong contrast, and the
    clock colors are reset for a colored background. The --g-hi, --g-facet, --g-panel, --g-shade, --g-black,
    --g-edge, --g-glow and --g-drop values are bare "r, g, b" triplets so one rule can make every tint. */
@@ -3830,6 +3830,20 @@ td {
   --g-text: #fbf5ff; --g-soft: #f4eaff; --g-accent: #cf9bff; --g-accent-b: #9b55e6; --g-accent-ink: #e2c4ff; --g-link: #f1e3ff;
   --g-pale: #f2e6ff; --g-mid: #d6a9fb; --g-chip: #e6d3fb; --g-dark: #3a1862;
 }
+/* topaz: a deep amber, kept dark enough for white text */
+.due-item.gem-topaz {
+  --g-1: #b35a00; --g-2: #8c4200; --g-3: #632d00; --g-4: #451e00;
+  --g-hi: 255, 176, 60;
+  --g-facet: 255, 224, 160;
+  --g-panel: 56, 24, 0;
+  --g-shade: 46, 18, 0;
+  --g-black: 28, 10, 0;
+  --g-edge: 255, 200, 110;
+  --g-glow: 255, 150, 30;
+  --g-drop: 140, 70, 0;
+  --g-text: #fff8ec; --g-soft: #fff0d6; --g-accent: #ffc266; --g-accent-b: #e8890a; --g-accent-ink: #ffd699; --g-link: #fff0d6;
+  --g-pale: #fff0cf; --g-mid: #ffc766; --g-chip: #ffe2ad; --g-dark: #451e00;
+}
 .due-item.gem {
   --ink: var(--g-text);
   --muted: var(--g-soft);
@@ -3874,6 +3888,7 @@ td {
 .due-item.gem-ruby::before { animation-delay: 3s; }
 .due-item.gem-sapphire::before { animation-delay: 4.5s; }
 .due-item.gem-amethyst::before { animation-delay: 6s; }
+.due-item.gem-topaz::before { animation-delay: 7.5s; }
 @keyframes gem-glint {
   0%, 62% { transform: translateX(-120%); }
   100% { transform: translateX(120%); }
@@ -3901,7 +3916,6 @@ td {
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 2px 8px rgba(var(--g-black), 0.45);
 }
 .gem .gem-flag .gem-icon { flex: none; filter: drop-shadow(0 1px 1px rgba(var(--g-black), 0.45)); }
-.gem .gem-name { font-weight: 700; opacity: 0.85; white-space: pre; }
 .gem .due-title {
   color: #fff;
   text-shadow: 0 1px 6px rgba(var(--g-black), 0.55);
