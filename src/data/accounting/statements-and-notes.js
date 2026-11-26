@@ -554,7 +554,7 @@ export const statementsAndNotesTopic = {
     {
       id: 'e2',
       marks: 8,
-      q: 'Using the second-season figures in the previous question, give the four closing entries and say which account they close into.',
+      q: 'In its second season the Ironhawks report revenue of $450M, player wages of $190M, other operating costs of $160.2M, depreciation of $16.8M and interest of $18M. Income tax is 20% of income before taxes, and the club pays dividends of $10M. Give the four closing entries and say which account they close into.',
       answer: [
         '**1. Revenue:** debit revenue accounts $450M, credit Income Summary $450M.',
         '**2. Expenses:** credit the expense accounts $398M (190 + 160.2 + 16.8 + 18 + 13) and debit Income Summary $398M.',

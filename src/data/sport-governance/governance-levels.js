@@ -298,7 +298,7 @@ export const governanceLevelsTopic = {
     {
       id: 'q2',
       type: 'mcq',
-      q: 'The course calls sports governing bodies “state-like organizations”. Why?',
+      q: 'Why are sports governing bodies often called “state-like organizations”?',
       options: [
         'They make rules, settle disputes and punish members, often with little outside supervision',
         'They are always owned by governments',
@@ -312,7 +312,7 @@ export const governanceLevelsTopic = {
     {
       id: 'q3',
       type: 'mcq',
-      q: 'Which list gives the three levels of governance used in this course?',
+      q: 'Which list gives the three levels at which a governance failure in sport can be analyzed?',
       options: [
         'Systemic, organizational, political',
         'Local, regional, global',
@@ -326,7 +326,7 @@ export const governanceLevelsTopic = {
     {
       id: 'q4',
       type: 'mcq',
-      q: 'In a network of many stakeholders, which skill matters most to a governing body, according to the slides?',
+      q: 'In a network of many stakeholders, which skill matters most to a governing body?',
       options: [
         'Negotiation and mutual adjustment',
         'Giving clear orders and expecting them to be followed',
@@ -368,7 +368,7 @@ export const governanceLevelsTopic = {
     {
       id: 'q7',
       type: 'open',
-      q: 'Exercise for the group assignment (observation, integration, critique). Take a federation case you know. (a) Observation: state in two sentences what happened. (b) Integration: name one of the three levels and one idea from this session that applies. (c) Critique: say what the idea does not explain.',
+      q: 'Exercise for the group assignment (observation, integration, critique). Take a federation case you know. (a) Observation: state in two sentences what happened. (b) Integration: name one of the three levels and one governance idea that applies. (c) Critique: say what the idea does not explain.',
       answer: [
         '**(a) Observation.** Facts only: who did what, when, with what result. No opinions yet.',
         '**(b) Integration.** For example: “The failure sits at the organizational level, because one person held decisive power with no check. Governance, not management, is the problem.”',

@@ -584,7 +584,7 @@ export const quantitativeOverviewTopic = {
     {
       id: 'q7',
       type: 'mcq',
-      q: 'In the Facebook News Feed experiment, the share of emotional words in users’ own posts was the…',
+      q: 'In the Facebook News Feed experiment, the researchers changed how many positive or negative posts some users saw in their feeds, then measured the share of emotional words in those users’ own posts. That share was the…',
       options: [
         'Dependent variable',
         'Independent variable',

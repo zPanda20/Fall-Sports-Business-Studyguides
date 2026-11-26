@@ -352,7 +352,7 @@ export const systemicGovernanceStakeholdersTopic = {
     {
       id: 'q3',
       type: 'mcq',
-      q: 'Which statement about WADA’s board is correct, according to the slides?',
+      q: 'Which statement about WADA’s board is correct?',
       options: [
         'It has equal numbers of representatives from the sports movement and from governments',
         'It is made up only of IOC members',
@@ -408,7 +408,7 @@ export const systemicGovernanceStakeholdersTopic = {
     {
       id: 'q7',
       type: 'open',
-      q: 'Exercise (systemic level). Choose one case from this session (CAS, WADA, the IPC or esports). (a) Observation: list its main stakeholders. (b) Integration: say how power is shared or concentrated among them. (c) Critique: name one weakness of the current set-up.',
+      q: 'Exercise (systemic level). Choose one case: CAS, WADA, the IPC or esports. (a) Observation: list its main stakeholders. (b) Integration: say how power is shared or concentrated among them. (c) Critique: name one weakness of the current set-up.',
       answer: [
         '**(a) Observation.** Example for CAS: the IOC, ICAS, international federations, athletes, national anti-doping bodies.',
         '**(b) Integration.** Since 1994 ICAS runs and funds CAS, so power over CAS is spread beyond the IOC. But the sports bodies that sit on ICAS are also frequent parties in CAS cases.',

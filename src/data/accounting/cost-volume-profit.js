@@ -396,7 +396,7 @@ export const cvpTopic = {
     {
       id: 'q3',
       type: 'mcq',
-      q: `Fixed costs are ${money(base.fixed)} for the season. How many tickets must the Ironhawks sell to break even?`,
+      q: `The Ironhawks sell tickets at ${money(base.price)} with ${money(base.variable)} of variable cost per ticket. Fixed costs are ${money(base.fixed)} for the season. How many tickets must they sell to break even?`,
       options: [num(beUnits), num(Math.round(base.fixed / base.price)), num(base.fixed / base.variable), num(capacity)],
       answer: 0,
       explanation: `Break-even = ${money(base.fixed)} ÷ ${money(cm)} = ${num(beUnits)}. Dividing by the price (${num(Math.round(base.fixed / base.price))}) ignores variable costs, and dividing by the variable cost alone (${num(base.fixed / base.variable)}) uses the wrong figure. ${num(capacity)} is simply the arena's season capacity.`,
@@ -405,7 +405,7 @@ export const cvpTopic = {
     {
       id: 'q4',
       type: 'mcq',
-      q: `Arena rent rises by ${moneyM(3_000_000)}, taking fixed costs to ${money(rentUp.fixed)}. Prices and variable costs stay the same. What is the new break-even in tickets?`,
+      q: `The Ironhawks sell tickets at ${money(base.price)} with ${money(base.variable)} of variable cost per ticket. Arena rent rises by ${moneyM(3_000_000)}, taking fixed costs from ${money(base.fixed)} to ${money(rentUp.fixed)} for the season. Price and variable cost stay the same. What is the new break-even in tickets?`,
       options: [num(unitsForProfit(rentUp)), num(beUnits), num(Math.round(rentUp.fixed / rentUp.price)), num(rentUp.fixed / rentUp.variable)],
       answer: 0,
       explanation: `${money(rentUp.fixed)} ÷ ${money(cm)} = ${num(unitsForProfit(rentUp))}. The contribution margin is unchanged, so break-even rises in proportion to fixed costs.`,
@@ -423,7 +423,7 @@ export const cvpTopic = {
     {
       id: 'q6',
       type: 'open',
-      q: `Exercise. The Ironhawks want a ${moneyM(9_000_000)} profit next season with the same price and costs. (a) How many tickets must they sell? (b) What ticket revenue is that? (c) Is it realistic given a season capacity of ${num(capacity)}?`,
+      q: `Exercise. The Ironhawks sell tickets at ${money(base.price)} with ${money(base.variable)} of variable cost per ticket, and fixed costs are ${money(base.fixed)} a season. They want a ${moneyM(9_000_000)} profit next season with the same price and costs. (a) How many tickets must they sell? (b) What ticket revenue is that? (c) Is it realistic given a season capacity of ${num(capacity)}?`,
       answer: [
         `**(a)** (${money(base.fixed)} + ${money(9_000_000)}) ÷ ${money(cm)} = **${num(target9)} tickets**.`,
         `**(b)** ${num(target9)} × ${money(base.price)} = **${money(target9Revenue)}**.`,
@@ -458,7 +458,7 @@ export const cvpTopic = {
     {
       id: 'e2',
       marks: 8,
-      q: 'Start from the base case in the previous question. Find the new break-even in tickets if (a) arena rent rises by $3M, (b) the ticket price falls to $80, (c) variable cost rises by $5 per ticket. (d) Which change pushes break-even up the most, and why?',
+      q: `The Ironhawks’ base case: price ${money(base.price)} per ticket, variable cost ${money(base.variable)} per ticket, fixed costs ${money(base.fixed)} a season. Find the new break-even in tickets if (a) arena rent rises by $3M, (b) the ticket price falls to $80, (c) variable cost rises by $5 per ticket. (d) Which change pushes break-even up the most, and why?`,
       answer: [
         `**(a)** Fixed costs become ${money(rentUp.fixed)}. Margin stays ${money(cm)}. Break-even = ${money(rentUp.fixed)} ÷ ${money(cm)} = **${num(unitsForProfit(rentUp))}**.`,
         `**(b)** Margin becomes $80 − ${money(base.variable)} = ${money(contributionMargin(priceDown))}. Break-even = ${money(base.fixed)} ÷ ${money(contributionMargin(priceDown))} = **${num(unitsForProfit(priceDown))}**.`,

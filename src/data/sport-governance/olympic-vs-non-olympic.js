@@ -196,8 +196,8 @@ export const olympicVsNonOlympicTopic = {
     { front: 'The three positions of a sport in the Olympic Movement', back: 'On the Games program, recognized but not on the program, or outside the movement.' },
     { front: 'What does an IF promise to keep IOC recognition?', back: 'That its statutes, practice and activities conform with the Olympic Charter, including the WADA Code and the Code on manipulation of competitions.' },
     { front: 'First stage of Fit for the Future', back: 'Screening on governance, integrity, anti-doping compliance and athlete safeguarding.' },
-    { front: 'Who owns the NFL, according to the slides?', back: 'A private company equally owned by its 32 clubs. Clubs elect the Commissioner.' },
-    { front: 'NASCAR revenue split on the slides', back: '10% to the league, 65% to tracks and 25% to drivers.' },
+    { front: 'Who owns the NFL?', back: 'A private company equally owned by its 32 clubs. Clubs elect the Commissioner.' },
+    { front: 'How NASCAR splits its revenue', back: '10% to the league, 65% to tracks and 25% to drivers.' },
   ],
 
   // ------------------------------------------------------------------ real example
@@ -358,7 +358,7 @@ export const olympicVsNonOlympicTopic = {
     {
       id: 'q2',
       type: 'mcq',
-      q: 'Under the “Fit for the Future” method described on the slides, which comes first?',
+      q: 'Under the IOC’s “Fit for the Future” method for choosing disciplines for the Games, which comes first?',
       options: [
         'A screening on governance, integrity, anti-doping and athlete safeguarding',
         'A vote by fans',
@@ -386,7 +386,7 @@ export const olympicVsNonOlympicTopic = {
     {
       id: 'q4',
       type: 'mcq',
-      q: 'According to the slides, who elects the Commissioner of a team league such as the NFL?',
+      q: 'Who elects the Commissioner of a team league such as the NFL?',
       options: [
         'The member clubs, who also own the league',
         'The national government',
@@ -400,7 +400,7 @@ export const olympicVsNonOlympicTopic = {
     {
       id: 'q5',
       type: 'mcq',
-      q: 'On the slides, how does NASCAR split league revenue?',
+      q: 'How does NASCAR split league revenue between the league, the tracks and the drivers?',
       options: [
         '10% to the league, 65% to tracks, 25% to drivers',
         '65% to the league, 25% to tracks, 10% to drivers',

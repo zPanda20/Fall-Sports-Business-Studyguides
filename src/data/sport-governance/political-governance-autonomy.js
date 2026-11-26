@@ -385,7 +385,7 @@ export const politicalGovernanceAutonomyTopic = {
     {
       id: 'q1',
       type: 'mcq',
-      q: 'Where does the autonomy of sport come from, according to the Session 5 takeaways?',
+      q: 'Where does the autonomy of sport come from?',
       options: [
         'Private association law, the sports movement’s own declarations and non-binding political support',
         'A binding United Nations treaty',

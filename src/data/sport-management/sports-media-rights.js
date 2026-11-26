@@ -654,7 +654,7 @@ export const sportsMediaRightsTopic = {
     {
       id: 'c7',
       type: 'mcq',
-      q: 'In the Premier League example, which is now bigger?',
+      q: 'Which is now the bigger source of Premier League media-rights income?',
       options: [
         'UK domestic rights',
         'They are exactly equal',
@@ -729,7 +729,7 @@ export const sportsMediaRightsTopic = {
     {
       id: 'e3',
       marks: 6,
-      q: 'A league is deciding whether to sell its next rights cycle exclusively to one streamer or in several non-exclusive packages. Recommend an approach and justify it using lecture ideas.',
+      q: 'A league is deciding whether to sell its next rights cycle exclusively to one streamer or in several non-exclusive packages. Recommend an approach and justify it using ideas about rights pricing, reach and fan access.',
       answer: [
         'Exclusive: one distributor, a higher fee and simple management, but fans need one specific service and reach is limited.',
         'Non-exclusive packages: wider reach and more distribution, and separate packages create competition, but buyers may pay and invest less.',

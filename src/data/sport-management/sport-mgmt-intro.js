@@ -368,7 +368,7 @@ export const sportMgmtIntroTopic = {
     {
       id: 'q4',
       type: 'mcq',
-      q: 'What should a group do with the Nielsen 2025 Global Sports Report in the assignment?',
+      q: 'A group assignment gives students the Nielsen 2025 Global Sports Report and asks for a forecast for 2035. What should the group do with the report?',
       options: [
         'Use it as a starting point and evaluate its predictions against other evidence',
         'Summarize it section by section',
@@ -382,7 +382,7 @@ export const sportMgmtIntroTopic = {
     {
       id: 'q5',
       type: 'mcq',
-      q: 'Which two sections of the group assignment carry the most weight, 30% each?',
+      q: 'In the group assignment on the Nielsen report, the sections are the introduction, key trends, evaluating the evidence, the 2035 forecast and the conclusion. Which two carry the most weight, 30% each?',
       options: [
         'Evaluating the evidence, and Your 2035 forecast',
         'Introduction, and Conclusion',
@@ -396,7 +396,7 @@ export const sportMgmtIntroTopic = {
     {
       id: 'q6',
       type: 'mcq',
-      q: 'What does the Nielsen report used in the assignment say about interest in women’s sport?',
+      q: 'What does the Nielsen 2025 Global Sports Report say about interest in women’s sport?',
       options: [
         'It is falling',
         'It is rising and now reaches about half of the global population',

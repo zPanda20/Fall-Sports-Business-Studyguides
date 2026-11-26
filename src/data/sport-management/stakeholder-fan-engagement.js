@@ -405,7 +405,7 @@ export const stakeholderFanEngagementTopic = {
     {
       id: 'c2',
       type: 'mcq',
-      q: 'Which sport has the most athletes on the most-followed athletes list?',
+      q: 'Among the world’s most-followed athletes on social media, which sport has the most athletes?',
       options: [
         'Basketball',
         'Cricket',

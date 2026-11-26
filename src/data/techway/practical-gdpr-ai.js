@@ -391,7 +391,7 @@ export const practicalGdprAiTopic = {
     {
       id: 'q3',
       type: 'mcq',
-      q: 'Why is “the patient is a middle-aged person with a chronic metabolic disease” safer than the original prompt?',
+      q: 'A prompt first said “Mr. Alvarez, 54, from Lyon, has type 2 diabetes” and was rewritten as “the patient is a middle-aged person with a chronic metabolic disease”. Why is the rewritten version safer?',
       options: [
         'It is shorter.',
         'It removes direct identifiers and generalizes sensitive details, so it is far harder to link to a person.',
@@ -419,7 +419,7 @@ export const practicalGdprAiTopic = {
     {
       id: 'q5',
       type: 'mcq',
-      q: 'Why does the model accessible note give both phone and branch options for help?',
+      q: 'An accessible notice about a new app tells readers they can get help by phone or at a branch, not only through the app. Why does it give both options?',
       options: [
         'To make the note longer.',
         'Because people have different needs and abilities, so each action should have an alternative.',

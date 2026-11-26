@@ -442,7 +442,7 @@ export const mediaAndSponsorshipIntroTopic = {
     {
       id: 'q1',
       type: 'mcq',
-      q: 'Which of these did the guest speaker list as a factor that influences the price of media rights?',
+      q: 'Which of these is a factor that influences the price of media rights?',
       options: [
         'The competitive situation among bidders',
         'The color of the team logo',
@@ -524,7 +524,7 @@ export const mediaAndSponsorshipIntroTopic = {
     {
       id: 'c1',
       type: 'mcq',
-      q: 'In the guest speaker’s list of event audiences, which two events passed one billion viewers?',
+      q: 'Which two of these events have drawn audiences of more than one billion viewers?',
       options: [
         'The Super Bowl and the Euro final',
         'The Champions League final and the cricket World Cup final',
@@ -566,7 +566,7 @@ export const mediaAndSponsorshipIntroTopic = {
     {
       id: 'c4',
       type: 'mcq',
-      q: 'What does the guest speaker’s Wimbledon rights table show about the price trend in Germany?',
+      q: 'Which best describes how the price of the German media rights to Wimbledon has moved between 2008 and today?',
       options: [
         'Prices stayed flat',
         'Prices rose strongly over time, with streamers paying the most',
@@ -580,7 +580,7 @@ export const mediaAndSponsorshipIntroTopic = {
     {
       id: 'c5',
       type: 'mcq',
-      q: 'Which streaming deal does the guest speaker call “the biggest commitment in the sports rights space”?',
+      q: 'Which of these streaming deals has been called “the biggest commitment in the sports rights space”?',
       options: [
         'Netflix’s Christmas Day NFL games',
         'YouTube’s highlights',
@@ -608,7 +608,7 @@ export const mediaAndSponsorshipIntroTopic = {
     {
       id: 'c7',
       type: 'mcq',
-      q: 'Of the two North American leagues in the sponsorship figures, which earns more from sponsors?',
+      q: 'Which of these two North American leagues earns more from sponsors?',
       options: [
         'The NBA',
         'They are equal',
@@ -668,7 +668,7 @@ export const mediaAndSponsorshipIntroTopic = {
     {
       id: 'e2',
       marks: 8,
-      q: 'Discuss the factors that influence the price of media rights, using one example from the course.',
+      q: 'Discuss the factors that influence the price of media rights, using one real example.',
       answer: [
         'Factors include tradition, audience numbers, economic power of buyers, refinancing options, national heroes, the competitive situation, time, advertising bookings, program strategies and the previous price.',
         'More bidders and bigger audiences raise the price, because buyers can earn it back through advertising or subscriptions.',

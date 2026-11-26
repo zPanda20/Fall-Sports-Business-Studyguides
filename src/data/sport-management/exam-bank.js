@@ -415,7 +415,7 @@ export const examBank = [
     area: 'Fan engagement',
     topic: 'stakeholder-fan-engagement',
     marks: 20,
-    q: 'Live event time is a small share of the year and fan attention is fragmented. Critically discuss how sports organizations should build fan engagement beyond the live event. Use examples from the lectures.',
+    q: 'Live event time is a small share of the year and fan attention is fragmented. Critically discuss how sports organizations should build fan engagement beyond the live event. Use real examples.',
     answer: [
       'Introduction: state the problem (live time is small, attention is split, 87% use a second screen) and your position: organizations need an integrated ecosystem, but each platform has limits.',
       'Platforms: the three families (core ecosystem, media and distribution, fan engagement and interactive experiences). Explain how fantasy sports turn spectators into players with a season-long interest, how streaming and social media keep highlights and stories flowing, and how athletes humanize the sport.',
@@ -546,7 +546,7 @@ export const examBank = [
     area: 'Fan engagement',
     topic: 'stakeholder-fan-engagement',
     marks: 20,
-    q: 'Evaluate whether niche and emerging sports can compete for fan attention with the major leagues. Use the platforms and strategies from the lectures.',
+    q: 'Evaluate whether niche and emerging sports can compete for fan attention with the major leagues. Use real platforms and strategies.',
     answer: [
       'Introduction: define niche (small but passionate following) and emerging (early stage of wider popularity), and state your position.',
       'Disadvantages: usually no big budgets, large leagues or mainstream coverage. Attention is already fragmented and live time is small.',

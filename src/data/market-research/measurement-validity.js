@@ -637,7 +637,7 @@ export const measurementValidityTopic = {
     {
       id: 'q8',
       type: 'mcq',
-      q: 'In the New Coke case, the blind sip test was best described as…',
+      q: 'In 1985 Coca-Cola replaced its original recipe with New Coke after blind sip tests showed that people preferred the taste, and the launch became a major flop. How is the blind sip test best described?',
       options: [
         'An indicator that missed part of the construct',
         'A manifest variable with perfect validity',

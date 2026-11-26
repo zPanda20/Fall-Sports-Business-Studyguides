@@ -387,13 +387,13 @@ export const organizationalGovernanceTopic = {
         'The sponsors',
       ],
       answer: 0,
-      explanation: 'According to the slides, the board is elected at the general assembly and the president then hires a CEO to run daily activities, reporting to the board.',
+      explanation: 'In a typical federation, the board is elected at the general assembly and the president then hires a CEO to run daily activities, reporting to the board.',
       review: { section: 'plain', slide: 0 },
     },
     {
       id: 'q2',
       type: 'mcq',
-      q: 'Which of these is a typical symptom of weak governance, according to the slides?',
+      q: 'Which of these is a typical symptom of weak governance?',
       options: [
         'Missing or opaque financial reporting',
         'Published and audited accounts',
@@ -407,7 +407,7 @@ export const organizationalGovernanceTopic = {
     {
       id: 'q3',
       type: 'mcq',
-      q: 'What do the five independent reviews suggest about who commissions a review?',
+      q: 'A sports federation commissions an “independent” review of its own governance failure. What does the choice of who commissions the review suggest?',
       options: [
         'It shapes what the review can find, because the body under scrutiny often sets scope, access and publication',
         'It makes no difference to the findings',

@@ -469,7 +469,7 @@ export const researchQuestionProposalTopic = {
     {
       id: 'q7',
       type: 'mcq',
-      q: 'Which draft question is best for a study of Rovers’ early leavers?',
+      q: 'A football club called Rovers wants to study why some fans leave matches early. Which draft research question is best?',
       options: [
         'Do fans like coming to games?',
         'What is the best way to run a football club?',

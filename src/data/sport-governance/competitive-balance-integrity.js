@@ -490,7 +490,7 @@ export const competitiveBalanceIntegrityTopic = {
     {
       id: 'q2',
       type: 'mcq',
-      q: 'What does the “paradox” on the slides mean?',
+      q: 'Some leagues dominated by a few big teams still draw large audiences, even though fans are said to want uncertain outcomes. What does this “paradox” of competitive balance mean?',
       options: [
         'Dominance also sells: stars, rivalries and underdog stories drive demand, so balance is not the only factor',
         'Balanced leagues always earn more',
@@ -541,10 +541,10 @@ export const competitiveBalanceIntegrityTopic = {
     {
       id: 'q6',
       type: 'mcq',
-      q: 'In the Northern Cup League pool, what is the ratio of the biggest to the smallest club’s revenue after the pool (to one decimal place)?',
+      q: 'A league has four clubs with revenue of 240, 120, 80 and 60 million. Every club puts 20% of its revenue into a pool, and the pool is shared equally among the four clubs. After the pool, what is the ratio of the biggest club’s revenue to the smallest club’s (to one decimal place)?',
       options: ['3.0', '4.0', '2.0', '1.0'],
       answer: 0,
-      explanation: 'After the pool, Club A has 217 and Club D has 73. 217 divided by 73 is about 3.0, down from 4.0 (240 / 60).',
+      explanation: 'Total revenue is 500, so the pool is 100 and each club receives 25. The biggest club has 240 − 48 + 25 = 217 and the smallest has 60 − 12 + 25 = 73. 217 divided by 73 is about 3.0, down from 4.0 (240 / 60).',
       review: { section: 'sports', slide: 1 },
     },
     {
