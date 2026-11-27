@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import Rich from '../lib/Rich.jsx';
 import AskAI from './AskAI.jsx';
+import QuestionBookmark from './QuestionBookmark.jsx';
 import { recordQuiz, getProgress } from '../lib/progress.js';
 import { emit } from '../companions/events.js';
 import { questionPrompt, bundlePrompt } from '../lib/ai.js';
@@ -154,6 +155,22 @@ export default function Quiz({ topic, courseTitle, onReview }) {
             <div className={`feedback ${wrong ? 'wrong' : 'right'}`} aria-live="polite">
               <strong>{wrong ? 'Not quite.' : 'Correct.'}</strong>
               <span><Rich text={q.explanation} /></span>
+            </div>
+          )}
+
+          {picked !== null && (
+            <div className="q-actions">
+              <QuestionBookmark
+                qKey={`${topic.id}:${q.id}`}
+                topicId={topic.id}
+                courseId={topic.course}
+                topicTitle={topic.title}
+                question={q.q}
+                picked={q.options[picked]}
+                correct={q.options[q.answer]}
+                explanation={q.explanation}
+                review={q.review}
+              />
             </div>
           )}
 

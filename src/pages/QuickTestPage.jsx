@@ -8,6 +8,7 @@ import Rich from '../lib/Rich.jsx';
 import AskAI from '../components/AskAI.jsx';
 import Ring from '../components/Ring.jsx';
 import Icon from '../components/Icon.jsx';
+import QuestionBookmark from '../components/QuestionBookmark.jsx';
 
 const plain = (s) => String(s).replace(/\*\*/g, '');
 const SIZES = [5, 10, 15];
@@ -195,6 +196,21 @@ export default function QuickTestPage() {
             <div className={`feedback ${wrong ? 'wrong' : 'right'}`} aria-live="polite">
               <strong>{wrong ? 'Not quite.' : 'Correct.'}</strong>
               <span><Rich text={q.explanation} /></span>
+            </div>
+          )}
+          {test.picked !== null && (
+            <div className="q-actions">
+              <QuestionBookmark
+                qKey={q.key}
+                topicId={q.topicId}
+                courseId={course.id}
+                topicTitle={q.topicTitle}
+                question={q.q}
+                picked={q.options[test.picked].text}
+                correct={q.options[q.answerPos].text}
+                explanation={q.explanation}
+                review={q.review}
+              />
             </div>
           )}
           {wrong && (

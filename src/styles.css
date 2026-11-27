@@ -4737,3 +4737,27 @@ td {
     animation: none !important;
   }
 }
+
+/* Bookmarking a quiz question right after answering it */
+.q-actions {
+  display: flex;
+  justify-content: flex-start;
+}
+.bm-question {
+  min-height: 44px;
+}
+.bm-question-body {
+  display: grid;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: var(--nm-bg);
+  box-shadow: inset 2px 2px 6px var(--nm-dark), inset -2px -2px 6px var(--nm-light);
+}
+.bm-question-body p {
+  margin: 0;
+}
+.bm-q {
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}

@@ -14,6 +14,7 @@ import Rich from '../lib/Rich.jsx';
 import AskAI from '../components/AskAI.jsx';
 import Ring from '../components/Ring.jsx';
 import Icon from '../components/Icon.jsx';
+import QuestionBookmark from '../components/QuestionBookmark.jsx';
 
 const plain = (s) => String(s).replace(/\*\*/g, '');
 const DAY_LETTERS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
@@ -211,6 +212,21 @@ function Question({ item, index, total, quiz, onNext }) {
         <div className={`feedback ${ok ? 'right' : 'wrong'}`} aria-live="polite">
           <strong>{ok ? 'Correct.' : 'Not quite.'}</strong>
           <span><Rich text={q.explanation} /></span>
+        </div>
+      )}
+      {done && (
+        <div className="q-actions">
+          <QuestionBookmark
+            qKey={q.key}
+            topicId={q.topicId}
+            courseId={q.courseId}
+            topicTitle={q.topicTitle}
+            question={q.q}
+            picked={optText(picks)}
+            correct={optText(q.answers)}
+            explanation={q.explanation}
+            review={q.review}
+          />
         </div>
       )}
       {done && !ok && (

@@ -29,6 +29,14 @@ function describe(b, cap) {
   let where = 'Whole topic';
   let excerpt = topic ? clip(topic.summary || '', cap) : '';
   let to = `/topic/${b.topicId}`;
+  if (b.scope === 'question') {
+    where = 'Quiz question';
+    excerpt = clip(
+      `Question: ${b.questionText} My answer: ${b.pickedText || 'not recorded'}. Correct answer: ${b.correctText}. Reason given: ${b.explanation}`,
+      cap + 250,
+    );
+    to = `/topic/${b.topicId}?s=${b.section || 'plain'}&slide=${b.slide ?? 0}`;
+  }
   if (b.scope === 'slide') {
     where = `${SECTION_LABEL[b.section] || 'Slide'}, slide ${b.slide + 1}: “${b.slideTitle}”`;
     const slide = slidesFor(topic, b.section)?.[b.slide];
@@ -86,7 +94,8 @@ export default function BookmarksPage() {
           <h2 className="serif" style={{ fontSize: '1.3rem' }}>Nothing bookmarked yet</h2>
           <p>
             On any topic, tap <strong>Confused? Bookmark topic</strong>. On any slide, tap{' '}
-            <strong>Ask later</strong> in the top corner. It will show up here, saved on this device.
+            <strong>Ask later</strong> in the top corner. In any quiz, tap <strong>Bookmark this question</strong>{' '}
+            after you answer. It will show up here, saved on this device.
           </p>
           <Link to="/" className="button fit">Browse courses</Link>
         </section>
@@ -148,15 +157,24 @@ export default function BookmarksPage() {
                               <span className="bm-topic">{b.topicTitle}</span>
                               <span className="meta">{d.where}</span>
                             </div>
-                            <span className="pill">{b.scope === 'topic' ? 'Topic' : 'Slide'}</span>
+                            <span className="pill">{b.scope === 'topic' ? 'Topic' : b.scope === 'question' ? 'Question' : 'Slide'}</span>
                           </div>
+
+                          {b.scope === 'question' && (
+                            <div className="bm-question-body">
+                              <p className="bm-q">{b.questionText}</p>
+                              {b.pickedText && b.pickedText !== b.correctText && <p className="meta">You chose: {b.pickedText}</p>}
+                              <p className="meta"><strong>Correct answer:</strong> {b.correctText}</p>
+                              <p className="meta">{b.explanation}</p>
+                            </div>
+                          )}
 
                           <label className="bm-note">
                             <span>What is confusing? (optional)</span>
                             <textarea
                               rows={2}
                               value={b.note || ''}
-                              placeholder="For example: I don't see why the second step comes before the first."
+                              placeholder={b.scope === 'question' ? 'For example: I don\'t see why this answer is the right one.' : "For example: I don't see why the second step comes before the first."}
                               onChange={(e) => setBookmarkNote(b.id, e.target.value)}
                             />
                           </label>

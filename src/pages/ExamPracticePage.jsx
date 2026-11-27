@@ -4,6 +4,7 @@ import { getCourse, topicsForCourse } from '../data/index.js';
 import { ExamQuestion } from '../components/ExamQuestions.jsx';
 import Rich from '../lib/Rich.jsx';
 import Icon from '../components/Icon.jsx';
+import QuestionBookmark from '../components/QuestionBookmark.jsx';
 import { mcqPool, drawTest } from './QuickTestPage.jsx';
 
 function shuffle(list) {
@@ -45,7 +46,7 @@ function ExamClock({ minutes }) {
 }
 
 // Part A of the mock: multiple choice, answered one by one with the reason shown straight away.
-function MockMcq({ qs }) {
+function MockMcq({ qs, courseId }) {
   const [picked, setPicked] = useState({});
   const answered = Object.keys(picked).length;
   const score = qs.filter((q, n) => picked[n] === q.answerPos).length;
@@ -80,6 +81,21 @@ function MockMcq({ qs }) {
               <div className={`feedback ${p === q.answerPos ? 'right' : 'wrong'}`} aria-live="polite">
                 <strong>{p === q.answerPos ? 'Correct.' : 'Not quite.'}</strong>
                 <span><Rich text={q.explanation} /></span>
+              </div>
+            )}
+            {p !== undefined && (
+              <div className="q-actions">
+                <QuestionBookmark
+                  qKey={q.key}
+                  topicId={q.topicId}
+                  courseId={courseId}
+                  topicTitle={q.topicTitle}
+                  question={q.q}
+                  picked={q.options[p].text}
+                  correct={q.options[q.answerPos].text}
+                  explanation={q.explanation}
+                  review={q.review}
+                />
               </div>
             )}
             {p !== undefined && p !== q.answerPos && (
@@ -457,7 +473,7 @@ export default function ExamPracticePage() {
             <ExamClock minutes={fmt.minutes} />
             <section className="stack" aria-label="Part A multiple choice">
               <h2 className="exam-section">Part A. Multiple choice</h2>
-              <MockMcq qs={mock.mcq} />
+              <MockMcq qs={mock.mcq} courseId={course.id} />
             </section>
             <section className="stack" aria-label="Part B short answers">
               <h2 className="exam-section">Part B. Short answers</h2>
