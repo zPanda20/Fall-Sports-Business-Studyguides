@@ -368,7 +368,7 @@ export const sportMgmtIntroTopic = {
     {
       id: 'q4',
       type: 'mcq',
-      q: 'A group assignment gives students the Nielsen 2025 Global Sports Report and asks for a forecast for 2035. What should the group do with the report?',
+      q: 'A team is asked to forecast the sports industry in 2035 using an industry report such as the Nielsen 2025 Global Sports Report. What should it do with the report?',
       options: [
         'Use it as a starting point and evaluate its predictions against other evidence',
         'Summarize it section by section',
@@ -376,21 +376,7 @@ export const sportMgmtIntroTopic = {
         'Copy its predictions as the group’s forecast',
       ],
       answer: 0,
-      explanation: 'The brief says the task is not to summarize or critique the report. It is to evaluate its predictions, use course concepts, and build an evidence-based forecast.',
-      review: { section: 'plain', slide: 6 },
-    },
-    {
-      id: 'q5',
-      type: 'mcq',
-      q: 'In the group assignment on the Nielsen report, the sections are the introduction, key trends, evaluating the evidence, the 2035 forecast and the conclusion. Which two carry the most weight, 30% each?',
-      options: [
-        'Evaluating the evidence, and Your 2035 forecast',
-        'Introduction, and Conclusion',
-        'Key trends, and Introduction',
-        'Key trends, and Conclusion',
-      ],
-      answer: 0,
-      explanation: 'Evaluating the evidence and the 2035 forecast are 30% each. Key trends is 20%, and the introduction and conclusion are 10% each.',
+      explanation: 'A good forecast does not just summarize the report or critique how it was made. It evaluates the report’s predictions against other evidence, applies sport-business concepts, and builds an evidence-based forecast.',
       review: { section: 'plain', slide: 6 },
     },
     {

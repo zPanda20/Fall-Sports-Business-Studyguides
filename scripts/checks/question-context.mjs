@@ -6,6 +6,10 @@ import { topics, courses, getTopic } from '../../src/data/index.js';
 
 const BANNED = /(?:in|from|using) the previous question|the (?:previous|last) question|on the slides?|according to the (slides?|lectures?|sessions?)|the guest speaker|session \d+ takeaways|in the lectures?|from the lectures?|lecture ideas|this session|the five independent reviews|the new coke case|the original prompt|the model accessible note/i;
 
+// Multiple-choice questions must test course content, not what a particular assignment brief says
+// (grading weights, required files, section lengths). Those are not exam questions.
+const BRIEF = /the brief (says|suggests|advises|states|asks)|group (assignment|project)|grading|criteria carry|points in the grad|required (file|for the)|GROUP_XX|which file is|weight[s]? (each|30)/i;
+
 function texts(item) {
   const out = [];
   if (typeof item.q === 'string') out.push(item.q);
@@ -25,6 +29,11 @@ export default function ({ ok_ }) {
   ok_(all.length > 500, `question context: scanned ${all.length} questions`);
   for (const { where, item } of all) {
     for (const s of texts(item)) ok_(!BANNED.test(s), `question context: ${where} points at hidden material: "${s.slice(0, 70)}"`);
+  }
+
+  for (const { where, item } of all) {
+    if (!Array.isArray(item.options)) continue;
+    for (const s of texts(item)) ok_(!BRIEF.test(s), `question context: ${where} asks about an assignment brief, not course content: "${s.slice(0, 70)}"`);
   }
 
   // Numeric questions that once left out their figures.
